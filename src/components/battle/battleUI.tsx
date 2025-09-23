@@ -23,8 +23,6 @@ import type {
   BattleReadyMove,
   StatusEffect,
   AnimationState,
-  TrainerState,
-  DialogueState,
   PlayerInventory,
   Item,
   NotificationType,

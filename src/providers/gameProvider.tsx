@@ -221,6 +221,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     },
     []
   );
+
   useEffect(() => {
     if (notification) {
       const timer = setTimeout(() => {
@@ -229,6 +230,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       return () => clearTimeout(timer);
     }
   }, [notification]);
+
   useEffect(() => {
     if (!notification && notificationQueue.length > 0) {
       const next = notificationQueue[0];
@@ -576,16 +578,12 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     },
     [addToLog, handleFaint, showNotification, statusVerbs, updateMonState]
   );
-
-  // --- NEW: AI Scoring Functions ---
   const calculateMoveScore = useCallback(
     (
       move: BattleReadyMove,
       attacker: BattleReadyMon,
       defender: BattleReadyMon
     ): number => {
-      if (move.power === 0 && !move.effect) return 0;
-      let score = 0;
       const effectiveness = getTypeEffectiveness(
         move.type,
         defender
@@ -593,19 +591,26 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       const isStab =
         attacker.type1 === move.type || attacker.type2 === move.type;
       const stabBonus = isStab ? 1.5 : 1;
-      const estimatedDamage =
+
+      // Base score from estimated damage
+      let score =
         move.power *
         (attacker.stats.atk / defender.stats.def) *
-        effectiveness *
-        stabBonus;
-      score += estimatedDamage;
-      score *= move.accuracy;
+        stabBonus *
+        effectiveness;
+
+      // Increase incentive for status moves, even if they do no damage
       if (move.effect && defender.status === null) {
-        score += 30 * move.effect.chance;
+        // Add a significant flat bonus for status effects, ignoring effectiveness for this bonus
+        score += 45 * move.effect.chance;
       }
-      if (estimatedDamage >= defender.currentHp) {
-        score *= 2;
+
+      // Final adjustments
+      score *= move.accuracy;
+      if (score >= defender.currentHp) {
+        score *= 1.5; // Prioritize finishing moves, but less aggressively
       }
+
       return score;
     },
     []
@@ -618,6 +623,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       opponentMon: BattleReadyMon
     ): number => {
       let score = 0;
+      // Evaluate defensive matchup
       const eff1 = getTypeEffectiveness(
         opponentMon.type1,
         switchToMon
@@ -626,20 +632,81 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         ? getTypeEffectiveness(opponentMon.type2, switchToMon).multiplier
         : 1;
       const opponentDamageMultiplier = Math.max(eff1, eff2);
-      if (opponentDamageMultiplier < 1) score += 100;
-      if (opponentDamageMultiplier > 1) score -= 100;
+
+      // Reduce the bonus/penalty for switching to make it less appealing
+      if (opponentDamageMultiplier < 1) score += 60; // Was 100
+      if (opponentDamageMultiplier > 1) score -= 60; // Was 100
+
+      // Evaluate offensive potential
       const bestMoveVsOpponent = switchToMon.moves
         .map((move) => calculateMoveScore(move, switchToMon, opponentMon))
         .reduce((max, current) => Math.max(max, current), 0);
       score += bestMoveVsOpponent;
+
+      // Factor in remaining health
       score *= switchToMon.currentHp / switchToMon.hp;
+
+      // Add a smaller bonus for saving a low-HP mon
       if (currentMon.currentHp / currentMon.hp < 0.25) {
-        score += 80;
+        score += 50; // Was 80
       }
+
       return score;
     },
     [calculateMoveScore]
   );
+
+  // --- AI DECISION LOGIC ---
+  const chooseAiAction = (
+    mon: BattleReadyMon,
+    opponent: BattleReadyMon,
+    team: BattleReadyMon[],
+    activeIndex: number
+  ) => {
+    const availableMoves = mon.moves.filter((m) => m.currentPp > 0);
+    const availableSwitches = team
+      .map((m, index) => ({ mon: m, index }))
+      .filter((item) => item.mon.currentHp > 0 && item.index !== activeIndex);
+
+    const moveOptions = availableMoves.map((move) => ({
+      type: "move" as const,
+      move,
+      score: calculateMoveScore(move, mon, opponent),
+    }));
+
+    const switchOptions = availableSwitches.map((item) => ({
+      type: "switch" as const,
+      index: item.index,
+      score: calculateSwitchScore(item.mon, mon, opponent),
+    }));
+
+    const allOptions = [...moveOptions, ...switchOptions];
+    if (allOptions.length === 0) return null;
+
+    // Sort all possible actions by score in descending order
+    allOptions.sort((a, b) => b.score - a.score);
+
+    // If there are no good options (all scores are 0 or less), just pick the best (least bad) one
+    if (allOptions[0].score <= 0) {
+      return allOptions[0];
+    }
+
+    // Determine the pool of best options based on a score threshold
+    const bestScore = allOptions[0].score;
+    let candidatePool = allOptions.filter(
+      (option) => option.score >= bestScore * 0.85 // Get all options with a score of at least 85% of the best
+    );
+
+    // Ensure the pool has at least 4 options, if that many are available, to increase variety
+    if (candidatePool.length < 4) {
+      const numToTake = Math.min(4, allOptions.length);
+      candidatePool = allOptions.slice(0, numToTake);
+    }
+
+    // Randomly select an action from the final candidate pool
+    const randomIndex = Math.floor(Math.random() * candidatePool.length);
+    return candidatePool[randomIndex];
+  };
 
   const endPlayerTurn = useCallback(async () => {
     showNotification("Opponent's Turn", "turn");
@@ -663,43 +730,18 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       playerMon?.currentHp > 0 &&
       currentGameState === "fight"
     ) {
-      // --- START: NEW CPU AI LOGIC ---
-      const availableMoves = cpuMon.moves.filter((m) => m.currentPp > 0);
-      const availableSwitches = currentCpuTeamState
-        .map((mon, index) => ({ mon, index }))
-        .filter(
-          (item) =>
-            item.mon.currentHp > 0 && item.index !== currentActiveCpuIndex
-        );
+      const chosenAction = chooseAiAction(
+        cpuMon,
+        playerMon,
+        currentCpuTeamState,
+        currentActiveCpuIndex
+      );
 
-      const moveOptions = availableMoves.map((move) => ({
-        type: "move" as const,
-        move,
-        score: calculateMoveScore(move, cpuMon, playerMon),
-      }));
-
-      const switchOptions = availableSwitches.map((item) => ({
-        type: "switch" as const,
-        index: item.index,
-        score: calculateSwitchScore(item.mon, cpuMon, playerMon),
-      }));
-
-      const bestMove =
-        moveOptions.length > 0
-          ? moveOptions.reduce((a, b) => (a.score > b.score ? a : b))
-          : { score: -Infinity };
-      const bestSwitch =
-        switchOptions.length > 0
-          ? switchOptions.reduce((a, b) => (a.score > b.score ? a : b))
-          : { score: -Infinity };
-
-      // Decide: Switch if it's a significantly better option, otherwise attack
-      if (bestSwitch.score > bestMove.score * 1.2 && "index" in bestSwitch) {
-        // Perform CPU Switch
+      if (chosenAction?.type === "switch") {
         setGruntTrainerState("commanding");
         await sleep(100);
         const oldCpuMonName = cpuMon.name;
-        const newCpuMon = currentCpuTeamState[bestSwitch.index]!;
+        const newCpuMon = currentCpuTeamState[chosenAction.index]!;
         const dialogueText = getRandomDialogue("switch", "cpu", {
           oldMon: oldCpuMonName,
           newMon: newCpuMon.name,
@@ -710,23 +752,21 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         addToLog(`CPU switched from ${oldCpuMonName} to ${newCpuMon.name}!`);
         setCpuAnimation("switchOut");
         await sleep(500);
-        setActiveCpuIndex(bestSwitch.index);
+        setActiveCpuIndex(chosenAction.index);
         setCpuAnimation("switchIn");
         await sleep(700);
         setCpuAnimation("idle");
         setGruntTrainerState("idle");
-      } else if ("move" in bestMove) {
-        // Perform CPU Attack
+      } else if (chosenAction?.type === "move") {
         faintedDuringTurn = await processTurn(
           cpuMon,
           playerMon,
-          bestMove.move,
+          chosenAction.move,
           "cpu"
         );
       } else {
         addToLog(`${cpuMon.name} has no moves left!`);
       }
-      // --- END: NEW CPU AI LOGIC ---
 
       if (!faintedDuringTurn && battleStateRef.current.gameState === "fight") {
         await applyEndOfTurnStatusEffects("cpu");
@@ -794,8 +834,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
           await endPlayerTurn();
         }
       } else {
-        // If a faint occurred, we might not want to immediately end the turn
-        // depending on game flow, but for now, this ensures processing stops.
         setIsProcessingTurn(false);
       }
     },
@@ -979,7 +1017,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     });
   }, []);
 
-  // --- REFACTORED AUTO-BATTLE LOGIC ---
   useEffect(() => {
     if (autoBattleTimerRef.current) {
       clearTimeout(autoBattleTimerRef.current);
@@ -1001,39 +1038,17 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         const cpuMon = cpuTeamState[activeCpuIndex];
         if (!playerMon || playerMon.currentHp <= 0 || !cpuMon) return;
 
-        const availableMoves = playerMon.moves.filter((m) => m.currentPp > 0);
-        const availableSwitches = playerTeamState
-          .map((mon, index) => ({ mon, index }))
-          .filter(
-            (item) => item.mon.currentHp > 0 && item.index !== activePlayerIndex
-          );
+        const chosenAction = chooseAiAction(
+          playerMon,
+          cpuMon,
+          playerTeamState,
+          activePlayerIndex
+        );
 
-        const moveOptions = availableMoves.map((move) => ({
-          type: "move" as const,
-          move,
-          score: calculateMoveScore(move, playerMon, cpuMon),
-        }));
-        const switchOptions = availableSwitches.map((item) => ({
-          type: "switch" as const,
-          index: item.index,
-          score: calculateSwitchScore(item.mon, playerMon, cpuMon),
-        }));
-
-        const bestMove =
-          moveOptions.length > 0
-            ? moveOptions.reduce((a, b) => (a.score > b.score ? a : b))
-            : { score: -Infinity };
-        const bestSwitch =
-          switchOptions.length > 0
-            ? switchOptions.reduce((a, b) => (a.score > b.score ? a : b))
-            : { score: -Infinity };
-
-        if (bestSwitch.score > bestMove.score * 1.2 && "index" in bestSwitch) {
-          void handleSwitchSelect(bestSwitch.index);
-        } else if ("move" in bestMove) {
-          void handleMoveSelect(bestMove.move);
-        } else if ("index" in bestSwitch) {
-          void handleSwitchSelect(bestSwitch.index);
+        if (chosenAction?.type === "switch") {
+          void handleSwitchSelect(chosenAction.index);
+        } else if (chosenAction?.type === "move") {
+          void handleMoveSelect(chosenAction.move);
         } else {
           addToLog(`${playerMon.name} is out of options!`);
         }
@@ -1054,7 +1069,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         const bestSwitch = scoredSwitches.reduce((a, b) =>
           a.score > b.score ? a : b
         );
-        handleSwitchSelect(bestSwitch.index);
+        void handleSwitchSelect(bestSwitch.index);
       }
     };
 

@@ -433,7 +433,7 @@ const Navbar = (props: {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showBgPreview, setShowBgPreview] = useState(false);
 
-  const nextBgIndex = (background % 5) + 1;
+  const nextBgIndex = (background % 6) + 1;
 
   useEffect(() => setMounted(true), []);
 
