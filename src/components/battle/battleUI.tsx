@@ -44,6 +44,7 @@ import {
   TypeBadge,
   typeStyles,
 } from "./battle";
+import { useGame } from "../../providers/gameProvider";
 
 const AutoBattleOverlay = ({ onStop }: { onStop: () => void }) => {
   const clipPath = "polygon(0 15px, 15px 0, 100% 0, 100% 100%, 0 100%)";
@@ -820,6 +821,7 @@ const TeamStatusIcon = React.memo(
 );
 TeamStatusIcon.displayName = "TeamStatusIcon";
 
+// ... (Rest of the file remains the same)
 const Hud = ({
   mon,
   team,
@@ -1019,6 +1021,23 @@ const PortfolioMonSprite = ({
   );
 };
 
+const EffectivenessBadge = ({ multiplier }: { multiplier: number }) => {
+  if (multiplier === 1) return null;
+
+  const isSuperEffective = multiplier > 1;
+  const colorClasses = isSuperEffective
+    ? "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300"
+    : "bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300";
+
+  return (
+    <span
+      className={`flex-shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-bold leading-none ${colorClasses}`}
+    >
+      {multiplier}x
+    </span>
+  );
+};
+
 const TeamBar = ({
   team,
   onSwitch,
@@ -1026,6 +1045,8 @@ const TeamBar = ({
   activeMonId,
   onItemTargetSelect,
   isItemTargetView,
+  opponentMon,
+  getTypeEffectiveness,
 }: {
   team: BattleReadyMon[];
   onSwitch: (index: number) => void;
@@ -1033,6 +1054,11 @@ const TeamBar = ({
   activeMonId: number;
   onItemTargetSelect?: (index: number) => void;
   isItemTargetView: boolean;
+  opponentMon: BattleReadyMon;
+  getTypeEffectiveness: (
+    moveType: string,
+    targetMon: BattleReadyMon
+  ) => { multiplier: number; message: string };
 }) => {
   const cardClipPath =
     "polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)";
@@ -1098,7 +1124,6 @@ const TeamBar = ({
 
                       <div className="flex gap-1">
                         <TypeBadge type={mon.type1} />
-
                         {mon.type2 && <TypeBadge type={mon.type2} />}
                       </div>
                     </div>
@@ -1113,19 +1138,29 @@ const TeamBar = ({
                   </div>
                 </div>
 
-                <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 border-t border-slate-300 pt-2 dark:border-slate-700">
-                  {mon.moves.map((move) => (
-                    <div
-                      key={move.name}
-                      className="flex justify-between text-xs text-slate-500 dark:text-slate-400"
-                    >
-                      <span className="truncate">{move.name}</span>
+                <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5 border-t border-slate-300 pt-2 dark:border-slate-700">
+                  {mon.moves.map((move) => {
+                    const { multiplier } = getTypeEffectiveness(
+                      move.type,
+                      opponentMon
+                    );
 
-                      <span className="font-mono">
-                        {move.currentPp}/{move.pp}
-                      </span>
-                    </div>
-                  ))}
+                    return (
+                      <div
+                        key={move.name}
+                        className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400"
+                      >
+                        {/* This container ensures the move name truncates correctly */}
+                        <div className="flex min-w-0 items-center gap-1.5">
+                          <span className="truncate">{move.name}</span>
+                          <EffectivenessBadge multiplier={multiplier} />
+                        </div>
+                        <span className="flex-shrink-0 font-mono">
+                          {move.currentPp}/{move.pp}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -1142,7 +1177,6 @@ const TeamBar = ({
     </div>
   );
 };
-
 const BattleLogMessage = ({ msg }: { msg: string }) => {
   const turnMatch = msg.match(/--- Turn (\d+) ---/i);
   if (turnMatch) {
@@ -1656,32 +1690,6 @@ const NotificationDisplay = ({
   );
 };
 
-interface FightScreenProps {
-  playerMon: BattleReadyMon;
-  cpuMon: BattleReadyMon;
-  playerTeam: BattleReadyMon[];
-  cpuTeam: BattleReadyMon[];
-  battleLog: string[];
-  isPlayerTurn: boolean;
-  onMoveSelect: (move: BattleReadyMove) => void;
-  onSwitchSelect: (index: number) => void;
-  onRun: () => void;
-  playerAnimation: AnimationState;
-  cpuAnimation: AnimationState;
-  playerTrainerState: TrainerState;
-  gruntTrainerState: TrainerState;
-  dialogue: DialogueState;
-  getTypeEffectiveness: typeof importedGetTypeEffectiveness;
-  inventory: PlayerInventory;
-  onItemUse: (itemName: string, targetIndex: number) => void;
-  turnCount: number;
-  notification: { id: number; message: string; type: NotificationType } | null;
-  gameState: "fight" | "forcedSwitch";
-  isAutoBattleActive: boolean;
-  toggleAutoBattle: () => void;
-  background: number;
-}
-
 const Corner = ({ position }: { position: string }) => (
   <motion.div
     className={`pointer-events-none absolute z-[60] h-12 w-12 text-cyan-400 ${position}`}
@@ -1778,31 +1786,37 @@ const TargetingReticule = () => (
   </motion.div>
 );
 
-export const FightScreen = ({
-  playerMon,
-  cpuMon,
-  playerTeam,
-  cpuTeam,
-  battleLog,
-  isPlayerTurn,
-  onMoveSelect,
-  onSwitchSelect,
-  onRun,
-  playerAnimation,
-  cpuAnimation,
-  playerTrainerState,
-  gruntTrainerState,
-  dialogue,
-  getTypeEffectiveness,
-  inventory,
-  onItemUse,
-  turnCount,
-  notification,
-  gameState,
-  isAutoBattleActive,
-  toggleAutoBattle,
-  background,
-}: FightScreenProps) => {
+export const FightScreen = () => {
+  const {
+    playerTeamState: playerTeam,
+    cpuTeamState: cpuTeam,
+    activePlayerIndex,
+    activeCpuIndex,
+    battleLog,
+    isPlayerTurn,
+    handleMoveSelect: onMoveSelect,
+    handleSwitchSelect: onSwitchSelect,
+    handleRun: onRun,
+    playerAnimation,
+    cpuAnimation,
+    playerTrainerState,
+    gruntTrainerState,
+    dialogue,
+    getTypeEffectiveness,
+    inventory,
+    handleItemUse: onItemUse,
+    turnCount,
+    notification,
+    gameState,
+    isAutoBattleActive,
+    toggleAutoBattle,
+    background,
+  } = useGame();
+
+  // Derive active mons from the context state
+  const playerMon = playerTeam[activePlayerIndex];
+  const cpuMon = cpuTeam[activeCpuIndex];
+
   const [actionState, setActionState] = useState<ActionState>("moves");
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [showGuide, setShowGuide] = useState(false);
@@ -2136,6 +2150,8 @@ export const FightScreen = ({
                   onItemTargetSelect={(index) => {
                     if (selectedItem) onItemUse(selectedItem.name, index);
                   }}
+                  opponentMon={cpuMon}
+                  getTypeEffectiveness={getTypeEffectiveness}
                 />
 
                 <div

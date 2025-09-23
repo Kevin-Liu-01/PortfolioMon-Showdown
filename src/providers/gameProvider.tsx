@@ -82,6 +82,7 @@ interface IGameContext {
   handleReset: () => void;
   toggleAutoBattle: () => void;
   cycleBackground: () => void;
+  getTypeEffectiveness: typeof getTypeEffectiveness;
 }
 
 const GameContext = createContext<IGameContext | null>(null);
@@ -576,9 +577,74 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     [addToLog, handleFaint, showNotification, statusVerbs, updateMonState]
   );
 
+  // --- NEW: AI Scoring Functions ---
+  const calculateMoveScore = useCallback(
+    (
+      move: BattleReadyMove,
+      attacker: BattleReadyMon,
+      defender: BattleReadyMon
+    ): number => {
+      if (move.power === 0 && !move.effect) return 0;
+      let score = 0;
+      const effectiveness = getTypeEffectiveness(
+        move.type,
+        defender
+      ).multiplier;
+      const isStab =
+        attacker.type1 === move.type || attacker.type2 === move.type;
+      const stabBonus = isStab ? 1.5 : 1;
+      const estimatedDamage =
+        move.power *
+        (attacker.stats.atk / defender.stats.def) *
+        effectiveness *
+        stabBonus;
+      score += estimatedDamage;
+      score *= move.accuracy;
+      if (move.effect && defender.status === null) {
+        score += 30 * move.effect.chance;
+      }
+      if (estimatedDamage >= defender.currentHp) {
+        score *= 2;
+      }
+      return score;
+    },
+    []
+  );
+
+  const calculateSwitchScore = useCallback(
+    (
+      switchToMon: BattleReadyMon,
+      currentMon: BattleReadyMon,
+      opponentMon: BattleReadyMon
+    ): number => {
+      let score = 0;
+      const eff1 = getTypeEffectiveness(
+        opponentMon.type1,
+        switchToMon
+      ).multiplier;
+      const eff2 = opponentMon.type2
+        ? getTypeEffectiveness(opponentMon.type2, switchToMon).multiplier
+        : 1;
+      const opponentDamageMultiplier = Math.max(eff1, eff2);
+      if (opponentDamageMultiplier < 1) score += 100;
+      if (opponentDamageMultiplier > 1) score -= 100;
+      const bestMoveVsOpponent = switchToMon.moves
+        .map((move) => calculateMoveScore(move, switchToMon, opponentMon))
+        .reduce((max, current) => Math.max(max, current), 0);
+      score += bestMoveVsOpponent;
+      score *= switchToMon.currentHp / switchToMon.hp;
+      if (currentMon.currentHp / currentMon.hp < 0.25) {
+        score += 80;
+      }
+      return score;
+    },
+    [calculateMoveScore]
+  );
+
   const endPlayerTurn = useCallback(async () => {
     showNotification("Opponent's Turn", "turn");
     await sleep(1500);
+
     const {
       cpuTeamState: currentCpuTeamState,
       playerTeamState: currentPlayerTeamState,
@@ -586,19 +652,83 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       activePlayerIndex: currentActivePlayerIndex,
       gameState: currentGameState,
     } = battleStateRef.current;
+
     const cpuMon = currentCpuTeamState[currentActiveCpuIndex]!;
-    if (cpuMon?.currentHp > 0 && currentGameState === "fight") {
-      const playerMon = currentPlayerTeamState[currentActivePlayerIndex]!;
+    const playerMon = currentPlayerTeamState[currentActivePlayerIndex]!;
+
+    let faintedDuringTurn = false;
+
+    if (
+      cpuMon?.currentHp > 0 &&
+      playerMon?.currentHp > 0 &&
+      currentGameState === "fight"
+    ) {
+      // --- START: NEW CPU AI LOGIC ---
       const availableMoves = cpuMon.moves.filter((m) => m.currentPp > 0);
-      let didFaint = false;
-      if (availableMoves.length > 0) {
-        const cpuMove =
-          availableMoves[Math.floor(Math.random() * availableMoves.length)]!;
-        didFaint = await processTurn(cpuMon, playerMon, cpuMove, "cpu");
+      const availableSwitches = currentCpuTeamState
+        .map((mon, index) => ({ mon, index }))
+        .filter(
+          (item) =>
+            item.mon.currentHp > 0 && item.index !== currentActiveCpuIndex
+        );
+
+      const moveOptions = availableMoves.map((move) => ({
+        type: "move" as const,
+        move,
+        score: calculateMoveScore(move, cpuMon, playerMon),
+      }));
+
+      const switchOptions = availableSwitches.map((item) => ({
+        type: "switch" as const,
+        index: item.index,
+        score: calculateSwitchScore(item.mon, cpuMon, playerMon),
+      }));
+
+      const bestMove =
+        moveOptions.length > 0
+          ? moveOptions.reduce((a, b) => (a.score > b.score ? a : b))
+          : { score: -Infinity };
+      const bestSwitch =
+        switchOptions.length > 0
+          ? switchOptions.reduce((a, b) => (a.score > b.score ? a : b))
+          : { score: -Infinity };
+
+      // Decide: Switch if it's a significantly better option, otherwise attack
+      if (bestSwitch.score > bestMove.score * 1.2 && "index" in bestSwitch) {
+        // Perform CPU Switch
+        setGruntTrainerState("commanding");
+        await sleep(100);
+        const oldCpuMonName = cpuMon.name;
+        const newCpuMon = currentCpuTeamState[bestSwitch.index]!;
+        const dialogueText = getRandomDialogue("switch", "cpu", {
+          oldMon: oldCpuMonName,
+          newMon: newCpuMon.name,
+        });
+        setDialogue({ player: "", cpu: dialogueText });
+        setTimeout(() => setDialogue((d) => ({ ...d, cpu: "" })), 3000);
+
+        addToLog(`CPU switched from ${oldCpuMonName} to ${newCpuMon.name}!`);
+        setCpuAnimation("switchOut");
+        await sleep(500);
+        setActiveCpuIndex(bestSwitch.index);
+        setCpuAnimation("switchIn");
+        await sleep(700);
+        setCpuAnimation("idle");
+        setGruntTrainerState("idle");
+      } else if ("move" in bestMove) {
+        // Perform CPU Attack
+        faintedDuringTurn = await processTurn(
+          cpuMon,
+          playerMon,
+          bestMove.move,
+          "cpu"
+        );
       } else {
         addToLog(`${cpuMon.name} has no moves left!`);
       }
-      if (!didFaint && battleStateRef.current.gameState === "fight") {
+      // --- END: NEW CPU AI LOGIC ---
+
+      if (!faintedDuringTurn && battleStateRef.current.gameState === "fight") {
         await applyEndOfTurnStatusEffects("cpu");
       }
     }
@@ -616,7 +746,14 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       setIsPlayerTurn(true);
     }
     setIsProcessingTurn(false);
-  }, [processTurn, applyEndOfTurnStatusEffects, showNotification, addToLog]);
+  }, [
+    processTurn,
+    applyEndOfTurnStatusEffects,
+    showNotification,
+    addToLog,
+    calculateMoveScore,
+    calculateSwitchScore,
+  ]);
 
   const handleMoveSelect = useCallback(
     async (move: BattleReadyMove) => {
@@ -656,6 +793,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         ) {
           await endPlayerTurn();
         }
+      } else {
+        // If a faint occurred, we might not want to immediately end the turn
+        // depending on game flow, but for now, this ensures processing stops.
+        setIsProcessingTurn(false);
       }
     },
     [
@@ -816,7 +957,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     setCpuStats(initialStats);
     setIsAutoBattleActive(false);
     setIsProcessingTurn(false);
-    // setBackground(1)
   }, []);
 
   const toggleAutoBattle = useCallback(() => {
@@ -839,16 +979,13 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     });
   }, []);
 
-  // Refactored Auto-battle logic into a single, robust useEffect
+  // --- REFACTORED AUTO-BATTLE LOGIC ---
   useEffect(() => {
     if (autoBattleTimerRef.current) {
       clearTimeout(autoBattleTimerRef.current);
       autoBattleTimerRef.current = null;
     }
-
-    if (!isAutoBattleActive || !isPlayerTurn || isProcessingTurn) {
-      return;
-    }
+    if (!isAutoBattleActive || !isPlayerTurn || isProcessingTurn) return;
 
     const performAutoAction = () => {
       const {
@@ -861,73 +998,63 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
       if (gameState === "fight") {
         const playerMon = playerTeamState[activePlayerIndex];
-        if (!playerMon || playerMon.currentHp <= 0) return;
-
-        if (playerMon.status === "sleep" || playerMon.status === "stun") {
-          handleMoveSelect(playerMon.moves[0]); // Dummy move to process stun
-          return;
-        }
+        const cpuMon = cpuTeamState[activeCpuIndex];
+        if (!playerMon || playerMon.currentHp <= 0 || !cpuMon) return;
 
         const availableMoves = playerMon.moves.filter((m) => m.currentPp > 0);
-        if (availableMoves.length === 0) {
-          addToLog(`${playerMon.name} has no moves with PP left!`);
-          return;
-        }
-
-        const cpuMon = cpuTeamState[activeCpuIndex];
-        const superEffectiveMoves = availableMoves.filter(
-          (move) => getTypeEffectiveness(move.type, cpuMon).multiplier > 1
-        );
-
-        let bestMove: BattleReadyMove;
-        if (superEffectiveMoves.length > 0) {
-          bestMove = superEffectiveMoves.reduce((prev, current) =>
-            prev.power > current.power ? prev : current
-          );
-        } else {
-          bestMove = availableMoves.reduce((prev, current) =>
-            prev.power > current.power ? prev : current
-          );
-        }
-
-        if (bestMove) {
-          handleMoveSelect(bestMove);
-        }
-      } else if (gameState === "forcedSwitch") {
         const availableSwitches = playerTeamState
           .map((mon, index) => ({ mon, index }))
           .filter(
             (item) => item.mon.currentHp > 0 && item.index !== activePlayerIndex
           );
 
+        const moveOptions = availableMoves.map((move) => ({
+          type: "move" as const,
+          move,
+          score: calculateMoveScore(move, playerMon, cpuMon),
+        }));
+        const switchOptions = availableSwitches.map((item) => ({
+          type: "switch" as const,
+          index: item.index,
+          score: calculateSwitchScore(item.mon, playerMon, cpuMon),
+        }));
+
+        const bestMove =
+          moveOptions.length > 0
+            ? moveOptions.reduce((a, b) => (a.score > b.score ? a : b))
+            : { score: -Infinity };
+        const bestSwitch =
+          switchOptions.length > 0
+            ? switchOptions.reduce((a, b) => (a.score > b.score ? a : b))
+            : { score: -Infinity };
+
+        if (bestSwitch.score > bestMove.score * 1.2 && "index" in bestSwitch) {
+          void handleSwitchSelect(bestSwitch.index);
+        } else if ("move" in bestMove) {
+          void handleMoveSelect(bestMove.move);
+        } else if ("index" in bestSwitch) {
+          void handleSwitchSelect(bestSwitch.index);
+        } else {
+          addToLog(`${playerMon.name} is out of options!`);
+        }
+      } else if (gameState === "forcedSwitch") {
+        const availableSwitches = playerTeamState
+          .map((mon, index) => ({ mon, index }))
+          .filter((item) => item.mon.currentHp > 0);
         if (availableSwitches.length === 0) return;
 
         const cpuMon = cpuTeamState[activeCpuIndex];
-        let bestSwitchIndex = -1;
-        let bestScore = -Infinity;
+        const playerMon = playerTeamState[activePlayerIndex];
 
-        for (const { mon, index } of availableSwitches) {
-          let score = 0;
-          mon.moves.forEach((move) => {
-            const eff = getTypeEffectiveness(move.type, cpuMon);
-            if (eff.multiplier > 1) score += eff.multiplier;
-          });
-          const cpuEff1 = getTypeEffectiveness(cpuMon.type1, mon);
-          if (cpuEff1.multiplier < 1) score += 2;
-          if (cpuEff1.multiplier > 1) score -= 2;
-          if (cpuMon.type2) {
-            const cpuEff2 = getTypeEffectiveness(cpuMon.type2, mon);
-            if (cpuEff2.multiplier < 1) score += 2;
-            if (cpuEff2.multiplier > 1) score -= 2;
-          }
-          if (score > bestScore) {
-            bestScore = score;
-            bestSwitchIndex = index;
-          }
-        }
-        handleSwitchSelect(
-          bestSwitchIndex !== -1 ? bestSwitchIndex : availableSwitches[0].index
+        const scoredSwitches = availableSwitches.map((item) => ({
+          index: item.index,
+          score: calculateSwitchScore(item.mon, playerMon, cpuMon),
+        }));
+
+        const bestSwitch = scoredSwitches.reduce((a, b) =>
+          a.score > b.score ? a : b
         );
+        handleSwitchSelect(bestSwitch.index);
       }
     };
 
@@ -947,6 +1074,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     handleMoveSelect,
     handleSwitchSelect,
     addToLog,
+    calculateMoveScore,
+    calculateSwitchScore,
   ]);
 
   const value = useMemo(
@@ -982,6 +1111,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       handleReset,
       toggleAutoBattle,
       cycleBackground,
+      getTypeEffectiveness,
     }),
     [
       gameState,

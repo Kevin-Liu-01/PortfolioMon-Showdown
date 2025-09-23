@@ -4,7 +4,6 @@ import { FightScreen } from "../battle/battleUI";
 import { GameOverScreen } from "./gameOverScreen";
 import { TeamSelectScreen } from "../team/teamUI";
 import { TeamPreviewScreen } from "../team/teamPreviewUI";
-import { getTypeEffectiveness } from "../../context/gameContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 const GameScreenManager = () => {
@@ -43,33 +42,7 @@ const GameScreenManager = () => {
           {game.gameState === "teamPreview" && <TeamPreviewScreen />}
           {(game.gameState === "fight" || game.gameState === "forcedSwitch") &&
             activePlayerMon &&
-            activeCpuMon && (
-              <FightScreen
-                gameState={game.gameState}
-                playerMon={activePlayerMon}
-                cpuMon={activeCpuMon}
-                playerTeam={game.playerTeamState}
-                cpuTeam={game.cpuTeamState}
-                battleLog={game.battleLog}
-                isPlayerTurn={game.isPlayerTurn}
-                onMoveSelect={game.handleMoveSelect}
-                onSwitchSelect={game.handleSwitchSelect}
-                onRun={game.handleRun}
-                playerAnimation={game.playerAnimation}
-                cpuAnimation={game.cpuAnimation}
-                playerTrainerState={game.playerTrainerState}
-                gruntTrainerState={game.gruntTrainerState}
-                dialogue={game.dialogue}
-                getTypeEffectiveness={getTypeEffectiveness}
-                inventory={game.inventory}
-                onItemUse={game.handleItemUse}
-                turnCount={game.turnCount}
-                notification={game.notification}
-                isAutoBattleActive={game.isAutoBattleActive}
-                toggleAutoBattle={game.toggleAutoBattle}
-                background={game.background}
-              />
-            )}
+            activeCpuMon && <FightScreen />}
         </motion.div>
       </AnimatePresence>
       {game.gameState === "gameOver" && <GameOverScreen />}

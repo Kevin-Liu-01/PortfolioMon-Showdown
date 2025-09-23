@@ -1185,32 +1185,40 @@ const TrainerInfoPanel = ({
               className="relative h-full w-full bg-slate-100/50 p-4 dark:bg-slate-800/50"
               style={{ clipPath: imagePanelClipPath }}
             >
+              {/* This container now acts as the border for the image */}
               <div
-                className="absolute inset-2 overflow-hidden"
+                className="absolute inset-2 bg-cyan-400/50 p-0.5"
                 style={{ clipPath: innerImageClipPath }}
               >
-                <Image
-                  src="/images/kevin_sidebar.png"
-                  fill
-                  alt="Kevin Liu"
-                  className="scale-110 object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent dark:from-slate-900/70" />
+                {/* This inner container holds the image and is also clipped */}
+                <div
+                  className="relative h-full w-full overflow-hidden"
+                  style={{ clipPath: innerImageClipPath }}
+                >
+                  <Image
+                    src="/images/kevin_sidebar.png"
+                    fill
+                    alt="Kevin Liu"
+                    className="scale-110 object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent dark:from-slate-900/70" />
+                </div>
               </div>
+
               <div className="relative flex h-full flex-col justify-between [transform:translateZ(20px)]">
                 <div>
                   <p className="font-mono text-xs text-cyan-600 [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
                     PRINCETON
                   </p>
                   <p className="font-mono text-xs text-cyan-600 [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
-                    5/27/2024
+                    5/19/2025
                   </p>
                 </div>
                 <div>
-                  <p className="text-2xl font-black tracking-tighter text-black [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-white dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
+                  <p className="text-2xl font-black tracking-wider text-black [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-white dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
                     KEVIN LIU
                   </p>
-                  <p className="text-xs font-bold text-cyan-700 dark:text-cyan-400">
+                  <p className="ml-1 text-xs font-bold tracking-wide text-cyan-700 dark:text-cyan-400">
                     Full-Stack & AI Developer
                   </p>
                 </div>
@@ -1443,8 +1451,8 @@ const TrainerInfoPanel = ({
                   <TimelineItem
                     role="Student"
                     company="High Technology High School"
-                    date="Graduated "
-                    description="Graduated with Honors"
+                    date="Graduated 2024"
+                    description="HTHS >>>"
                     isLast={true}
                   />
                 </div>
