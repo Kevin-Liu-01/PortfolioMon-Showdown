@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { type NextPage } from "next";
 import { useState } from "react";
 import Navbar from "../components/navbar";
@@ -42,26 +43,31 @@ const Home: NextPage = () => {
   //   }`;
 
   return (
-    <main
-      className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
-      style={{
-        // This style logic for special fonts remains the same
-        fontFamily:
-          font === "font-orbiter" ? "'Orbiter', sans-serif" : undefined,
-      }}
-    >
-      {/* <div className={patternStyles()} /> */}
-      <div className="relative z-20">
-        <Navbar
-          menuHandler={() => setTranslate(!translate)}
-          fontInitializer={fontInitializer}
-        />
-      </div>
+    <div>
+      <Head>
+        <title>Kevin Liu&apos;s PortfolioMon Showdown</title>
+      </Head>
+      <main
+        className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
+        style={{
+          // This style logic for special fonts remains the same
+          fontFamily:
+            font === "font-orbiter" ? "'Orbiter', sans-serif" : undefined,
+        }}
+      >
+        {/* <div className={patternStyles()} /> */}
+        <div className="relative z-20">
+          <Navbar
+            menuHandler={() => setTranslate(!translate)}
+            fontInitializer={fontInitializer}
+          />
+        </div>
 
-      <div className="relative z-10 h-[calc(100vh-4.8rem)] w-full">
-        <GameScreenManager />
-      </div>
-    </main>
+        <div className="relative z-10 h-[calc(100vh-4.8rem)] w-full">
+          <GameScreenManager />
+        </div>
+      </main>
+    </div>
   );
 };
 

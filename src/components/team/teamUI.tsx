@@ -30,10 +30,11 @@ import {
   Moon,
   XCircle,
   FileText,
-  Linkedin,
+  XIcon,
+  PlusIcon,
 } from "lucide-react";
 
-// --- BATTLE UI EFFECT COMPONENTS (Unchanged) ---
+// --- BATTLE UI EFFECT COMPONENTS ---
 const BattleScannerRingHalf = ({
   delay,
   duration,
@@ -704,7 +705,7 @@ const MonDetailView = ({
         <div className="flex w-1/2 flex-col gap-3">
           <UpgradedClippedContainer
             variants={itemVariants}
-            className="flex-1 pr-1"
+            className="flex-1 pr-1 "
             clipPath="polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)"
           >
             <div className="flex h-full flex-col p-2.5">
@@ -718,7 +719,7 @@ const MonDetailView = ({
                   return (
                     <div
                       key={move.name}
-                      className={`group flex-1 p-px transition-all duration-300 ${bgClass} hover:brightness-110`}
+                      className={`group flex-1 p-px pr-1 transition-all duration-300 hover:pr-1.5 ${bgClass} hover:brightness-110`}
                       style={{ clipPath }}
                     >
                       <div
@@ -757,7 +758,9 @@ const MonDetailView = ({
                             />
                             <MoveStatChip
                               label="CRIT"
-                              value={`${move.critChance * 100}%`}
+                              value={`${
+                                move.critChance ? move.critChance * 100 : "—"
+                              }%`}
                             />
                             <MoveStatChip label="PP" value={move.pp} />
                           </div>
@@ -1227,7 +1230,7 @@ const TrainerInfoPanel = ({
           </motion.div>
           <motion.div variants={itemVariants} className="space-y-3">
             <UpgradedClippedContainer
-              className="flex-shrink-0 pl-1"
+              className="flex-shrink-0 pl-1 transition-all hover:pl-2"
               clipPath="polygon(12px 0px, 100% 0px, 100% 100%, 0% 100%, 0px 12px)"
             >
               <div className="flex items-center justify-center gap-4 p-2.5">
@@ -1282,7 +1285,7 @@ const TrainerInfoPanel = ({
               </div>
             </UpgradedClippedContainer>
             <UpgradedClippedContainer
-              className="pr-1"
+              className="pr-1 transition-all hover:pr-2"
               clipPath="polygon(0px 0px, 100% 0px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0px 100%)"
             >
               <div className="space-y-2 p-3">
@@ -1304,7 +1307,7 @@ const TrainerInfoPanel = ({
           className="relative z-10 mt-auto flex flex-col gap-4"
         >
           <UpgradedClippedContainer
-            className="flex-shrink-0 px-1"
+            className="flex-shrink-0 px-1  transition-all hover:px-2"
             clipPath="polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)"
           >
             <div className="p-3">
@@ -1560,18 +1563,22 @@ const MonGridItem = ({
           onTeamSelect(mon);
         }}
         disabled={buttonDisabled}
-        className={`absolute bottom-2 right-2 z-20 flex h-6 w-6 items-center justify-center rounded-full transition-all group-hover:opacity-100 ${
+        className={`absolute bottom-2 right-2 z-20 flex items-center justify-center p-1 pb-0.5 transition-all group-hover:opacity-100 ${
           isOnTeam
             ? "bg-red-500 text-white opacity-100"
             : "bg-green-500 text-white opacity-0"
         } disabled:cursor-not-allowed disabled:bg-slate-600 disabled:opacity-0`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        style={{
+          clipPath:
+            "polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px)",
+        }}
       >
         {isOnTeam ? (
-          <XCircle className="h-4 w-4" />
+          <XIcon className="mb-0.5 h-4 w-4" />
         ) : (
-          <PlusCircle className="h-4 w-4" />
+          <PlusIcon className="mb-0.5 h-4 w-4" />
         )}
       </motion.button>
     </motion.div>
