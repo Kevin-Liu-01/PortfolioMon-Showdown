@@ -278,39 +278,40 @@ export const ItemMenu = ({
   );
 };
 
-export const StatBar = ({
+const StatBar = ({
   label,
   value,
-  maxValue = 200,
+  maxValue = 320,
 }: {
   label: string;
   value: number;
   maxValue?: number;
 }) => (
-  <div className="grid grid-cols-6 items-center gap-2 text-xs">
-    <span className="col-span-1 font-bold uppercase text-slate-400">
+  <div className="grid grid-cols-6 items-center gap-2">
+    <span className="col-span-1 font-kode text-[10px] uppercase text-slate-500 dark:text-slate-400">
       {label}
     </span>
-
     <div
-      className="col-span-4 w-full bg-slate-600/50"
+      className="col-span-4 h-1.5 bg-slate-300 p-0.5 dark:bg-slate-900/70"
       style={{
         clipPath:
           "polygon(0 0, 100% 0, 100% 100%, 3px 100%, 0 calc(100% - 3px))",
       }}
     >
       <motion.div
-        className="h-2 bg-gradient-to-r from-cyan-500 to-blue-500"
+        className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
         initial={{ width: 0 }}
         animate={{ width: `${(value / maxValue) * 100}%` }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+        transition={{ duration: 0.8, ease: "circOut", delay: 0.5 }}
         style={{
           clipPath:
             "polygon(0 0, 100% 0, 100% 100%, 3px 100%, 0 calc(100% - 3px))",
         }}
       />
     </div>
-    <span className="col-span-1 font-bold text-white">{value}</span>
+    <span className="col-span-1 font-kode text-xs font-bold text-slate-900 dark:text-white">
+      {value}
+    </span>
   </div>
 );
 
@@ -379,6 +380,10 @@ export const GuideModal = ({
   };
   const types = Object.keys(typeChart);
 
+  // Define the clip-path as a constant to avoid repetition
+  const modalClipPath =
+    "polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)";
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -389,149 +394,149 @@ export const GuideModal = ({
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
           onClick={onClose}
         >
+          {/* This outer div now acts as the border */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="relative flex h-full max-h-[60vh] w-full max-w-3xl flex-col border border-slate-600 bg-slate-800 shadow-2xl"
+            className="relative w-full max-w-3xl bg-slate-600 p-px pl-2 shadow-2xl" // Border color and thickness
+            style={{ clipPath: modalClipPath }}
             onClick={(e: React.MouseEvent<HTMLDivElement>) =>
               e.stopPropagation()
             }
-            style={{
-              clipPath:
-                "polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%)",
-            }}
           >
-            <div className="flex items-center justify-between border-b border-slate-700 p-4">
-              <h2 className="text-2xl font-bold text-cyan-300">Battle Guide</h2>
+            {/* The inner div is the main content area */}
+            <div
+              className="relative flex h-full max-h-[60vh] w-full flex-col bg-slate-800"
+              style={{ clipPath: modalClipPath }}
+            >
+              <div className="flex items-center justify-between border-b border-slate-700 p-4">
+                <h2 className="text-2xl font-bold text-cyan-300">
+                  Battle Guide
+                </h2>
 
-              <button
-                onClick={onClose}
-                className="rounded-full bg-slate-700 p-1 text-white transition hover:bg-slate-600"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <div className="flex-grow overflow-y-auto p-6">
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <div>
-                  <h3 className="mb-2 text-lg font-semibold">Turn Actions</h3>
-
-                  <ul className="list-inside list-disc space-y-2 text-slate-300">
-                    <li>
-                      <strong>Fight:</strong> Attack with a chosen move.
-                    </li>
-
-                    <li>
-                      <strong>Switch:</strong> Swap your active Project with
-                      another.
-                    </li>
-
-                    <li>
-                      <strong>Items:</strong> Use an item from your bag.
-                    </li>
-
-                    <li>
-                      <strong>Run:</strong> Forfeit the battle.
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="mb-2 text-lg font-semibold">
-                    Status Conditions
-                  </h3>
-
-                  <ul className="list-inside list-disc space-y-2 text-slate-300">
-                    <li>
-                      <strong className="text-orange-400">Burn:</strong> Takes
-                      damage each turn.
-                    </li>
-
-                    <li>
-                      <strong className="text-purple-400">Poison:</strong> Takes
-                      damage each turn.
-                    </li>
-
-                    <li>
-                      <strong className="text-gray-400">Sleep:</strong>{" "}
-                      Can&apos;t move for 1-3 turns.
-                    </li>
-
-                    <li>
-                      <strong className="text-yellow-400">Stun:</strong> 25%
-                      chance to be unable to move.
-                    </li>
-                  </ul>
-                </div>
+                <button
+                  onClick={onClose}
+                  className="rounded-full bg-slate-700 p-1 text-white transition hover:bg-slate-600"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
-              <div className="mt-8">
-                <h3 className="mb-2 text-lg font-semibold">
-                  Type Effectiveness Chart
-                </h3>
+              <div className="flex-grow overflow-y-auto p-6">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                  <div>
+                    <h3 className="mb-2 text-lg font-semibold">Turn Actions</h3>
 
-                <p className="mb-4 text-sm text-slate-400">
-                  Rows are Attacking types, Columns are Defending types.
-                </p>
+                    <ul className="list-inside list-disc space-y-2 text-slate-300">
+                      <li>
+                        <strong>Fight:</strong> Attack with a chosen move.
+                      </li>
+                      <li>
+                        <strong>Switch:</strong> Swap your active Project with
+                        another.
+                      </li>
+                      <li>
+                        <strong>Items:</strong> Use an item from your bag.
+                      </li>
+                      <li>
+                        <strong>Run:</strong> Forfeit the battle.
+                      </li>
+                    </ul>
+                  </div>
 
-                <div
-                  className="overflow-x-auto border border-slate-700"
-                  style={{
-                    clipPath:
-                      "polygon(0 8px, 8px 0, 100% 0, 100% 100%, 0 100%)",
-                  }}
-                >
-                  <table className="w-full min-w-[500px] border-collapse text-center text-xs">
-                    <thead>
-                      <tr className="bg-slate-900/50">
-                        <th className="sticky left-0 z-10 bg-slate-800 p-2 font-semibold text-slate-400">
-                          ATK \ DEF
-                        </th>
+                  <div>
+                    <h3 className="mb-2 text-lg font-semibold">
+                      Status Conditions
+                    </h3>
 
-                        {types.map((def) => (
-                          <th key={def} className="p-1">
-                            <TypeBadge type={def} />
+                    <ul className="list-inside list-disc space-y-2 text-slate-300">
+                      <li>
+                        <strong className="text-orange-400">Burn:</strong> Takes
+                        damage each turn.
+                      </li>
+                      <li>
+                        <strong className="text-purple-400">Poison:</strong>{" "}
+                        Takes damage each turn.
+                      </li>
+                      <li>
+                        <strong className="text-gray-400">Sleep:</strong>{" "}
+                        Can&apos;t move for 1-3 turns.
+                      </li>
+                      <li>
+                        <strong className="text-yellow-400">Stun:</strong> 25%
+                        chance to be unable to move.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <h3 className="mb-2 text-lg font-semibold">
+                    Type Effectiveness Chart
+                  </h3>
+
+                  <p className="mb-4 text-sm text-slate-400">
+                    Rows are Attacking types, Columns are Defending types.
+                  </p>
+
+                  <div
+                    className="overflow-x-auto border border-slate-700"
+                    style={{
+                      clipPath:
+                        "polygon(0 8px, 8px 0, 100% 0, 100% 100%, 0 100%)",
+                    }}
+                  >
+                    <table className="w-full min-w-[500px] border-collapse text-center text-xs">
+                      <thead>
+                        <tr className="bg-slate-900/50">
+                          <th className="sticky left-0 z-10 bg-slate-800 p-2 font-semibold text-slate-400">
+                            ATK \ DEF
                           </th>
-                        ))}
-                      </tr>
-                    </thead>
 
-                    <tbody className="divide-y divide-slate-700">
-                      {types.map((atk) => (
-                        <tr key={atk} className="hover:bg-slate-700/50">
-                          <td className="sticky left-0 z-10 bg-slate-800 p-1">
-                            <TypeBadge type={atk} />
-                          </td>
-
-                          {types.map((def) => {
-                            const multiplier = typeChart[atk]?.[def] ?? 1;
-                            return (
-                              <td key={def} className="p-1 font-mono">
-                                <span
-                                  className={`flex h-6 w-8 items-center justify-center text-white ${
-                                    multiplier > 1
-                                      ? "bg-green-500/80"
-                                      : multiplier < 1
-                                      ? "bg-red-500/80"
-                                      : "bg-slate-700 text-slate-400"
-                                  }`}
-                                  style={{
-                                    clipPath:
-                                      "polygon(0 0, 100% 0, 100% 100%, 4px 100%, 0 calc(100% - 4px))",
-                                  }}
-                                >
-                                  {multiplier}
-                                </span>
-                              </td>
-                            );
-                          })}
+                          {types.map((def) => (
+                            <th key={def} className="p-1">
+                              <TypeBadge type={def} />
+                            </th>
+                          ))}
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+
+                      <tbody className="divide-y divide-slate-700">
+                        {types.map((atk) => (
+                          <tr key={atk} className="hover:bg-slate-700/50">
+                            <td className="sticky left-0 z-10 bg-slate-800 p-1">
+                              <TypeBadge type={atk} />
+                            </td>
+
+                            {types.map((def) => {
+                              const multiplier = typeChart[atk]?.[def] ?? 1;
+                              return (
+                                <td key={def} className="p-1 font-mono">
+                                  <span
+                                    className={`flex h-6 w-8 items-center justify-center text-white ${
+                                      multiplier > 1
+                                        ? "bg-green-500/80"
+                                        : multiplier < 1
+                                        ? "bg-red-500/80"
+                                        : "bg-slate-700 text-slate-400"
+                                    }`}
+                                    style={{
+                                      clipPath:
+                                        "polygon(0 0, 100% 0, 100% 100%, 4px 100%, 0 calc(100% - 4px))",
+                                    }}
+                                  >
+                                    {multiplier}
+                                  </span>
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

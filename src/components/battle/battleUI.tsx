@@ -205,7 +205,7 @@ const ItemMenu = ({
                           {item.description}
                         </p>
                       </div>
-                      <p className="flex-shrink-0 pl-4 font-mono text-lg font-bold text-cyan-600 dark:text-cyan-300">
+                      <p className="flex-shrink-0 pl-4 font-kode text-lg font-bold text-cyan-600 dark:text-cyan-300">
                         x{quantity}
                       </p>
                     </div>
@@ -899,7 +899,7 @@ const Hud = ({
               <HealthBar currentHp={mon.currentHp} maxHp={mon.hp} />
             </div>
 
-            <p className="absolute -bottom-4 right-0 px-3 font-mono text-xs text-slate-600 dark:text-slate-300">
+            <p className="absolute -bottom-4 right-0 px-3 font-kode text-xs text-slate-600 dark:text-slate-300">
               {mon.currentHp} / {mon.hp}
             </p>
           </div>
@@ -1031,7 +1031,7 @@ const EffectivenessBadge = ({ multiplier }: { multiplier: number }) => {
 
   return (
     <span
-      className={`flex-shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-bold leading-none ${colorClasses}`}
+      className={`flex-shrink-0 rounded-md px-1.5 py-0.5 font-kode text-[10px] font-bold leading-none ${colorClasses}`}
     >
       {multiplier}x
     </span>
@@ -1155,7 +1155,7 @@ const TeamBar = ({
                           <span className="truncate">{move.name}</span>
                           <EffectivenessBadge multiplier={multiplier} />
                         </div>
-                        <span className="flex-shrink-0 font-mono">
+                        <span className="flex-shrink-0 font-kode">
                           {move.currentPp}/{move.pp}
                         </span>
                       </div>
@@ -1367,7 +1367,7 @@ const MoveInfoHover = ({
                   <p className="text-[9px] font-bold uppercase text-slate-500 dark:text-slate-400">
                     Accuracy
                   </p>
-                  <p className="font-mono text-sm font-bold text-cyan-600 dark:text-cyan-300">
+                  <p className="font-kode text-sm font-bold text-cyan-600 dark:text-cyan-300">
                     {move.accuracy * 100}%
                   </p>
                 </div>
@@ -1376,7 +1376,7 @@ const MoveInfoHover = ({
                     <p className="text-end text-[9px] font-bold uppercase text-slate-500 dark:text-slate-400">
                       Crit Chance
                     </p>
-                    <p className="font-mono text-sm font-bold text-yellow-500 dark:text-yellow-300">
+                    <p className="font-kode text-sm font-bold text-yellow-500 dark:text-yellow-300">
                       {move.critChance * 100}%
                     </p>
                   </div>
@@ -1494,7 +1494,7 @@ const MoveButton = ({
               className={`flex w-full items-start justify-between ${textColorClass}`}
             >
               <p className="text-sm font-bold">{move.name}</p>
-              <p className="font-mono text-xs">Pwr: {move.power || "--"}</p>
+              <p className="font-kode text-xs">Pwr: {move.power || "--"}</p>
             </div>
             {hasStatusEffect && move.effect && (
               <div className="pointer-events-none absolute inset-x-0 bottom-0 top-1/2 flex h-8 items-center justify-center">
@@ -1520,7 +1520,7 @@ const MoveButton = ({
               <div className="flex justify-center"></div>
               <div className="flex justify-end">
                 <p
-                  className={`font-mono text-xs font-bold ${
+                  className={`font-kode text-xs font-bold ${
                     outOfPP ? "text-red-500" : textColorClass
                   }`}
                 >

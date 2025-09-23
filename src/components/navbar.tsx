@@ -31,7 +31,7 @@ const ClippedGroupContainer = ({
   className?: string;
 }) => (
   <motion.div
-    className={`relative bg-slate-300/50 p-px dark:bg-cyan-400/20 ${className}`}
+    className={`relative bg-slate-300/50 p-px transition-all hover:px-1 dark:bg-cyan-400/50 ${className}`}
     style={{
       clipPath:
         "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",

@@ -30,6 +30,7 @@ import {
   Moon,
   XCircle,
   FileText,
+  Linkedin,
 } from "lucide-react";
 
 // --- BATTLE UI EFFECT COMPONENTS (Unchanged) ---
@@ -78,8 +79,6 @@ export const AnimatedBackground = () => (
   </div>
 );
 
-// --- NEW & UPGRADED HELPER COMPONENTS (Updated for Dark Mode) ---
-
 const UpgradedClippedContainer = ({
   children,
   className,
@@ -95,7 +94,7 @@ const UpgradedClippedContainer = ({
 }) => (
   <motion.div
     variants={variants}
-    className={`relative overflow-hidden bg-slate-300/50 p-px dark:bg-cyan-400/20 ${className}`}
+    className={`relative overflow-hidden bg-cyan-300/40 p-px dark:bg-cyan-300/30 ${className}`}
     style={{ clipPath }}
     initial="rest"
     whileHover="hover"
@@ -209,7 +208,7 @@ const StatBar = ({
   maxValue?: number;
 }) => (
   <div className="grid grid-cols-6 items-center gap-2">
-    <span className="col-span-1 font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400">
+    <span className="col-span-1 font-kode text-[10px] uppercase text-slate-500 dark:text-slate-400">
       {label}
     </span>
     <div
@@ -230,7 +229,7 @@ const StatBar = ({
         }}
       />
     </div>
-    <span className="col-span-1 font-mono text-xs font-bold text-slate-900 dark:text-white">
+    <span className="col-span-1 font-kode text-xs font-bold text-slate-900 dark:text-white">
       {value}
     </span>
   </div>
@@ -377,7 +376,8 @@ const MoveStatChip = ({
   <div
     className="bg-slate-300/70 p-px dark:bg-slate-900/70"
     style={{
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 6px 100%, 0 calc(100% - 6px))",
+      clipPath:
+        "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
     }}
   >
     <div
@@ -388,10 +388,10 @@ const MoveStatChip = ({
       }}
     >
       <div className="flex items-baseline justify-between gap-1">
-        <span className="font-mono text-[8px] font-bold text-cyan-600/80 dark:text-cyan-400/80">
+        <span className="font-kode text-[8px] font-bold text-cyan-600/80 dark:text-cyan-400/80">
           {label}
         </span>
-        <span className="font-mono text-[10px] font-semibold text-slate-900 dark:text-white">
+        <span className="font-kode text-[10px] font-semibold text-slate-900 dark:text-white">
           {value}
         </span>
       </div>
@@ -411,6 +411,7 @@ const MonDetailView = ({
   isSelectedOnTeam: boolean;
   isTeamFull: boolean;
 }) => {
+  const { background } = useGame();
   const buttonDisabled = isTeamFull && !isSelectedOnTeam;
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -461,29 +462,27 @@ const MonDetailView = ({
       className="relative flex h-full flex-col gap-3 p-3"
     >
       <div className="absolute inset-0 bg-slate-200/40 dark:bg-slate-900/40" />
+
       <motion.div
         variants={itemVariants}
-        className="relative flex h-64 flex-shrink-0 items-center justify-center overflow-hidden bg-cyan-400/20 p-px"
+        className="relative flex h-64 flex-shrink-0 items-center justify-center overflow-hidden bg-cyan-400/20 p-px px-1"
         style={{ clipPath: mainPanelClipPath }}
       >
+        <div className="absolute inset-0 aspect-video w-full overflow-hidden rounded opacity-80">
+          <Image
+            src={`/images/backgrounds/background-${background}.jpg`}
+            alt={`Background ${background}`}
+            fill
+            className="object-cover"
+          />
+        </div>
         <div
           className="relative h-full w-full bg-white/50 p-4 dark:bg-slate-900/50"
           style={{ clipPath: mainPanelClipPath }}
         >
-          <motion.div
-            className="pointer-events-none absolute left-0 right-0 h-px bg-cyan-300/70 shadow-[0_0_10px_theme(colors.cyan.300)]"
-            initial={{ y: "0%" }}
-            animate={{ y: "100%" }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
-            }}
-          />
           <DetailViewCornerBracket className="top-1 left-1" />
           <DetailViewCornerBracket className="bottom-1 right-1 scale-x-[-1] scale-y-[-1]" />
-          <div className="absolute -bottom-4 right-0 font-mono text-[10rem] font-black leading-none text-slate-300/60 dark:text-slate-700/60">
+          <div className="absolute -bottom-4 right-1 font-kode text-[10rem] font-black leading-none text-slate-300/40">
             {String(mon.id).padStart(3, "0")}
           </div>
           <div className="absolute left-0 h-full w-full">
@@ -585,10 +584,10 @@ const MonDetailView = ({
             </div>
           </div>
           <div className="absolute top-3 left-4 z-40">
-            <h2 className="text-2xl font-black tracking-tighter text-cyan-500 [text-shadow:2px_2px_4px_rgba(255,255,255,0.3)] dark:text-white dark:[text-shadow:2px_2px_4px_rgba(0,0,0,0.7)]">
+            <h2 className="text-2xl font-black tracking-tighter text-white [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)]">
               {mon.name}
             </h2>
-            <span className="font-mono text-base font-bold text-slate-600 [text-shadow:1px_1px_2px_rgba(255,255,255,0.2)] dark:text-slate-400 dark:[text-shadow:1px_1px_2px_rgba(0,0,0,0.5)]">
+            <span className="font-kode text-base font-bold text-slate-600 [text-shadow:1px_1px_2px_rgba(255,255,255,0.2)] dark:text-slate-400 dark:[text-shadow:1px_1px_2px_rgba(0,0,0,0.5)]">
               No.{String(mon.id).padStart(3, "0")}
             </span>
           </div>
@@ -602,6 +601,7 @@ const MonDetailView = ({
         <div className="flex w-1/2 flex-col gap-3">
           <UpgradedClippedContainer
             variants={itemVariants}
+            className="pl-1"
             clipPath="polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px)"
           >
             <div className="p-2.5">
@@ -616,7 +616,7 @@ const MonDetailView = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-orange-500/80 hover:bg-orange-500/100"
-                    clipPath="polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px)"
+                    clipPath="polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px)"
                   >
                     Visit <ExternalLink className="h-3 w-3" />
                   </ActionButton>
@@ -629,7 +629,7 @@ const MonDetailView = ({
                       ? "bg-red-600/80 hover:bg-red-500/100"
                       : "bg-green-600/80 hover:bg-green-500/100"
                   }
-                  clipPath="polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%)"
+                  clipPath="polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)"
                 >
                   {isSelectedOnTeam ? "Remove" : "Add"}
                   {isSelectedOnTeam ? (
@@ -643,6 +643,7 @@ const MonDetailView = ({
           </UpgradedClippedContainer>
           <UpgradedClippedContainer
             variants={itemVariants}
+            className="pl-1"
             clipPath="polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)"
           >
             <div className="p-2.5">
@@ -657,7 +658,7 @@ const MonDetailView = ({
           </UpgradedClippedContainer>
           <UpgradedClippedContainer
             variants={itemVariants}
-            className="flex-1"
+            className="flex-1 pl-1"
             clipPath="polygon(0 12px, 12px 0, 100% 0, 100% 100%, 0 100%)"
           >
             <div className="flex h-full flex-col p-2.5">
@@ -703,7 +704,7 @@ const MonDetailView = ({
         <div className="flex w-1/2 flex-col gap-3">
           <UpgradedClippedContainer
             variants={itemVariants}
-            className="flex-1"
+            className="flex-1 pr-1"
             clipPath="polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)"
           >
             <div className="flex h-full flex-col p-2.5">
@@ -940,7 +941,7 @@ const TimelineItem = ({
     <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400">
       {company}
     </p>
-    <p className="mt-0.5 font-mono text-[10px] text-slate-500 dark:text-slate-400">
+    <p className="mt-0.5 font-kode text-[10px] text-slate-500 dark:text-slate-400">
       {date}
     </p>
     <p className="mt-1.5 text-xs text-slate-600 dark:text-slate-300">
@@ -948,8 +949,6 @@ const TimelineItem = ({
     </p>
   </div>
 );
-
-// --- NEW HELPER COMPONENTS FOR DEPLOY TEAM SECTION ---
 
 const TargetingReticule = () => (
   <motion.svg
@@ -1147,7 +1146,7 @@ const TrainerInfoPanel = ({
   const imagePanelClipPath =
     "polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px)";
   const innerImageClipPath =
-    "polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px)";
+    "polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px)";
 
   const teamSlots = [...Array(3)].map((_, i) => playerTeam[i] || null);
 
@@ -1171,6 +1170,7 @@ const TrainerInfoPanel = ({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,220,255,0.05),transparent_40%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(0,220,255,0.15),transparent_40%)]" />
           <AnimatedCircuitry />
         </div>
+
         <div className="relative z-10 flex flex-grow flex-col gap-4">
           <motion.div
             style={{
@@ -1179,7 +1179,7 @@ const TrainerInfoPanel = ({
               transformStyle: "preserve-3d",
               clipPath: imagePanelClipPath,
             }}
-            className="dark:shadow-slate-950/40 relative h-full w-full bg-cyan-400/20 p-px shadow-xl shadow-slate-300/40"
+            className="dark:shadow-slate-950/40 relative h-full w-full bg-cyan-400/30 p-0.5 shadow-xl shadow-slate-300/40"
           >
             <div
               className="relative h-full w-full bg-slate-100/50 p-4 dark:bg-slate-800/50"
@@ -1206,19 +1206,19 @@ const TrainerInfoPanel = ({
               </div>
 
               <div className="relative flex h-full flex-col justify-between [transform:translateZ(20px)]">
-                <div>
-                  <p className="font-mono text-xs text-cyan-600 [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
+                <div className="ml-1">
+                  <p className="font-kode text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
                     PRINCETON
                   </p>
-                  <p className="font-mono text-xs text-cyan-600 [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
+                  <p className="font-kode text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
                     5/19/2025
                   </p>
                 </div>
                 <div>
-                  <p className="text-2xl font-black tracking-wider text-black [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-white dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
+                  <p className="ml-1 text-2xl font-black tracking-wider text-black [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-white dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
                     KEVIN LIU
                   </p>
-                  <p className="ml-1 text-xs font-bold tracking-wide text-cyan-700 dark:text-cyan-400">
+                  <p className="ml-2 text-xs font-bold tracking-wide text-cyan-700 dark:text-cyan-400">
                     Full-Stack & AI Developer
                   </p>
                 </div>
@@ -1227,7 +1227,7 @@ const TrainerInfoPanel = ({
           </motion.div>
           <motion.div variants={itemVariants} className="space-y-3">
             <UpgradedClippedContainer
-              className="flex-shrink-0"
+              className="flex-shrink-0 pl-1"
               clipPath="polygon(12px 0px, 100% 0px, 100% 100%, 0% 100%, 0px 12px)"
             >
               <div className="flex items-center justify-center gap-4 p-2.5">
@@ -1281,7 +1281,10 @@ const TrainerInfoPanel = ({
                 </Link>
               </div>
             </UpgradedClippedContainer>
-            <UpgradedClippedContainer clipPath="polygon(0px 0px, 100% 0px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0px 100%)">
+            <UpgradedClippedContainer
+              className="pr-1"
+              clipPath="polygon(0px 0px, 100% 0px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0px 100%)"
+            >
               <div className="space-y-2 p-3">
                 <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
                   <BrainCircuit className="h-4 w-4 flex-shrink-0 text-cyan-600 dark:text-cyan-400" />
@@ -1301,8 +1304,8 @@ const TrainerInfoPanel = ({
           className="relative z-10 mt-auto flex flex-col gap-4"
         >
           <UpgradedClippedContainer
-            className="flex-shrink-0"
-            clipPath="polygon(16px 0px, 100% 0px, 100% 100%, 0px 100%, 0px 16px)"
+            className="flex-shrink-0 px-1"
+            clipPath="polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)"
           >
             <div className="p-3">
               <SectionHeader>Deploy Team</SectionHeader>
@@ -1388,7 +1391,7 @@ const TrainerInfoPanel = ({
                       "polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px), 0 8px)",
                   }}
                 >
-                  <Zap className="h-4 w-4" /> Random Team
+                  <Zap className="h-4 w-4" /> Randomize
                 </motion.button>
                 <motion.button
                   onClick={onEnter}
@@ -1504,7 +1507,7 @@ const MonGridItem = ({
   return (
     <motion.div
       layout="position"
-      className={`group relative w-full overflow-hidden p-px text-left transition-all duration-200 ${
+      className={`group relative w-full overflow-hidden p-px pl-1 text-left transition-all duration-200 ${
         isSelected
           ? "bg-cyan-400 shadow-[0_0_15px_theme(colors.cyan.400)]"
           : "bg-cyan-400/20 hover:bg-cyan-400/40"
@@ -1516,7 +1519,7 @@ const MonGridItem = ({
     >
       <button
         onClick={onClick}
-        className="h-full w-full bg-slate-200/80 p-2 dark:bg-slate-800/80"
+        className="h-full w-full bg-slate-100 p-2 dark:bg-slate-800/80"
         style={{
           clipPath:
             "polygon(0 12px, 12px 0, 100% 0, 100% 100%, 12px 100%, 0 100%)",
@@ -1525,7 +1528,7 @@ const MonGridItem = ({
         {isOnTeam && (
           <CheckCircle2 className="absolute top-2 left-2 z-20 h-4 w-4 text-green-400 drop-shadow-[0_0_2px_currentColor]" />
         )}
-        <div className="pointer-events-none absolute -bottom-2 -right-2 z-0 font-mono text-5xl font-black text-slate-900/5 dark:text-white/5">
+        <div className="pointer-events-none absolute -bottom-2 -right-2 z-0 font-kode text-5xl font-black text-slate-900/5 dark:text-white/5">
           {String(mon.id).padStart(3, "0")}
         </div>
         <div className="relative z-10 flex items-center gap-3">
@@ -1547,7 +1550,7 @@ const MonGridItem = ({
             </div>
           </div>
         </div>
-        <span className="absolute top-1 right-2 z-10 font-mono text-xs font-bold text-slate-400 dark:text-slate-500">
+        <span className="absolute top-1 right-2 z-10 font-kode text-xs font-bold text-slate-400 dark:text-slate-500">
           No.{String(mon.id).padStart(3, "0")}
         </span>
       </button>
@@ -1640,7 +1643,7 @@ export const TeamSelectScreen = () => {
           <aside className="flex min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 lg:col-span-4">
             <div className="flex-shrink-0 p-4">
               <div
-                className="group relative bg-cyan-400/20 p-px transition-colors duration-300 focus-within:bg-cyan-400 focus-within:shadow-[0_0_15px_theme(colors.cyan.400)]"
+                className="group relative bg-cyan-400/20 p-px px-1 transition-colors duration-300 focus-within:bg-cyan-400 focus-within:shadow-[0_0_15px_theme(colors.cyan.400)]"
                 style={{
                   clipPath:
                     "polygon(0 10px, 10px 0, 100% 0, 100% 100%, 0 100%)",
@@ -1650,7 +1653,7 @@ export const TeamSelectScreen = () => {
                   className="relative bg-white/80 dark:bg-slate-800/80"
                   style={{
                     clipPath:
-                      "polygon(0 10px, 10px 0, 100% 0, 100% 100%, 0 100%)",
+                      "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
                   }}
                 >
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-cyan-600 dark:text-slate-500 dark:group-focus-within:text-cyan-400" />
@@ -1664,7 +1667,7 @@ export const TeamSelectScreen = () => {
                 </div>
               </div>
             </div>
-            <div className="custom-scrollbar flex-grow overflow-y-auto p-4 pt-0 pb-24">
+            <div className="custom-scrollbar flex-grow overflow-y-auto p-4 pt-0">
               <motion.div
                 layout
                 className="grid grid-cols-1 gap-2 xl:grid-cols-2"

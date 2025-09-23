@@ -1,10 +1,10 @@
 # PortfolioMon Showdown
 
-Welcome to PortfolioMon Showdown, a dynamic and interactive gamified portfolio where my software projects come to life as battle-ready creatures\! Inspired by the classic Pokémon battle system, this application showcases my full-stack development and UI/UX design skills in a fun, engaging, and memorable way.
+Welcome to PortfolioMon Showdown, a dynamic and interactive gamified portfolio where my software projects come to life as battle-ready creatures\! Inspired by the classic Pokémon battle system, this app showcases my full-stack development and UI/UX design skills in a fun, engaging, and memorable way.
 
-**[➡️ View the Live Demo Here\!](https://kevin-portfolio.vercel.app/en-US)** _(Replace with your actual deployment URL)_
+**[➡️ Play the Game Here\!](https://kevin-liu.tech/)**
 
-_(Replace this with a high-quality screenshot or GIF of your application)_
+![Gameplay Screenshot](/public/images/gameplay.png)
 
 ## ✨ Key Features
 
@@ -14,6 +14,7 @@ _(Replace this with a high-quality screenshot or GIF of your application)_
   - **Status Effects:** Moves can burn, poison, stun, or put opponents to sleep.
   - **Items & Inventory:** Use items like "API Key" (Potion) or "Debugger" (Antidote) to turn the tide of battle.
   - **Detailed Battle Logs & Stats:** Track every action and review a comprehensive battle report upon victory or defeat.
+- **Intelligent Auto-Battler & CPU:** Activate the auto-battler to let a smart AI take over for you. It strategically weighs move power, type effectiveness, and survivability to choose the optimal action. The CPU opponent is powered by the same advanced logic, providing a consistent and challenging experience.
 - **Dynamic Team Building:** Choose a strategic team of 3 projects from my portfolio to take into battle.
 - **Advanced UI/UX:** A sleek, high-tech interface built with **Tailwind CSS** and heavily animated with **Framer Motion** for a fluid and polished user experience.
 - **Robust State Management:** The entire game state is managed centrally using React's Context API, ensuring a scalable and maintainable codebase.
@@ -133,7 +134,7 @@ To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the fo
 - [Documentation](https://create.t3.gg/)
 - [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome\!
 
 ## How do I deploy this?
 
