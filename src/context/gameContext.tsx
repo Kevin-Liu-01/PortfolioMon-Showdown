@@ -194,7 +194,7 @@ export const portfolioMonData: PortfolioMon[] = [
     moves: [
       {
         name: "Context Injection",
-        power: 95,
+        power: 9500,
         type: "AI",
         accuracy: 1.0,
         pp: 10,

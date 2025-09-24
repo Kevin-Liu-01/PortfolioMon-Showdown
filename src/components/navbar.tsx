@@ -267,7 +267,7 @@ const PortfolioMonLogo = () => {
               PortfolioMon
             </motion.div>
             <div
-              className="relative font-orbiter text-2xl font-black uppercase tracking-wide text-slate-900 dark:text-slate-100"
+              className="relative font-orbiter text-2xl font-black uppercase tracking-wide text-slate-100"
               style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.5)" }}
             >
               PortfolioMon
@@ -276,7 +276,7 @@ const PortfolioMonLogo = () => {
           <div className="relative -mt-1 w-[150px]">
             <motion.div
               variants={showdownPlateVariants}
-              className="absolute top-0 left-0 h-full w-full bg-slate-300 dark:bg-slate-700"
+              className="absolute top-0 left-0 h-full w-full bg-slate-500"
               style={{
                 clipPath: "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
               }}
@@ -288,10 +288,10 @@ const PortfolioMonLogo = () => {
               }}
             >
               <div className="justify-left flex items-center gap-2 truncate px-2 py-0.5">
-                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-900">
+                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-slate-900">
                   <Shield className="h-3 w-3 text-red-400" />
                 </div>
-                <div className="font-orbiter text-xs font-extrabold tracking-[0.2em] text-black dark:text-white">
+                <div className="font-orbiter text-xs font-extrabold tracking-[0.2em] text-white">
                   SHOWDOWN
                 </div>
               </div>
@@ -322,7 +322,7 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <motion.div
-      className="relative flex w-full min-w-fit items-center overflow-hidden bg-white/90 py-3 pl-4 pr-12 dark:bg-slate-800/90 sm:pl-6 lg:pl-8"
+      className="relative flex w-full min-w-fit items-center overflow-hidden bg-slate-800/90 py-3 pl-4 pr-12 sm:pl-6 lg:pl-8"
       style={{
         clipPath: "polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%)",
       }}
@@ -464,6 +464,14 @@ const Navbar = (props: {
       whileHover="hover"
       animate="rest"
     >
+      <div className="absolute inset-0 aspect-video h-full w-full overflow-hidden rounded opacity-60 dark:opacity-30">
+        <Image
+          src={`/images/backgrounds/background-${background}.jpg`}
+          alt={`Background ${background}`}
+          fill
+          className="object-cover"
+        />
+      </div>
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-slate-200/50 to-slate-100/50 dark:from-slate-800/50 dark:to-slate-900/50"

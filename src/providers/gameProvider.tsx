@@ -178,6 +178,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [isAutoBattleActive, setIsAutoBattleActive] = useState(false);
   const [isProcessingTurn, setIsProcessingTurn] = useState(false);
   const [background, setBackground] = useState(1);
+  const [playerDidSwitchLastTurn, setPlayerDidSwitchLastTurn] = useState(false);
+  const [cpuDidSwitchLastTurn, setCpuDidSwitchLastTurn] = useState(false);
 
   // --- REFS FOR MANAGING ASYNC OPERATIONS SAFELY ---
   const battleStateRef = useRef({
@@ -305,11 +307,13 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [playerTeam]);
 
-  const startBattle = useCallback(() => {
+  const startBattle = useCallback(async () => {
     setBattleLog([`--- Turn 1 ---`]);
     showNotification("Your Turn", "turn");
     addToLog(`${playerTeamState[0]!.name} vs ${cpuTeamState[0]!.name}!`);
     setGameState("fight");
+    setPlayerAnimation("switchIn");
+    setCpuAnimation("switchIn");
   }, [playerTeamState, cpuTeamState, addToLog, showNotification]);
 
   const handleFaint = useCallback(
@@ -322,6 +326,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       const remaining = teamState.filter((p) => p.currentHp > 0);
       if (remaining.length === 0) {
         setWinner(victor);
+        await sleep(1500);
         setGameState("gameOver");
         setIsProcessingTurn(false);
         return;
@@ -578,6 +583,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     },
     [addToLog, handleFaint, showNotification, statusVerbs, updateMonState]
   );
+
   const calculateMoveScore = useCallback(
     (
       move: BattleReadyMove,
@@ -592,23 +598,19 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         attacker.type1 === move.type || attacker.type2 === move.type;
       const stabBonus = isStab ? 1.5 : 1;
 
-      // Base score from estimated damage
       let score =
         move.power *
         (attacker.stats.atk / defender.stats.def) *
         stabBonus *
         effectiveness;
 
-      // Increase incentive for status moves, even if they do no damage
       if (move.effect && defender.status === null) {
-        // Add a significant flat bonus for status effects, ignoring effectiveness for this bonus
         score += 45 * move.effect.chance;
       }
 
-      // Final adjustments
       score *= move.accuracy;
       if (score >= defender.currentHp) {
-        score *= 1.5; // Prioritize finishing moves, but less aggressively
+        score *= 1.5;
       }
 
       return score;
@@ -623,7 +625,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       opponentMon: BattleReadyMon
     ): number => {
       let score = 0;
-      // Evaluate defensive matchup
       const eff1 = getTypeEffectiveness(
         opponentMon.type1,
         switchToMon
@@ -633,22 +634,18 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         : 1;
       const opponentDamageMultiplier = Math.max(eff1, eff2);
 
-      // Reduce the bonus/penalty for switching to make it less appealing
-      if (opponentDamageMultiplier < 1) score += 60; // Was 100
-      if (opponentDamageMultiplier > 1) score -= 60; // Was 100
+      if (opponentDamageMultiplier < 1) score += 60;
+      if (opponentDamageMultiplier > 1) score -= 60;
 
-      // Evaluate offensive potential
       const bestMoveVsOpponent = switchToMon.moves
         .map((move) => calculateMoveScore(move, switchToMon, opponentMon))
         .reduce((max, current) => Math.max(max, current), 0);
       score += bestMoveVsOpponent;
 
-      // Factor in remaining health
       score *= switchToMon.currentHp / switchToMon.hp;
 
-      // Add a smaller bonus for saving a low-HP mon
       if (currentMon.currentHp / currentMon.hp < 0.25) {
-        score += 50; // Was 80
+        score += 50;
       }
 
       return score;
@@ -656,12 +653,12 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     [calculateMoveScore]
   );
 
-  // --- AI DECISION LOGIC ---
   const chooseAiAction = (
     mon: BattleReadyMon,
     opponent: BattleReadyMon,
     team: BattleReadyMon[],
-    activeIndex: number
+    activeIndex: number,
+    didSwitchLastTurn: boolean
   ) => {
     const availableMoves = mon.moves.filter((m) => m.currentPp > 0);
     const availableSwitches = team
@@ -674,36 +671,33 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       score: calculateMoveScore(move, mon, opponent),
     }));
 
-    const switchOptions = availableSwitches.map((item) => ({
-      type: "switch" as const,
-      index: item.index,
-      score: calculateSwitchScore(item.mon, mon, opponent),
-    }));
+    const switchOptions = !didSwitchLastTurn
+      ? availableSwitches.map((item) => ({
+          type: "switch" as const,
+          index: item.index,
+          score: calculateSwitchScore(item.mon, mon, opponent),
+        }))
+      : [];
 
     const allOptions = [...moveOptions, ...switchOptions];
     if (allOptions.length === 0) return null;
 
-    // Sort all possible actions by score in descending order
     allOptions.sort((a, b) => b.score - a.score);
 
-    // If there are no good options (all scores are 0 or less), just pick the best (least bad) one
     if (allOptions[0].score <= 0) {
       return allOptions[0];
     }
 
-    // Determine the pool of best options based on a score threshold
     const bestScore = allOptions[0].score;
     let candidatePool = allOptions.filter(
-      (option) => option.score >= bestScore * 0.85 // Get all options with a score of at least 85% of the best
+      (option) => option.score >= bestScore * 0.85
     );
 
-    // Ensure the pool has at least 4 options, if that many are available, to increase variety
     if (candidatePool.length < 4) {
       const numToTake = Math.min(4, allOptions.length);
       candidatePool = allOptions.slice(0, numToTake);
     }
 
-    // Randomly select an action from the final candidate pool
     const randomIndex = Math.floor(Math.random() * candidatePool.length);
     return candidatePool[randomIndex];
   };
@@ -734,10 +728,12 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         cpuMon,
         playerMon,
         currentCpuTeamState,
-        currentActiveCpuIndex
+        currentActiveCpuIndex,
+        cpuDidSwitchLastTurn
       );
 
       if (chosenAction?.type === "switch") {
+        setCpuDidSwitchLastTurn(true);
         setGruntTrainerState("commanding");
         await sleep(100);
         const oldCpuMonName = cpuMon.name;
@@ -758,6 +754,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         setCpuAnimation("idle");
         setGruntTrainerState("idle");
       } else if (chosenAction?.type === "move") {
+        setCpuDidSwitchLastTurn(false);
         faintedDuringTurn = await processTurn(
           cpuMon,
           playerMon,
@@ -793,11 +790,13 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     addToLog,
     calculateMoveScore,
     calculateSwitchScore,
+    cpuDidSwitchLastTurn,
   ]);
 
   const handleMoveSelect = useCallback(
     async (move: BattleReadyMove) => {
       if (!isPlayerTurn || isProcessingTurn) return;
+      if (isAutoBattleActive) setPlayerDidSwitchLastTurn(false);
 
       setIsProcessingTurn(true);
       const playerMon = playerTeamState[activePlayerIndex]!;
@@ -848,6 +847,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       processTurn,
       applyEndOfTurnStatusEffects,
       endPlayerTurn,
+      isAutoBattleActive,
     ]
   );
 
@@ -861,6 +861,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       )
         return;
 
+      if (isAutoBattleActive) setPlayerDidSwitchLastTurn(true);
       setIsProcessingTurn(true);
       setIsPlayerTurn(false);
       setPlayerTrainerState("commanding");
@@ -902,12 +903,14 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       addToLog,
       endPlayerTurn,
       showNotification,
+      isAutoBattleActive,
     ]
   );
 
   const handleItemUse = useCallback(
     async (itemName: string, targetIndex: number) => {
       if (!isPlayerTurn || isProcessingTurn) return;
+      setPlayerDidSwitchLastTurn(false);
       const itemInInventory = inventory[itemName];
       if (!itemInInventory || itemInInventory.quantity <= 0) return;
 
@@ -995,6 +998,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     setCpuStats(initialStats);
     setIsAutoBattleActive(false);
     setIsProcessingTurn(false);
+    setPlayerDidSwitchLastTurn(false);
+    setCpuDidSwitchLastTurn(false);
   }, []);
 
   const toggleAutoBattle = useCallback(() => {
@@ -1042,7 +1047,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
           playerMon,
           cpuMon,
           playerTeamState,
-          activePlayerIndex
+          activePlayerIndex,
+          playerDidSwitchLastTurn
         );
 
         if (chosenAction?.type === "switch") {
@@ -1091,6 +1097,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     addToLog,
     calculateMoveScore,
     calculateSwitchScore,
+    playerDidSwitchLastTurn,
   ]);
 
   const value = useMemo(

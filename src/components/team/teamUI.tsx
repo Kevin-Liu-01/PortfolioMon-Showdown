@@ -9,7 +9,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { useGame } from "../../providers/gameProvider";
-import { PortfolioMon, portfolioMonData } from "../../context/gameContext";
+import { type PortfolioMon, portfolioMonData } from "../../context/gameContext";
 
 import { typeStyles } from "../battle/battle";
 import {
@@ -462,7 +462,7 @@ const MonDetailView = ({
       exit={{ opacity: 0 }}
       className="relative flex h-full flex-col gap-3 p-3"
     >
-      <div className="absolute inset-0 bg-slate-200/40 dark:bg-slate-900/40" />
+      <div className="absolute inset-0 bg-white/30 dark:bg-slate-900/30" />
 
       <motion.div
         variants={itemVariants}
@@ -1218,10 +1218,10 @@ const TrainerInfoPanel = ({
                   </p>
                 </div>
                 <div>
-                  <p className="ml-1 text-2xl font-black tracking-wider text-black [text-shadow:1px_1px_3px_rgba(255,255,255,0.5)] dark:text-white dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
+                  <p className="ml-1 text-2xl font-black tracking-wider text-cyan-200 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-white">
                     KEVIN LIU
                   </p>
-                  <p className="ml-2 text-xs font-bold tracking-wide text-cyan-700 dark:text-cyan-400">
+                  <p className="ml-2 text-xs font-bold tracking-wide text-cyan-300 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-cyan-400">
                     Full-Stack & AI Developer
                   </p>
                 </div>

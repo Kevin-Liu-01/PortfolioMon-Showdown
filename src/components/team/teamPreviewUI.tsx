@@ -41,7 +41,7 @@ const ClashEffects = () => (
 );
 
 export const TeamPreviewScreen = () => {
-  const { playerTeamState, cpuTeamState, startBattle } = useGame();
+  const { playerTeamState, cpuTeamState, startBattle, background } = useGame();
 
   // Variants for staggering the team card animations
   const teamContainerVariants = {
@@ -70,6 +70,14 @@ export const TeamPreviewScreen = () => {
       <AnimatedBackground />
       <HighTechEffects />
       <PulsingCircuit />
+      <div className="absolute inset-0 aspect-video w-full overflow-hidden rounded opacity-30">
+        <Image
+          src={`/images/backgrounds/background-${background}.jpg`}
+          alt={`Background ${background}`}
+          fill
+          className="object-cover"
+        />
+      </div>
       <div className="relative z-20 flex flex-col items-center pb-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -177,7 +185,7 @@ export const TeamPreviewScreen = () => {
                   }}
                 >
                   <div>
-                    <p className="text-base font-bold text-slate-800 dark:text-white">
+                    <p className="truncate text-base font-bold text-slate-800 dark:text-white">
                       {p.name}
                     </p>
                     <div className="mt-1 flex justify-end gap-1">

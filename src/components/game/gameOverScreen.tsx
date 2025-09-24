@@ -140,7 +140,8 @@ const TrainerPodium = ({
 };
 
 export const GameOverScreen = () => {
-  const { winner, handleReset, turnCount, playerStats, cpuStats } = useGame();
+  const { winner, handleReset, turnCount, playerStats, cpuStats, background } =
+    useGame();
   const isPlayerWinner = winner === "Player";
 
   const containerVariants = {
@@ -170,7 +171,14 @@ export const GameOverScreen = () => {
       <AnimatedBackground />
       <HighTechEffects />
       <PulsingCircuit />
-
+      <div className="absolute inset-0 aspect-video w-full overflow-hidden rounded opacity-30">
+        <Image
+          src={`/images/backgrounds/background-${background}.jpg`}
+          alt={`Background ${background}`}
+          fill
+          className="object-cover"
+        />
+      </div>
       <div className="flex h-full w-full max-w-screen-2xl items-stretch justify-center">
         {/* Left Trainer Podium */}
         <div className="w-1/3">
