@@ -17,6 +17,7 @@ import {
   CheckSquare,
   Bot,
   Layers,
+  TypeIcon,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGame } from "../providers/gameProvider";
@@ -703,9 +704,7 @@ const Navbar = (props: {
                 className="font-mono text-lg font-bold"
                 title="Change Font"
               >
-                <div className="flex h-5 w-5 items-center justify-center">
-                  F
-                </div>
+                <TypeIcon className="h-5 w-5" />
               </ClippedButton>
               {renderThemeChanger()}
             </ClippedGroupContainer>
@@ -798,29 +797,17 @@ const Navbar = (props: {
                       <Swords className="h-5 w-5" />
                     </ClippedButton>
                   )}
-                </div>
-              </ClippedGroupContainer>
-
-              <ClippedGroupContainer className="w-full">
-                <div className="flex w-full items-center justify-around">
                   <ClippedButton
                     onClick={cycleBackground}
                     title="Change Background"
                   >
                     <Layers className="h-5 w-5" />
                   </ClippedButton>
-                </div>
-              </ClippedGroupContainer>
-
-              <ClippedGroupContainer className="w-full">
-                <div className="flex w-full items-center justify-around">
                   <ClippedButton
                     onClick={() => props.fontInitializer()}
                     className="font-mono text-lg font-bold"
                   >
-                    <div className="flex h-5 w-5 items-center justify-center">
-                      F
-                    </div>
+                    <TypeIcon className="h-5 w-5" />
                   </ClippedButton>
                   {renderThemeChanger()}
                 </div>

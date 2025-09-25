@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // New component for the visual effects in the center
 const ClashEffects = () => (
-  <div className="pointer-events-none absolute inset-0 z-10 flex rotate-90 items-center justify-center">
+  <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center sm:rotate-90">
     {/* Bright Lens Flare */}
     <motion.div
       className="absolute h-96 w-96 rounded-full bg-yellow-300/50"
@@ -66,11 +66,11 @@ export const TeamPreviewScreen = () => {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white">
+    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-auto bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white">
       <AnimatedBackground />
       <HighTechEffects />
       <PulsingCircuit />
-      <div className="absolute inset-0 aspect-video w-full overflow-hidden rounded opacity-30">
+      <div className="absolute inset-0 aspect-video h-full w-full overflow-hidden rounded opacity-30">
         <Image
           src={`/images/backgrounds/background-${background}.jpg`}
           alt={`Background ${background}`}
@@ -78,49 +78,49 @@ export const TeamPreviewScreen = () => {
           className="object-cover"
         />
       </div>
-      <div className="relative z-20 flex flex-col items-center pb-24">
+      <div className="relative z-20 flex h-full flex-col items-center py-6 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 drop-shadow-lg dark:text-white md:text-6xl">
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 drop-shadow-lg dark:text-white sm:text-5xl md:text-6xl">
             BATTLE START!
           </h1>
-          <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+          <p className="mt-2 hidden text-sm text-slate-600 dark:text-slate-300 sm:block sm:text-lg">
             Your team is ready for the challenge.
           </p>
         </motion.div>
-        <div className="mt-8 flex w-full max-w-[90rem] items-center justify-between">
+        <div className="mt-3 flex w-full max-w-[90rem] flex-col items-center justify-between sm:mt-8 sm:flex-row">
           <motion.div
             className="w-full space-y-3"
             variants={teamContainerVariants}
             initial="hidden"
             animate="visible"
           >
-            <h2 className="text-center text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+            <h2 className="text-center text-base font-bold text-cyan-600 dark:text-cyan-400 sm:text-2xl">
               YOUR TEAM
             </h2>
             {playerTeamState.map((p) => (
               <motion.div
                 key={p.id}
                 variants={playerCardVariants}
-                className="bg-cyan-300 p-px pr-4 shadow-lg backdrop-blur-sm transition-all hover:pr-2 dark:bg-cyan-700"
+                className="w-[20rem] bg-cyan-300 p-px pr-4 shadow-lg backdrop-blur-sm transition-all hover:pr-2 dark:bg-cyan-700"
                 style={{
                   clipPath:
                     "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
                 }}
               >
                 <div
-                  className="flex h-full w-full items-center gap-4 bg-slate-200/80 p-3 dark:bg-slate-800/80"
+                  className="flex h-full w-full items-center gap-4 bg-slate-200/80 p-2 dark:bg-slate-800/80 sm:p-3"
                   style={{
                     clipPath:
                       "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
                   }}
                 >
                   <div
-                    className="relative h-16 w-24 flex-shrink-0 bg-slate-300/50 p-1 dark:bg-slate-900/50"
+                    className="relative h-10 w-14 flex-shrink-0 bg-slate-300/50 p-1 dark:bg-slate-900/50 sm:h-16 sm:w-24"
                     style={{
                       clipPath:
                         "polygon(0 10px, 10px 0, 100% 0, 100% 100%, 0 100%)",
@@ -134,7 +134,7 @@ export const TeamPreviewScreen = () => {
                     />
                   </div>
                   <div>
-                    <p className="truncate text-base font-bold text-slate-800 dark:text-white">
+                    <p className="truncate text-sm font-bold text-slate-800 dark:text-white sm:text-base">
                       {p.name}
                     </p>
                     <div className="mt-1 flex gap-1">
@@ -147,12 +147,12 @@ export const TeamPreviewScreen = () => {
             ))}
           </motion.div>
 
-          <div className="relative z-20 mx-12">
+          <div className="relative z-20 m-4 sm:m-12">
             <ClashEffects />
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1, transition: { delay: 0.6 } }}
-              className="relative z-10 text-6xl font-black text-slate-400 dark:text-white"
+              className="relative z-10 font-kode text-3xl font-black text-slate-400 dark:text-white sm:text-6xl"
             >
               VS
             </motion.div>
@@ -164,28 +164,28 @@ export const TeamPreviewScreen = () => {
             initial="hidden"
             animate="visible"
           >
-            <h2 className="text-center text-2xl font-bold text-red-500">
+            <h2 className="text-center  text-base font-bold text-red-500 sm:text-2xl">
               CPU TEAM
             </h2>
             {cpuTeamState.map((p) => (
               <motion.div
                 key={p.id}
                 variants={cpuCardVariants}
-                className="bg-red-300 p-px pl-4 text-right shadow-lg backdrop-blur-sm transition-all hover:pl-2 dark:bg-red-500"
+                className="w-[20rem] bg-red-300 p-px pl-4 text-right shadow-lg backdrop-blur-sm transition-all hover:pl-2 dark:bg-red-500"
                 style={{
                   clipPath:
                     "polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px)",
                 }}
               >
                 <div
-                  className="flex h-full w-full items-center justify-end gap-4 bg-slate-200/80 p-3 dark:bg-slate-800/80"
+                  className="flex h-full w-full items-center justify-end gap-4 bg-slate-200/80 p-2 dark:bg-slate-800/80 sm:p-3"
                   style={{
                     clipPath:
                       "polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px)",
                   }}
                 >
                   <div>
-                    <p className="truncate text-base font-bold text-slate-800 dark:text-white">
+                    <p className="truncate text-sm font-bold text-slate-800 dark:text-white sm:text-base">
                       {p.name}
                     </p>
                     <div className="mt-1 flex justify-end gap-1">
@@ -194,7 +194,7 @@ export const TeamPreviewScreen = () => {
                     </div>
                   </div>
                   <div
-                    className="relative h-16 w-24 flex-shrink-0 bg-slate-300/50 p-1 dark:bg-slate-900/50"
+                    className="relative h-10 w-14 flex-shrink-0 bg-slate-300/50 p-1 dark:bg-slate-900/50 sm:h-16 sm:w-24"
                     style={{
                       clipPath:
                         "polygon(0 0, 100% 0, 100% 10px, calc(100% - 10px) 100%, 0 100%)",

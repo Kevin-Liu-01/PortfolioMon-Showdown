@@ -9,7 +9,7 @@ const FONT_CLASSES = [
   "font-general",
   "font-clash",
   "font-satoshi",
-  "font-hedvig",
+  "font-kode",
   "font-play",
   "font-racing",
 ];
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   // --- PAGE LAYOUT STATE ---
   // const [pattern, setPattern] = useState("cross");
   const [font, setFont] = useState(FONT_CLASSES[0]); // Start with the first font
-
+  console.log(font);
   // --- PAGE LAYOUT HANDLERS ---
   // const patternBG = () =>
   //   setPattern((p) =>

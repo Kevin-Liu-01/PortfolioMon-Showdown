@@ -32,6 +32,7 @@ import {
   FileText,
   XIcon,
   PlusIcon,
+  ArrowLeft,
 } from "lucide-react";
 
 // --- BATTLE UI EFFECT COMPONENTS ---
@@ -1174,6 +1175,21 @@ const TrainerInfoPanel = ({
           <AnimatedCircuitry />
         </div>
 
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="absolute top-4 right-0 z-40 rounded bg-cyan-500/80 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-cyan-500/20 backdrop-blur-sm transition hover:bg-cyan-500/100"
+          style={{
+            clipPath:
+              "polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px), 0 8px)",
+          }}
+        >
+          {isExpanded ? (
+            <ArrowLeft className="h-4 w-4" />
+          ) : (
+            <ArrowRight className="h-4 w-4" />
+          )}
+        </button>
+
         <div className="relative z-10 flex flex-grow flex-col gap-4">
           <motion.div
             style={{
@@ -1185,7 +1201,7 @@ const TrainerInfoPanel = ({
             className="dark:shadow-slate-950/40 relative h-full w-full bg-cyan-400/30 p-0.5 shadow-xl shadow-slate-300/40"
           >
             <div
-              className="relative h-full w-full bg-slate-100/50 p-4 dark:bg-slate-800/50"
+              className="relative h-96 w-full bg-slate-100/50 p-4 dark:bg-slate-800/50 sm:h-full"
               style={{ clipPath: imagePanelClipPath }}
             >
               {/* This container now acts as the border for the image */}
@@ -1425,7 +1441,7 @@ const TrainerInfoPanel = ({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="absolute top-0 left-full z-20 h-full w-80 overflow-hidden border-r border-slate-300 bg-white dark:border-cyan-400/20 dark:bg-slate-900"
+            className="absolute top-0 z-50 h-full w-80 overflow-hidden border-r border-slate-300 bg-white dark:border-cyan-400/20 dark:bg-slate-900 sm:left-full sm:z-20"
           >
             <div className="pointer-events-none absolute inset-0 z-0">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,220,255,0.05),transparent_40%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(0,220,255,0.15),transparent_40%)]" />
@@ -1614,7 +1630,7 @@ export const TeamSelectScreen = () => {
   );
 
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white">
+    <div className="relative flex h-full w-full flex-col overflow-auto bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white sm:overflow-hidden">
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 8px;
@@ -1640,14 +1656,14 @@ export const TeamSelectScreen = () => {
       `}</style>
       <AnimatedBackground />
       <HighTechEffects />
-      <div className="z-10 grid min-h-0 flex-grow grid-cols-12">
+      <div className="z-10 grid h-full flex-grow grid-cols-12 sm:min-h-0">
         <TrainerInfoPanel
           playerTeam={playerTeam}
           onEnter={handleConfirmTeam}
           onRandomTeam={handleRandomTeam}
         />
-        <main className="relative col-span-12 flex min-h-0 flex-col lg:col-span-9 lg:grid lg:grid-cols-9">
-          <aside className="flex min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 lg:col-span-4">
+        <main className="relative col-span-12 flex flex-col sm:min-h-0 lg:col-span-9 lg:grid lg:grid-cols-9">
+          <aside className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4">
             <div className="flex-shrink-0 p-4">
               <div
                 className="group relative bg-cyan-400/20 p-px px-1 transition-colors duration-300 focus-within:bg-cyan-400 focus-within:shadow-[0_0_15px_theme(colors.cyan.400)]"

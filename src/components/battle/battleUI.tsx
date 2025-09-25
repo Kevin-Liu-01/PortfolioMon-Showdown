@@ -17,6 +17,9 @@ import {
   BedDouble,
   Bubbles,
   Bot,
+  Swords,
+  Users,
+  FileText,
 } from "lucide-react";
 import type {
   BattleReadyMon,
@@ -121,7 +124,7 @@ const AutoBattleOverlay = ({ onStop }: { onStop: () => void }) => {
             onClick={onStop}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-2 flex items-center gap-2 bg-red-600/90 px-6 py-3 text-base font-bold text-white shadow-lg shadow-black/30 transition-colors hover:bg-red-500"
+            className="mt-2 flex items-center gap-2 bg-red-600/90 px-6 py-2 text-base font-bold text-white shadow-lg shadow-black/30 transition-colors hover:bg-red-500"
             style={{
               clipPath:
                 "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
@@ -241,7 +244,7 @@ const SwitchItemView = ({
       {title}
     </p>
     <p className="text-sm text-slate-600 dark:text-slate-400">
-      Select a Project from the list on the left.
+      Select a Project from your team list.
     </p>
     <button
       onClick={onCancel}
@@ -256,7 +259,7 @@ const StatusIcon = ({
   status,
   size = "md",
 }: {
-  status: StatusEffect;
+  status: StatusEffect | null;
   size?: "sm" | "md";
 }) => {
   if (!status) return null;
@@ -300,7 +303,7 @@ const StatusIcon = ({
   );
 };
 
-const StatusEffectDisplay = ({ status }: { status: StatusEffect }) => {
+const StatusEffectDisplay = ({ status }: { status: StatusEffect | null }) => {
   if (!status) return null;
   const effects: { [key in StatusEffect & string]: JSX.Element } = {
     burn: (
@@ -497,7 +500,7 @@ const PlatformEffects = ({
 
   if (part === "back") {
     return (
-      <div className="absolute inset-0 bottom-[-15rem]">
+      <div className="absolute inset-0 bottom-[-5rem] sm:bottom-[-15rem]">
         <motion.div
           className="absolute inset-0 [transform-style:preserve-3d]"
           style={{ transform: "rotateX(75deg)" }}
@@ -666,7 +669,7 @@ const PlatformEffects = ({
 
   if (part === "front") {
     return (
-      <div className="absolute inset-0 bottom-[-15rem]">
+      <div className="absolute inset-0 bottom-[-5rem] sm:bottom-[-15rem]">
         <div
           className="absolute inset-0 [transform-style:preserve-3d]"
           style={{ transform: "rotateX(75deg)" }}
@@ -768,7 +771,7 @@ const HealthBar = ({
 
       {showText && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-xs font-bold text-black/70 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] dark:text-white dark:drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+          <span className="font-kode text-xs font-bold text-black/70 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] dark:text-white dark:drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
             {currentHp} / {maxHp}
           </span>
         </div>
@@ -819,7 +822,6 @@ const TeamStatusIcon = React.memo(
 );
 TeamStatusIcon.displayName = "TeamStatusIcon";
 
-// ... (Rest of the file remains the same)
 const Hud = ({
   mon,
   team,
@@ -866,7 +868,7 @@ const Hud = ({
             <div className="flex-grow">
               <div className="flex items-center justify-between font-bold">
                 <div className="flex items-center gap-2">
-                  <span className="truncate text-lg uppercase tracking-wider text-slate-900 dark:text-white">
+                  <span className="truncate text-base uppercase tracking-wider text-slate-900 dark:text-white sm:text-lg">
                     {mon.name}
                   </span>
                   <StatusIcon status={mon.status} size="md" />
@@ -1062,7 +1064,7 @@ const TeamBar = ({
     "polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)";
 
   return (
-    <div className="flex h-full flex-col gap-2 overflow-y-auto pr-2">
+    <div className="flex h-full flex-col gap-2 overflow-y-auto p-2 lg:pr-2">
       {team.map((mon, index) => {
         const isActive = mon.id === activeMonId;
         const isDisabled =
@@ -1098,7 +1100,7 @@ const TeamBar = ({
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`relative h-12 w-12 flex-shrink-0 bg-slate-200 p-1 dark:bg-slate-800 ${
+                    className={`relative h-10 w-14 flex-shrink-0 bg-slate-200 p-1 dark:bg-slate-800 ${
                       mon.currentHp <= 0 ? "grayscale" : ""
                     }`}
                     style={{
@@ -1110,7 +1112,7 @@ const TeamBar = ({
                       src={mon.image}
                       fill
                       alt={mon.name}
-                      className="object-contain"
+                      className="object-cover object-left"
                     />
                   </div>
 
@@ -1175,6 +1177,28 @@ const TeamBar = ({
     </div>
   );
 };
+
+const BattleLog = ({ battleLog }: { battleLog: string[] }) => {
+  const logContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [battleLog]);
+
+  return (
+    <div
+      ref={logContainerRef}
+      className="flex h-full flex-col gap-1.5 overflow-y-auto scroll-smooth bg-gradient-to-t from-white/80 to-slate-100/80 p-4 pt-2 [mask-image:linear-gradient(to_bottom,transparent_0,_black_24px,_black_calc(100%-24px),transparent_100%)] dark:from-slate-900/80 dark:to-slate-800/80"
+    >
+      {battleLog.map((msg, i) => (
+        <BattleLogMessage key={`${i}-${msg}`} msg={msg} />
+      ))}
+    </div>
+  );
+};
+
 const BattleLogMessage = ({ msg }: { msg: string }) => {
   const turnMatch = msg.match(/--- Turn (\d+) ---/i);
   if (turnMatch) {
@@ -1320,7 +1344,7 @@ const EffectivenessTag = ({ multiplier }: { multiplier: number }) => {
       : "bg-gray-600";
   return (
     <span
-      className={`absolute -right-1 -top-2 z-20 px-2 py-0.5 text-[10px] font-bold text-white ${tagColor}`}
+      className={`absolute -right-1 -top-1.5 z-20 pb-0.5 pl-2 pr-1.5 font-kode text-[10px] font-bold text-white ${tagColor}`}
       style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 8% 100%)" }}
     >
       {multiplier}x
@@ -1491,13 +1515,15 @@ const MoveButton = ({
             <div
               className={`flex w-full items-start justify-between ${textColorClass}`}
             >
-              <p className="text-sm font-bold">{move.name}</p>
-              <p className="font-kode text-xs">Pwr: {move.power || "--"}</p>
+              <p className="text-xs font-bold sm:text-sm">{move.name}</p>
+              <p className="font-kode text-[0.6rem] sm:text-xs">
+                Pwr: {move.power || "--"}
+              </p>
             </div>
             {hasStatusEffect && move.effect && (
               <div className="pointer-events-none absolute inset-x-0 bottom-0 top-1/2 flex h-8 items-center justify-center">
                 <div
-                  className={`flex items-center gap-2 bg-white/40 px-3 py-1 text-sm ${textColorClass}`}
+                  className={`flex items-center gap-1 bg-white/40 px-3 py-1 text-sm sm:gap-2 sm:px-4 ${textColorClass}`}
                   style={{
                     clipPath: "polygon(15% 0, 85% 0, 100% 100%, 0% 100%)",
                   }}
@@ -1505,20 +1531,20 @@ const MoveButton = ({
                   <div className="size-4">
                     {statusEffectIcons[statusType as StatusEffect]}
                   </div>
-                  <span className="text-sm font-bold">
+                  <span className="font-kode text-[10px] font-bold sm:text-sm">
                     {move.effect.chance * 100}%
                   </span>
                 </div>
               </div>
             )}
-            <div className="mt-auto grid grid-cols-3 items-center gap-1 pt-1">
+            <div className="mt-auto flex items-center gap-1 pt-1 sm:grid sm:grid-cols-3">
               <div className="flex justify-start">
                 <TypeBadge type={move.type} />
               </div>
               <div className="flex justify-center"></div>
-              <div className="flex justify-end">
+              <div className="ml-auto flex justify-end">
                 <p
-                  className={`font-kode text-xs font-bold ${
+                  className={`font-kode text-[0.6rem] font-bold sm:text-xs ${
                     outOfPP ? "text-red-500" : textColorClass
                   }`}
                 >
@@ -1565,8 +1591,10 @@ const SpeechBubble = ({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`absolute z-[80] w-48 ${
-        isPlayer ? "bottom-[90%] left-[-10%]" : "bottom-[90%] right-[-10%]"
+      className={`absolute z-[80] w-36 md:w-48 ${
+        isPlayer
+          ? "bottom-full left-0 md:bottom-[90%] md:left-[-10%]"
+          : "bottom-full right-0 md:bottom-[90%] md:right-[-10%]"
       }`}
       style={{
         filter: `drop-shadow(0 4px 8px ${shadowColor})`,
@@ -1672,12 +1700,16 @@ const NotificationDisplay = ({
               style={{ clipPath }}
             >
               {style.icon && (
-                <div className={`h-7 w-7 flex-shrink-0 ${style.text}`}>
+                <div
+                  className={`h-4 w-4 flex-shrink-0 sm:h-7 sm:w-7 ${style.text}`}
+                >
                   {style.icon}
                 </div>
               )}
 
-              <span className={`text-lg font-bold tracking-wide ${style.text}`}>
+              <span
+                className={`text-sm font-bold tracking-wide sm:text-lg ${style.text}`}
+              >
                 {notification.message}
               </span>
             </div>
@@ -1784,6 +1816,27 @@ const TargetingReticule = () => (
   </motion.div>
 );
 
+const MobileTabButton = ({
+  onClick,
+  isActive,
+  children,
+}: {
+  onClick: () => void;
+  isActive: boolean;
+  children: React.ReactNode;
+}) => (
+  <button
+    onClick={onClick}
+    className={`w-full p-2 text-center text-xs font-bold uppercase tracking-wider transition-colors ${
+      isActive
+        ? "border-b-2 border-cyan-400 bg-cyan-400/20 text-cyan-400"
+        : "border-b-2 border-transparent text-slate-500 hover:bg-slate-200/50 dark:text-slate-400 dark:hover:bg-slate-700/50"
+    }`}
+  >
+    {children}
+  </button>
+);
+
 export const FightScreen = () => {
   const {
     playerTeamState: playerTeam,
@@ -1811,7 +1864,6 @@ export const FightScreen = () => {
     background,
   } = useGame();
 
-  // Derive active mons from the context state
   const playerMon = playerTeam[activePlayerIndex];
   const cpuMon = cpuTeam[activeCpuIndex];
 
@@ -1820,20 +1872,17 @@ export const FightScreen = () => {
   const [showGuide, setShowGuide] = useState(false);
   const [isPlayerHudHovered, setPlayerHudHovered] = useState(false);
   const [isCpuHudHovered, setCpuHudHovered] = useState(false);
-  const logContainerRef = useRef<HTMLDivElement>(null);
+  const [mobileView, setMobileView] = useState<"actions" | "team" | "log">(
+    "actions"
+  );
 
   useEffect(() => {
     if (isPlayerTurn && gameState !== "forcedSwitch") {
       setActionState("moves");
       setSelectedItem(null);
+      setMobileView("actions");
     }
   }, [isPlayerTurn, playerMon, gameState]);
-
-  useEffect(() => {
-    if (logContainerRef.current) {
-      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
-    }
-  }, [battleLog]);
 
   const handleItemSelect = (item: Item) => {
     if (item.effect.type === "heal" || item.effect.type === "cureStatus") {
@@ -1856,11 +1905,7 @@ export const FightScreen = () => {
       y: -10,
       rotate: [0, 5, -5, 0],
       transition: {
-        rotate: {
-          duration: 0.5,
-          ease: "easeInOut",
-          repeat: Infinity,
-        },
+        rotate: { duration: 0.5, ease: "easeInOut", repeat: Infinity },
       },
     },
     lose: { y: 5, rotate: 2, opacity: 0.8 },
@@ -1872,11 +1917,7 @@ export const FightScreen = () => {
       y: -10,
       rotate: [0, -5, 5, 0],
       transition: {
-        rotate: {
-          duration: 0.5,
-          ease: "easeInOut",
-          repeat: Infinity,
-        },
+        rotate: { duration: 0.5, ease: "easeInOut", repeat: Infinity },
       },
     },
     lose: { y: 5, rotate: -2, opacity: 0.8 },
@@ -1925,8 +1966,8 @@ export const FightScreen = () => {
 
       <AnimatePresence>
         {dialogue.cpu && (
-          <div className="absolute top-[8%] right-[5%] z-[80] aspect-[2/1] w-[45%] max-w-lg">
-            <div className="absolute -bottom-[20%] -left-[25%] h-[120%] w-[60%]">
+          <div className="absolute top-[25%] right-[-11%] z-[80] aspect-[2/1] w-[45%] max-w-lg sm:right-[5%] sm:top-[8%]">
+            <div className="absolute -bottom-[20%] -left-[25%] h-[110%] w-[60%] sm:-left-[15%]">
               <SpeechBubble text={dialogue.cpu} isPlayer={false} />
             </div>
           </div>
@@ -1934,8 +1975,8 @@ export const FightScreen = () => {
       </AnimatePresence>
       <AnimatePresence>
         {dialogue.player && (
-          <div className="absolute bottom-[35%] left-[5%] z-[80] aspect-[2/1] w-[55%] max-w-2xl">
-            <div className="absolute -bottom-[20%] -right-[18%] h-[110%] w-[55%]">
+          <div className="absolute bottom-[51%] left-[-10%] z-[80] aspect-[2/1] w-[55%] max-w-2xl sm:left-[5%] sm:bottom-[36%] md:bottom-[34%]">
+            <div className="absolute -bottom-[20%] -right-[18%] h-[110%] w-[55%] sm:-right-[20%] sm:-bottom-[30%]">
               <SpeechBubble text={dialogue.player} isPlayer={true} />
             </div>
           </div>
@@ -1948,7 +1989,7 @@ export const FightScreen = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="absolute -bottom-[20%] -left-[25%] z-20 h-[120%] w-[60%]">
+        <div className="absolute -bottom-[150%] -left-[45%] z-20 h-[120%] w-[60%] sm:-left-[25%] sm:-bottom-[20%]">
           <motion.div
             variants={cpuTrainerVariants}
             animate={gruntTrainerState}
@@ -1966,7 +2007,7 @@ export const FightScreen = () => {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-0 right-[-5%] h-full w-[75%]">
+        <div className="absolute -bottom-[130%] right-[-5%] h-full w-[95%] sm:bottom-0 sm:w-[75%]">
           <PlatformEffects
             isPlayer={false}
             animationState={cpuAnimation}
@@ -2002,12 +2043,12 @@ export const FightScreen = () => {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-[35%] left-[5%] z-10 aspect-[2/1] w-[55%] max-w-2xl [perspective:1000px]"
+        className="absolute bottom-[36%] left-[5%] z-10 aspect-[2/1] w-[55%] max-w-2xl [perspective:1000px] md:bottom-[34%]"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="absolute -bottom-[20%] -right-[18%] z-20 h-[110%] w-[55%]">
+        <div className="absolute bottom-[100%] -right-[18%] z-20 h-[110%] w-[55%] sm:-bottom-[20%]">
           <motion.div
             variants={playerTrainerVariants}
             animate={playerTrainerState}
@@ -2025,7 +2066,7 @@ export const FightScreen = () => {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-0 left-[-5%] z-10 h-full w-[75%]">
+        <div className="absolute bottom-[100%] left-[-5%] z-10 h-full w-[75%] sm:bottom-0">
           <PlatformEffects
             isPlayer={true}
             animationState={playerAnimation}
@@ -2058,7 +2099,7 @@ export const FightScreen = () => {
         <div
           onMouseEnter={() => setCpuHudHovered(true)}
           onMouseLeave={() => setCpuHudHovered(false)}
-          className="pointer-events-auto absolute top-4 right-4 w-full max-w-xs sm:max-w-sm"
+          className="pointer-events-auto absolute top-14 right-4 w-[68%] max-w-none sm:top-4 sm:w-full md:max-w-xs lg:max-w-sm"
         >
           <Hud mon={cpuMon} team={cpuTeam} isPlayer={false} />
 
@@ -2072,7 +2113,7 @@ export const FightScreen = () => {
         <div
           onMouseEnter={() => setPlayerHudHovered(true)}
           onMouseLeave={() => setPlayerHudHovered(false)}
-          className="pointer-events-auto absolute bottom-[35%] left-4 w-full max-w-xs sm:max-w-sm"
+          className="pointer-events-auto absolute bottom-[36%] left-4 w-[68%] max-w-none md:bottom-[34%] md:w-full md:max-w-xs lg:max-w-sm"
         >
           <Hud mon={playerMon} team={playerTeam} isPlayer={true} />
 
@@ -2088,7 +2129,7 @@ export const FightScreen = () => {
         initial={{ y: "100%" }}
         animate={{ y: "0%" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="absolute bottom-0 left-0 right-0 z-40 h-[33.33%] bg-white/80 p-1 backdrop-blur-sm dark:bg-slate-800/80"
+        className="absolute bottom-0 left-0 right-0 z-40 h-[32%] bg-white/80 p-1 backdrop-blur-sm dark:bg-slate-800/80 sm:h-[31%]"
         style={{
           clipPath: "polygon(0 15px, 15px 0, 100% 0, 100% 100%, 0 100%)",
         }}
@@ -2108,33 +2149,56 @@ export const FightScreen = () => {
               )}
           </AnimatePresence>
           <div
-            className="flex h-full w-full bg-white/90 dark:bg-slate-900/90"
+            className="h-full w-full flex-col overflow-hidden bg-white/90 dark:bg-slate-900/90"
             style={{
               clipPath: "polygon(0 15px, 15px 0, 100% 0, 100% 100%, 0 100%)",
             }}
           >
-            <div className="relative w-[35%]">
-              <div
-                ref={logContainerRef}
-                className="flex h-full flex-col gap-1.5 overflow-y-auto scroll-smooth bg-gradient-to-t from-white/80 to-slate-100/80 p-4 pt-2 [mask-image:linear-gradient(to_bottom,transparent_0,_black_24px,_black_calc(100%-24px),transparent_100%)] dark:from-slate-900/80 dark:to-slate-800/80"
+            {/* --- MOBILE TABS --- */}
+            <div className="flex flex-shrink-0 border-b-2 border-slate-300/50 dark:border-cyan-400/50 lg:hidden">
+              <MobileTabButton
+                onClick={() => setMobileView("actions")}
+                isActive={mobileView === "actions"}
               >
-                {battleLog.map((msg, i) => (
-                  <BattleLogMessage key={`${i}-${msg}`} msg={msg} />
-                ))}
-              </div>
-
-              <div
-                className="pointer-events-none absolute inset-0 bg-cyan-400"
-                style={{
-                  clipPath:
-                    "polygon(calc(100% - 2px) 0, 100% 0, 100% 100%, calc(100% - 2px) 100%)",
-                  opacity: 0.5,
-                }}
-              />
+                <div className="flex items-center justify-center gap-1.5">
+                  <Swords className="h-3.5 w-3.5" /> Actions
+                </div>
+              </MobileTabButton>
+              <MobileTabButton
+                onClick={() => setMobileView("team")}
+                isActive={mobileView === "team"}
+              >
+                <div className="flex items-center justify-center gap-1.5">
+                  <Users className="h-3.5 w-3.5" /> Team
+                </div>
+              </MobileTabButton>
+              <MobileTabButton
+                onClick={() => setMobileView("log")}
+                isActive={mobileView === "log"}
+              >
+                <div className="flex items-center justify-center gap-1.5">
+                  <FileText className="h-3.5 w-3.5" /> Log
+                </div>
+              </MobileTabButton>
             </div>
 
-            <div className="flex w-[65%]">
-              <div className="relative w-[40%] p-2">
+            {/* --- CONTENT AREA --- */}
+            <div className="relative flex h-full min-h-0 flex-grow flex-col lg:flex-row">
+              {/* --- LOG (Left) --- */}
+              <div
+                className={`relative h-full w-full lg:order-1 lg:block lg:w-[35%] ${
+                  mobileView === "log" ? "block" : "hidden"
+                }`}
+              >
+                <BattleLog battleLog={battleLog} />
+              </div>
+
+              {/* --- TEAM (Middle) --- */}
+              <div
+                className={`relative h-full w-full border-x-2 border-slate-300/50 dark:border-cyan-400/50 lg:order-2 lg:block lg:w-[26%] ${
+                  mobileView === "team" ? "block" : "hidden"
+                }`}
+              >
                 <TeamBar
                   team={playerTeam}
                   onSwitch={handleSwitch}
@@ -2151,19 +2215,15 @@ export const FightScreen = () => {
                   opponentMon={cpuMon}
                   getTypeEffectiveness={getTypeEffectiveness}
                 />
-
-                <div
-                  className="pointer-events-none absolute inset-0 bg-cyan-400"
-                  style={{
-                    clipPath:
-                      "polygon(calc(100% - 2px) 0, 100% 0, 100% 100%, calc(100% - 2px) 100%)",
-                    opacity: 0.5,
-                  }}
-                />
               </div>
 
-              <div className="relative flex w-[60%] flex-col p-4">
-                <div className="relative h-[calc(100%-3.5rem)] flex-grow">
+              {/* --- ACTIONS (Right) --- */}
+              <div
+                className={`relative flex h-[calc(100%-2.5rem)] w-full flex-col sm:h-full lg:order-3 lg:flex lg:w-[39%] ${
+                  mobileView === "actions" ? "flex" : "hidden"
+                }`}
+              >
+                <div className="sm:min-h-auto relative h-full min-h-0 flex-grow p-2 sm:p-3">
                   <AnimatePresence mode="wait">
                     {gameState === "forcedSwitch" ? (
                       <ForcedSwitchScreen key="forced-switch" />
@@ -2173,7 +2233,7 @@ export const FightScreen = () => {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
-                        className="grid h-full grid-cols-2 grid-rows-2 gap-3"
+                        className="my-auto grid h-full grid-cols-2 grid-rows-2 gap-1.5 sm:my-0 sm:gap-3 "
                       >
                         {playerMon.moves.map((move) => (
                           <MoveButton
@@ -2210,10 +2270,13 @@ export const FightScreen = () => {
                   </AnimatePresence>
                 </div>
 
-                <div className="mt-3 grid flex-shrink-0 grid-cols-4 gap-2 border-t-2 border-slate-300/50 pt-2 dark:border-cyan-400/50">
+                <div className="mt-auto grid flex-shrink-0 grid-cols-4 gap-2 border-t-2 border-slate-300/50 p-2 pt-2 dark:border-cyan-400/50">
                   <ActionButton
                     icon={<ArrowRightLeft className="h-4 w-4" />}
-                    onClick={() => setActionState("switch")}
+                    onClick={() => {
+                      setActionState("switch");
+                      setMobileView("team");
+                    }}
                     disabled={
                       !isPlayerTurn ||
                       gameState === "forcedSwitch" ||

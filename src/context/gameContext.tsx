@@ -134,10 +134,10 @@ export const statusEffectStyles: {
 export const statusEffectIcons: {
   [key in StatusEffect & string]: JSX.Element;
 } = {
-  burn: <Flame className="h-4 w-4" />,
-  poison: <Bubbles className="h-4 w-4" />,
-  sleep: <BedDouble className="h-4 w-4" />,
-  stun: <Zap className="h-4 w-4" />,
+  burn: <Flame className="h-3 w-3 sm:h-4 sm:w-4" />,
+  poison: <Bubbles className="h-3 w-3 sm:h-4 sm:w-4" />,
+  sleep: <BedDouble className="h-3 w-3 sm:h-4 sm:w-4" />,
+  stun: <Zap className="h-3 w-3 sm:h-4 sm:w-4" />,
 };
 
 // --- ITEM DEFINITIONS ---
@@ -194,7 +194,7 @@ export const portfolioMonData: PortfolioMon[] = [
     moves: [
       {
         name: "Context Injection",
-        power: 9500,
+        power: 95,
         type: "AI",
         accuracy: 1.0,
         pp: 10,
