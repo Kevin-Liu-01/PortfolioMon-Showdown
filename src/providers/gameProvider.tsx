@@ -74,6 +74,7 @@ interface IGameContext {
   background: number;
   handleTeamSelect: (mon: PortfolioMon) => void;
   handleConfirmTeam: () => void;
+  handleClearTeam: () => void;
   startBattle: () => void;
   handleMoveSelect: (move: BattleReadyMove) => Promise<void>;
   handleSwitchSelect: (index: number) => Promise<void>;
@@ -291,6 +292,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         return prev;
       }
     });
+  }, []);
+
+  const handleClearTeam = useCallback(() => {
+    setPlayerTeam([]);
   }, []);
 
   const handleConfirmTeam = useCallback(() => {
@@ -1098,6 +1103,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     calculateMoveScore,
     calculateSwitchScore,
     playerDidSwitchLastTurn,
+    chooseAiAction,
   ]);
 
   const value = useMemo(
@@ -1125,6 +1131,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       background,
       handleTeamSelect,
       handleConfirmTeam,
+      handleClearTeam,
       startBattle,
       handleMoveSelect,
       handleSwitchSelect,
@@ -1159,6 +1166,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       background,
       handleTeamSelect,
       handleConfirmTeam,
+      handleClearTeam,
       startBattle,
       handleMoveSelect,
       handleSwitchSelect,

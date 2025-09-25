@@ -33,6 +33,7 @@ import {
   XIcon,
   PlusIcon,
   ArrowLeft,
+  Trash2,
 } from "lucide-react";
 
 // --- BATTLE UI EFFECT COMPONENTS ---
@@ -984,10 +985,12 @@ const TrainerInfoPanel = ({
   playerTeam,
   onEnter,
   onRandomTeam,
+  onClearTeam,
 }: {
   playerTeam: PortfolioMon[];
   onEnter: () => void;
   onRandomTeam: () => void;
+  onClearTeam: () => void;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1341,6 +1344,22 @@ const TrainerInfoPanel = ({
                   ))}
                 </div>
               </div>
+              <motion.button
+                onClick={onClearTeam}
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0px 0px 25px rgba(239, 68, 68, 0.7)",
+                }}
+                whileTap={{ scale: 0.98 }}
+                disabled={playerTeam.length === 0}
+                className="absolute top-3 right-0 inline-flex items-center justify-center bg-gradient-to-r from-red-500 to-orange-600 px-2 pb-1 pt-0.5 text-sm font-bold text-white shadow-lg transition-opacity disabled:cursor-not-allowed disabled:from-slate-600 disabled:to-slate-700 disabled:opacity-50"
+                style={{
+                  clipPath:
+                    "polygon(4px 0, 100% 0, 100% 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)",
+                }}
+              >
+                <Trash2 className="h-4 w-4" />
+              </motion.button>
               <div className="mt-4 grid grid-cols-2 gap-2">
                 <motion.button
                   onClick={onRandomTeam}
@@ -1372,7 +1391,7 @@ const TrainerInfoPanel = ({
                   }}
                 >
                   Let&apos;s Battle! <ArrowRight className="h-4 w-4" />
-                </motion.button>
+                </motion.button>{" "}
               </div>
             </div>
           </UpgradedClippedContainer>
@@ -1419,7 +1438,7 @@ const TrainerInfoPanel = ({
                     role="Student"
                     company="High Technology High School"
                     date="Graduated 2024"
-                    description="HTHS >>>"
+                    description="I ❤️ HTHS"
                     isLast={true}
                   />
                 </div>
@@ -1548,7 +1567,8 @@ const MonGridItem = ({
 
 // --- PRIMARY UI ---
 export const TeamSelectScreen = () => {
-  const { playerTeam, handleTeamSelect, handleConfirmTeam } = useGame();
+  const { playerTeam, handleTeamSelect, handleConfirmTeam, handleClearTeam } =
+    useGame();
   const [selectedId, setSelectedId] = useState<number | null>(1);
   const selectedMon = portfolioMonData.find((m) => m.id === selectedId);
   const [searchTerm, setSearchTerm] = useState("");
@@ -1606,6 +1626,7 @@ export const TeamSelectScreen = () => {
           playerTeam={playerTeam}
           onEnter={handleConfirmTeam}
           onRandomTeam={handleRandomTeam}
+          onClearTeam={handleClearTeam}
         />
         <main className="relative col-span-12 flex flex-col sm:min-h-0 lg:col-span-9 lg:grid lg:grid-cols-9">
           <aside className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4">

@@ -1463,6 +1463,58 @@ export const portfolioMonData: PortfolioMon[] = [
       },
     ],
   },
+  {
+    id: 26,
+    name: "PortfolioMon",
+    url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
+    description:
+      "This portfolio website, built as a Pokemon Showdown-inspired turn-based fighting game.",
+    image: "/images/kevinportfolio.png",
+    sprite: <Code />,
+    type1: "Web",
+    type2: "Game",
+    hp: 310,
+    stats: { hp: 310, atk: 110, def: 110, spd: 110 },
+    moves: [
+      {
+        name: "Source Code",
+        power: 95,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.15,
+        description:
+          "Reveals the underlying code, a powerful and precise strike.",
+      },
+      {
+        name: "UI Overhaul",
+        power: 80,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "A visually stunning move that deals consistent damage.",
+      },
+      {
+        name: "Game Logic",
+        power: 85,
+        type: "Game",
+        accuracy: 0.95,
+        pp: 15,
+        critChance: 0.1,
+        description:
+          "Executes complex game logic to outsmart and damage the foe.",
+      },
+      {
+        name: "Responsive Breakpoint",
+        power: 70,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 20,
+        description: "Adapts its structure to always land a solid hit.",
+      },
+    ],
+  },
 ];
 
 // --- GAME LOGIC & UTILITIES ---
