@@ -243,7 +243,7 @@ const statusIconMapping: { [key: string]: React.ReactNode } = {
   freeze: <Snowflake className="h-3 w-3 text-blue-300" />,
   sleep: <Moon className="h-3 w-3 text-indigo-300" />,
 };
-const StatusEffectIcon = ({ move }: { move: Move }) => {
+const StatusEffectIcon = ({ move }: { move: any }) => {
   if (!move.effect?.type) return null;
   const icon = statusIconMapping[move.effect.type];
   if (!icon) return null;
@@ -269,80 +269,7 @@ const StatusEffectIcon = ({ move }: { move: Move }) => {
     </div>
   );
 };
-const typeChart: { [attacker: string]: { [defender: string]: number } } = {
-  AI: {
-    Data: 2,
-    Web: 0.5,
-    Hardware: 0.5,
-    Game: 2,
-    Design: 1,
-    Health: 1,
-    Mobile: 1,
-  },
-  Data: {
-    AI: 0.5,
-    Design: 2,
-    Health: 2,
-    Game: 0.5,
-    Web: 1,
-    Hardware: 1,
-    Mobile: 1,
-  },
-  Web: {
-    Mobile: 2,
-    AI: 2,
-    Design: 0.5,
-    Data: 0.5,
-    Game: 1,
-    Health: 1,
-    Hardware: 1,
-  },
-  Design: {
-    Web: 2,
-    Game: 2,
-    Data: 0.5,
-    AI: 1,
-    Hardware: 1,
-    Health: 1,
-    Mobile: 1,
-  },
-  Hardware: {
-    AI: 2,
-    Mobile: 2,
-    Health: 0.5,
-    Web: 0.5,
-    Data: 1,
-    Design: 1,
-    Game: 1,
-  },
-  Health: {
-    Hardware: 2,
-    Game: 0.5,
-    Data: 0.5,
-    AI: 1,
-    Web: 1,
-    Design: 1,
-    Mobile: 1,
-  },
-  Mobile: {
-    Game: 2,
-    Design: 2,
-    Web: 0.5,
-    Hardware: 0.5,
-    AI: 1,
-    Data: 1,
-    Health: 1,
-  },
-  Game: {
-    Health: 2,
-    Data: 2,
-    AI: 0.5,
-    Design: 0.5,
-    Mobile: 0.5,
-    Web: 1,
-    Hardware: 1,
-  },
-};
+
 const DetailViewCornerBracket = ({ className }: { className?: string }) => (
   <motion.svg
     initial={{ opacity: 0 }}
@@ -413,7 +340,7 @@ const MonDetailView = ({
   isSelectedOnTeam: boolean;
   isTeamFull: boolean;
 }) => {
-  const { background } = useGame();
+  const { background, getTypeEffectiveness } = useGame();
   const buttonDisabled = isTeamFull && !isSelectedOnTeam;
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -432,10 +359,17 @@ const MonDetailView = ({
   const platformColor = "rgba(0, 220, 255,";
 
   const offensiveMatchups = { superEffective: new Set<string>() };
-  new Set(mon.moves.map((m) => m.type)).forEach((moveType) => {
-    Object.keys(typeChart).forEach((defendingType) => {
-      if ((typeChart[moveType]?.[defendingType] ?? 1) > 1)
-        offensiveMatchups.superEffective.add(defendingType);
+  const moveTypes = new Set(mon.moves.map((m) => m.type));
+
+  portfolioMonData.forEach((defendingMon) => {
+    moveTypes.forEach((moveType) => {
+      const effectiveness = getTypeEffectiveness(moveType, defendingMon);
+      if (effectiveness.multiplier > 1) {
+        offensiveMatchups.superEffective.add(defendingMon.type1);
+        if (defendingMon.type2) {
+          offensiveMatchups.superEffective.add(defendingMon.type2);
+        }
+      }
     });
   });
 
@@ -443,12 +377,19 @@ const MonDetailView = ({
     weaknesses: new Set<string>(),
     resistances: new Set<string>(),
   };
-  Object.keys(typeChart).forEach((attackingType) => {
-    const mult1 = typeChart[attackingType]?.[mon.type1] ?? 1;
-    const mult2 = mon.type2 ? typeChart[attackingType]?.[mon.type2] ?? 1 : 1;
-    const finalMultiplier = mult1 * mult2;
-    if (finalMultiplier > 1) defensiveMatchups.weaknesses.add(attackingType);
-    if (finalMultiplier < 1) defensiveMatchups.resistances.add(attackingType);
+  const allTypes = new Set(portfolioMonData.map((m) => m.type1));
+  portfolioMonData.forEach((m) => {
+    if (m.type2) allTypes.add(m.type2);
+  });
+
+  allTypes.forEach((attackingType) => {
+    const effectiveness = getTypeEffectiveness(attackingType, mon);
+    if (effectiveness.multiplier > 1) {
+      defensiveMatchups.weaknesses.add(attackingType);
+    }
+    if (effectiveness.multiplier < 1) {
+      defensiveMatchups.resistances.add(attackingType);
+    }
   });
 
   const mainPanelClipPath =
@@ -735,7 +676,7 @@ const MonDetailView = ({
                             </p>
                             <div className="flex flex-shrink-0 items-center gap-2">
                               <div className="flex items-center gap-1 text-[10px]">
-                                <StatusEffectIcon move={move} />
+                                <StatusEffectIcon move={move as any} />
                                 {move.effect?.chance && (
                                   <span className="text-[10px]">
                                     {move.effect?.chance * 100}%
@@ -1158,11 +1099,15 @@ const TrainerInfoPanel = ({
     <motion.aside
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsExpanded(true)}
+      onMouseEnter={() => {
+        if (window.innerWidth >= 640) setIsExpanded(true);
+      }}
       onMouseLeave={() => {
-        setIsExpanded(false);
-        mouseX.set(0);
-        mouseY.set(0);
+        if (window.innerWidth >= 640) {
+          setIsExpanded(false);
+          mouseX.set(0);
+          mouseY.set(0);
+        }
       }}
       className="relative z-20 col-span-12 flex h-full flex-col overflow-visible border-r border-slate-300 bg-white [perspective:1000px] dark:border-cyan-400/20 dark:bg-slate-900 lg:col-span-3"
       variants={containerVariants}
@@ -1177,16 +1122,16 @@ const TrainerInfoPanel = ({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute top-4 right-0 z-40 rounded bg-cyan-500/80 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-cyan-500/20 backdrop-blur-sm transition hover:bg-cyan-500/100"
+          className="absolute top-6 right-0 z-40 flex bg-cyan-500/80 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-cyan-500/20 backdrop-blur-sm transition-all transition hover:bg-cyan-500/100 hover:pr-2 sm:hidden"
           style={{
             clipPath:
               "polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px), 0 8px)",
           }}
         >
           {isExpanded ? (
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-5 w-5" />
           ) : (
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-5 w-5" />
           )}
         </button>
 

@@ -545,7 +545,6 @@ const PlatformEffects = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                style={{ clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)" }}
               >
                 <ScannerRing duration={3} delay={0} mainColor={mainColor} />
                 <ScannerRing
@@ -1605,7 +1604,7 @@ const SpeechBubble = ({
         style={{ clipPath }}
       >
         <div
-          className="bg-white/90 px-4 py-2 text-center text-sm font-semibold text-slate-900 backdrop-blur-sm dark:bg-slate-900/90 dark:text-white"
+          className="bg-white/90 px-2 py-2 text-center text-xs font-semibold text-slate-900 backdrop-blur-sm dark:bg-slate-900/90 dark:text-white sm:px-4 sm:text-sm"
           style={{ clipPath }}
         >
           {text}
@@ -1967,7 +1966,7 @@ export const FightScreen = () => {
       <AnimatePresence>
         {dialogue.cpu && (
           <div className="absolute top-[25%] right-[-11%] z-[80] aspect-[2/1] w-[45%] max-w-lg sm:right-[5%] sm:top-[8%]">
-            <div className="absolute -bottom-[20%] -left-[25%] h-[110%] w-[60%] sm:-left-[15%]">
+            <div className="absolute -bottom-[15%] -left-[25%] h-[110%] w-[60%] sm:-left-[15%]">
               <SpeechBubble text={dialogue.cpu} isPlayer={false} />
             </div>
           </div>
@@ -2007,7 +2006,7 @@ export const FightScreen = () => {
           </motion.div>
         </div>
 
-        <div className="absolute -bottom-[130%] right-[-5%] h-full w-[95%] sm:bottom-0 sm:w-[75%]">
+        <div className="absolute -bottom-[130%] right-[-5%] h-full w-[95%] sm:bottom-[-10%] sm:w-[75%]">
           <PlatformEffects
             isPlayer={false}
             animationState={cpuAnimation}
