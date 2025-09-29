@@ -18,6 +18,7 @@ import {
   Bot,
   Layers,
   TypeIcon,
+  UserIcon,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGame } from "../providers/gameProvider";
@@ -32,7 +33,7 @@ const ClippedGroupContainer = ({
   className?: string;
 }) => (
   <motion.div
-    className={`relative bg-slate-300/50 p-px transition-all hover:px-1 dark:bg-cyan-400/50 ${className}`}
+    className={`relative bg-slate-300/50 p-px px-0.5 transition-all hover:py-0.5 dark:bg-cyan-400/50 ${className}`}
     style={{
       clipPath:
         "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
@@ -456,7 +457,7 @@ const Navbar = (props: {
   };
 
   const octagonalClipPath =
-    "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)";
+    "polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 0% 100%, 0% 20%)";
 
   return (
     <motion.nav
@@ -607,11 +608,11 @@ const Navbar = (props: {
           <div className="hidden items-center gap-3 sm:flex">
             <ClippedGroupContainer>
               <div
-                className="relative h-8 w-8 bg-slate-200 p-px dark:bg-cyan-400/20"
+                className="relative h-9 w-9 bg-slate-200 p-px dark:bg-cyan-400/50"
                 style={{ clipPath: octagonalClipPath }}
               >
                 <div
-                  className="relative h-full w-full bg-slate-100 dark:bg-slate-800"
+                  className="relative h-full w-full bg-slate-100 dark:bg-cyan-900"
                   style={{ clipPath: octagonalClipPath }}
                 >
                   {session?.user?.image ? (
@@ -622,7 +623,7 @@ const Navbar = (props: {
                       className="object-cover"
                     />
                   ) : (
-                    <UserCircle className="h-full w-full text-slate-400 dark:text-slate-600" />
+                    <UserIcon className="h-full w-full pt-1 pr-1 text-slate-400 dark:text-cyan-500" />
                   )}
                 </div>
               </div>
@@ -733,24 +734,29 @@ const Navbar = (props: {
           >
             <div className="space-y-3 p-4">
               <ClippedGroupContainer className="w-full">
-                <div className="flex w-full items-center justify-between px-2">
+                <div className="flex w-full items-center justify-between pl-1 pr-2">
                   <div className="flex items-center gap-2">
                     <div
-                      className="relative h-8 w-8"
+                      className="relative h-7 w-7 bg-slate-200 p-px dark:bg-cyan-400/50"
                       style={{ clipPath: octagonalClipPath }}
                     >
-                      {session?.user?.image ? (
-                        <Image
-                          src={session.user.image}
-                          alt="Profile"
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <UserCircle className="h-full w-full text-slate-400 dark:text-slate-600" />
-                      )}
+                      <div
+                        className="relative h-full w-full bg-slate-100 dark:bg-cyan-900"
+                        style={{ clipPath: octagonalClipPath }}
+                      >
+                        {session?.user?.image ? (
+                          <Image
+                            src={session.user.image}
+                            alt="Profile"
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <UserIcon className="h-full w-full p-1 text-slate-400 dark:text-cyan-500" />
+                        )}
+                      </div>
                     </div>
-                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <span className="ml-1 text-sm font-medium text-slate-700 dark:text-slate-300">
                       {session?.user?.name ?? "Guest"}
                     </span>
                   </div>

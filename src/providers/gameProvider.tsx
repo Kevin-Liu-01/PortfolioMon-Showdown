@@ -27,7 +27,7 @@ import type {
 } from "../context/gameContext";
 
 // --- BATTLE BACKGROUNDS ---
-const TOTAL_BACKGROUNDS = 5; // Set this to the number of background images you have
+const TOTAL_BACKGROUNDS = 6; // Set this to the number of background images you have
 
 // --- TYPE FOR BATTLE STATS ---
 export interface BattleStats {
