@@ -760,6 +760,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         setGruntTrainerState("idle");
       } else if (chosenAction?.type === "move") {
         setCpuDidSwitchLastTurn(false);
+        setGruntTrainerState("commanding");
+        await sleep(100);
         faintedDuringTurn = await processTurn(
           cpuMon,
           playerMon,
