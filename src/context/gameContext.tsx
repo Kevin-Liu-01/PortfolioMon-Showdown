@@ -183,7 +183,7 @@ export const portfolioMonData: PortfolioMon[] = [
   {
     id: 1,
     name: "Podium",
-    url: "#podium", // Placeholder URL
+    url: "https://hackprinceton-podium.vercel.app/", // Placeholder URL
     description:
       "An app that streamlines judging & Event Management for Hackathons.",
     image: "/images/podium.png",
