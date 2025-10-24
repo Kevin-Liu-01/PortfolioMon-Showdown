@@ -25,6 +25,7 @@ import {
   Bubbles,
   BedDouble,
   Zap,
+  Trophy, // <-- Added Trophy
 } from "lucide-react";
 
 // --- CORE TYPE DEFINITIONS ---
@@ -181,6 +182,58 @@ export const initialInventory: PlayerInventory = {
 export const portfolioMonData: PortfolioMon[] = [
   {
     id: 1,
+    name: "Podium",
+    url: "#podium", // Placeholder URL
+    description:
+      "An app that streamlines judging & Event Management for Hackathons.",
+    image: "/images/podium.png",
+    sprite: <Trophy />,
+    type1: "Web",
+    type2: "Data",
+    hp: 290,
+    stats: { hp: 290, atk: 115, def: 100, spd: 110 },
+    moves: [
+      {
+        name: "Final Judging",
+        power: 100,
+        type: "Data",
+        accuracy: 0.9,
+        pp: 10,
+        critChance: 0.15,
+        description: "A powerful final decision that hits hard.",
+      },
+      {
+        name: "Live Leaderboard",
+        power: 85,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "A real-time update that reliably strikes the foe.",
+      },
+      {
+        name: "Spam Prevention",
+        power: 70,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 15,
+        critChance: 0.05,
+        effect: { type: "stun", chance: 0.3 },
+        description: "Blocks the foe's advance, may cause a stun.",
+      },
+      {
+        name: "Score Finalize",
+        power: 90,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.2,
+        description: "Locks in the score with a critical, precise strike.",
+      },
+    ],
+  },
+  {
+    id: 2, // Re-indexed from 1
     name: "Lumachor",
     url: "https://lumachor.vercel.app/home",
     description:
@@ -232,7 +285,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 2,
+    id: 3, // Re-indexed from 2
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     description:
@@ -284,7 +337,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 3,
+    id: 4, // Re-indexed from 3
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     description: "Track expenses and split them with friends.",
@@ -336,7 +389,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 4,
+    id: 5, // Re-indexed from 4
     name: "Lootbox Sim",
     url: "https://lootboxsimulator.vercel.app/",
     description:
@@ -389,7 +442,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 5,
+    id: 6, // Re-indexed from 5
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     description:
@@ -441,7 +494,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 6,
+    id: 7, // Re-indexed from 6
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     description:
@@ -493,7 +546,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 7,
+    id: 8, // Re-indexed from 7
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     description:
@@ -546,7 +599,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 8,
+    id: 9, // Re-indexed from 8
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     description:
@@ -597,7 +650,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 9,
+    id: 10, // Re-indexed from 9
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     description: "Scans your refrigerator to generate recipes using ChatGPT.",
@@ -648,7 +701,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 10,
+    id: 11, // Re-indexed from 10
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     description: "Generates full study guides for literary works.",
@@ -698,7 +751,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 11,
+    id: 12, // Re-indexed from 11
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     description: "A tool to help immigrants find support and resources.",
@@ -749,7 +802,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 12,
+    id: 13, // Re-indexed from 12
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     description: "An affordable wearable sensor to help you sleep soundly.",
@@ -801,7 +854,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 13,
+    id: 14, // Re-indexed from 13
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     description: "U.S. History II Final; Analyzes Military Industrial Complex.",
@@ -852,7 +905,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 14,
+    id: 15, // Re-indexed from 14
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     description:
@@ -904,7 +957,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 15,
+    id: 16, // Re-indexed from 15
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     description: "A code editor that allows ChatGPT to review your code.",
@@ -954,7 +1007,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 16,
+    id: 17, // Re-indexed from 16
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     description: "The official test portal of the OMMC competition.",
@@ -1004,7 +1057,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17,
+    id: 18, // Re-indexed from 17
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     description: "The official sample test portal of OMMC.",
@@ -1054,7 +1107,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18,
+    id: 19, // Re-indexed from 18
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     description:
@@ -1106,7 +1159,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19,
+    id: 20, // Re-indexed from 19
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
     description:
@@ -1158,7 +1211,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20,
+    id: 21, // Re-indexed from 20
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     description:
@@ -1210,7 +1263,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21,
+    id: 22, // Re-indexed from 21
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     description: "The fullstack database for all OMMC questions.",
@@ -1260,7 +1313,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 22,
+    id: 23, // Re-indexed from 22
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     description:
@@ -1311,7 +1364,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23,
+    id: 24, // Re-indexed from 23
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     description: "A website to help students learn about Math and Physics.",
@@ -1362,7 +1415,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24,
+    id: 25, // Re-indexed from 24
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     description: "An app to help tutors and pupils connect.",
@@ -1413,7 +1466,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25,
+    id: 26, // Re-indexed from 25
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     description: "My first app! A game to create satellites from parts.",
@@ -1464,7 +1517,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26,
+    id: 27, // Re-indexed from 26
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     description:
