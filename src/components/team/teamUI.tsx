@@ -8,6 +8,7 @@ import {
   useTransform,
   useSpring,
 } from "framer-motion";
+import { Tooltip } from "@radix-ui/themes";
 import { useGame } from "../../providers/gameProvider";
 import { type PortfolioMon, portfolioMonData } from "../../context/gameContext";
 
@@ -177,7 +178,7 @@ const ActionButton = ({
   </motion.button>
 );
 
-// --- (Unchanged Helper Components: TypeBadge, etc.) ---
+// --- Helper Components: TypeBadge, etc.) ---
 const TypeBadge = ({
   type,
   size = "sm",
@@ -189,7 +190,9 @@ const TypeBadge = ({
   const sizeClasses =
     size === "sm"
       ? "px-2.5 py-0.5 text-xs font-semibold"
-      : "px-2 py-0.5 text-[9px] font-semibold";
+      : size === "xs"
+      ? "px-2 py-0.5 text-[9px] font-semibold"
+      : "px-2 py-0.15 text-[9px] font-semibold";
   return (
     <span
       className={`tracking-wide ${sizeClasses} ${style.bg} ${style.text}`}
@@ -548,7 +551,7 @@ const MonDetailView = ({
             className="pl-1"
             clipPath="polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px)"
           >
-            <div className="p-2.5">
+            <div className="p-2.5 pt-2">
               <SectionHeader>Data Entry</SectionHeader>
               <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
                 {mon.description}
@@ -590,7 +593,7 @@ const MonDetailView = ({
             className="pl-1"
             clipPath="polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)"
           >
-            <div className="p-2.5">
+            <div className="p-2.5 pt-2">
               <SectionHeader>Base Stats</SectionHeader>
               <div className="flex flex-col justify-center space-y-1">
                 <StatBar label="HP" value={mon.stats.hp} />
@@ -605,17 +608,26 @@ const MonDetailView = ({
             className="flex-1 pl-1"
             clipPath="polygon(0 12px, 12px 0, 100% 0, 100% 100%, 0 100%)"
           >
-            <div className="flex h-full flex-col p-2.5">
+            <div className="flex h-full flex-col px-2.5 pt-2">
               <SectionHeader>Type Matchups</SectionHeader>
-              <div className="flex flex-grow flex-col justify-around gap-1 text-xs">
+              <div className="flex flex-grow flex-col justify-around gap-1 pb-2 text-xs">
                 <div className="flex items-start gap-2">
-                  <Sparkles
-                    title="Super-effective against"
-                    className="mt-0.5 h-3 w-3 flex-shrink-0 text-cyan-400"
-                  />
+                  <Sparkles className="mt-0.5 h-3 w-3 flex-shrink-0 text-cyan-400" />
                   <div className="flex flex-wrap gap-1">
                     {[...offensiveMatchups.superEffective].map((t) => (
-                      <TypeBadge key={t} type={t} size="xs" />
+                      <TypeBadge key={t} type={t} size="xxs" />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <ShieldCheck
+                    title="Resistant to"
+                    className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-400"
+                  />
+                  <div className="flex flex-wrap gap-1">
+                    {[...defensiveMatchups.resistances].map((t) => (
+                      <TypeBadge key={t} type={t} size="xxs" />
                     ))}
                   </div>
                 </div>
@@ -626,18 +638,7 @@ const MonDetailView = ({
                   />
                   <div className="flex flex-wrap gap-1">
                     {[...defensiveMatchups.weaknesses].map((t) => (
-                      <TypeBadge key={t} type={t} size="xs" />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex items-start gap-2">
-                  <ShieldCheck
-                    title="Resistant to"
-                    className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-400"
-                  />
-                  <div className="flex flex-wrap gap-1">
-                    {[...defensiveMatchups.resistances].map((t) => (
-                      <TypeBadge key={t} type={t} size="xs" />
+                      <TypeBadge key={t} type={t} size="xxs" />
                     ))}
                   </div>
                 </div>
@@ -651,7 +652,7 @@ const MonDetailView = ({
             className="flex-1 pr-1 "
             clipPath="polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)"
           >
-            <div className="flex h-full flex-col p-2.5">
+            <div className="flex h-full flex-col p-2.5 pt-2">
               <SectionHeader>Moveset</SectionHeader>
               <div className="flex flex-grow flex-col gap-2">
                 {mon.moves.map((move) => {
