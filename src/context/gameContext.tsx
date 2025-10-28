@@ -390,7 +390,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
   {
     id: 5, // Re-indexed from 4
-    name: "Lootbox Sim",
+    name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     description:
       "Simulator-style game where users can try opening different kinds of lootboxes.",
