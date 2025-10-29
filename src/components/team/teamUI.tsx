@@ -557,7 +557,7 @@ const MonDetailView = ({
                 {mon.description}
               </p>
               <div className="mt-2 grid grid-cols-2 gap-2 border-t border-slate-300 pt-2 dark:border-slate-700">
-                <Link href={mon.url} passHref legacyBehavior>
+                <Link href={mon.url} target="_blank" rel="noopener noreferrer">
                   <ActionButton
                     as="a"
                     target="_blank"

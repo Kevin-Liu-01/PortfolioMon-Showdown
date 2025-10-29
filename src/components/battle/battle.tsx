@@ -355,6 +355,8 @@ export const InfoBox = ({
         clipPath:
           "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)",
       }}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       Visit Project <ExternalLink className="h-4 w-4" />
     </Link>
