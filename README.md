@@ -1,27 +1,24 @@
 # PortfolioMon Showdown
 
-Welcome to PortfolioMon Showdown, a dynamic and interactive gamified portfolio where my software projects come to life as battle-ready creatures\! Inspired by the classic Pokémon battle system, this app showcases my full-stack development and UI/UX design skills in a fun, engaging, and memorable way.
+Welcome to PortfolioMon Showdown, a dynamic and interactive gamified portfolio where my projects come to life as battle-ready creatures\! This is inspired by the classic Pokémon battle system and its presentation by [Pokémon Showdown](https://pokemonshowdown.com/).
 
-**[➡️ Play the Game Here\!](https://kevin-liu.tech/)**
+**[➡️ Play the Game Here (Or explore my projects)\!](https://kevin-liu.tech/)**
 
 ![Gameplay Screenshot](/public/images/gameplay.png)
 
-## ✨ Key Features
+## Key Features
 
-- **Gamified Portfolio:** My projects aren't just lines on a resume; they're "PortfolioMons" with unique types, stats, and movesets derived from their real-world tech stacks and functionalities.
-- **Strategic Turn-Based Combat:** Engage in a complex battle system against a CPU opponent. The system features:
-  - **Type Effectiveness:** A custom type chart (AI \> Data, Web \> Mobile, etc.) adds strategic depth.
-  - **Status Effects:** Moves can burn, poison, stun, or put opponents to sleep.
-  - **Items & Inventory:** Use items like "API Key" (Potion) or "Debugger" (Antidote) to turn the tide of battle.
-  - **Detailed Battle Logs & Stats:** Track every action and review a comprehensive battle report upon victory or defeat.
-- **Intelligent Auto-Battler & CPU:** Activate the auto-battler to let a smart AI take over for you. It strategically weighs move power, type effectiveness, and survivability to choose the optimal action. The CPU opponent is powered by the same advanced logic, providing a consistent and challenging experience.
-- **Dynamic Team Building:** Choose a strategic team of 3 projects from my portfolio to take into battle.
-- **Advanced UI/UX:** A sleek, high-tech interface built with **Tailwind CSS** and heavily animated with **Framer Motion** for a fluid and polished user experience.
-- **Robust State Management:** The entire game state is managed centrally using React's Context API, ensuring a scalable and maintainable codebase.
-- **User Authentication:** Secure user sign-in implemented with **NextAuth.js**, supporting providers like GitHub.
-- **Fully Responsive:** The application is designed to be fully functional and visually appealing on desktops, tablets, and mobile devices.
+- **The Portfolio:** I wanted to completely avoid the boring route of listing my projects as lines on a resume; this turned into adding pictures; which very quickly leapt into these very pictures representing Pokemon complete with types and movesets. They're "PortfolioMons" with unique types, stats, and movesets derived from their real-world tech stacks and functionalities.
+- **Turn-Based Combat:** This is no button-spamming clicker game. You will need to employ strategy against a CPU opponent that has a basic battle system. It is programmed to choose the most ideal moves and will switch out its Portfoliomon intelligently. Don't worry, I nerfed it so it can't switch out twice in a row. But to help you out, I added:
+  - **Type Effectiveness:** A custom type chart (AI \> Data, Web \> Mobile, etc.) to help you find what types are effective against / resist each other.
+  - **Status Effects:** Moves can burn, poison, stun, or put opponents' Portfoliomon to sleep.
+  - **Items & Inventory:** You get items like an "API Key" (Potion) or "Debugger" (Antidote) to turn the tide of battle.
+  - **Detailed Battle Logs & Stats:** You can meticulously track every action and review a comprehensive battle report upon victory or defeat, but it's usually not that deep.
+- **Intelligent Auto-Battler & CPU:** If you are extremely lazy, you can activate an auto-battler to let your own CPU take over for you 💀. It also strategically weighs move power, type effectiveness, and survivability to choose the optimal action. The CPU opponent is powered by the same advanced logic, though, so while the experience may not be as challenging, it may be more...consistent? I love free will
+- **Dynamic Team Building:** You can choose a strategic team of 3 projects from my portfolio to take into battle, but you can also randomly generate a team!
+- **Fully Responsive:** On the go? The portfolio is designed to be fully functional and visually appealing on desktops, tablets, and mobile devices. You will see my resume one way or another. Metrics are off the roof. Hurrah!
 
-## 🛠️ Tech Stack & Tools
+## Tech Stack & Tools
 
 This project was built with a modern, type-safe, and performant technology stack.
 
@@ -34,7 +31,7 @@ This project was built with a modern, type-safe, and performant technology stack
 - **Icons:** Lucide React
 - **Deployment:** Vercel
 
-## 📂 Project Structure
+## Project Structure
 
 The codebase is organized to be modular and easy to navigate, separating concerns for UI, state management, and static data.
 
@@ -61,7 +58,7 @@ src/
     └── images/              # All static assets (project images, trainer sprites, etc.)
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 To run this project locally, follow these steps:
 
