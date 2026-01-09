@@ -181,6 +181,61 @@ export const initialInventory: PlayerInventory = {
 // --- PORTFOLIO-MON DATA ---
 export const portfolioMonData: PortfolioMon[] = [
   {
+    id: 0,
+    name: "Princeton Tower Defense",
+    url: "https://princeton-tower-defense.vercel.app/",
+    description:
+      "A tower defense game where players defend Princeton from waves of attacks.",
+    image: "/images/princetontd.png",
+    sprite: <Scale />,
+    type1: "Game",
+    type2: "Web",
+    hp: 300,
+    stats: { hp: 300, atk: 120, def: 90, spd: 90 },
+    moves: [
+      {
+        name: "Nassau Cannon Blast",
+        power: 100,
+        type: "Web",
+        accuracy: 0.9,
+        pp: 10,
+        critChance: 0.15,
+        description: "A powerful cannon attack that hits hard.",
+      },
+      {
+        name: "Dinky Station Strike",
+        power: 80,
+        type: "Game",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "Yet another strike from the Dinky train.",
+      },
+      // abilities
+      {
+        name: "E-Quad Lab Lightning",
+        power: 70,
+        type: "Game",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        effect: { type: "stun", chance: 0.2 },
+        description: "Tesla coil strike that may stun the opponent.",
+      },
+      {
+        name: "Blair Arch Resonance",
+        power: 80,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.1,
+        effect: { type: "sleep", chance: 0.2 },
+        description: "Beautiful sonic lullaby that may put the foe to sleep.",
+      },
+    ],
+  },
+
+  {
     id: 1,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/", // Placeholder URL
@@ -455,10 +510,10 @@ export const portfolioMonData: PortfolioMon[] = [
     stats: { hp: 240, atk: 150, def: 50, spd: 130 },
     moves: [
       {
-        name: "Incremental Gain",
-        power: 125,
+        name: "100 Clicks Per Second",
+        power: 100,
         type: "Game",
-        accuracy: 0.8,
+        accuracy: 0.9,
         pp: 5,
         critChance: 0.1,
         description: "A massive attack that builds up over time.",
@@ -473,13 +528,13 @@ export const portfolioMonData: PortfolioMon[] = [
         description: "A quick swipe that always hits.",
       },
       {
-        name: "Prestige",
-        power: 100,
+        name: "Golden Cookie",
+        power: 125,
         type: "Game",
-        accuracy: 0.9,
-        pp: 10,
-        critChance: 0.25,
-        description: "Resets progress for a huge burst of power.",
+        accuracy: 0.8,
+        pp: 8,
+        critChance: 0.35,
+        description: "A rare and powerful alpha cookie.",
       },
       {
         name: "Late Meal",

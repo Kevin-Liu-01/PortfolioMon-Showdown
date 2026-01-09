@@ -106,7 +106,7 @@ export const TeamPreviewScreen = () => {
               <motion.div
                 key={p.id}
                 variants={playerCardVariants}
-                className="w-[20rem] bg-cyan-300 p-px pr-4 shadow-lg backdrop-blur-sm transition-all hover:pr-2 dark:bg-cyan-700"
+                className="w-[20rem] bg-cyan-300 p-px pr-4 shadow-lg backdrop-blur-sm transition-all hover:pr-2 dark:bg-cyan-700 sm:w-[22rem]"
                 style={{
                   clipPath:
                     "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
@@ -171,7 +171,7 @@ export const TeamPreviewScreen = () => {
               <motion.div
                 key={p.id}
                 variants={cpuCardVariants}
-                className="w-[20rem] bg-red-300 p-px pl-4 text-right shadow-lg backdrop-blur-sm transition-all hover:pl-2 dark:bg-red-500"
+                className="w-[20rem] bg-red-300 p-px pl-4 text-right shadow-lg backdrop-blur-sm transition-all hover:pl-2 dark:bg-red-500 sm:w-[22rem]"
                 style={{
                   clipPath:
                     "polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px)",
