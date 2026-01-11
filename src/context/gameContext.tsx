@@ -181,7 +181,7 @@ export const initialInventory: PlayerInventory = {
 // --- PORTFOLIO-MON DATA ---
 export const portfolioMonData: PortfolioMon[] = [
   {
-    id: 0,
+    id: 1,
     name: "Princeton Tower Defense",
     url: "https://princeton-tower-defense.vercel.app/",
     description:
@@ -236,7 +236,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 1,
+    id: 2,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/", // Placeholder URL
     description:
@@ -288,7 +288,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 2, // Re-indexed from 1
+    id: 3,
     name: "Lumachor",
     url: "https://lumachor.vercel.app/home",
     description:
@@ -340,7 +340,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 3, // Re-indexed from 2
+    id: 4,
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     description:
@@ -392,7 +392,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 4, // Re-indexed from 3
+    id: 5,
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     description: "Track expenses and split them with friends.",
@@ -444,7 +444,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 5, // Re-indexed from 4
+    id: 6,
     name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     description:
@@ -497,7 +497,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 6, // Re-indexed from 5
+    id: 7,
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     description:
@@ -549,7 +549,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 7, // Re-indexed from 6
+    id: 8,
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     description:
@@ -601,7 +601,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 8, // Re-indexed from 7
+    id: 9,
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     description:
@@ -654,7 +654,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 9, // Re-indexed from 8
+    id: 10,
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     description:
@@ -705,7 +705,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 10, // Re-indexed from 9
+    id: 11,
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     description: "Scans your refrigerator to generate recipes using ChatGPT.",
@@ -756,7 +756,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 11, // Re-indexed from 10
+    id: 12,
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     description: "Generates full study guides for literary works.",
@@ -806,7 +806,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 12, // Re-indexed from 11
+    id: 13,
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     description: "A tool to help immigrants find support and resources.",
@@ -857,7 +857,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 13, // Re-indexed from 12
+    id: 14,
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     description: "An affordable wearable sensor to help you sleep soundly.",
@@ -909,7 +909,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 14, // Re-indexed from 13
+    id: 15,
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     description: "U.S. History II Final; Analyzes Military Industrial Complex.",
@@ -960,7 +960,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 15, // Re-indexed from 14
+    id: 16,
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     description:
@@ -1012,7 +1012,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 16, // Re-indexed from 15
+    id: 17,
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     description: "A code editor that allows ChatGPT to review your code.",
@@ -1062,7 +1062,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17, // Re-indexed from 16
+    id: 18,
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     description: "The official test portal of the OMMC competition.",
@@ -1112,7 +1112,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18, // Re-indexed from 17
+    id: 19,
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     description: "The official sample test portal of OMMC.",
@@ -1162,7 +1162,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19, // Re-indexed from 18
+    id: 20,
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     description:
@@ -1214,7 +1214,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20, // Re-indexed from 19
+    id: 21,
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
     description:
@@ -1266,7 +1266,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21, // Re-indexed from 20
+    id: 22,
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     description:
@@ -1318,7 +1318,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 22, // Re-indexed from 21
+    id: 23,
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     description: "The fullstack database for all OMMC questions.",
@@ -1368,7 +1368,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23, // Re-indexed from 22
+    id: 24,
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     description:
@@ -1419,7 +1419,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24, // Re-indexed from 23
+    id: 25,
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     description: "A website to help students learn about Math and Physics.",
@@ -1470,7 +1470,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25, // Re-indexed from 24
+    id: 26,
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     description: "An app to help tutors and pupils connect.",
@@ -1521,7 +1521,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26, // Re-indexed from 25
+    id: 27,
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     description: "My first app! A game to create satellites from parts.",
@@ -1572,7 +1572,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 27, // Re-indexed from 26
+    id: 28,
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     description:
