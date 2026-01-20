@@ -182,6 +182,58 @@ export const initialInventory: PlayerInventory = {
 export const portfolioMonData: PortfolioMon[] = [
   {
     id: 1,
+    name: "Dedalus",
+    url: "https://dedalus-demo.vercel.app/",
+    description:
+      "Build model-agnostic agents powered by MCP with a production-grade SDK and secure, multi-tenant auth.",
+    image: "/images/dedalus.png",
+    sprite: <Server />,
+    type1: "AI",
+    type2: "Web",
+    hp: 295,
+    stats: { hp: 295, atk: 130, def: 95, spd: 110 },
+    moves: [
+      {
+        name: "MCP Orchestrate",
+        power: 95,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.15,
+        description: "Routes models and tools with a high-impact command.",
+      },
+      {
+        name: "SDK Deploy",
+        power: 85,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "Ships agents quickly with reliable delivery power.",
+      },
+      {
+        name: "Auth Relay",
+        power: 70,
+        type: "Web",
+        accuracy: 0.9,
+        pp: 15,
+        critChance: 0.05,
+        effect: { type: "stun", chance: 0.3 },
+        description: "Secures access and disrupts the foe, may stun.",
+      },
+      {
+        name: "Marketplace Sync",
+        power: 60,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 20,
+        critChance: 0.1,
+        description: "Connects tools and servers for steady damage.",
+      },
+    ],
+  },
+  {
+    id: 2,
     name: "Princeton Tower Defense",
     url: "https://princeton-tower-defense.vercel.app/",
     description:
@@ -234,9 +286,8 @@ export const portfolioMonData: PortfolioMon[] = [
       },
     ],
   },
-
   {
-    id: 2,
+    id: 3,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/", // Placeholder URL
     description:
@@ -288,7 +339,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     name: "Sevenfold",
     url: "https://sevenfold-demo.vercel.app/",
     description:
@@ -340,7 +391,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     description:
@@ -392,7 +443,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     description: "Track expenses and split them with friends.",
@@ -444,7 +495,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     description:
@@ -497,7 +548,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     description:
@@ -549,7 +600,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 8,
+    id: 9,
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     description:
@@ -601,7 +652,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 9,
+    id: 10,
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     description:
@@ -654,7 +705,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 10,
+    id: 11,
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     description:
@@ -705,7 +756,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 11,
+    id: 12,
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     description: "Scans your refrigerator to generate recipes using ChatGPT.",
@@ -756,7 +807,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 12,
+    id: 13,
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     description: "Generates full study guides for literary works.",
@@ -806,7 +857,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 13,
+    id: 14,
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     description: "A tool to help immigrants find support and resources.",
@@ -857,7 +908,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 14,
+    id: 15,
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     description: "An affordable wearable sensor to help you sleep soundly.",
@@ -909,7 +960,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 15,
+    id: 16,
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     description: "U.S. History II Final; Analyzes Military Industrial Complex.",
@@ -960,7 +1011,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 16,
+    id: 17,
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     description:
@@ -1012,7 +1063,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17,
+    id: 18,
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     description: "A code editor that allows ChatGPT to review your code.",
@@ -1062,7 +1113,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18,
+    id: 19,
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     description: "The official test portal of the OMMC competition.",
@@ -1112,7 +1163,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19,
+    id: 20,
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     description: "The official sample test portal of OMMC.",
@@ -1162,7 +1213,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20,
+    id: 21,
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     description:
@@ -1214,7 +1265,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21,
+    id: 22,
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
     description:
@@ -1266,7 +1317,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 22,
+    id: 23,
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     description:
@@ -1318,7 +1369,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23,
+    id: 24,
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     description: "The fullstack database for all OMMC questions.",
@@ -1368,7 +1419,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24,
+    id: 25,
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     description:
@@ -1419,7 +1470,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25,
+    id: 26,
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     description: "A website to help students learn about Math and Physics.",
@@ -1470,7 +1521,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26,
+    id: 27,
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     description: "An app to help tutors and pupils connect.",
@@ -1521,7 +1572,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 27,
+    id: 28,
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     description: "My first app! A game to create satellites from parts.",
@@ -1572,7 +1623,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 28,
+    id: 29,
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     description:
@@ -1622,7 +1673,7 @@ export const portfolioMonData: PortfolioMon[] = [
         description: "Adapts its structure to always land a solid hit.",
       },
     ],
-  },
+  }
 ];
 
 // --- GAME LOGIC & UTILITIES ---
