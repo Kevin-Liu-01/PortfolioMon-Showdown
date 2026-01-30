@@ -45,7 +45,8 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Kevin Liu&apos;s PortfolioMon Showdown</title>
+        <title>Kevin Liu | PortfolioMon Showdown – Battle Through 29+ Projects</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </Head>
       <main
         className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
