@@ -79,7 +79,7 @@ export default function Document() {
                 ],
                 sameAs: [
                   "https://github.com/Kevin-Liu-01",
-                  "https://linkedin.com/in/kevin-liu-01",
+                  "www.linkedin.com/in/kevin-liu-princeton",
                 ],
               },
               potentialAction: {
