@@ -238,7 +238,7 @@ export const portfolioMonData: PortfolioMon[] = [
     url: "https://princeton-tower-defense.vercel.app/",
     description:
       "A tower defense game where players defend Princeton from waves of attacks.",
-    image: "/images/princetontd.jpg",
+    image: "/images/princetontd.png",
     sprite: <Scale />,
     type1: "Game",
     type2: "Web",
