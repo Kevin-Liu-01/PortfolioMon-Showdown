@@ -191,8 +191,8 @@ const TypeBadge = ({
     size === "sm"
       ? "px-2.5 py-0.5 text-xs font-semibold"
       : size === "xs"
-      ? "px-2 py-0.5 text-[9px] font-semibold"
-      : "px-2 py-0.15 text-[9px] font-semibold";
+        ? "px-2 py-0.5 text-[9px] font-semibold"
+        : "px-2 py-0.15 text-[9px] font-semibold";
   return (
     <span
       className={`tracking-wide ${sizeClasses} ${style.bg} ${style.text}`}
@@ -702,9 +702,8 @@ const MonDetailView = ({
                             />
                             <MoveStatChip
                               label="CRIT"
-                              value={`${
-                                move.critChance ? move.critChance * 100 : "—"
-                              }%`}
+                              value={`${move.critChance ? move.critChance * 100 : "—"
+                                }%`}
                             />
                             <MoveStatChip label="PP" value={move.pp} />
                           </div>
@@ -824,9 +823,15 @@ const AnimatedCircuitry = () => (
 const workExperience = [
   {
     role: "Founding Engineer",
-    company: "Ketspen - Game-Changing Agentic Research",
-    date: "Jun 2025 – Present",
-    description: "Building MVP for an end-to-end, agentic research workflow.",
+    company: "Dedalus Labs",
+    date: "Jan 2026 – Present",
+    description: "Building www.dedaluslabs.ai.",
+  },
+  {
+    role: "Founding Engineer",
+    company: "Sevenfold - Game-Changing Agentic Research",
+    date: "Jun 2025 – Nov 2025",
+    description: "Built MVP for an end-to-end, agentic research workflow.",
   },
   {
     role: "Software Development Engineer Intern – FBA Inventory",
@@ -1491,11 +1496,10 @@ const MonGridItem = ({
   return (
     <motion.div
       layout="position"
-      className={`group relative w-full overflow-hidden p-px pl-1 text-left transition-all duration-200 ${
-        isSelected
-          ? "bg-cyan-400 shadow-[0_0_15px_theme(colors.cyan.400)]"
-          : "bg-cyan-400/20 hover:bg-cyan-400/40"
-      }`}
+      className={`group relative w-full overflow-hidden p-px pl-1 text-left transition-all duration-200 ${isSelected
+        ? "bg-cyan-400 shadow-[0_0_15px_theme(colors.cyan.400)]"
+        : "bg-cyan-400/20 hover:bg-cyan-400/40"
+        }`}
       style={{
         clipPath:
           "polygon(0 12px, 12px 0, 100% 0, 100% 100%, 12px 100%, 0 100%)",
@@ -1544,11 +1548,10 @@ const MonGridItem = ({
           onTeamSelect(mon);
         }}
         disabled={buttonDisabled}
-        className={`absolute bottom-2 right-2 z-20 flex items-center justify-center p-1 pb-0.5 transition-all group-hover:opacity-100 ${
-          isOnTeam
-            ? "bg-red-500 text-white opacity-100"
-            : "bg-green-500 text-white opacity-0"
-        } disabled:cursor-not-allowed disabled:bg-slate-600 disabled:opacity-0`}
+        className={`absolute bottom-2 right-2 z-20 flex items-center justify-center p-1 pb-0.5 transition-all group-hover:opacity-100 ${isOnTeam
+          ? "bg-red-500 text-white opacity-100"
+          : "bg-green-500 text-white opacity-0"
+          } disabled:cursor-not-allowed disabled:bg-slate-600 disabled:opacity-0`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         style={{
