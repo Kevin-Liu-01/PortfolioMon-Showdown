@@ -7,7 +7,7 @@ export default function Document() {
     "Battle your way through 29+ projects in this Pokémon Showdown-inspired portfolio! Kevin Liu (Princeton '28) showcases AI agents, hackathon-winning apps, games, and more as battle-ready PortfolioMons. Pick your team and fight!";
   const ogImage = `${siteUrl}/kevinportfolio.png`;
   const keywords =
-    "Kevin Liu, Princeton, developer portfolio, interactive portfolio, Pokemon Showdown, PortfolioMon, CS student, web developer, AI projects, hackathon winner, React, Next.js, TypeScript, game developer, full-stack developer, Princeton University, Class of 2028";
+    "Kevin Liu, Princeton University, developer portfolio, interactive portfolio, PortfolioMon, Pokemon Showdown, computer science student, web developer, AI projects, machine learning, hackathon winner, React, Next.js, TypeScript, full-stack developer, game developer, Princeton Class of 2028, software engineer portfolio";
 
   return (
     <Html lang="en">
@@ -19,9 +19,12 @@ export default function Document() {
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta name="author" content="Kevin Liu" />
-        <meta name="robots" content="index, follow" />
+        <meta name="application-name" content="Kevin Liu Portfolio" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="theme-color" content="#0f172a" />
         <meta name="color-scheme" content="dark light" />
+        <meta name="referrer" content="origin-when-cross-origin" />
+        <meta name="format-detection" content="telephone=no" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
@@ -29,69 +32,103 @@ export default function Document() {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:image:secure_url" content={ogImage} />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="PortfolioMon Showdown - Kevin Liu's Interactive Developer Portfolio" />
         <meta property="og:site_name" content="PortfolioMon Showdown" />
         <meta property="og:locale" content="en_US" />
+        <meta property="og:updated_time" content="2026-02-11" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@kevskgs" />
+        <meta name="twitter:creator" content="@kevskgs" />
         <meta name="twitter:url" content={siteUrl} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage} />
         <meta name="twitter:image:alt" content="PortfolioMon Showdown - Kevin Liu's Interactive Developer Portfolio" />
-        <meta name="twitter:creator" content="@kevinliu_01" />
 
         {/* Favicons & Icons */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="canonical" href={siteUrl} />
 
-        {/* Structured Data - JSON-LD */}
+        {/* Sitemap & Robots */}
+        <link rel="sitemap" type="application/xml" href={`${siteUrl}/sitemap.xml`} />
+
+        {/* Structured Data - WebSite */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
+              "@id": `${siteUrl}/#website`,
               name: "PortfolioMon Showdown",
+              alternateName: "Kevin Liu Portfolio",
               description: description,
               url: siteUrl,
+              inLanguage: "en-US",
               author: {
-                "@type": "Person",
-                name: "Kevin Liu",
-                url: siteUrl,
-                jobTitle: "Computer Science Student",
-                affiliation: {
-                  "@type": "CollegeOrUniversity",
-                  name: "Princeton University",
-                },
-                knowsAbout: [
-                  "Web Development",
-                  "Artificial Intelligence",
-                  "Game Development",
-                  "Full-Stack Development",
-                  "React",
-                  "Next.js",
-                  "TypeScript",
-                ],
-                sameAs: [
-                  "https://github.com/Kevin-Liu-01",
-                  "www.linkedin.com/in/kevin-liu-princeton",
-                ],
+                "@id": `${siteUrl}/#person`,
+              },
+              publisher: {
+                "@id": `${siteUrl}/#person`,
               },
               potentialAction: {
                 "@type": "SearchAction",
-                target: `${siteUrl}/?search={search_term_string}`,
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: `${siteUrl}/?search={search_term_string}`,
+                },
                 "query-input": "required name=search_term_string",
               },
             }),
           }}
         />
 
-        {/* Additional Structured Data - Software Application */}
+        {/* Structured Data - Person (enables Knowledge Panel, richer snippets) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": `${siteUrl}/#person`,
+              name: "Kevin Liu",
+              url: siteUrl,
+              jobTitle: "Computer Science Student",
+              alumniOf: {
+                "@type": "CollegeOrUniversity",
+                name: "Princeton University",
+              },
+              knowsAbout: [
+                "Web Development",
+                "Artificial Intelligence",
+                "Machine Learning",
+                "Game Development",
+                "Full-Stack Development",
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Python",
+              ],
+              sameAs: [
+                "https://github.com/Kevin-Liu-01",
+                "https://www.linkedin.com/in/kevin-liu-princeton",
+              ],
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `${siteUrl}/`,
+              },
+            }),
+          }}
+        />
+
+        {/* Structured Data - Software Application */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -102,21 +139,34 @@ export default function Document() {
               applicationCategory: "GameApplication",
               operatingSystem: "Web Browser",
               description:
-                "An interactive portfolio experience inspired by Pokémon Showdown where each project is a battling PortfolioMon with unique abilities and stats.",
+                "An interactive portfolio experience inspired by Pokémon Showdown where each project is a battling PortfolioMon with unique abilities and stats. Explore 29+ projects including AI agents, hackathon-winning apps, and games.",
               author: {
-                "@type": "Person",
-                name: "Kevin Liu",
+                "@id": `${siteUrl}/#person`,
               },
               offers: {
                 "@type": "Offer",
                 price: "0",
                 priceCurrency: "USD",
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "5",
-                ratingCount: "1",
-              },
+            }),
+          }}
+        />
+
+        {/* Structured Data - BreadcrumbList */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: siteUrl,
+                },
+              ],
             }),
           }}
         />
@@ -141,8 +191,9 @@ export default function Document() {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin="use-credentials"
+          crossOrigin="anonymous"
         />
+        <link rel="preconnect" href="https://api.fontshare.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Play:wght@400;700&family=Racing+Sans+One&family=Sedgwick+Ave+Display&family=TASA+Orbiter:wght@400..800&family=Young+Serif&display=swap"
           rel="stylesheet"
