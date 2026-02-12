@@ -2,9 +2,9 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   const siteUrl = "https://www.kevin-liu.tech";
-  const title = "Kevin Liu | PortfolioMon Showdown – Interactive Developer Portfolio";
+  const title = "Kevin Liu | PortfolioMon Showdown ⁂ Portfolio Battle Game";
   const description =
-    "Battle your way through 29+ projects in this Pokémon Showdown-inspired portfolio! Kevin Liu (Princeton '28) showcases AI agents, hackathon-winning apps, games, and more as battle-ready PortfolioMons. Pick your team and fight!";
+    "Battle your way through 30 projects in this Pokémon Showdown-inspired portfolio! Kevin Liu (Princeton '28) showcases AI agents, hackathon-winning apps, games, and more as battle-ready PortfolioMons. Pick your team and fight!";
   const ogImage = `${siteUrl}/kevinportfolio.png`;
   const keywords =
     "Kevin Liu, Princeton University, developer portfolio, interactive portfolio, PortfolioMon, Pokemon Showdown, computer science student, web developer, AI projects, machine learning, hackathon winner, React, Next.js, TypeScript, full-stack developer, game developer, Princeton Class of 2028, software engineer portfolio";
