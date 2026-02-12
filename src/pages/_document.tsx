@@ -4,7 +4,7 @@ export default function Document() {
   const siteUrl = "https://www.kevin-liu.tech";
   const title = "Kevin Liu | PortfolioMon Showdown ⁂ Portfolio Battle Game";
   const description =
-    "Battle your way through 30 projects in this Pokémon Showdown-inspired portfolio! Kevin Liu (Princeton '28) showcases AI agents, hackathon-winning apps, games, and more as battle-ready PortfolioMons. Pick your team and fight!";
+    "Battle your way through 30+ projects in this Pokémon Showdown-inspired portfolio! Kevin Liu (Princeton '28) showcases AI agents, hackathon-winning apps, games, and more as battle-ready PortfolioMons. Pick your team and fight!";
   const ogImage = `${siteUrl}/kevinportfolio.png`;
   const keywords =
     "Kevin Liu, Princeton University, developer portfolio, interactive portfolio, PortfolioMon, Pokemon Showdown, computer science student, web developer, AI projects, machine learning, hackathon winner, React, Next.js, TypeScript, full-stack developer, game developer, Princeton Class of 2028, software engineer portfolio";
@@ -19,7 +19,7 @@ export default function Document() {
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta name="author" content="Kevin Liu" />
-        <meta name="application-name" content="Kevin Liu Portfolio" />
+        <meta name="application-name" content="Kevin Liu's PortfolioMon Showdown" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="theme-color" content="#0f172a" />
         <meta name="color-scheme" content="dark light" />
@@ -36,7 +36,7 @@ export default function Document() {
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="PortfolioMon Showdown - Kevin Liu's Interactive Developer Portfolio" />
+        <meta property="og:image:alt" content="PortfolioMon Showdown ⁂ Kevin Liu's Interactive Developer Portfolio" />
         <meta property="og:site_name" content="PortfolioMon Showdown" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content="2026-02-11" />
@@ -49,7 +49,7 @@ export default function Document() {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage} />
-        <meta name="twitter:image:alt" content="PortfolioMon Showdown - Kevin Liu's Interactive Developer Portfolio" />
+        <meta name="twitter:image:alt" content="Kevin Liu's PortfolioMon Showdown" />
 
         {/* Favicons & Icons */}
         <link rel="icon" href="/favicon.ico" />
@@ -139,7 +139,7 @@ export default function Document() {
               applicationCategory: "GameApplication",
               operatingSystem: "Web Browser",
               description:
-                "An interactive portfolio experience inspired by Pokémon Showdown where each project is a battling PortfolioMon with unique abilities and stats. Explore 29+ projects including AI agents, hackathon-winning apps, and games.",
+                "An interactive portfolio experience inspired by Pokémon Showdown where each project is a battling PortfolioMon with unique abilities and stats. Explore 30+ projects including AI agents, hackathon-winning apps, and games.",
               author: {
                 "@id": `${siteUrl}/#person`,
               },
