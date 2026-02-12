@@ -825,20 +825,20 @@ const workExperience = [
     role: "Founding Engineer",
     company: "Dedalus Labs",
     date: "Jan 2026 – Present",
-    description: "Building www.dedaluslabs.ai.",
+    description: "Building www.dedaluslabs.ai (YC S25). Ship agents in 5 lines of code.",
   },
   {
     role: "Founding Engineer",
-    company: "Sevenfold - Game-Changing Agentic Research",
+    company: "Sevenfold AI",
     date: "Jun 2025 – Nov 2025",
-    description: "Built MVP for an end-to-end, agentic research workflow.",
+    description: "Built MVP for an end-to-end, agentic research workflow using contextual intelligence.",
   },
   {
     role: "Software Development Engineer Intern – FBA Inventory",
     company: "Amazon",
     date: "May 2025 - Aug 2025",
     description:
-      "Built internal APIs for FBA inventory workflows, improving response time by 37% and refactoring a reconciliation pipeline to reduce technical debt.",
+      "Built API devtools for internal metrics migrations, accelerating approval pipeline and response time by 37%."
   },
 
   {
@@ -846,29 +846,29 @@ const workExperience = [
     company: "Bloomberg L.P.",
     date: "Summer 2024",
     description:
-      "Developed a Random Forest ML model to classify corporate filings, accelerating classification by 55%. Engineered high-uptime JIRA workflow tools.",
+      "Developed Random Forest ML pipeline to classify 2k+ filings per week, accelerating classification by 55% and streamlining reporting workflows by 30%.",
   },
   {
     role: "AI Research Intern – NLP & Intelligent Agents",
     company: "AT&T Labs Research",
     date: "Fall 2023",
     description:
-      "Designed autonomous agents with Mixture-of-Experts LLMs to parse enterprise documents, reducing analysis time by 85%.",
+      "Designed autonomous agents with Mixture-of-Experts LLMs to accurately digest enterprise documents, acheiving analysis savings of 850k/quarter.",
   },
   {
     role: "Software Engineering Intern – Financial Instruments (DT-FI)",
     company: "Bloomberg L.P.",
     date: "Summer 2023",
     description:
-      "Built a real-time market feed platform using Next.js to track treasury bonds, improving remediation speed by 4x and enhancing UI/backend stability.",
+      "Built a real-time market feed platform using Next.js to track treasury bonds, improving remediation speed and time-to-market by 4x.",
   },
 
   {
     role: "Full Stack Software Engineer",
-    company: "Johns Hopkins University – UCredit.me",
+    company: "Johns Hopkins University – uCredit.me",
     date: "Fall 2022",
     description:
-      "Built a responsive full-stack course selection platform using React and AWS Lambda for 6k+ students in a CI/CD environment.",
+      "Built a full-stack course selection platform using React and AWS for 6k+ students.",
   },
 ];
 const TimelineItem = ({
@@ -1184,7 +1184,7 @@ const TrainerInfoPanel = ({
                     PRINCETON
                   </p>
                   <p className="font-kode text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
-                    5/19/2025
+                    5/19/2024
                   </p>
                 </div>
                 <div>
