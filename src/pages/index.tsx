@@ -45,7 +45,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Kevin Liu | PortfolioMon Showdown – Battle Through 29+ Projects</title>
+        <title>Kevin Liu's Portfolio | PortfolioMon Showdown – Battle Through 30+ Projects</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="description" content="Interactive developer portfolio by Kevin Liu (Princeton '28). Explore 29+ projects—AI agents, hackathon winners, games—brought to life as battle-ready PortfolioMons in this Pokémon Showdown-inspired experience." />
         <meta name="theme-color" content="#0f172a" />
