@@ -3,4 +3,5 @@ User-agent: *
 Allow: /
 
 # Sitemap location
+Sitemap: https://kevinliu.biz/sitemap.xml
 Sitemap: https://www.kevin-liu.tech/sitemap.xml

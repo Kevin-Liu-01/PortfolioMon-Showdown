@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
-  const siteUrl = "https://www.kevin-liu.tech";
+  const siteUrl = "https://kevinliu.biz";
   const title = "Kevin Liu | PortfolioMon Showdown ⁂ Portfolio Battle Game";
   const description =
     "Battle your way through 30+ projects in this Pokémon Showdown-inspired portfolio! Kevin Liu (Princeton '28) showcases AI agents, hackathon-winning apps, games, and more as battle-ready PortfolioMons. Pick your team and fight!";
@@ -55,6 +55,7 @@ export default function Document() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="canonical" href={siteUrl} />
+        <link rel="alternate" href="https://www.kevin-liu.tech" />
 
         {/* Sitemap & Robots */}
         <link rel="sitemap" type="application/xml" href={`${siteUrl}/sitemap.xml`} />
@@ -119,6 +120,7 @@ export default function Document() {
               sameAs: [
                 "https://github.com/Kevin-Liu-01",
                 "https://www.linkedin.com/in/kevin-liu-princeton",
+                "https://www.kevin-liu.tech",
               ],
               mainEntityOfPage: {
                 "@type": "WebPage",
