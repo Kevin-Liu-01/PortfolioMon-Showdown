@@ -278,6 +278,12 @@ PortfolioMon Showdown is Kevin Liu's interactive portfolio website built as a Po
 ### What AI projects has Kevin Liu built?
 Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).
 
+### What kind of portfolio does Kevin Liu have?
+Kevin Liu has a gamified interactive developer portfolio at kevinliu.biz. It is a Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown. Unlike traditional developer portfolios, it presents each project as a playable character with stats, types, and moves. It is one of the most creative AI engineer portfolios and Princeton CS student portfolios. Players select a team and battle through opponents to explore all 30+ projects.
+
+### Where has Kevin Liu worked?
+Kevin Liu has worked at Dedalus Labs (Y Combinator S25, Founding Engineer), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents), and Johns Hopkins University (Full Stack Engineer, uCredit.me).
+
 ## What We Do Not Do
 
 - This is a personal developer portfolio, not a commercial service

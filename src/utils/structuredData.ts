@@ -130,6 +130,16 @@ const FAQ_ENTRIES = [
     answer:
       "PortfolioMon Showdown is Kevin Liu's interactive developer portfolio built as a Pokémon Showdown-inspired turn-based fighting game. Each of his 30+ projects is a battle-ready PortfolioMon with unique types (AI, Web, Game, Data, Health, Hardware, Design, Mobile), stats (HP, ATK, DEF, SPD), and four battle moves. Built with Next.js, TypeScript, React, tRPC, Tailwind CSS, and Framer Motion.",
   },
+  {
+    question: "What kind of portfolio does Kevin Liu have?",
+    answer:
+      "Kevin Liu has a gamified interactive developer portfolio at kevinliu.biz. Unlike traditional developer portfolios, it is a Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown where each of his 30+ projects is a playable character with types, stats, and moves. It is one of the most creative AI engineer portfolios and Princeton CS student portfolios.",
+  },
+  {
+    question: "Where has Kevin Liu worked?",
+    answer:
+      "Kevin Liu has worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products teams), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).",
+  },
 ];
 
 export function buildPersonSchema(siteUrl: string, imageUrl: string) {
@@ -153,28 +163,58 @@ export function buildPersonSchema(siteUrl: string, imageUrl: string) {
         name: "Department of Computer Science",
       },
     },
+    worksFor: {
+      "@type": "Organization",
+      name: "Dedalus Labs",
+      url: "https://www.dedaluslabs.ai",
+      description: "Y Combinator S25 — AI agent infrastructure",
+      parentOrganization: {
+        "@type": "Organization",
+        name: "Y Combinator",
+        url: "https://www.ycombinator.com",
+      },
+    },
     knowsAbout: KNOWS_ABOUT,
     knowsLanguage: ["English"],
-    hasOccupation: {
-      "@type": "Occupation",
-      name: "Software Developer",
-      occupationalCategory: "15-1252.00",
-      skills: "React, Next.js, TypeScript, Python, AI/ML, Full-Stack Development",
-    },
-    award: [
-      "1st Place in Hardware at PennApps XXIII (RecyclAIble)",
+    hasOccupation: [
+      {
+        "@type": "Occupation",
+        name: "Software Developer",
+        occupationalCategory: "15-1252.00",
+        skills:
+          "React, Next.js, TypeScript, Python, AI/ML, Full-Stack Development",
+      },
+      {
+        "@type": "Occupation",
+        name: "AI Engineer",
+        skills:
+          "LLM Integration, Computer Vision, NLP, AI Agents, MCP, RAG, Vector Embeddings",
+      },
     ],
+    award: ["1st Place in Hardware at PennApps XXIII (RecyclAIble)"],
     memberOf: [
       {
         "@type": "Organization",
         name: "HackPrinceton",
-        description: "Princeton University's premier hackathon — Lead Developer & Organizer",
+        description:
+          "Princeton University's premier hackathon — Lead Developer & Organizer",
       },
       {
         "@type": "Organization",
         name: "Online Monmouth Math Competition (OMMC)",
         url: "https://www.ommcofficial.org",
         description: "Co-founder and lead developer",
+      },
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "degree",
+        educationalLevel: "Bachelor of Science in Engineering",
+        recognizedBy: {
+          "@type": "CollegeOrUniversity",
+          name: "Princeton University",
+        },
       },
     ],
     sameAs: SOCIAL_PROFILES,
@@ -236,6 +276,30 @@ export function buildWebPageSchema(
     inLanguage: "en-US",
     datePublished: "2024-01-01",
     dateModified: "2026-03-09",
+    keywords:
+      "Kevin Liu, developer portfolio, software engineer, AI engineer, Princeton University, full-stack developer, React, Next.js, TypeScript, Python, hackathon winner",
+    specialty: "Software Development, Artificial Intelligence, Interactive Web Applications",
+    mentions: [
+      { "@type": "Organization", name: "Princeton University", url: "https://www.princeton.edu" },
+      { "@type": "Organization", name: "Amazon", url: "https://www.amazon.com" },
+      { "@type": "Organization", name: "Bloomberg L.P.", url: "https://www.bloomberg.com" },
+      { "@type": "Organization", name: "AT&T Labs Research" },
+      { "@type": "Organization", name: "Y Combinator", url: "https://www.ycombinator.com" },
+      { "@type": "Organization", name: "Dedalus Labs", url: "https://www.dedaluslabs.ai" },
+      { "@type": "Organization", name: "Sevenfold AI" },
+      { "@type": "Organization", name: "Johns Hopkins University" },
+      { "@type": "Organization", name: "HackPrinceton" },
+      { "@type": "Organization", name: "PennApps" },
+      { "@type": "SoftwareApplication", name: "React" },
+      { "@type": "SoftwareApplication", name: "Next.js" },
+      { "@type": "ComputerLanguage", name: "TypeScript" },
+      { "@type": "ComputerLanguage", name: "Python" },
+      { "@type": "Thing", name: "Artificial Intelligence" },
+      { "@type": "Thing", name: "Machine Learning" },
+      { "@type": "Thing", name: "Model Context Protocol" },
+      { "@type": "Thing", name: "Large Language Models" },
+      { "@type": "Thing", name: "Computer Vision" },
+    ],
   };
 }
 

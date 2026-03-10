@@ -825,7 +825,7 @@ const workExperience = [
     role: "Founding Engineer",
     company: "Dedalus Labs",
     date: "Jan 2026 – Present",
-    description: "Building www.dedaluslabs.ai (YC S25). Ship agents in 5 lines of code.",
+    description: "Building dedaluslabs.ai (Y Combinator S25). Ship AI agents in 5 lines of code with MCP.",
   },
   {
     role: "Founding Engineer",
@@ -1188,11 +1188,11 @@ const TrainerInfoPanel = ({
                   </p>
                 </div>
                 <div>
-                  <p className="ml-1 text-2xl font-black tracking-wider text-cyan-200 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-white">
+                  <h1 className="ml-1 text-2xl font-black tracking-wider text-cyan-200 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-white">
                     KEVIN LIU
-                  </p>
+                  </h1>
                   <p className="ml-2 text-xs font-bold tracking-wide text-cyan-300 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-cyan-400">
-                    Full-Stack & AI Developer
+                    Software Developer & AI Engineer · Princeton &apos;28
                   </p>
                 </div>
               </div>
@@ -1261,12 +1261,13 @@ const TrainerInfoPanel = ({
               <div className="space-y-2 p-3">
                 <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
                   <BrainCircuit className="h-4 w-4 flex-shrink-0 text-cyan-600 dark:text-cyan-400" />
-                  <span>{"Princeton University '28, B.S.E. in CS"}</span>
+                  <span>Princeton University &apos;28, B.S.E. in Computer Science</span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
-                  I build digital experiences at the intersection of robust
-                  engineering and intelligent design. This portfolio game is a
-                  showcase of my passion. Have fun!
+                  Full-stack developer and AI engineer with experience at
+                  Amazon, Bloomberg, AT&amp;T Labs, and Y Combinator-backed
+                  startups. I build with React, Next.js, TypeScript, and Python, from AI agents to interactive games. Pick your team and
+                  battle through 30+ projects!
                 </p>
               </div>
             </UpgradedClippedContainer>
@@ -1419,7 +1420,9 @@ const TrainerInfoPanel = ({
             </div>
             <div className="custom-scrollbar relative z-10 flex h-full flex-col gap-6 overflow-y-auto p-4">
               <div>
-                <SectionHeader>Work Experience</SectionHeader>
+                <h2 className="mb-1 -ml-3 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
+                  Software Engineering Experience
+                </h2>
                 <div className="mt-2 flex flex-col">
                   {workExperience.map((item, index) => (
                     <TimelineItem
@@ -1431,7 +1434,9 @@ const TrainerInfoPanel = ({
                 </div>
               </div>
               <div>
-                <SectionHeader>Education</SectionHeader>
+                <h2 className="mb-1 -ml-3 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
+                  Education — Princeton University
+                </h2>
                 <div className="mt-2 flex flex-col">
                   <TimelineItem
                     role="Undergraduate Student"
@@ -1569,6 +1574,66 @@ const MonGridItem = ({
   );
 };
 
+const SEOContent = () => (
+  <article
+    className="sr-only"
+    aria-label="About Kevin Liu"
+    itemScope
+    itemType="https://schema.org/Person"
+  >
+    <h2 itemProp="name">Kevin Liu — Software Developer &amp; AI Engineer, Princeton University CS &apos;28</h2>
+    <p itemProp="description">
+      Kevin Liu is a Computer Science student at Princeton University (Class of 2028)
+      and a full-stack software developer specializing in artificial intelligence,
+      machine learning, and interactive web applications. His interactive developer
+      portfolio — a gamified, Pokémon Showdown-inspired experience — showcases
+      over 30 projects spanning AI agents, web platforms, browser games, health
+      technology, and hardware. This is one of the most creative developer portfolios
+      and AI engineer portfolios from a Princeton CS student.
+    </p>
+    <h3>Professional Experience</h3>
+    <p>
+      Kevin has worked as a Founding Engineer at Dedalus Labs (Y Combinator S25),
+      building AI agent infrastructure with the Model Context Protocol (MCP). He was
+      a Founding Engineer at Sevenfold AI, where he built an end-to-end agentic
+      research workflow. He interned as a Software Development Engineer at Amazon
+      (FBA Inventory), a Software Engineering Intern at Bloomberg L.P. (twice —
+      Financial Instruments and Core Products teams), and an AI Research Intern at
+      AT&amp;T Labs Research working on NLP and intelligent agents with
+      Mixture-of-Experts LLMs.
+    </p>
+    <h3>Technical Skills</h3>
+    <p>
+      React, Next.js, TypeScript, JavaScript, Python, Node.js, tRPC, PostgreSQL,
+      Firebase, MongoDB, Prisma, Tailwind CSS, Framer Motion, OpenCV, LLM integration
+      (GPT-4, Claude), computer vision, speech recognition, AI agents, MCP, RAG,
+      vector embeddings, Docker, Vercel, AWS, CI/CD, REST APIs, GraphQL.
+    </p>
+    <h3>Featured Projects</h3>
+    <ul>
+      <li>Dedalus — AI agent SDK with Model Context Protocol support (Y Combinator S25)</li>
+      <li>Sevenfold — AI-powered research workspace with contextual intelligence</li>
+      <li>Lumachor — Context engine for expert-level prompt engineering</li>
+      <li>RecyclAIble — Smart recycling with AI object detection (1st Place Hardware, PennApps XXIII)</li>
+      <li>HD Transcribe — Novel speech model for Huntington&apos;s Disease patients</li>
+      <li>Princeton Tower Defense — Tower defense game defending Princeton campus</li>
+      <li>Podium — Hackathon judging and event management platform</li>
+      <li>PortfolioMon Showdown — This interactive portfolio game with 30+ projects</li>
+    </ul>
+    <h3>Education and Achievements</h3>
+    <p>
+      Princeton University, B.S.E. in Computer Science, Class of 2028.
+      1st Place in Hardware at PennApps XXIII. HackPrinceton lead developer and
+      organizer. Co-founder of the Online Monmouth Math Competition (OMMC).
+    </p>
+    <h3>Contact Kevin Liu</h3>
+    <p>
+      GitHub: github.com/Kevin-Liu-01 · LinkedIn: linkedin.com/in/kevin-liu-princeton ·
+      Portfolio: kevinliu.biz · Twitter: @kevskgs
+    </p>
+  </article>
+);
+
 // --- PRIMARY UI ---
 export const TeamSelectScreen = () => {
   const { playerTeam, handleTeamSelect, handleConfirmTeam, handleClearTeam } =
@@ -1600,6 +1665,7 @@ export const TeamSelectScreen = () => {
 
   return (
     <div className="relative flex h-full w-full flex-col overflow-auto bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white sm:overflow-hidden">
+      <SEOContent />
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 8px;
@@ -1633,8 +1699,11 @@ export const TeamSelectScreen = () => {
           onClearTeam={handleClearTeam}
         />
         <main className="relative col-span-12 flex flex-col sm:min-h-0 lg:col-span-9 lg:grid lg:grid-cols-9">
-          <aside className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4">
+          <aside className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4" aria-label="Project roster">
             <div className="flex-shrink-0 p-4">
+              <h2 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
+                Kevin Liu&apos;s Software Projects
+              </h2>
               <div
                 className="group relative bg-cyan-400/20 p-px px-1 transition-colors duration-300 focus-within:bg-cyan-400 focus-within:shadow-[0_0_15px_theme(colors.cyan.400)]"
                 style={{

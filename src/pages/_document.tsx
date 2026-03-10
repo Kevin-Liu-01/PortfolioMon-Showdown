@@ -125,11 +125,20 @@ export default function Document() {
           content="Kevin Liu's PortfolioMon Showdown — Interactive Developer Portfolio"
         />
 
+        {/* Viewport — must be in _document for immediate availability to crawlers */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+
         {/* Favicons & Icons */}
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href={SITE_URL} />
-        <link rel="alternate" href="https://www.kevin-liu.tech" />
+        <link rel="alternate" hrefLang="en" href={SITE_URL} />
+        <link rel="alternate" hrefLang="en" href="https://www.kevin-liu.tech" />
+
+        {/* Preload critical images */}
+        <link rel="preload" as="image" href="/images/kevin_sidebar.png" />
+        <link rel="preload" as="image" href="/kevinportfolio.png" />
 
         {/* Sitemap */}
         <link
@@ -228,6 +237,57 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <noscript>
+          <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto", fontFamily: "system-ui, sans-serif" }}>
+            <h1>Kevin Liu — Software Developer &amp; AI Engineer | Princeton CS &apos;28</h1>
+            <p>
+              Kevin Liu is a Computer Science student at Princeton University (Class of 2028)
+              and a full-stack software developer specializing in artificial intelligence,
+              machine learning, and interactive web applications. This is his interactive
+              developer portfolio — a gamified, Pokémon Showdown-inspired experience
+              showcasing 30+ projects. Enable JavaScript to play.
+            </p>
+            <h2>About Kevin Liu</h2>
+            <p>
+              Full-stack developer and AI engineer with professional experience at
+              Amazon, Bloomberg L.P., AT&amp;T Labs Research, and Y Combinator-backed
+              startups (Dedalus Labs, Sevenfold AI). Builds with React, Next.js,
+              TypeScript, Python, and AI/ML technologies including LLMs, computer
+              vision, and the Model Context Protocol (MCP).
+            </p>
+            <h2>Featured Projects</h2>
+            <ul>
+              <li><a href="https://dedalus-demo.vercel.app/">Dedalus</a> — AI agent SDK with MCP support (Y Combinator S25)</li>
+              <li><a href="https://sevenfold-demo.vercel.app/">Sevenfold</a> — AI-powered research workspace</li>
+              <li><a href="https://lumachor.vercel.app/home">Lumachor</a> — AI context engine for prompt engineering</li>
+              <li><a href="https://recyclaible.vercel.app/">RecyclAIble</a> — Smart recycling (1st Place Hardware, PennApps XXIII)</li>
+              <li><a href="https://hd-transcribe.vercel.app">HD Transcribe</a> — Speech model for Huntington&apos;s Disease</li>
+              <li><a href="https://princeton-tower-defense.vercel.app/">Princeton Tower Defense</a> — Tower defense game</li>
+              <li><a href="https://hackprinceton-podium.vercel.app/">Podium</a> — Hackathon judging platform</li>
+              <li><a href="https://snelltech.vercel.app/">SnellTech</a> — Digital visual acuity exam</li>
+              <li><a href="https://letmecook.vercel.app/">LetMeCook</a> — AI recipe generator</li>
+              <li><a href="https://www.ommcofficial.org">OMMC</a> — Online Monmouth Math Competition</li>
+            </ul>
+            <h2>Experience</h2>
+            <ul>
+              <li>Founding Engineer — Dedalus Labs (Y Combinator S25), Jan 2026–Present</li>
+              <li>Founding Engineer — Sevenfold AI, Jun–Nov 2025</li>
+              <li>Software Development Engineer Intern — Amazon, Summer 2025</li>
+              <li>Software Engineering Intern — Bloomberg L.P., Summer 2024</li>
+              <li>AI Research Intern — AT&amp;T Labs Research, Fall 2023</li>
+              <li>Software Engineering Intern — Bloomberg L.P., Summer 2023</li>
+              <li>Full Stack Engineer — Johns Hopkins University (uCredit), Fall 2022</li>
+            </ul>
+            <h2>Education</h2>
+            <p>Princeton University, B.S.E. in Computer Science, Class of 2028</p>
+            <h2>Contact</h2>
+            <ul>
+              <li><a href="https://github.com/Kevin-Liu-01">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/kevin-liu-princeton">LinkedIn</a></li>
+              <li><a href="https://www.kevin-liu.tech">Alternate Portfolio</a></li>
+            </ul>
+          </div>
+        </noscript>
       </body>
     </Html>
   );

@@ -45,9 +45,8 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Kevin Liu | Software Developer & AI Engineer — Princeton CS &apos;28 | PortfolioMon Showdown</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="description" content="Kevin Liu is a Princeton University CS student (Class of 2028) and full-stack developer who has built 30+ projects across AI, web, games, and health-tech. Explore his interactive portfolio — a Pokémon Showdown-inspired battle game where every project is a PortfolioMon." />
+        <title>Kevin Liu | Software Developer &amp; AI Engineer — Princeton CS &apos;28 | PortfolioMon Showdown</title>
+        <meta name="description" content="Kevin Liu is a Princeton University CS student (Class of 2028) and full-stack developer who has built 30+ projects across AI, web, games, and health-tech. Explore his interactive developer portfolio — a gamified Pokémon Showdown-inspired battle game where every project is a PortfolioMon." />
         <meta name="theme-color" content="#0f172a" />
       </Head>
       <main
