@@ -1,5 +1,5 @@
 // Schema.org JSON-LD structured data builders for SEO and GEO optimization.
-// Each function returns a plain object ready for JSON.stringify in _document.tsx.
+// Consolidated @graph approach for tighter entity relationships.
 
 const PERSON_NAME = "Kevin Liu";
 const PERSON_JOB_TITLE = "Software Developer & AI Engineer";
@@ -8,8 +8,8 @@ const PERSON_DESCRIPTION =
 
 const SOCIAL_PROFILES = [
   "https://github.com/Kevin-Liu-01",
-  "https://www.linkedin.com/in/kevin-liu-princeton",
-  "https://twitter.com/kevskgs",
+  "https://www.linkedin.com/in/kevin-liu-princeton/",
+  "https://x.com/kevskgs",
   "https://www.kevin-liu.tech",
   "https://devpost.com/Kevin-Liu-01",
 ];
@@ -118,7 +118,7 @@ const FAQ_ENTRIES = [
   {
     question: "How can I contact Kevin Liu?",
     answer:
-      "You can reach Kevin Liu via GitHub at github.com/Kevin-Liu-01, LinkedIn at linkedin.com/in/kevin-liu-princeton, or Twitter/X @kevskgs. His portfolio is at kevinliu.biz and his alternate site is kevin-liu.tech.",
+      "You can reach Kevin Liu via GitHub at github.com/Kevin-Liu-01, LinkedIn at linkedin.com/in/kevin-liu-princeton, or X (formerly Twitter) @kevskgs. His portfolio is at kevinliu.biz and his alternate site is kevin-liu.tech.",
   },
   {
     question: "What is OMMC and what is Kevin Liu's role?",
@@ -142,9 +142,8 @@ const FAQ_ENTRIES = [
   },
 ];
 
-export function buildPersonSchema(siteUrl: string, imageUrl: string) {
+function buildPersonNode(siteUrl: string, imageUrl: string) {
   return {
-    "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${siteUrl}/#person`,
     name: PERSON_NAME,
@@ -218,16 +217,12 @@ export function buildPersonSchema(siteUrl: string, imageUrl: string) {
       },
     ],
     sameAs: SOCIAL_PROFILES,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${siteUrl}/`,
-    },
+    mainEntityOfPage: { "@id": `${siteUrl}/#webpage` },
   };
 }
 
-export function buildWebSiteSchema(siteUrl: string, description: string) {
+function buildWebSiteNode(siteUrl: string, description: string) {
   return {
-    "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     name: "Kevin Liu — Developer Portfolio",
@@ -252,14 +247,13 @@ export function buildWebSiteSchema(siteUrl: string, description: string) {
   };
 }
 
-export function buildWebPageSchema(
+function buildWebPageNode(
   siteUrl: string,
   title: string,
   description: string,
   imageUrl: string
 ) {
   return {
-    "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${siteUrl}/#webpage`,
     url: siteUrl,
@@ -275,10 +269,11 @@ export function buildWebPageSchema(
     },
     inLanguage: "en-US",
     datePublished: "2024-01-01",
-    dateModified: "2026-03-09",
+    dateModified: "2026-03-10",
     keywords:
       "Kevin Liu, developer portfolio, software engineer, AI engineer, Princeton University, full-stack developer, React, Next.js, TypeScript, Python, hackathon winner",
-    specialty: "Software Development, Artificial Intelligence, Interactive Web Applications",
+    specialty:
+      "Software Development, Artificial Intelligence, Interactive Web Applications",
     mentions: [
       { "@type": "Organization", name: "Princeton University", url: "https://www.princeton.edu" },
       { "@type": "Organization", name: "Amazon", url: "https://www.amazon.com" },
@@ -303,9 +298,8 @@ export function buildWebPageSchema(
   };
 }
 
-export function buildSoftwareAppSchema(siteUrl: string) {
+function buildSoftwareAppNode(siteUrl: string) {
   return {
-    "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "@id": `${siteUrl}/#app`,
     name: "PortfolioMon Showdown",
@@ -332,9 +326,8 @@ export function buildSoftwareAppSchema(siteUrl: string) {
   };
 }
 
-export function buildProfilePageSchema(siteUrl: string, imageUrl: string) {
+function buildProfilePageNode(siteUrl: string, imageUrl: string) {
   return {
-    "@context": "https://schema.org",
     "@type": "ProfilePage",
     "@id": `${siteUrl}/#profilepage`,
     url: siteUrl,
@@ -342,13 +335,12 @@ export function buildProfilePageSchema(siteUrl: string, imageUrl: string) {
     mainEntity: { "@id": `${siteUrl}/#person` },
     image: imageUrl,
     dateCreated: "2024-01-01",
-    dateModified: "2026-03-09",
+    dateModified: "2026-03-10",
   };
 }
 
-export function buildProjectListSchema(siteUrl: string) {
+function buildProjectListNode(siteUrl: string) {
   return {
-    "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": `${siteUrl}/#projects`,
     name: "Kevin Liu's Projects",
@@ -369,9 +361,8 @@ export function buildProjectListSchema(siteUrl: string) {
   };
 }
 
-export function buildBreadcrumbSchema(siteUrl: string) {
+function buildBreadcrumbNode(siteUrl: string) {
   return {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       {
@@ -384,9 +375,8 @@ export function buildBreadcrumbSchema(siteUrl: string) {
   };
 }
 
-export function buildFAQSchema() {
+function buildFAQNode() {
   return {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: FAQ_ENTRIES.map((entry) => ({
       "@type": "Question",
@@ -396,5 +386,26 @@ export function buildFAQSchema() {
         text: entry.answer,
       },
     })),
+  };
+}
+
+export function buildSchemaGraph(
+  siteUrl: string,
+  title: string,
+  description: string,
+  imageUrl: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      buildPersonNode(siteUrl, imageUrl),
+      buildWebSiteNode(siteUrl, description),
+      buildWebPageNode(siteUrl, title, description, imageUrl),
+      buildSoftwareAppNode(siteUrl),
+      buildProfilePageNode(siteUrl, imageUrl),
+      buildProjectListNode(siteUrl),
+      buildBreadcrumbNode(siteUrl),
+      buildFAQNode(),
+    ],
   };
 }

@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Html, Head, Main, NextScript } from "next/document";
-import {
-  buildPersonSchema,
-  buildWebSiteSchema,
-  buildWebPageSchema,
-  buildSoftwareAppSchema,
-  buildProfilePageSchema,
-  buildProjectListSchema,
-  buildBreadcrumbSchema,
-  buildFAQSchema,
-} from "../utils/structuredData";
+import { buildSchemaGraph } from "../utils/structuredData";
 import {
   SITE_URL,
   SITE_TITLE,
@@ -72,7 +63,7 @@ export default function Document() {
         />
         <meta property="og:site_name" content="Kevin Liu — Developer Portfolio" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:updated_time" content="2026-03-09T00:00:00Z" />
+        <meta property="og:updated_time" content="2026-03-10T00:00:00Z" />
         {/* OG Profile tags */}
         <meta property="profile:first_name" content="Kevin" />
         <meta property="profile:last_name" content="Liu" />
@@ -113,69 +104,13 @@ export default function Document() {
           href={`${SITE_URL}/sitemap.xml`}
         />
 
-        {/* Structured Data — WebSite */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildWebSiteSchema(SITE_URL, SITE_DESCRIPTION)),
-          }}
-        />
-
-        {/* Structured Data — Person (Knowledge Panel, entity recognition) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildPersonSchema(SITE_URL, OG_IMAGE)),
-          }}
-        />
-
-        {/* Structured Data — WebPage */}
+        {/* Structured Data — Consolidated @graph with all entity nodes */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
-              buildWebPageSchema(SITE_URL, SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE)
+              buildSchemaGraph(SITE_URL, SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE)
             ),
-          }}
-        />
-
-        {/* Structured Data — SoftwareApplication */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildSoftwareAppSchema(SITE_URL)),
-          }}
-        />
-
-        {/* Structured Data — ProfilePage (GEO-critical for person entities) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildProfilePageSchema(SITE_URL, OG_IMAGE)),
-          }}
-        />
-
-        {/* Structured Data — ItemList (all 30 projects as a collection) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildProjectListSchema(SITE_URL)),
-          }}
-        />
-
-        {/* Structured Data — BreadcrumbList */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildBreadcrumbSchema(SITE_URL)),
-          }}
-        />
-
-        {/* Structured Data — FAQPage (GEO-critical for AI answer extraction) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildFAQSchema()),
           }}
         />
 
@@ -249,7 +184,8 @@ export default function Document() {
             <h2>Contact</h2>
             <ul>
               <li><a href="https://github.com/Kevin-Liu-01">GitHub</a></li>
-              <li><a href="https://www.linkedin.com/in/kevin-liu-princeton">LinkedIn</a></li>
+              <li><a href="https://www.linkedin.com/in/kevin-liu-princeton/">LinkedIn</a></li>
+              <li><a href="https://x.com/kevskgs">X (formerly Twitter)</a></li>
               <li><a href="https://www.kevin-liu.tech">Alternate Portfolio</a></li>
             </ul>
           </div>

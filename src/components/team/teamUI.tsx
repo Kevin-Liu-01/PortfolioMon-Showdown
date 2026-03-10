@@ -1237,7 +1237,7 @@ const TrainerInfoPanel = ({
             >
               <div className="flex items-center justify-center gap-4 p-2.5">
                 <Link
-                  href="https://www.linkedin.com/in/kevin-liu-2495b6205/"
+                  href="https://www.linkedin.com/in/kevin-liu-princeton/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-500 transition-colors hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400"
@@ -1667,7 +1667,7 @@ const SEOContent = () => (
     <h3>Contact Kevin Liu</h3>
     <p>
       GitHub: github.com/Kevin-Liu-01 · LinkedIn: linkedin.com/in/kevin-liu-princeton ·
-      Portfolio: kevinliu.biz · Twitter: @kevskgs
+      Portfolio: kevinliu.biz · X: @kevskgs
     </p>
   </article>
 );

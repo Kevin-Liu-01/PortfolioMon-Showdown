@@ -6,7 +6,8 @@
 
 - [Portfolio Website](https://kevinliu.biz): Interactive developer portfolio built as a Pokémon Showdown-inspired turn-based battle game featuring 30+ projects as PortfolioMons
 - [GitHub](https://github.com/Kevin-Liu-01): Open-source projects and contributions
-- [LinkedIn](https://www.linkedin.com/in/kevin-liu-princeton): Professional profile and experience
+- [LinkedIn](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience
+- [X (formerly Twitter)](https://x.com/kevskgs): Updates and announcements
 - [Alternate Portfolio](https://www.kevin-liu.tech): Secondary portfolio site
 
 ## Key Skills and Expertise
@@ -79,6 +80,6 @@
 ## Contact
 
 - GitHub: https://github.com/Kevin-Liu-01
-- LinkedIn: https://www.linkedin.com/in/kevin-liu-princeton
+- LinkedIn: https://www.linkedin.com/in/kevin-liu-princeton/
 - Website: https://kevinliu.biz
-- Twitter: https://twitter.com/kevskgs
+- X: https://x.com/kevskgs

@@ -45,8 +45,8 @@ export const KEYWORDS = [
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/Kevin-Liu-01",
-  linkedin: "https://www.linkedin.com/in/kevin-liu-princeton",
-  twitter: "https://twitter.com/kevskgs",
+  linkedin: "https://www.linkedin.com/in/kevin-liu-princeton/",
+  x: "https://x.com/kevskgs",
   devpost: "https://devpost.com/Kevin-Liu-01",
   alternate: "https://www.kevin-liu.tech",
   email: "k.bowen.liu@gmail.com",
