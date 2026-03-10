@@ -20,6 +20,11 @@ import {
   Swords,
   Users,
   FileText,
+  ArrowUp,
+  Heart,
+  Droplets,
+  Shield,
+  Gauge,
 } from "lucide-react";
 import type {
   BattleReadyMon,
@@ -30,11 +35,11 @@ import type {
   Item,
   NotificationType,
   ActionState,
+  StatModifiers,
 } from "../../context/gameContext";
 import {
   statusEffectStyles,
   statusEffectIcons,
-  type getTypeEffectiveness as importedGetTypeEffectiveness,
 } from "../../context/gameContext";
 import {
   GuideModal,
@@ -44,8 +49,95 @@ import {
   ActionButton,
   TypeBadge,
   typeStyles,
+  SelfEffectOverlay,
 } from "./battle";
 import { useGame } from "../../providers/gameProvider";
+import type { SelfEffectType, SelfEffect } from "../../context/gameContext";
+import { CLIP } from "../../constants/clipPaths";
+import { MonFrame } from "./monFrames";
+
+interface SelfEffectStyle {
+  label: string;
+  icon: JSX.Element;
+  bg: string;
+  border: string;
+  text: string;
+}
+
+const SELF_EFFECT_STYLES: Record<SelfEffectType, SelfEffectStyle> = {
+  atkUp: {
+    label: "ATK ▲",
+    icon: <Swords className="h-full w-full" />,
+    bg: "bg-red-600",
+    border: "bg-red-400",
+    text: "text-white",
+  },
+  defUp: {
+    label: "DEF ▲",
+    icon: <Shield className="h-full w-full" />,
+    bg: "bg-blue-600",
+    border: "bg-blue-400",
+    text: "text-white",
+  },
+  spdUp: {
+    label: "SPD ▲",
+    icon: <Gauge className="h-full w-full" />,
+    bg: "bg-yellow-500",
+    border: "bg-yellow-300",
+    text: "text-black",
+  },
+  heal: {
+    label: "HEAL",
+    icon: <Heart className="h-full w-full" />,
+    bg: "bg-emerald-600",
+    border: "bg-emerald-400",
+    text: "text-white",
+  },
+  drain: {
+    label: "DRAIN",
+    icon: <Droplets className="h-full w-full" />,
+    bg: "bg-violet-600",
+    border: "bg-violet-400",
+    text: "text-white",
+  },
+  recoil: {
+    label: "RECOIL",
+    icon: <Flame className="h-full w-full" />,
+    bg: "bg-orange-600",
+    border: "bg-orange-400",
+    text: "text-white",
+  },
+};
+
+const SelfEffectBadge = ({ selfEffect }: { selfEffect: SelfEffect }) => {
+  const style = SELF_EFFECT_STYLES[selfEffect.type];
+  const showChance = selfEffect.chance < 1;
+
+  let detail = "";
+  if (selfEffect.type === "heal") {
+    detail = `+${selfEffect.amount} HP`;
+  } else if (selfEffect.type === "drain") {
+    detail = `${selfEffect.amount * 100}% DMG`;
+  } else if (selfEffect.type === "recoil") {
+    detail = `${selfEffect.amount * 100}% DMG`;
+  }
+
+  return (
+    <div
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 ${style.bg}`}
+      style={{ clipPath: CLIP.typeBadge }}
+    >
+      <div className={`h-3.5 w-3.5 ${style.text}`}>
+        {style.icon}
+      </div>
+      <p className={`text-[10px] font-bold uppercase tracking-wide ${style.text}`}>
+        {showChance ? `${selfEffect.chance * 100}% ` : ""}
+        {style.label}
+        {detail ? ` · ${detail}` : ""}
+      </p>
+    </div>
+  );
+};
 
 const AutoBattleOverlay = ({ onStop }: { onStop: () => void }) => {
   const clipPath = "polygon(0 15px, 15px 0, 100% 0, 100% 100%, 0 100%)";
@@ -303,118 +395,278 @@ const StatusIcon = ({
   );
 };
 
+const BurnEffect = () => (
+  <>
+    {/* Base glow */}
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: "radial-gradient(ellipse at 50% 80%, rgba(251,146,60,0.2) 0%, transparent 60%)",
+      }}
+      animate={{ opacity: [0.4, 0.8, 0.4] }}
+      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+    />
+    {/* Flame tongues */}
+    {Array.from({ length: 8 }, (_, i) => {
+      const x = 8 + (i * 84) / 7;
+      const h = 20 + (i % 3) * 12;
+      return (
+        <motion.div
+          key={`flame-${i}`}
+          className="absolute bottom-0 rounded-t-full"
+          style={{
+            left: `${x}%`,
+            width: 6 + (i % 2) * 4,
+            height: h,
+            background: `linear-gradient(to top, rgba(249,115,22,0.7), rgba(251,191,36,0.5) 60%, transparent)`,
+            filter: "blur(2px)",
+            transformOrigin: "bottom center",
+          }}
+          animate={{
+            scaleY: [1, 1.4, 0.8, 1.2, 1],
+            scaleX: [1, 0.8, 1.2, 0.9, 1],
+            opacity: [0.6, 0.9, 0.5, 0.8, 0.6],
+          }}
+          transition={{ duration: 0.8 + (i % 3) * 0.3, repeat: Infinity, delay: i * 0.12, ease: "easeInOut" }}
+        />
+      );
+    })}
+    {/* Rising embers */}
+    {Array.from({ length: 6 }, (_, i) => (
+      <motion.div
+        key={`ember-${i}`}
+        className="absolute h-1 w-1 rounded-full"
+        style={{
+          left: `${15 + i * 14}%`,
+          bottom: "10%",
+          background: i % 2 === 0 ? "#fb923c" : "#fbbf24",
+          boxShadow: `0 0 4px ${i % 2 === 0 ? "#fb923c" : "#fbbf24"}`,
+        }}
+        animate={{
+          y: [0, -60 - i * 10],
+          x: [(i % 2 === 0 ? -1 : 1) * 5, (i % 2 === 0 ? 1 : -1) * 15],
+          opacity: [0.8, 0],
+          scale: [1, 0.3],
+        }}
+        transition={{ duration: 1.5 + i * 0.2, repeat: Infinity, delay: i * 0.25, ease: "easeOut" }}
+      />
+    ))}
+    {/* Heat shimmer overlay */}
+    <motion.div
+      className="absolute inset-0"
+      style={{ background: "linear-gradient(to top, rgba(249,115,22,0.08), transparent 40%)" }}
+      animate={{ opacity: [0.5, 1, 0.5] }}
+      transition={{ duration: 1, repeat: Infinity }}
+    />
+  </>
+);
+
+const PoisonEffect = () => (
+  <>
+    {/* Toxic pool at bottom */}
+    <motion.div
+      className="absolute bottom-0 left-0 h-[25%] w-full"
+      style={{
+        background: "linear-gradient(to top, rgba(147,51,234,0.3), rgba(34,197,94,0.15) 60%, transparent)",
+        borderRadius: "50% 50% 0 0 / 30% 30% 0 0",
+      }}
+      animate={{ opacity: [0.5, 0.8, 0.5], scaleY: [1, 1.1, 1] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+    />
+    {/* Rising bubbles */}
+    {Array.from({ length: 7 }, (_, i) => {
+      const size = 4 + (i % 3) * 3;
+      return (
+        <motion.div
+          key={`bubble-${i}`}
+          className="absolute rounded-full"
+          style={{
+            width: size,
+            height: size,
+            left: `${12 + i * 12}%`,
+            bottom: "5%",
+            border: "1px solid rgba(74,222,128,0.5)",
+            background: "radial-gradient(circle at 35% 35%, rgba(74,222,128,0.3), rgba(147,51,234,0.2))",
+            boxShadow: "0 0 4px rgba(74,222,128,0.3)",
+          }}
+          animate={{
+            y: [0, -60 - i * 8],
+            x: [(i % 2 === 0 ? -1 : 1) * 3, (i % 2 === 0 ? 1 : -1) * 8],
+            opacity: [0.7, 0.3, 0],
+            scale: [0.8, 1.2, 0.6],
+          }}
+          transition={{ duration: 2 + i * 0.3, repeat: Infinity, delay: i * 0.35, ease: "easeOut" }}
+        />
+      );
+    })}
+    {/* Toxic drips from top */}
+    {Array.from({ length: 3 }, (_, i) => (
+      <motion.div
+        key={`drip-${i}`}
+        className="absolute top-0 w-1 rounded-b-full"
+        style={{
+          left: `${25 + i * 25}%`,
+          background: "linear-gradient(to bottom, rgba(147,51,234,0.6), rgba(74,222,128,0.4))",
+          height: 12,
+        }}
+        animate={{
+          y: [0, 40, 0],
+          opacity: [0.6, 0.3, 0.6],
+          scaleY: [1, 2, 1],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.8, ease: "easeInOut" }}
+      />
+    ))}
+    {/* Green miasma glow */}
+    <motion.div
+      className="absolute inset-0"
+      style={{ background: "radial-gradient(ellipse at 50% 70%, rgba(74,222,128,0.08) 0%, transparent 60%)" }}
+      animate={{ opacity: [0.3, 0.6, 0.3] }}
+      transition={{ duration: 3, repeat: Infinity }}
+    />
+  </>
+);
+
+const SleepEffect = () => (
+  <>
+    {/* Dreamy blue overlay */}
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: "radial-gradient(ellipse at 50% 50%, rgba(99,102,241,0.12) 0%, rgba(30,58,138,0.06) 60%, transparent)",
+      }}
+      animate={{ opacity: [0.3, 0.6, 0.3] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+    />
+    {/* Floating Z's with glow */}
+    {Array.from({ length: 4 }, (_, i) => (
+      <motion.div
+        key={`z-${i}`}
+        className="absolute flex items-center justify-center"
+        style={{
+          left: `${45 + i * 8}%`,
+          top: "40%",
+          textShadow: "0 0 8px rgba(129,140,248,0.8), 0 0 16px rgba(129,140,248,0.4)",
+          fontSize: 16 + i * 6,
+          fontWeight: 900,
+          color: "rgba(165,180,252,0.9)",
+        }}
+        animate={{
+          y: [0, -50 - i * 15],
+          x: [0, 10 + i * 8],
+          opacity: [0, 0.9, 0],
+          scale: [0.3, 0.6 + i * 0.2],
+          rotate: [0, -10 + i * 5],
+        }}
+        transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.6, ease: "easeOut" }}
+      >
+        Z
+      </motion.div>
+    ))}
+    {/* Sparkle particles */}
+    {Array.from({ length: 5 }, (_, i) => (
+      <motion.div
+        key={`sparkle-${i}`}
+        className="absolute h-1 w-1 rounded-full"
+        style={{
+          left: `${20 + i * 15}%`,
+          top: `${30 + (i % 3) * 15}%`,
+          background: "rgba(165,180,252,0.7)",
+          boxShadow: "0 0 4px rgba(165,180,252,0.5)",
+        }}
+        animate={{ opacity: [0, 0.8, 0], scale: [0, 1.5, 0] }}
+        transition={{ duration: 2, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+      />
+    ))}
+  </>
+);
+
+const StunEffect = () => (
+  <>
+    {/* Electric field overlay */}
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: "radial-gradient(ellipse at 50% 50%, rgba(250,204,21,0.1) 0%, transparent 60%)",
+      }}
+      animate={{ opacity: [0.2, 0.6, 0.1, 0.5, 0.2] }}
+      transition={{ duration: 0.8, repeat: Infinity }}
+    />
+    {/* Lightning bolts using SVG */}
+    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {Array.from({ length: 4 }, (_, i) => {
+        const x = 15 + i * 22;
+        const points = `${x},${10 + i * 5} ${x + 8},${35 + i * 3} ${x - 3},${38 + i * 3} ${x + 5},${65 + i * 4} ${x - 2},${68 + i * 4} ${x + 3},${90}`;
+        return (
+          <motion.polyline
+            key={`bolt-${i}`}
+            points={points}
+            fill="none"
+            stroke="rgba(250,204,21,0.7)"
+            strokeWidth="0.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ filter: "drop-shadow(0 0 3px rgba(250,204,21,0.6))" }}
+            animate={{ opacity: [0, 1, 0], strokeWidth: [0.5, 1.2, 0.5] }}
+            transition={{
+              duration: 0.15,
+              repeat: Infinity,
+              repeatDelay: 1.5 + i * 0.4,
+              delay: i * 0.3,
+            }}
+          />
+        );
+      })}
+    </svg>
+    {/* Crackling sparks */}
+    {Array.from({ length: 6 }, (_, i) => (
+      <motion.div
+        key={`spark-${i}`}
+        className="absolute h-0.5 rounded-full"
+        style={{
+          width: 4 + (i % 3) * 4,
+          top: `${15 + i * 13}%`,
+          left: `${10 + i * 14}%`,
+          background: "rgba(250,204,21,0.9)",
+          boxShadow: "0 0 6px rgba(250,204,21,0.7), 0 0 12px rgba(250,204,21,0.3)",
+          rotate: 30 + i * 25,
+        }}
+        animate={{
+          opacity: [0, 1, 0],
+          scaleX: [0, 1, 0],
+        }}
+        transition={{
+          duration: 0.12,
+          repeat: Infinity,
+          repeatDelay: 0.8 + (i % 3) * 0.5,
+          delay: i * 0.15,
+        }}
+      />
+    ))}
+    {/* Bright flash */}
+    <motion.div
+      className="absolute inset-0"
+      style={{ background: "rgba(250,204,21,0.15)" }}
+      animate={{ opacity: [0, 0.3, 0] }}
+      transition={{ duration: 0.1, repeat: Infinity, repeatDelay: 2.5 }}
+    />
+  </>
+);
+
+const STATUS_EFFECTS: Record<string, React.FC> = {
+  burn: BurnEffect,
+  poison: PoisonEffect,
+  sleep: SleepEffect,
+  stun: StunEffect,
+};
+
 const StatusEffectDisplay = ({ status }: { status: StatusEffect | null }) => {
   if (!status) return null;
-  const effects: { [key in StatusEffect & string]: JSX.Element } = {
-    burn: (
-      <>
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bottom-0 h-4 w-2 rounded-full bg-orange-500"
-            style={{
-              left: `${Math.random() * 90 + 5}%`,
-              boxShadow: "0 0 10px 4px #f97316",
-              scale: Math.random() * 0.5 + 0.5,
-            }}
-            animate={{
-              y: [0, -60, -80],
-              opacity: [1, 0.5, 0],
-              scaleY: [1, 2, 0.5],
-            }}
-            transition={{
-              duration: Math.random() * 0.5 + 0.8,
-              repeat: Infinity,
-              delay: i * 0.1,
-              ease: "easeOut",
-            }}
-          />
-        ))}
-      </>
-    ),
-    poison: (
-      <>
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bottom-[5%] h-5 w-5 rounded-full border-2 border-green-300 bg-purple-600/60"
-            style={{
-              left: `${Math.random() * 80 + 10}%`,
-              scale: Math.random() * 0.6 + 0.5,
-            }}
-            animate={{
-              y: [0, -80],
-              opacity: [0.9, 0],
-              scale: [1, 0.5],
-            }}
-            transition={{
-              duration: Math.random() * 1 + 1.5,
-              repeat: Infinity,
-              delay: i * 0.2,
-              ease: "easeIn",
-            }}
-          />
-        ))}
-      </>
-    ),
-    sleep: (
-      <>
-        {[...Array(3)].map((_, i) => (
-          <motion.p
-            key={i}
-            className="absolute top-1/2 left-1/2 text-4xl font-black text-slate-400/80"
-            style={{
-              originX: `${Math.random() * 40 - 20}%`,
-            }}
-            animate={{
-              y: [0, -60],
-              x: [0, Math.random() * 40 - 20],
-              opacity: [1, 0],
-              scale: [0.5, 1.2],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.7,
-              ease: "easeOut",
-            }}
-          >
-            Z
-          </motion.p>
-        ))}
-      </>
-    ),
-    stun: (
-      <>
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-1 w-8 bg-yellow-300"
-            style={{
-              top: `${Math.random() * 80 + 10}%`,
-              left: `${Math.random() * 80 + 10}%`,
-              rotate: Math.random() * 180,
-              boxShadow: "0 0 10px 2px #facc15",
-            }}
-            animate={{
-              opacity: [0, 1, 0, 1, 0],
-              scaleX: [0, 1, 0.5, 1, 0],
-            }}
-            transition={{
-              duration: 0.4,
-              repeat: Infinity,
-              repeatDelay: 1,
-              delay: Math.random(),
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </>
-    ),
-  };
+  const EffectComponent = STATUS_EFFECTS[status];
+  if (!EffectComponent) return null;
   return (
     <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
-      {effects[status]}
+      <EffectComponent />
     </div>
   );
 };
@@ -431,9 +683,8 @@ const ScannerRing = ({
   mainColor: string;
 }) => (
   <motion.div
-    className={`absolute inset-0 rounded-[50%] ${
-      isThin ? "border" : "border-2"
-    }`}
+    className={`absolute inset-0 rounded-[50%] ${isThin ? "border" : "border-2"
+      }`}
     style={{
       borderColor: mainColor,
       boxShadow: `0 0 10px 1px ${mainColor}`,
@@ -730,8 +981,8 @@ const HealthBar = ({
     healthPercentage < 0.2
       ? "#ef4444" // red-500
       : healthPercentage < 0.5
-      ? "#f59e0b" // amber-500
-      : "#22c55e"; // green-500
+        ? "#f59e0b" // amber-500
+        : "#22c55e"; // green-500
 
   return (
     <div className="relative w-full">
@@ -821,6 +1072,38 @@ const TeamStatusIcon = React.memo(
 );
 TeamStatusIcon.displayName = "TeamStatusIcon";
 
+const STAT_LABELS: { key: keyof StatModifiers; label: string; color: string }[] = [
+  { key: "atk", label: "ATK", color: "text-red-400" },
+  { key: "def", label: "DEF", color: "text-blue-400" },
+  { key: "spd", label: "SPD", color: "text-yellow-400" },
+];
+
+const StatModifierBar = ({ modifiers }: { modifiers: StatModifiers }) => {
+  const hasAny = modifiers.atk !== 0 || modifiers.def !== 0 || modifiers.spd !== 0;
+  if (!hasAny) return null;
+
+  return (
+    <div className="mt-1 flex gap-2">
+      {STAT_LABELS.map(({ key, label, color }) => {
+        const val = modifiers[key];
+        if (val === 0) return null;
+        const arrow = val > 0 ? "▲" : "▼";
+        const absVal = Math.abs(val);
+        return (
+          <motion.span
+            key={key}
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`font-kode text-[10px] font-bold ${color}`}
+          >
+            {label} {arrow.repeat(absVal)}
+          </motion.span>
+        );
+      })}
+    </div>
+  );
+};
+
 const Hud = ({
   mon,
   team,
@@ -836,13 +1119,13 @@ const Hud = ({
 
   const hudStyle = isPlayer
     ? {
-        background: "linear-gradient(to right, #06b6d4, #22d3ee)",
-        filter: "drop-shadow(0 0 10px #06b6d4)",
-      }
+      background: "linear-gradient(to right, #06b6d4, #22d3ee)",
+      filter: "drop-shadow(0 0 10px #06b6d4)",
+    }
     : {
-        background: "linear-gradient(to right, #ef4444, #f87171)",
-        filter: "drop-shadow(0 0 10px #ef4444)",
-      };
+      background: "linear-gradient(to right, #ef4444, #f87171)",
+      filter: "drop-shadow(0 0 10px #ef4444)",
+    };
 
   return (
     <motion.div
@@ -875,9 +1158,8 @@ const Hud = ({
               </div>
 
               <div
-                className={`my-1.5 flex items-center gap-2 ${
-                  isPlayer ? "justify-start" : "justify-end"
-                }`}
+                className={`my-1.5 flex items-center gap-2 ${isPlayer ? "justify-start" : "justify-end"
+                  }`}
               >
                 <TypeBadge type={mon.type1} />
                 {mon.type2 && <TypeBadge type={mon.type2} />}
@@ -888,9 +1170,8 @@ const Hud = ({
           <div className="relative mt-1">
             <div className="flex items-center gap-2">
               <span
-                className={`text-sm font-bold ${
-                  isPlayer ? "text-cyan-500" : "text-red-500"
-                }`}
+                className={`text-sm font-bold ${isPlayer ? "text-cyan-500" : "text-red-500"
+                  }`}
               >
                 HP
               </span>
@@ -902,13 +1183,14 @@ const Hud = ({
               {mon.currentHp} / {mon.hp}
             </p>
           </div>
+
+          <StatModifierBar modifiers={mon.statModifiers} />
         </div>
       </div>
 
       <div
-        className={`absolute flex items-center gap-1.5 ${
-          isPlayer ? "-bottom-2 left-6" : "-top-2 right-6"
-        }`}
+        className={`absolute flex items-center gap-1.5 ${isPlayer ? "-bottom-2 left-6" : "-top-2 right-6"
+          }`}
       >
         {team.map((teamMon) => (
           <TeamStatusIcon
@@ -932,6 +1214,7 @@ const PortfolioMonSprite = ({
   isPlayer: boolean;
 }) => {
   const mainColor = isPlayer ? "#00dcff" : "#ff5050";
+  const colorRgb = isPlayer ? "0, 220, 255" : "255, 80, 80";
   const defaultShadow = "drop-shadow(0px 5px 10px rgba(0,0,0,0.5))";
 
   const variants = {
@@ -939,6 +1222,7 @@ const PortfolioMonSprite = ({
       x: 0,
       y: 0,
       scale: 1,
+      opacity: 1,
       rotate: 0,
       filter: `brightness(100%) ${defaultShadow}`,
       transition: { duration: 0.4 },
@@ -947,6 +1231,7 @@ const PortfolioMonSprite = ({
       x: isPlayer ? [0, 60, 0] : [0, -60, 0],
       y: [0, -15, 0],
       scale: [1, 0.9, 1.15, 1],
+      opacity: 1,
       filter: [
         `brightness(100%) ${defaultShadow}`,
         `brightness(120%) drop-shadow(0px 0px 15px ${mainColor})`,
@@ -958,6 +1243,7 @@ const PortfolioMonSprite = ({
       x: [0, -8, 8, -8, 8, 0],
       y: [0, -4, 0],
       scale: [1, 0.95, 1.05, 1],
+      opacity: 1,
       rotate: [0, -2, 2, -2, 2, 0],
       filter: [
         `brightness(100%) ${defaultShadow}`,
@@ -1008,12 +1294,25 @@ const PortfolioMonSprite = ({
           delay: 0.5,
         }}
       >
-        <Image
-          src={mon.image}
-          fill
-          alt={mon.name}
-          priority
-          className="object-scale-down"
+        <MonFrame monId={mon.id} color={colorRgb} />
+
+        <div className="absolute inset-[2%]" style={{ opacity: 0.95 }}>
+          <Image
+            src={mon.image}
+            fill
+            alt={mon.name}
+            priority
+            className="object-contain drop-shadow-lg"
+          />
+        </div>
+
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(ellipse at 50% 100%, rgba(${colorRgb}, 0.12) 0%, transparent 50%)`,
+          }}
+          animate={{ opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>
     </motion.div>
@@ -1044,6 +1343,7 @@ const TeamBar = ({
   activeMonId,
   onItemTargetSelect,
   isItemTargetView,
+  isReviveMode,
   opponentMon,
   getTypeEffectiveness,
 }: {
@@ -1053,6 +1353,7 @@ const TeamBar = ({
   activeMonId: number;
   onItemTargetSelect?: (index: number) => void;
   isItemTargetView: boolean;
+  isReviveMode: boolean;
   opponentMon: BattleReadyMon;
   getTypeEffectiveness: (
     moveType: string,
@@ -1066,9 +1367,10 @@ const TeamBar = ({
     <div className="flex h-full flex-col gap-2 overflow-y-auto p-2 lg:pr-2">
       {team.map((mon, index) => {
         const isActive = mon.id === activeMonId;
+        const isFainted = mon.currentHp <= 0;
         const isDisabled =
           (!isSwitchView && !isItemTargetView) ||
-          mon.currentHp <= 0 ||
+          (isReviveMode ? !isFainted : isFainted) ||
           (isSwitchView && isActive);
 
         return (
@@ -1086,11 +1388,10 @@ const TeamBar = ({
             className={`group relative w-full text-left transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50`}
           >
             <div
-              className={`p-0.5 ${
-                isActive
-                  ? "bg-cyan-500"
-                  : "bg-slate-300 enabled:hover:bg-cyan-300 dark:bg-slate-700 dark:enabled:hover:bg-cyan-400"
-              }`}
+              className={`p-0.5 ${isActive
+                ? "bg-cyan-500"
+                : "bg-slate-300 enabled:hover:bg-cyan-300 dark:bg-slate-700 dark:enabled:hover:bg-cyan-400"
+                }`}
               style={{ clipPath: cardClipPath }}
             >
               <div
@@ -1099,9 +1400,8 @@ const TeamBar = ({
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`relative h-10 w-14 flex-shrink-0 bg-slate-200 p-1 dark:bg-slate-800 ${
-                      mon.currentHp <= 0 ? "grayscale" : ""
-                    }`}
+                    className={`relative h-10 w-14 flex-shrink-0 bg-slate-200 p-1 dark:bg-slate-800 ${mon.currentHp <= 0 ? "grayscale" : ""
+                      }`}
                     style={{
                       clipPath:
                         "polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
@@ -1339,8 +1639,8 @@ const EffectivenessTag = ({ multiplier }: { multiplier: number }) => {
     multiplier > 1
       ? "bg-green-500"
       : multiplier < 1
-      ? "bg-red-500"
-      : "bg-gray-600";
+        ? "bg-red-500"
+        : "bg-gray-600";
   return (
     <span
       className={`absolute -right-1 -top-1.5 z-20 pb-0.5 pl-2 pr-1.5 font-kode text-[10px] font-bold text-white ${tagColor}`}
@@ -1408,17 +1708,23 @@ const MoveInfoHover = ({
             {move.effect && statusType && statusStyle && (
               <div className="mt-1 flex-shrink-0 border-t border-slate-300/50 pt-1 text-center dark:border-slate-700/50">
                 <div
-                  className={`inline-flex items-center gap-2 rounded px-2 py-0.5 ${statusStyle.bg}`}
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 ${statusStyle.bg}`}
+                  style={{ clipPath: CLIP.typeBadge }}
                 >
                   <div className={`h-3.5 w-3.5 ${statusStyle.text}`}>
                     {statusEffectIcons[statusType as StatusEffect]}
                   </div>
                   <p
-                    className={`text-[10px] font-bold uppercase ${statusStyle.text}`}
+                    className={`text-[10px] font-bold uppercase tracking-wide ${statusStyle.text}`}
                   >
-                    {move.effect.chance * 100}% CHANCE FOR {move.effect.type}
+                    {move.effect.chance * 100}% {move.effect.type}
                   </p>
                 </div>
+              </div>
+            )}
+            {move.selfEffect && (
+              <div className="mt-1 flex-shrink-0 border-t border-slate-300/50 pt-1 text-center dark:border-slate-700/50">
+                <SelfEffectBadge selfEffect={move.selfEffect} />
               </div>
             )}
           </div>
@@ -1439,7 +1745,7 @@ const MoveButton = ({
   onSelect: (move: BattleReadyMove) => void;
   disabled: boolean;
   opponentMon: BattleReadyMon;
-  getTypeEffectiveness: typeof importedGetTypeEffectiveness;
+  getTypeEffectiveness: (moveType: string, targetMon: BattleReadyMon) => { multiplier: number; message: string };
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { multiplier } = getTypeEffectiveness(move.type, opponentMon);
@@ -1447,6 +1753,7 @@ const MoveButton = ({
   const outOfPP = move.currentPp <= 0;
   const isHighPower = move.power && move.power >= 90;
   const hasStatusEffect = !!move.effect;
+  const hasSelfEffect = !!move.selfEffect;
   const statusType = move.effect?.type;
 
   const typeStyle = typeStyles[move.type] || {
@@ -1465,10 +1772,18 @@ const MoveButton = ({
   let textColorClass = "text-slate-900 dark:text-white";
   let isAccented = false;
 
+  const selfEffectStyle = hasSelfEffect
+    ? SELF_EFFECT_STYLES[move.selfEffect!.type]
+    : null;
+
   if (hasStatusEffect && statusStyle) {
     frameBgClass = statusStyle.border;
     contentBgClass = statusStyle.bg;
     textColorClass = statusStyle.text;
+  } else if (hasSelfEffect && selfEffectStyle) {
+    frameBgClass = selfEffectStyle.border;
+    contentBgClass = selfEffectStyle.bg;
+    textColorClass = selfEffectStyle.text;
   } else if (isHighPower) {
     frameBgClass = typeStyle.border.replace("border-", "bg-");
     contentBgClass = typeStyle.bg;
@@ -1536,6 +1851,25 @@ const MoveButton = ({
                 </div>
               </div>
             )}
+            {!hasStatusEffect && hasSelfEffect && move.selfEffect && selfEffectStyle && (
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 top-1/2 flex h-8 items-center justify-center">
+                <div
+                  className={`flex items-center gap-1 bg-white/40 px-3 py-1 text-sm sm:gap-2 sm:px-4 ${selfEffectStyle.text}`}
+                  style={{
+                    clipPath: "polygon(15% 0, 85% 0, 100% 100%, 0% 100%)",
+                  }}
+                >
+                  <div className="size-4">
+                    {selfEffectStyle.icon}
+                  </div>
+                  <span className="font-kode text-[10px] font-bold sm:text-sm">
+                    {move.selfEffect.chance < 1
+                      ? `${move.selfEffect.chance * 100}%`
+                      : selfEffectStyle.label}
+                  </span>
+                </div>
+              </div>
+            )}
             <div className="mt-auto flex items-center gap-1 pt-1 sm:grid sm:grid-cols-3">
               <div className="flex justify-start">
                 <TypeBadge type={move.type} />
@@ -1543,9 +1877,8 @@ const MoveButton = ({
               <div className="flex justify-center"></div>
               <div className="ml-auto flex justify-end">
                 <p
-                  className={`font-kode text-[0.6rem] font-bold sm:text-xs ${
-                    outOfPP ? "text-red-500" : textColorClass
-                  }`}
+                  className={`font-kode text-[0.6rem] font-bold sm:text-xs ${outOfPP ? "text-red-500" : textColorClass
+                    }`}
                 >
                   PP {move.currentPp}/{move.pp}
                 </p>
@@ -1590,11 +1923,10 @@ const SpeechBubble = ({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`absolute z-[80] w-36 md:w-48 ${
-        isPlayer
-          ? "bottom-full left-0 md:bottom-[90%] md:left-[-10%]"
-          : "bottom-full right-0 md:bottom-[90%] md:right-[-10%]"
-      }`}
+      className={`absolute z-[80] w-36 md:w-48 ${isPlayer
+        ? "bottom-full left-0 md:bottom-[90%] md:left-[-10%]"
+        : "bottom-full right-0 md:bottom-[90%] md:right-[-10%]"
+        }`}
       style={{
         filter: `drop-shadow(0 4px 8px ${shadowColor})`,
       }}
@@ -1664,6 +1996,27 @@ const NotificationDisplay = ({
           borderBg: "bg-slate-400",
           text: "text-slate-100",
           icon: <XCircle className="h-full w-full" />,
+        };
+      case "boost":
+        return {
+          bg: "bg-orange-500/90",
+          borderBg: "bg-orange-300",
+          text: "text-white",
+          icon: <ArrowUp className="h-full w-full" />,
+        };
+      case "heal":
+        return {
+          bg: "bg-emerald-500/90",
+          borderBg: "bg-emerald-300",
+          text: "text-white",
+          icon: <Heart className="h-full w-full" />,
+        };
+      case "drain":
+        return {
+          bg: "bg-violet-500/90",
+          borderBg: "bg-violet-300",
+          text: "text-white",
+          icon: <Droplets className="h-full w-full" />,
         };
       default:
         return {
@@ -1741,10 +2094,10 @@ const Corner = ({ position }: { position: string }) => (
           position.includes("top-8 left-8")
             ? ""
             : position.includes("top-8 right-8")
-            ? "rotate(90 25 25)"
-            : position.includes("bottom") && position.includes("right")
-            ? "rotate(180 25 25)"
-            : "rotate(270 25 25)"
+              ? "rotate(90 25 25)"
+              : position.includes("bottom") && position.includes("right")
+                ? "rotate(180 25 25)"
+                : "rotate(270 25 25)"
         }
       />
     </svg>
@@ -1826,11 +2179,10 @@ const MobileTabButton = ({
 }) => (
   <button
     onClick={onClick}
-    className={`w-full p-2 text-center text-xs font-bold uppercase tracking-wider transition-colors ${
-      isActive
-        ? "border-b-2 border-cyan-400 bg-cyan-400/20 text-cyan-400"
-        : "border-b-2 border-transparent text-slate-500 hover:bg-slate-200/50 dark:text-slate-400 dark:hover:bg-slate-700/50"
-    }`}
+    className={`w-full p-2 text-center text-xs font-bold uppercase tracking-wider transition-colors ${isActive
+      ? "border-b-2 border-cyan-400 bg-cyan-400/20 text-cyan-400"
+      : "border-b-2 border-transparent text-slate-500 hover:bg-slate-200/50 dark:text-slate-400 dark:hover:bg-slate-700/50"
+      }`}
   >
     {children}
   </button>
@@ -1861,6 +2213,8 @@ export const FightScreen = () => {
     isAutoBattleActive,
     toggleAutoBattle,
     background,
+    lastMoveType,
+    activeBattleEffect,
   } = useGame();
 
   const playerMon = playerTeam[activePlayerIndex];
@@ -1884,10 +2238,14 @@ export const FightScreen = () => {
   }, [isPlayerTurn, playerMon, gameState]);
 
   const handleItemSelect = (item: Item) => {
-    if (item.effect.type === "heal" || item.effect.type === "cureStatus") {
-      setSelectedItem(item);
-      setActionState("itemTarget");
+    const t = item.effect.type;
+    if (t === "boostAtk" || t === "boostDef" || t === "boostSpd") {
+      onItemUse(item.name, activePlayerIndex);
+      setActionState("moves");
+      return;
     }
+    setSelectedItem(item);
+    setActionState("itemTarget");
   };
 
   const handleSwitch = (index: number) => {
@@ -1940,6 +2298,7 @@ export const FightScreen = () => {
             key={turnCount}
             playerAnimation={playerAnimation}
             cpuAnimation={cpuAnimation}
+            lastMoveType={lastMoveType}
           />
         </AnimatePresence>
       </div>
@@ -1983,7 +2342,7 @@ export const FightScreen = () => {
       </AnimatePresence>
 
       <motion.div
-        className="absolute top-[8%] right-[5%] z-10 aspect-[2/1] w-[45%] max-w-lg [perspective:1000px]"
+        className="absolute top-[12%] right-[5%] z-10 aspect-[2/1] w-[45%] max-w-lg [perspective:1000px]"
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -2026,6 +2385,12 @@ export const FightScreen = () => {
               animationState={cpuAnimation}
               isPlayer={false}
             />
+
+            <AnimatePresence>
+              {activeBattleEffect?.target === "cpu" && (
+                <SelfEffectOverlay effect={activeBattleEffect} />
+              )}
+            </AnimatePresence>
 
             <StatusEffectDisplay
               key={`${cpuMon.id}-status`}
@@ -2079,6 +2444,12 @@ export const FightScreen = () => {
               animationState={playerAnimation}
               isPlayer={true}
             />
+
+            <AnimatePresence>
+              {activeBattleEffect?.target === "player" && (
+                <SelfEffectOverlay effect={activeBattleEffect} />
+              )}
+            </AnimatePresence>
 
             <StatusEffectDisplay
               key={`${playerMon.id}-status`}
@@ -2185,18 +2556,16 @@ export const FightScreen = () => {
             <div className="relative flex h-full min-h-0 flex-grow flex-col lg:flex-row">
               {/* --- LOG (Left) --- */}
               <div
-                className={`relative h-full w-full lg:order-1 lg:block lg:w-[35%] ${
-                  mobileView === "log" ? "block" : "hidden"
-                }`}
+                className={`relative h-full w-full lg:order-1 lg:block lg:w-[35%] ${mobileView === "log" ? "block" : "hidden"
+                  }`}
               >
                 <BattleLog battleLog={battleLog} />
               </div>
 
               {/* --- TEAM (Middle) --- */}
               <div
-                className={`relative h-full w-full border-x-2 border-slate-300/50 dark:border-cyan-400/50 lg:order-2 lg:block lg:w-[26%] ${
-                  mobileView === "team" ? "block" : "hidden"
-                }`}
+                className={`relative h-full w-full border-x-2 border-slate-300/50 dark:border-cyan-400/50 lg:order-2 lg:block lg:w-[26%] ${mobileView === "team" ? "block" : "hidden"
+                  }`}
               >
                 <TeamBar
                   team={playerTeam}
@@ -2208,6 +2577,7 @@ export const FightScreen = () => {
                   }
                   activeMonId={playerMon.id}
                   isItemTargetView={actionState === "itemTarget"}
+                  isReviveMode={selectedItem?.effect.type === "revive"}
                   onItemTargetSelect={(index) => {
                     if (selectedItem) onItemUse(selectedItem.name, index);
                   }}
@@ -2218,9 +2588,8 @@ export const FightScreen = () => {
 
               {/* --- ACTIONS (Right) --- */}
               <div
-                className={`relative flex h-[calc(100%-2.5rem)] w-full flex-col sm:h-full lg:order-3 lg:flex lg:w-[39%] ${
-                  mobileView === "actions" ? "flex" : "hidden"
-                }`}
+                className={`relative flex h-[calc(100%-2.5rem)] w-full flex-col sm:h-full lg:order-3 lg:flex lg:w-[39%] ${mobileView === "actions" ? "flex" : "hidden"
+                  }`}
               >
                 <div className="sm:min-h-auto relative h-full min-h-0 flex-grow p-2 sm:p-3">
                   <AnimatePresence mode="wait">

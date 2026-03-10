@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -7,12 +7,15 @@ import {
   useMotionValue,
   useTransform,
   useSpring,
+  type Variants,
 } from "framer-motion";
 import { Tooltip } from "@radix-ui/themes";
 import { useGame } from "../../providers/gameProvider";
-import { type PortfolioMon, portfolioMonData } from "../../context/gameContext";
-
-import { typeStyles } from "../battle/battle";
+import { type PortfolioMon, type Move, portfolioMonData } from "../../context/gameContext";
+import { TypeBadge, TYPE_STYLES } from "../ui/TypeBadge";
+import { CLIP } from "../../constants/clipPaths";
+import { MAX_STAT_VALUE, MAX_HP_VALUE } from "../../constants/game";
+import { workExperience } from "../../data/workExperience";
 import {
   Mail as MailIcon,
   ExternalLink,
@@ -35,6 +38,11 @@ import {
   PlusIcon,
   ArrowLeft,
   Trash2,
+  Swords,
+  Shield,
+  Gauge,
+  Heart,
+  Droplets,
 } from "lucide-react";
 
 // --- BATTLE UI EFFECT COMPONENTS ---
@@ -93,7 +101,7 @@ const UpgradedClippedContainer = ({
   children: React.ReactNode;
   className?: string;
   clipPath: string;
-  variants?: any;
+  variants?: Variants;
   showSheen?: boolean;
 }) => (
   <motion.div
@@ -178,83 +186,125 @@ const ActionButton = ({
   </motion.button>
 );
 
-// --- Helper Components: TypeBadge, etc.) ---
-const TypeBadge = ({
-  type,
-  size = "sm",
-}: {
-  type: string;
-  size?: "sm" | "xs";
-}) => {
-  const style = typeStyles[type] || { bg: "bg-gray-700", text: "text-white" };
-  const sizeClasses =
-    size === "sm"
-      ? "px-2.5 py-0.5 text-xs font-semibold"
-      : size === "xs"
-        ? "px-2 py-0.5 text-[9px] font-semibold"
-        : "px-2 py-0.15 text-[9px] font-semibold";
-  return (
-    <span
-      className={`tracking-wide ${sizeClasses} ${style.bg} ${style.text}`}
-      style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 10% 100%)" }}
-    >
-      {type}
-    </span>
-  );
-};
-
-// --- (Updated Helper Components) ---
 const StatBar = ({
   label,
   value,
-  maxValue = 320,
+  maxValue = MAX_STAT_VALUE,
 }: {
   label: string;
   value: number;
   maxValue?: number;
-}) => (
-  <div className="grid grid-cols-6 items-center gap-2">
-    <span className="col-span-1 font-kode text-[10px] uppercase text-slate-500 dark:text-slate-400">
-      {label}
-    </span>
-    <div
-      className="col-span-4 h-1.5 bg-slate-300 p-0.5 dark:bg-slate-900/70"
-      style={{
-        clipPath:
-          "polygon(0 0, 100% 0, 100% 100%, 3px 100%, 0 calc(100% - 3px))",
-      }}
-    >
-      <motion.div
-        className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
-        initial={{ width: 0 }}
-        animate={{ width: `${(value / maxValue) * 100}%` }}
-        transition={{ duration: 0.8, ease: "circOut", delay: 0.5 }}
-        style={{
-          clipPath:
-            "polygon(0 0, 100% 0, 100% 100%, 3px 100%, 0 calc(100% - 3px))",
-        }}
-      />
+}) => {
+  const pct = Math.min(100, (value / maxValue) * 100);
+  const gradient =
+    pct >= 75
+      ? "from-emerald-400 to-cyan-400 shadow-[0_0_8px_theme(colors.emerald.500)]"
+      : pct >= 50
+        ? "from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
+        : pct >= 30
+          ? "from-amber-400 to-orange-500 shadow-[0_0_8px_theme(colors.amber.500)]"
+          : "from-red-400 to-rose-600 shadow-[0_0_8px_theme(colors.red.500)]";
+
+  return (
+    <div className="grid grid-cols-6 items-center gap-2">
+      <span className="col-span-1 font-kode text-[10px] uppercase text-slate-500 dark:text-slate-400">
+        {label}
+      </span>
+      <div
+        className="col-span-4 h-1.5 bg-slate-300 p-0.5 dark:bg-slate-900/70"
+        style={{ clipPath: CLIP.statBar }}
+      >
+        <motion.div
+          className={`h-full bg-gradient-to-r ${gradient}`}
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 0.8, ease: "circOut", delay: 0.5 }}
+          style={{ clipPath: CLIP.statBar }}
+        />
+      </div>
+      <span className="col-span-1 font-kode text-xs font-bold text-slate-900 dark:text-white">
+        {value}
+      </span>
     </div>
-    <span className="col-span-1 font-kode text-xs font-bold text-slate-900 dark:text-white">
-      {value}
-    </span>
-  </div>
-);
-const statusIconMapping: { [key: string]: React.ReactNode } = {
-  stun: <Zap className="h-3 w-3 text-yellow-400" />,
-  poison: <Biohazard className="h-3 w-3 text-purple-400" />,
-  burn: <Flame className="h-3 w-3 text-orange-400" />,
-  freeze: <Snowflake className="h-3 w-3 text-blue-300" />,
-  sleep: <Moon className="h-3 w-3 text-indigo-300" />,
+  );
 };
-const StatusEffectIcon = ({ move }: { move: any }) => {
+const STATUS_EFFECT_TAG_STYLES: Record<string, { icon: JSX.Element; bg: string }> = {
+  stun: { icon: <Zap className="h-2.5 w-2.5" />, bg: "bg-yellow-500 text-black" },
+  poison: { icon: <Biohazard className="h-2.5 w-2.5" />, bg: "bg-purple-500" },
+  burn: { icon: <Flame className="h-2.5 w-2.5" />, bg: "bg-orange-500" },
+  freeze: { icon: <Snowflake className="h-2.5 w-2.5" />, bg: "bg-blue-400" },
+  sleep: { icon: <Moon className="h-2.5 w-2.5" />, bg: "bg-indigo-500" },
+};
+
+const StatusEffectTag = ({ move }: { move: Move }) => {
   if (!move.effect?.type) return null;
-  const icon = statusIconMapping[move.effect.type];
-  if (!icon) return null;
+  const style = STATUS_EFFECT_TAG_STYLES[move.effect.type];
+  if (!style) return null;
+
+  return (
+    <div
+      className={`flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold text-white ${style.bg}`}
+      style={{ clipPath: CLIP.typeBadge }}
+    >
+      {style.icon}
+      <span className="hidden sm:inline uppercase">{move.effect.type}</span>
+      <span className="opacity-75">{move.effect.chance * 100}%</span>
+    </div>
+  );
+};
+
+const SELF_EFFECT_TAG_STYLES: Record<string, { icon: JSX.Element; bg: string; label: string }> = {
+  atkUp: {
+    icon: <Swords className="h-2.5 w-2.5" />,
+    bg: "bg-red-500",
+    label: "ATK▲",
+  },
+  defUp: {
+    icon: <Shield className="h-2.5 w-2.5" />,
+    bg: "bg-blue-500",
+    label: "DEF▲",
+  },
+  spdUp: {
+    icon: <Gauge className="h-2.5 w-2.5" />,
+    bg: "bg-yellow-500 text-black",
+    label: "SPD▲",
+  },
+  heal: {
+    icon: <Heart className="h-2.5 w-2.5" />,
+    bg: "bg-emerald-500",
+    label: "HEAL",
+  },
+  drain: {
+    icon: <Droplets className="h-2.5 w-2.5" />,
+    bg: "bg-violet-500",
+    label: "DRAIN",
+  },
+  recoil: {
+    icon: <Flame className="h-2.5 w-2.5" />,
+    bg: "bg-orange-500",
+    label: "RECOIL",
+  },
+};
+
+const SelfEffectTag = ({ move }: { move: Move }) => {
+  if (!move.selfEffect) return null;
+  const style = SELF_EFFECT_TAG_STYLES[move.selfEffect.type];
+  if (!style) return null;
+
+  const chanceText = move.selfEffect.chance < 1
+    ? `${move.selfEffect.chance * 100}%`
+    : null;
 
   return (
     <div className="group relative flex items-center">
-      {icon}
+      <div
+        className={`flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold text-white ${style.bg}`}
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 8% 100%)" }}
+      >
+        {style.icon}
+        <span className="hidden sm:inline">{style.label}</span>
+        {chanceText && <span className="opacity-75">{chanceText}</span>}
+      </div>
       <div
         className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max -translate-x-1/2 rounded-sm border border-slate-300 bg-white p-0.5 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 dark:border-cyan-400/50 dark:bg-slate-900"
         style={{
@@ -267,7 +317,13 @@ const StatusEffectIcon = ({ move }: { move: any }) => {
             clipPath: "polygon(0 5px, 5px 0, 100% 0, 100% 100%, 0 100%)",
           }}
         >
-          {move.effect.chance * 100}% chance to {move.effect.type} the enemy
+          {move.selfEffect.chance < 1
+            ? `${move.selfEffect.chance * 100}% chance: `
+            : ""}
+          {style.label}
+          {move.selfEffect.type === "heal" && ` +${move.selfEffect.amount} HP`}
+          {move.selfEffect.type === "drain" && ` ${move.selfEffect.amount * 100}% of damage`}
+          {move.selfEffect.type === "recoil" && ` ${move.selfEffect.amount * 100}% self-damage`}
         </div>
       </div>
     </div>
@@ -346,6 +402,23 @@ const MonDetailView = ({
 }) => {
   const { background, getTypeEffectiveness } = useGame();
   const buttonDisabled = isTeamFull && !isSelectedOnTeam;
+
+  const hasVariants = mon.variants && mon.variants.length > 0;
+  const [variantIndex, setVariantIndex] = useState(() =>
+    hasVariants ? Math.floor(Math.random() * mon.variants!.length) : 0
+  );
+  const resolvedVariant = hasVariants ? (mon.variants![variantIndex % mon.variants!.length] ?? null) : null;
+
+  const cycleVariant = () => {
+    if (!hasVariants) return;
+    setVariantIndex((prev) => (prev + 1) % mon.variants!.length);
+  };
+
+  const displayImage = resolvedVariant?.image ?? mon.image;
+  const displayName = resolvedVariant
+    ? `${mon.name}: ${resolvedVariant.nameSuffix}`
+    : mon.name;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
@@ -492,8 +565,8 @@ const MonDetailView = ({
                 }}
               >
                 <Image
-                  src={mon.image}
-                  alt={mon.name}
+                  src={displayImage}
+                  alt={displayName}
                   fill
                   priority
                   className="object-contain"
@@ -532,7 +605,7 @@ const MonDetailView = ({
           </div>
           <div className="absolute top-3 left-4 z-40">
             <h2 className="text-2xl font-black tracking-tighter text-white [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)]">
-              {mon.name}
+              {displayName}
             </h2>
             <span className="font-kode text-base font-bold text-slate-600 [text-shadow:1px_1px_2px_rgba(255,255,255,0.2)] dark:text-slate-400 dark:[text-shadow:1px_1px_2px_rgba(0,0,0,0.5)]">
               No.{String(mon.id).padStart(3, "0")}
@@ -542,6 +615,22 @@ const MonDetailView = ({
             <TypeBadge type={mon.type1} size="sm" />
             {mon.type2 && <TypeBadge type={mon.type2} size="sm" />}
           </div>
+
+          {hasVariants && (
+            <motion.button
+              onClick={cycleVariant}
+              className="absolute right-3 bottom-3 z-40 flex items-center gap-1.5 border border-cyan-400/50 bg-slate-900/80 px-2.5 py-1.5 text-[10px] font-bold text-cyan-300 backdrop-blur-sm transition-colors hover:border-cyan-400 hover:bg-slate-800/90 hover:text-cyan-200"
+              style={{ clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))" }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ArrowRight className="h-3 w-3" />
+              <span>{resolvedVariant?.nameSuffix ?? "Base"}</span>
+              <span className="text-[8px] text-slate-400">
+                {(variantIndex % mon.variants!.length) + 1}/{mon.variants!.length}
+              </span>
+            </motion.button>
+          )}
         </div>
       </motion.div>
       <div className="flex min-h-0 flex-grow gap-3">
@@ -596,10 +685,10 @@ const MonDetailView = ({
             <div className="p-2.5 pt-2">
               <SectionHeader>Base Stats</SectionHeader>
               <div className="flex flex-col justify-center space-y-1">
-                <StatBar label="HP" value={mon.stats.hp} />
-                <StatBar label="ATK" value={mon.stats.atk} maxValue={150} />
-                <StatBar label="DEF" value={mon.stats.def} maxValue={150} />
-                <StatBar label="SPD" value={mon.stats.spd} maxValue={150} />
+                <StatBar label="HP" value={mon.stats.hp} maxValue={MAX_HP_VALUE} />
+                <StatBar label="ATK" value={mon.stats.atk} />
+                <StatBar label="DEF" value={mon.stats.def} />
+                <StatBar label="SPD" value={mon.stats.spd} />
               </div>
             </div>
           </UpgradedClippedContainer>
@@ -656,7 +745,7 @@ const MonDetailView = ({
               <SectionHeader>Moveset</SectionHeader>
               <div className="flex flex-grow flex-col gap-2">
                 {mon.moves.map((move) => {
-                  const bgClass = typeStyles[move.type].bg || "bg-slate-700";
+                  const bgClass = TYPE_STYLES[move.type]?.bg ?? "bg-slate-700";
                   const clipPath =
                     "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)";
 
@@ -676,15 +765,9 @@ const MonDetailView = ({
                             <p className="text-xs font-bold text-white">
                               {move.name}
                             </p>
-                            <div className="flex flex-shrink-0 items-center gap-2">
-                              <div className="flex items-center gap-1 text-[10px]">
-                                <StatusEffectIcon move={move as any} />
-                                {move.effect?.chance && (
-                                  <span className="text-[10px]">
-                                    {move.effect?.chance * 100}%
-                                  </span>
-                                )}
-                              </div>
+                            <div className="flex flex-shrink-0 items-center gap-1.5">
+                              <StatusEffectTag move={move} />
+                              <SelfEffectTag move={move} />
                               <TypeBadge type={move.type} size="xs" />
                             </div>
                           </div>
@@ -820,57 +903,6 @@ const AnimatedCircuitry = () => (
     />
   </svg>
 );
-const workExperience = [
-  {
-    role: "Founding Engineer",
-    company: "Dedalus Labs",
-    date: "Jan 2026 – Present",
-    description: "Building dedaluslabs.ai (Y Combinator S25). Ship AI agents in 5 lines of code with MCP.",
-  },
-  {
-    role: "Founding Engineer",
-    company: "Sevenfold AI",
-    date: "Jun 2025 – Nov 2025",
-    description: "Built MVP for an end-to-end, agentic research workflow using contextual intelligence.",
-  },
-  {
-    role: "Software Development Engineer Intern – FBA Inventory",
-    company: "Amazon",
-    date: "May 2025 - Aug 2025",
-    description:
-      "Built API devtools for internal metrics migrations, accelerating approval pipeline and response time by 37%."
-  },
-
-  {
-    role: "Software Engineering Intern – Core Products (DT-CADEA)",
-    company: "Bloomberg L.P.",
-    date: "Summer 2024",
-    description:
-      "Developed Random Forest ML pipeline to classify 2k+ filings per week, accelerating classification by 55% and streamlining reporting workflows by 30%.",
-  },
-  {
-    role: "AI Research Intern – NLP & Intelligent Agents",
-    company: "AT&T Labs Research",
-    date: "Fall 2023",
-    description:
-      "Designed autonomous agents with Mixture-of-Experts LLMs to accurately digest enterprise documents, acheiving analysis savings of 850k/quarter.",
-  },
-  {
-    role: "Software Engineering Intern – Financial Instruments (DT-FI)",
-    company: "Bloomberg L.P.",
-    date: "Summer 2023",
-    description:
-      "Built a real-time market feed platform using Next.js to track treasury bonds, improving remediation speed and time-to-market by 4x.",
-  },
-
-  {
-    role: "Full Stack Software Engineer",
-    company: "Johns Hopkins University – uCredit.me",
-    date: "Fall 2022",
-    description:
-      "Built a full-stack course selection platform using React and AWS for 6k+ students.",
-  },
-];
 const TimelineItem = ({
   role,
   company,
@@ -1498,6 +1530,12 @@ const MonGridItem = ({
 }) => {
   const buttonDisabled = isTeamFull && !isOnTeam;
 
+  const gridImage = useMemo(() => {
+    if (!mon.variants || mon.variants.length === 0) return mon.image;
+    const picked = mon.variants[Math.floor(Math.random() * mon.variants.length)];
+    return picked?.image ?? mon.image;
+  }, [mon.variants, mon.image]);
+
   return (
     <motion.div
       layout="position"
@@ -1527,7 +1565,7 @@ const MonGridItem = ({
         <div className="relative z-10 flex items-center gap-3">
           <div className="relative h-10 w-12 flex-shrink-0">
             <Image
-              src={mon.image}
+              src={gridImage}
               alt={mon.name}
               fill
               className="object-contain"

@@ -41,6 +41,11 @@ export type AnimationState =
   | "switchOut";
 
 export type TrainerState = "idle" | "commanding" | "win" | "lose";
+
+export interface BattleEffect {
+  type: SelfEffectType;
+  target: "player" | "cpu";
+}
 export type DialogueState = { player: string; cpu: string };
 export type NotificationType =
   | "info"
@@ -48,7 +53,10 @@ export type NotificationType =
   | "effectiveness"
   | "critical"
   | "status"
-  | "miss";
+  | "miss"
+  | "boost"
+  | "heal"
+  | "drain";
 
 export interface NotificationItem {
   id: number;
@@ -56,9 +64,37 @@ export interface NotificationItem {
   type: NotificationType;
 }
 
+export type StatusEffectType = "burn" | "poison" | "sleep" | "stun";
+export type SelfEffectType =
+  | "atkUp"
+  | "defUp"
+  | "spdUp"
+  | "heal"
+  | "drain"
+  | "recoil";
+
 export interface Effect {
-  type: "burn" | "poison" | "sleep" | "stun";
+  type: StatusEffectType;
   chance: number;
+}
+
+export interface SelfEffect {
+  type: SelfEffectType;
+  chance: number;
+  /** For stat boosts: stages (1-3). For drain: fraction of damage (0.5 = 50%). For recoil: fraction of damage. For heal: flat HP amount. */
+  amount: number;
+}
+
+export interface StatModifiers {
+  atk: number;
+  def: number;
+  spd: number;
+}
+
+/** Maps a stage number to a multiplier. Stages range from -3 to +3. */
+export function getStatMultiplier(stage: number): number {
+  const clamped = Math.max(-3, Math.min(3, stage));
+  return 1 + clamped * 0.25;
 }
 
 export interface Move {
@@ -69,11 +105,17 @@ export interface Move {
   pp: number;
   critChance?: number;
   effect?: Effect;
+  selfEffect?: SelfEffect;
   description: string;
 }
 
 export interface BattleReadyMove extends Move {
   currentPp: number;
+}
+
+export interface MonVariant {
+  image: string;
+  nameSuffix: string;
 }
 
 export interface PortfolioMon {
@@ -93,6 +135,7 @@ export interface PortfolioMon {
     spd: number;
   };
   moves: Move[];
+  variants?: MonVariant[];
 }
 
 export interface BattleReadyMon extends PortfolioMon {
@@ -100,6 +143,7 @@ export interface BattleReadyMon extends PortfolioMon {
   status: StatusEffect;
   statusTurns: number;
   moves: BattleReadyMove[];
+  statModifiers: StatModifiers;
 }
 
 export interface Item {
@@ -117,7 +161,11 @@ export interface PlayerInventory {
 
 export type ItemEffect =
   | { type: "heal"; amount: number }
-  | { type: "cureStatus" };
+  | { type: "cureStatus" }
+  | { type: "boostAtk"; stages: number }
+  | { type: "boostDef"; stages: number }
+  | { type: "boostSpd"; stages: number }
+  | { type: "revive"; hpFraction: number };
 
 // --- UI SPECIFIC TYPES / STATES ---
 export type ActionState = "moves" | "switch" | "items" | "itemTarget";
@@ -161,21 +209,45 @@ export const gameItems: { [key: string]: Item } = {
   "System Restore": {
     name: "System Restore",
     description: "Restores a Project's HP to its maximum.",
-    effect: { type: "heal", amount: 9999 }, // High value acts as a full heal
+    effect: { type: "heal", amount: 9999 },
   },
   Debugger: {
     name: "Debugger",
     description: "A tool that cures any status condition.",
     effect: { type: "cureStatus" },
   },
+  Overclock: {
+    name: "Overclock",
+    description: "Overclocks your Project's processor, sharply raising ATK.",
+    effect: { type: "boostAtk", stages: 2 },
+  },
+  Firewall: {
+    name: "Firewall",
+    description: "Deploys a firewall, sharply raising DEF.",
+    effect: { type: "boostDef", stages: 2 },
+  },
+  "Turbo Mode": {
+    name: "Turbo Mode",
+    description: "Enables turbo mode, sharply raising SPD.",
+    effect: { type: "boostSpd", stages: 2 },
+  },
+  Rollback: {
+    name: "Rollback",
+    description: "Revives a fainted Project with 50% HP.",
+    effect: { type: "revive", hpFraction: 0.5 },
+  },
 };
 
 export const initialInventory: PlayerInventory = {
-  "Code Snippet": { item: gameItems["Code Snippet"], quantity: 5 },
-  "API Key": { item: gameItems["API Key"], quantity: 3 },
-  "Server Patch": { item: gameItems["Server Patch"], quantity: 1 },
-  "System Restore": { item: gameItems["System Restore"], quantity: 1 },
-  Debugger: { item: gameItems["Debugger"], quantity: 2 },
+  "Code Snippet": { item: gameItems["Code Snippet"]!, quantity: 5 },
+  "API Key": { item: gameItems["API Key"]!, quantity: 3 },
+  "Server Patch": { item: gameItems["Server Patch"]!, quantity: 1 },
+  "System Restore": { item: gameItems["System Restore"]!, quantity: 1 },
+  Debugger: { item: gameItems["Debugger"]!, quantity: 2 },
+  Overclock: { item: gameItems["Overclock"]!, quantity: 2 },
+  Firewall: { item: gameItems["Firewall"]!, quantity: 2 },
+  "Turbo Mode": { item: gameItems["Turbo Mode"]!, quantity: 1 },
+  Rollback: { item: gameItems["Rollback"]!, quantity: 1 },
 };
 
 // --- PORTFOLIO-MON DATA ---
@@ -223,27 +295,33 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Marketplace Sync",
-        power: 60,
+        power: 65,
         type: "Data",
         accuracy: 1.0,
-        pp: 20,
-        critChance: 0.1,
-        description: "Connects tools and servers for steady damage.",
+        pp: 15,
+        description: "Connects tools and servers, siphoning energy from the foe.",
+        selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
       },
     ],
   },
   {
     id: 2,
-    name: "Princeton Tower Defense",
+    name: "Princeton TD",
     url: "https://princeton-tower-defense.vercel.app/",
     description:
       "A tower defense game where players defend Princeton from waves of attacks.",
-    image: "/images/princetontd.png",
+    image: "/images/princetontd/gameplay_grounds_ui.png",
     sprite: <Scale />,
     type1: "Game",
     type2: "Web",
     hp: 300,
     stats: { hp: 300, atk: 120, def: 90, spd: 90 },
+    variants: [
+      { image: "/images/princetontd/gameplay_grounds_ui.png", nameSuffix: "Grounds" },
+      { image: "/images/princetontd/gameplay_volcano_ui.png", nameSuffix: "Volcano" },
+      { image: "/images/princetontd/gameplay_swamp_ui.png", nameSuffix: "Swamp" },
+      { image: "/images/princetontd/gameplay_winter_ui.png", nameSuffix: "Winter" },
+    ],
     moves: [
       {
         name: "Nassau Cannon Blast",
@@ -255,13 +333,13 @@ export const portfolioMonData: PortfolioMon[] = [
         description: "A powerful cannon attack that hits hard.",
       },
       {
-        name: "Dinky Station Strike",
-        power: 80,
+        name: "Fortify Walls",
+        power: 50,
         type: "Game",
         accuracy: 1.0,
-        pp: 15,
-        critChance: 0.1,
-        description: "Yet another strike from the Dinky train.",
+        pp: 20,
+        description: "Reinforces defenses while dealing chip damage. Raises DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 1 },
       },
       // abilities
       {
@@ -329,12 +407,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Score Finalize",
-        power: 90,
+        power: 45,
         type: "Data",
         accuracy: 1.0,
-        pp: 10,
-        critChance: 0.2,
-        description: "Locks in the score with a critical, precise strike.",
+        pp: 15,
+        description: "Locks in the score, boosting ATK for the next assault.",
+        selfEffect: { type: "atkUp", chance: 1.0, amount: 1 },
       },
     ],
   },
@@ -381,12 +459,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Citation Trace",
-        power: 55,
+        power: 0,
         type: "Data",
         accuracy: 1.0,
-        pp: 22,
-        critChance: 0.1,
-        description: "Follows references for steady, reliable damage.",
+        pp: 10,
+        description: "Compiles sources to recover HP. Restores 60 HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 60 },
       },
     ],
   },
@@ -432,13 +510,13 @@ export const portfolioMonData: PortfolioMon[] = [
         description: "Confuses the foe with complex data, may cause a stun.",
       },
       {
-        name: "API Call",
-        power: 50,
-        type: "Web",
+        name: "Prompt Tuning",
+        power: 40,
+        type: "AI",
         accuracy: 1.0,
-        pp: 25,
-        critChance: 0.05,
-        description: "A quick and reliable call that deals damage.",
+        pp: 20,
+        description: "Optimizes the model's output, raising SPD.",
+        selfEffect: { type: "spdUp", chance: 1.0, amount: 1 },
       },
     ],
   },
@@ -485,12 +563,13 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Framer Motion",
-        power: 75,
+        power: 110,
         type: "Design",
         accuracy: 0.9,
-        pp: 15,
+        pp: 8,
         critChance: 0.1,
-        description: "A flashy animation that deals solid damage.",
+        description: "A flashy, reckless animation with intense recoil.",
+        selfEffect: { type: "recoil", chance: 1.0, amount: 0.25 },
       },
     ],
   },
@@ -535,14 +614,13 @@ export const portfolioMonData: PortfolioMon[] = [
         description: "Injects bad data that slowly drains the foe's HP.",
       },
       {
-        name: "Debt Reminder",
-        power: 0,
+        name: "Debt Collector",
+        power: 60,
         type: "Web",
         accuracy: 1.0,
         pp: 15,
-        critChance: 0.1,
-        effect: { type: "stun", chance: 0.3 },
-        description: "A nagging reminder that may daze the opponent.",
+        description: "Collects what's owed, draining the foe's energy.",
+        selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
       },
     ],
   },
@@ -575,8 +653,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 1.0,
         pp: 20,
         critChance: 0.05,
-        effect: { type: "stun", chance: 0.2 },
-        description: "A weak but flashy attack that might stun the opponent.",
+        description: "A flashy pull that powers up ATK. May raise ATK.",
+        selfEffect: { type: "atkUp", chance: 0.5, amount: 1 },
       },
       {
         name: "Legendary Roll",
@@ -623,12 +701,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "TigerCard Swipe",
-        power: 65,
+        power: 45,
         type: "Data",
         accuracy: 1.0,
-        pp: 25,
-        critChance: 0.1,
-        description: "A quick swipe that always hits.",
+        pp: 20,
+        description: "A quick swipe that boosts speed. Raises SPD.",
+        selfEffect: { type: "spdUp", chance: 1.0, amount: 1 },
       },
       {
         name: "Golden Cookie",
@@ -666,12 +744,12 @@ export const portfolioMonData: PortfolioMon[] = [
     moves: [
       {
         name: "Responsive Grid",
-        power: 75,
+        power: 45,
         type: "Design",
         accuracy: 1.0,
         pp: 20,
-        critChance: 0.1,
-        description: "Adapts to the opponent, dealing consistent damage.",
+        description: "Adapts to the opponent, boosting SPD in the process.",
+        selfEffect: { type: "spdUp", chance: 1.0, amount: 1 },
       },
       {
         name: "Component Library",
@@ -770,13 +848,13 @@ export const portfolioMonData: PortfolioMon[] = [
     stats: { hp: 300, atk: 100, def: 100, spd: 85 },
     moves: [
       {
-        name: "Acuity Test",
-        power: 75,
+        name: "Eye Exam",
+        power: 0,
         type: "Health",
-        accuracy: 0.95,
-        pp: 15,
-        critChance: 0.1,
-        description: "Targets the foe's weak points with precision.",
+        accuracy: 1.0,
+        pp: 8,
+        description: "A thorough checkup that restores 80 HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 80 },
       },
       {
         name: "Glare",
@@ -849,12 +927,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Gourmet Meal",
-        power: 110,
+        power: 0,
         type: "AI",
-        accuracy: 0.85,
-        pp: 5,
-        critChance: 0.2,
-        description: "A perfectly crafted attack that hits incredibly hard.",
+        accuracy: 1.0,
+        pp: 8,
+        description: "A perfectly crafted dish that restores 70 HP and raises ATK.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 70 },
       },
     ],
   },
@@ -899,12 +977,13 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Plot Twist",
-        power: 75,
+        power: 55,
         type: "Game",
         accuracy: 1.0,
         pp: 15,
-        critChance: 0.2,
-        description: "An unexpected turn of events with a high crit rate.",
+        critChance: 0.15,
+        description: "An unexpected turn of events that raises ATK.",
+        selfEffect: { type: "atkUp", chance: 1.0, amount: 1 },
       },
     ],
   },
@@ -940,12 +1019,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Community Aid",
-        power: 80,
+        power: 50,
         type: "Web",
         accuracy: 1.0,
         pp: 15,
-        critChance: 0.1,
-        description: "A helping hand that deals reliable damage.",
+        description: "A helping hand that raises DEF while dealing damage.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 1 },
       },
       {
         name: "Green Card",
@@ -972,13 +1051,13 @@ export const portfolioMonData: PortfolioMon[] = [
     stats: { hp: 320, atk: 90, def: 115, spd: 75 },
     moves: [
       {
-        name: "Sensor Sweep",
-        power: 70,
-        type: "Hardware",
+        name: "Vital Check",
+        power: 0,
+        type: "Health",
         accuracy: 1.0,
-        pp: 15,
-        critChance: 0.1,
-        description: "A precise scan that targets weaknesses.",
+        pp: 8,
+        description: "Monitors vitals to restore 90 HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 90 },
       },
       {
         name: "Health Alert",
@@ -1053,12 +1132,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Lobbyist",
-        power: 75,
+        power: 70,
         type: "Web",
         accuracy: 1.0,
         pp: 15,
-        critChance: 0.1,
-        description: "A persuasive move that damages the opponent's will.",
+        description: "A persuasive move that drains the opponent's resources.",
+        selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
       },
     ],
   },
@@ -1110,7 +1189,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.75,
         pp: 5,
         critChance: 0.1,
-        description: "An unlikely event that deals massive damage.",
+        description: "An unlikely event that deals massive damage but recoils.",
+        selfEffect: { type: "recoil", chance: 1.0, amount: 0.33 },
       },
     ],
   },
@@ -1146,12 +1226,12 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Refactor",
-        power: 85,
+        power: 50,
         type: "Web",
-        accuracy: 0.9,
+        accuracy: 1.0,
         pp: 15,
-        critChance: 0.1,
-        description: "Restructures the opponent's code base for damage.",
+        description: "Clean up the codebase, boosting DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 1 },
       },
       {
         name: "Syntax Error",
@@ -1210,7 +1290,8 @@ export const portfolioMonData: PortfolioMon[] = [
         type: "Web",
         accuracy: 0.8,
         pp: 5,
-        description: "A devastating crash that deals immense damage.",
+        description: "A devastating crash with punishing recoil.",
+        selfEffect: { type: "recoil", chance: 1.0, amount: 0.25 },
       },
     ],
   },
@@ -1228,12 +1309,12 @@ export const portfolioMonData: PortfolioMon[] = [
     moves: [
       {
         name: "Practice Round",
-        power: 65,
+        power: 45,
         type: "Data",
         accuracy: 1.0,
-        pp: 25,
-        critChance: 0.1,
-        description: "A quick and reliable attack for warming up.",
+        pp: 20,
+        description: "A warm-up that also raises ATK.",
+        selfEffect: { type: "atkUp", chance: 1.0, amount: 1 },
       },
       {
         name: "Sample Questions",
@@ -1310,9 +1391,9 @@ export const portfolioMonData: PortfolioMon[] = [
         power: 70,
         type: "Data",
         accuracy: 1.0,
-        pp: 20,
-        critChance: 0.1,
-        description: "A rapid stream of data that chips away at the foe.",
+        pp: 15,
+        description: "A rapid stream of data that drains the foe's tokens.",
+        selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
       },
     ],
   },
@@ -1358,13 +1439,13 @@ export const portfolioMonData: PortfolioMon[] = [
         description: "Uses sensitive data to inflict a lasting ailment.",
       },
       {
-        name: "Sonic Boom",
-        power: 100,
-        type: "Hardware",
-        accuracy: 0.9,
-        pp: 5,
-        critChance: 0.1,
-        description: "A powerful blast of sound waves.",
+        name: "Recovery Scan",
+        power: 0,
+        type: "Health",
+        accuracy: 1.0,
+        pp: 8,
+        description: "A deep diagnostic scan that restores 85 HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 85 },
       },
     ],
   },

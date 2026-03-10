@@ -15,49 +15,15 @@ import type {
   Item,
   BattleReadyMon,
   AnimationState,
+  BattleEffect,
+  SelfEffectType,
 } from "../../context/gameContext";
+import { typeChart as sharedTypeChart } from "../../context/gameContext";
+import { CLIP } from "../../constants/clipPaths";
+import { MAX_HP_VALUE, MAX_STAT_VALUE } from "../../constants/game";
 
-// --- TYPE & STATUS STYLING ---
-export const typeStyles: {
-  [key: string]: { bg: string; border: string; text: string };
-} = {
-  AI: { bg: "bg-purple-500", border: "border-purple-400", text: "text-white" },
-  Data: { bg: "bg-blue-500", border: "border-blue-400", text: "text-white" },
-  Web: { bg: "bg-green-500", border: "border-green-400", text: "text-white" },
-  Design: { bg: "bg-pink-500", border: "border-pink-400", text: "text-white" },
-  Hardware: {
-    bg: "bg-gray-500",
-    border: "border-gray-400",
-    text: "text-white",
-  },
-  Health: { bg: "bg-red-500", border: "border-red-400", text: "text-white" },
-  Mobile: {
-    bg: "bg-yellow-500",
-    border: "border-yellow-400",
-    text: "text-black",
-  },
-  Game: {
-    bg: "bg-orange-500",
-    border: "border-orange-400",
-    text: "text-white",
-  },
-};
-
-export const TypeBadge = ({ type }: { type: string }) => {
-  const style = typeStyles[type] || {
-    bg: "bg-gray-200",
-    border: "border-gray-300",
-    text: "text-black",
-  };
-  return (
-    <span
-      className={`px-2 py-0.5 text-xs font-bold ${style.bg} ${style.text}`}
-      style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 8% 100%)" }}
-    >
-      {type}
-    </span>
-  );
-};
+import { TypeBadge, TYPE_STYLES } from "../ui/TypeBadge";
+export { TypeBadge, TYPE_STYLES as typeStyles };
 
 export const ForcedSwitchScreen = () => (
   <motion.div
@@ -75,67 +41,351 @@ export const ForcedSwitchScreen = () => (
   </motion.div>
 );
 
+const ATTACK_PARTICLES = 10;
+
+const TypeParticles = ({
+  originX,
+  originY,
+  color,
+}: {
+  originX: string;
+  originY: string;
+  color: string;
+}) => (
+  <>
+    {Array.from({ length: ATTACK_PARTICLES }, (_, i) => {
+      const angle = (i / ATTACK_PARTICLES) * 360;
+      const rad = (angle * Math.PI) / 180;
+      const dist = 40 + Math.random() * 80;
+      return (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: 4 + Math.random() * 6,
+            height: 4 + Math.random() * 6,
+            left: originX,
+            top: originY,
+            background: `rgba(${color}, ${0.6 + Math.random() * 0.4})`,
+            boxShadow: `0 0 8px rgba(${color}, 0.8)`,
+          }}
+          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+          animate={{
+            x: Math.cos(rad) * dist,
+            y: Math.sin(rad) * dist,
+            opacity: 0,
+            scale: 0.3,
+          }}
+          transition={{ duration: 0.4 + Math.random() * 0.2, ease: "easeOut" }}
+        />
+      );
+    })}
+  </>
+);
+
+const SlashLines = ({ color, isPlayer }: { color: string; isPlayer: boolean }) => (
+  <>
+    {[0, 1, 2].map((i) => (
+      <motion.div
+        key={i}
+        className="absolute"
+        style={{
+          left: isPlayer ? "60%" : "15%",
+          top: isPlayer ? "20%" : "50%",
+          width: 60 + i * 15,
+          height: 2,
+          background: `linear-gradient(90deg, transparent, rgba(${color}, 0.9), transparent)`,
+          transformOrigin: "center",
+          rotate: -30 + i * 25,
+        }}
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: [0, 1, 0], opacity: [0, 1, 0] }}
+        transition={{ duration: 0.35, delay: i * 0.06, ease: "easeOut" }}
+      />
+    ))}
+  </>
+);
+
 export const BackgroundEffects = ({
   playerAnimation,
   cpuAnimation,
+  lastMoveType,
 }: {
   playerAnimation: AnimationState;
   cpuAnimation: AnimationState;
+  lastMoveType: string | null;
 }) => {
+  const typeColor = lastMoveType
+    ? (TYPE_ATTACK_COLORS[lastMoveType] ?? "0, 220, 255")
+    : "0, 220, 255";
+
   return (
     <>
       {playerAnimation === "attack" && (
-        <motion.div
-          className="absolute left-0 top-0 h-full w-full"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 65%, rgba(0, 220, 255, 0.4), transparent 40%)",
-          }}
-          initial={{ opacity: 0, scale: 1.5 }}
-          animate={{ opacity: [0, 1, 0], scale: 1 }}
-          transition={{ duration: 0.5, times: [0, 0.5, 1] }}
-        />
+        <>
+          <motion.div
+            className="absolute left-0 top-0 h-full w-full"
+            style={{
+              background: `radial-gradient(circle at 30% 65%, rgba(${typeColor}, 0.5), transparent 40%)`,
+            }}
+            initial={{ opacity: 0, scale: 1.5 }}
+            animate={{ opacity: [0, 1, 0], scale: 1 }}
+            transition={{ duration: 0.5, times: [0, 0.5, 1] }}
+          />
+          <SlashLines color={typeColor} isPlayer={true} />
+        </>
       )}
 
       {cpuAnimation === "hit" && (
-        <motion.div
-          className="absolute right-[10%] top-[15%] h-1/4 w-1/4"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(255, 255, 255, 0.8), transparent 60%)",
-          }}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: [0, 1, 0], scale: 1 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
+        <>
+          <motion.div
+            className="absolute right-[10%] top-[15%] h-1/4 w-1/4"
+            style={{
+              background: `radial-gradient(circle at center, rgba(${typeColor}, 0.8), transparent 60%)`,
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 1] }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+          <TypeParticles originX="70%" originY="25%" color={typeColor} />
+        </>
       )}
 
       {cpuAnimation === "attack" && (
-        <motion.div
-          className="absolute left-0 top-0 h-full w-full"
-          style={{
-            background:
-              "radial-gradient(circle at 70% 30%, rgba(255, 80, 80, 0.4), transparent 40%)",
-          }}
-          initial={{ opacity: 0, scale: 1.5 }}
-          animate={{ opacity: [0, 1, 0], scale: 1 }}
-          transition={{ duration: 0.5, times: [0, 0.5, 1] }}
-        />
+        <>
+          <motion.div
+            className="absolute left-0 top-0 h-full w-full"
+            style={{
+              background: `radial-gradient(circle at 70% 30%, rgba(${typeColor}, 0.5), transparent 40%)`,
+            }}
+            initial={{ opacity: 0, scale: 1.5 }}
+            animate={{ opacity: [0, 1, 0], scale: 1 }}
+            transition={{ duration: 0.5, times: [0, 0.5, 1] }}
+          />
+          <SlashLines color={typeColor} isPlayer={false} />
+        </>
       )}
 
       {playerAnimation === "hit" && (
-        <motion.div
-          className="absolute bottom-[40%] left-[12%] h-1/3 w-1/3"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(255, 255, 255, 0.8), transparent 60%)",
-          }}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: [0, 1, 0], scale: 1 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
+        <>
+          <motion.div
+            className="absolute bottom-[40%] left-[12%] h-1/3 w-1/3"
+            style={{
+              background: `radial-gradient(circle at center, rgba(${typeColor}, 0.8), transparent 60%)`,
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 1] }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+          <TypeParticles originX="25%" originY="55%" color={typeColor} />
+        </>
       )}
     </>
+  );
+};
+
+const TYPE_ATTACK_COLORS: Record<string, string> = {
+  AI: "138, 43, 226",
+  Data: "59, 130, 246",
+  Web: "34, 197, 94",
+  Design: "236, 72, 153",
+  Hardware: "107, 114, 128",
+  Health: "239, 68, 68",
+  Mobile: "234, 179, 8",
+  Game: "249, 115, 22",
+};
+
+// --- SELF EFFECT VISUAL OVERLAYS ---
+
+const EFFECT_COLORS: Record<SelfEffectType, { primary: string; glow: string }> = {
+  atkUp: { primary: "239, 68, 68", glow: "248, 113, 113" },
+  defUp: { primary: "59, 130, 246", glow: "96, 165, 250" },
+  spdUp: { primary: "234, 179, 8", glow: "250, 204, 21" },
+  heal: { primary: "34, 197, 94", glow: "74, 222, 128" },
+  drain: { primary: "139, 92, 246", glow: "167, 139, 250" },
+  recoil: { primary: "249, 115, 22", glow: "251, 146, 60" },
+};
+
+const StatBoostEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+  <>
+    {Array.from({ length: 8 }, (_, i) => {
+      const x = 20 + Math.random() * 60;
+      const delay = i * 0.06;
+      return (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{
+            left: `${x}%`,
+            bottom: "10%",
+            width: 3,
+            height: 14 + Math.random() * 10,
+            background: `rgba(${color.glow}, 0.9)`,
+            boxShadow: `0 0 10px rgba(${color.primary}, 0.8)`,
+            borderRadius: 2,
+          }}
+          initial={{ y: 0, opacity: 0, scaleY: 0.5 }}
+          animate={{ y: -80 - Math.random() * 40, opacity: [0, 1, 1, 0], scaleY: 1 }}
+          transition={{ duration: 0.7, delay, ease: "easeOut" }}
+        />
+      );
+    })}
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: `radial-gradient(ellipse at 50% 80%, rgba(${color.primary}, 0.3), transparent 60%)`,
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0.8, 0] }}
+      transition={{ duration: 0.8 }}
+    />
+  </>
+);
+
+const HealEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+  <>
+    {Array.from({ length: 12 }, (_, i) => {
+      const x = 15 + Math.random() * 70;
+      const delay = i * 0.05;
+      const size = 4 + Math.random() * 5;
+      return (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            left: `${x}%`,
+            bottom: "20%",
+            width: size,
+            height: size,
+            background: `rgba(${color.glow}, 0.9)`,
+            boxShadow: `0 0 8px rgba(${color.primary}, 0.6)`,
+          }}
+          initial={{ y: 0, opacity: 0, scale: 0 }}
+          animate={{ y: -60 - Math.random() * 50, opacity: [0, 1, 0.8, 0], scale: [0, 1.2, 0.6] }}
+          transition={{ duration: 0.8, delay, ease: "easeOut" }}
+        />
+      );
+    })}
+    <motion.div
+      className="absolute inset-x-[20%] bottom-[30%] h-[40%]"
+      style={{
+        background: `radial-gradient(ellipse at 50% 50%, rgba(${color.primary}, 0.25), transparent 70%)`,
+      }}
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: [0, 1, 0], scale: [0.5, 1.3, 1.5] }}
+      transition={{ duration: 0.9 }}
+    />
+  </>
+);
+
+const DrainEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+  <>
+    {Array.from({ length: 10 }, (_, i) => {
+      const startX = 30 + Math.random() * 40;
+      const startY = 30 + Math.random() * 40;
+      const delay = i * 0.07;
+      return (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            left: `${startX}%`,
+            top: `${startY}%`,
+            width: 5,
+            height: 5,
+            background: `rgba(${color.glow}, 0.9)`,
+            boxShadow: `0 0 12px rgba(${color.primary}, 0.8)`,
+          }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{
+            x: [0, (50 - startX) * 0.5],
+            y: [0, (50 - startY) * 0.5],
+            scale: [0, 1.5, 0.3],
+            opacity: [0, 1, 0],
+          }}
+          transition={{ duration: 0.7, delay, ease: "easeIn" }}
+        />
+      );
+    })}
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: `radial-gradient(ellipse at 50% 50%, rgba(${color.primary}, 0.2), transparent 50%)`,
+      }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: [0, 0.6, 0], scale: [0.8, 1.1, 0.9] }}
+      transition={{ duration: 0.8 }}
+    />
+  </>
+);
+
+const RecoilEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+  <>
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: `radial-gradient(ellipse at 50% 50%, rgba(${color.primary}, 0.4), transparent 60%)`,
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 1, 0, 0.6, 0] }}
+      transition={{ duration: 0.6, times: [0, 0.2, 0.4, 0.6, 1] }}
+    />
+    {Array.from({ length: 6 }, (_, i) => {
+      const angle = (i / 6) * 360;
+      const rad = (angle * Math.PI) / 180;
+      return (
+        <motion.div
+          key={i}
+          className="absolute left-1/2 top-1/2 rounded-full"
+          style={{
+            width: 3,
+            height: 8,
+            background: `rgba(${color.glow}, 0.8)`,
+            transformOrigin: "center",
+            rotate: angle,
+          }}
+          initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
+          animate={{
+            x: Math.cos(rad) * 35,
+            y: Math.sin(rad) * 35,
+            opacity: [0, 1, 0],
+            scale: [0, 1, 0.5],
+          }}
+          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+        />
+      );
+    })}
+  </>
+);
+
+const EFFECT_RENDERERS: Record<SelfEffectType, React.FC<{ color: { primary: string; glow: string } }>> = {
+  atkUp: StatBoostEffect,
+  defUp: StatBoostEffect,
+  spdUp: StatBoostEffect,
+  heal: HealEffect,
+  drain: DrainEffect,
+  recoil: RecoilEffect,
+};
+
+export const SelfEffectOverlay = ({
+  effect,
+}: {
+  effect: BattleEffect | null;
+}) => {
+  if (!effect) return null;
+  const color = EFFECT_COLORS[effect.type];
+  const Renderer = EFFECT_RENDERERS[effect.type];
+  return (
+    <motion.div
+      key={`${effect.type}-${effect.target}-${Date.now()}`}
+      className="pointer-events-none absolute inset-0 z-30 overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
+    >
+      <Renderer color={color} />
+    </motion.div>
   );
 };
 
@@ -157,11 +407,8 @@ export const ActionButton = ({
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     className={`flex items-center justify-center gap-2 py-2 text-[0.6rem] text-xs font-bold uppercase tracking-wider text-white shadow-md transition-colors disabled:cursor-not-allowed disabled:bg-slate-700 disabled:opacity-50 ${color}`}
-    disabled={disabled} // Sci-fi Update: Added clip-path for angular button style
-    style={{
-      clipPath:
-        "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)",
-    }}
+    disabled={disabled}
+    style={{ clipPath: CLIP.cornerBR }}
   >
     {icon} {children}
   </motion.button>
@@ -186,11 +433,8 @@ export const SwitchItemView = ({
       onClick={onCancel}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="flex items-center gap-2 bg-red-600 px-6 py-2 font-bold text-white shadow-md transition-colors hover:bg-red-500" // Sci-fi Update: Added clip-path
-      style={{
-        clipPath:
-          "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)",
-      }}
+      className="flex items-center gap-2 bg-red-600 px-6 py-2 font-bold text-white shadow-md transition-colors hover:bg-red-500"
+      style={{ clipPath: CLIP.cornerBR }}
     >
       <ArrowLeft className="h-5 w-5" /> Back
     </motion.button>
@@ -238,10 +482,7 @@ export const ItemMenu = ({
               key={item.name}
               onClick={() => onItemSelect(item)}
               className="w-full bg-slate-700/80 p-2 text-left shadow-sm transition hover:bg-slate-700"
-              style={{
-                clipPath:
-                  "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)",
-              }}
+              style={{ clipPath: CLIP.cornerBR }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -260,10 +501,7 @@ export const ItemMenu = ({
 
                 <span
                   className="bg-slate-600 px-3 py-1 text-sm font-bold"
-                  style={{
-                    clipPath:
-                      "polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
-                  }}
+                  style={{ clipPath: CLIP.quantityBadge }}
                 >
                   x{quantity}
                 </span>
@@ -281,39 +519,45 @@ export const ItemMenu = ({
 const StatBar = ({
   label,
   value,
-  maxValue = 320,
+  maxValue = MAX_STAT_VALUE,
 }: {
   label: string;
   value: number;
   maxValue?: number;
-}) => (
-  <div className="grid grid-cols-6 items-center gap-2">
-    <span className="col-span-1 font-kode text-[10px] uppercase text-slate-500 dark:text-slate-400">
-      {label}
-    </span>
-    <div
-      className="col-span-4 h-1.5 bg-slate-300 p-0.5 dark:bg-slate-900/70"
-      style={{
-        clipPath:
-          "polygon(0 0, 100% 0, 100% 100%, 3px 100%, 0 calc(100% - 3px))",
-      }}
-    >
-      <motion.div
-        className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
-        initial={{ width: 0 }}
-        animate={{ width: `${(value / maxValue) * 100}%` }}
-        transition={{ duration: 0.8, ease: "circOut", delay: 0.5 }}
-        style={{
-          clipPath:
-            "polygon(0 0, 100% 0, 100% 100%, 3px 100%, 0 calc(100% - 3px))",
-        }}
-      />
+}) => {
+  const pct = Math.min(100, (value / maxValue) * 100);
+  const gradient =
+    pct >= 75
+      ? "from-emerald-400 to-cyan-400 shadow-[0_0_8px_theme(colors.emerald.500)]"
+      : pct >= 50
+        ? "from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
+        : pct >= 30
+          ? "from-amber-400 to-orange-500 shadow-[0_0_8px_theme(colors.amber.500)]"
+          : "from-red-400 to-rose-600 shadow-[0_0_8px_theme(colors.red.500)]";
+
+  return (
+    <div className="grid grid-cols-6 items-center gap-2">
+      <span className="col-span-1 font-kode text-[10px] uppercase text-slate-500 dark:text-slate-400">
+        {label}
+      </span>
+      <div
+        className="col-span-4 h-1.5 bg-slate-300 p-0.5 dark:bg-slate-900/70"
+        style={{ clipPath: CLIP.statBar }}
+      >
+        <motion.div
+          className={`h-full bg-gradient-to-r ${gradient}`}
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 0.8, ease: "circOut", delay: 0.5 }}
+          style={{ clipPath: CLIP.statBar }}
+        />
+      </div>
+      <span className="col-span-1 font-kode text-xs font-bold text-slate-900 dark:text-white">
+        {value}
+      </span>
     </div>
-    <span className="col-span-1 font-kode text-xs font-bold text-slate-900 dark:text-white">
-      {value}
-    </span>
-  </div>
-);
+  );
+};
 
 export const InfoBox = ({
   mon,
@@ -342,7 +586,7 @@ export const InfoBox = ({
       <h5 className="mb-1 text-xs font-bold uppercase tracking-wider text-slate-400">
         Base Stats
       </h5>
-      <StatBar label="HP" value={mon.stats.hp} />
+      <StatBar label="HP" value={mon.stats.hp} maxValue={MAX_HP_VALUE} />
       <StatBar label="ATK" value={mon.stats.atk} />
       <StatBar label="DEF" value={mon.stats.def} />
       <StatBar label="SPD" value={mon.stats.spd} />
@@ -351,10 +595,7 @@ export const InfoBox = ({
     <Link
       href={mon.url}
       className="mt-1 inline-flex w-full cursor-pointer items-center justify-center gap-2 bg-cyan-600 px-3 py-1 text-sm font-semibold text-white transition hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-800"
-      style={{
-        clipPath:
-          "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)",
-      }}
+      style={{ clipPath: CLIP.cornerBR }}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -370,21 +611,7 @@ export const GuideModal = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
-  const typeChart: { [attacker: string]: { [defender: string]: number } } = {
-    AI: { Data: 2, Web: 0.5, Hardware: 0.5, Game: 2 },
-    Data: { AI: 0.5, Design: 2, Health: 2, Game: 0.5 },
-    Web: { Mobile: 2, AI: 2, Design: 0.5, Data: 0.5 },
-    Design: { Web: 2, Game: 2, Data: 0.5 },
-    Hardware: { AI: 2, Health: 0.5, Mobile: 2, Web: 0.5 },
-    Health: { Hardware: 2, Game: 0.5, Data: 0.5 },
-    Mobile: { Web: 0.5, Hardware: 0.5, Game: 2, Design: 2 },
-    Game: { AI: 0.5, Design: 0.5, Health: 2, Data: 2, Mobile: 0.5 },
-  };
-  const types = Object.keys(typeChart);
-
-  // Define the clip-path as a constant to avoid repetition
-  const modalClipPath =
-    "polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)";
+  const types = Object.keys(sharedTypeChart);
 
   return (
     <AnimatePresence>
@@ -402,16 +629,15 @@ export const GuideModal = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="relative w-full max-w-3xl bg-slate-600 p-px pl-2 shadow-2xl" // Border color and thickness
-            style={{ clipPath: modalClipPath }}
+            className="relative w-full max-w-3xl bg-slate-600 p-px pl-2 shadow-2xl"
+            style={{ clipPath: CLIP.modal }}
             onClick={(e: React.MouseEvent<HTMLDivElement>) =>
               e.stopPropagation()
             }
           >
-            {/* The inner div is the main content area */}
             <div
               className="relative flex h-full max-h-[60vh] w-full flex-col bg-slate-800"
-              style={{ clipPath: modalClipPath }}
+              style={{ clipPath: CLIP.modal }}
             >
               <div className="flex items-center justify-between border-b border-slate-700 p-4">
                 <h2 className="text-2xl font-bold text-cyan-300">
@@ -468,7 +694,44 @@ export const GuideModal = ({
                       </li>
                       <li>
                         <strong className="text-yellow-400">Stun:</strong> 25%
-                        chance to be unable to move.
+                        chance to skip your turn. Lasts 3 turns.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+                  <div>
+                    <h3 className="mb-2 text-lg font-semibold">Move Effects</h3>
+                    <ul className="list-inside list-disc space-y-2 text-slate-300">
+                      <li>
+                        <strong className="text-red-400">ATK Up:</strong> Raises
+                        the user&apos;s ATK by 1 stage (+25% per stage, max +3).
+                      </li>
+                      <li>
+                        <strong className="text-blue-400">DEF Up:</strong> Raises
+                        the user&apos;s DEF by 1 stage.
+                      </li>
+                      <li>
+                        <strong className="text-yellow-400">SPD Up:</strong> Raises
+                        the user&apos;s SPD by 1 stage.
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="mb-2 text-lg font-semibold">Special Effects</h3>
+                    <ul className="list-inside list-disc space-y-2 text-slate-300">
+                      <li>
+                        <strong className="text-emerald-400">Heal:</strong> Restores
+                        a fixed amount of HP.
+                      </li>
+                      <li>
+                        <strong className="text-violet-400">Drain:</strong> Recovers
+                        HP equal to 50% of damage dealt.
+                      </li>
+                      <li>
+                        <strong className="text-orange-400">Recoil:</strong> User takes
+                        a fraction of damage dealt as self-damage.
                       </li>
                     </ul>
                   </div>
@@ -513,7 +776,7 @@ export const GuideModal = ({
                             </td>
 
                             {types.map((def) => {
-                              const multiplier = typeChart[atk]?.[def] ?? 1;
+                              const multiplier = sharedTypeChart[atk]?.[def] ?? 1;
                               return (
                                 <td key={def} className="p-1 font-mono">
                                   <span

@@ -7,43 +7,46 @@ import {
   Moon,
   LogIn,
   LogOut,
-  UserCircle,
-  Menu,
-  X,
   Shield,
-  RefreshCw,
+  RotateCcw,
   Flag,
   Swords,
   CheckSquare,
   Bot,
-  Layers,
-  TypeIcon,
+  ImageIcon,
+  Type,
   UserIcon,
+  Github,
+  Linkedin,
+  Mail,
+  Menu,
+  X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGame } from "../providers/gameProvider";
 import LogoIcon from "./logoIcon";
+import { CLIP } from "../constants/clipPaths";
+import { SOCIAL_LINKS } from "../constants/site";
+// --- Reusable Primitives ---
 
-// Helper component for styled button groups with hover animation
 const ClippedGroupContainer = ({
   children,
   className,
+  label,
 }: {
   children: React.ReactNode;
   className?: string;
+  label?: string;
 }) => (
   <motion.div
-    className={`relative bg-slate-300/50 p-px px-0.5 transition-all hover:py-0.5 dark:bg-cyan-400/50 ${className}`}
-    style={{
-      clipPath:
-        "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
-    }}
+    className={`relative bg-slate-400/60 p-px px-0.5 transition-all hover:py-0.5 dark:bg-cyan-400/50 ${className ?? ""}`}
+    style={{ clipPath: CLIP.navGroup }}
     initial="rest"
     whileHover="hover"
     animate="rest"
   >
     <motion.div
-      className="absolute top-0 left-0 h-full w-12 bg-black/10 blur-md dark:bg-white/25"
+      className="pointer-events-none absolute top-0 left-0 h-full w-12 bg-black/10 blur-md dark:bg-white/25"
       variants={{
         rest: { x: "-150%", skewX: -20 },
         hover: {
@@ -54,30 +57,64 @@ const ClippedGroupContainer = ({
       }}
     />
     <div
-      className="relative flex h-full w-full items-center gap-1 bg-slate-100/80 px-1 py-1 dark:bg-slate-900/80"
-      style={{
-        clipPath:
-          "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
-      }}
+      className="relative flex h-full w-full items-center gap-0.5 bg-white/90 px-1 py-1 dark:bg-slate-900/80"
+      style={{ clipPath: CLIP.navGroup }}
     >
+      {label && (
+        <span className="pointer-events-none select-none pl-1.5 pr-1 font-hanken text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+          {label}
+        </span>
+      )}
       {children}
     </div>
   </motion.div>
 );
 
-// Helper for individual buttons
-const ClippedButton = (props: React.ComponentProps<"button">) => (
+const ClippedButton = ({
+  className,
+  ...props
+}: React.ComponentProps<"button">) => (
   <button
     {...props}
-    className={`relative p-2 text-slate-600 transition-colors duration-200 hover:bg-cyan-400/10 hover:text-cyan-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-600 dark:text-slate-300 dark:hover:bg-cyan-400/20 dark:hover:text-cyan-300 dark:disabled:hover:text-slate-300 ${props.className}`}
-    style={{
-      clipPath:
-        "polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
-    }}
+    className={`relative p-2 text-slate-500 transition-colors duration-200 hover:bg-cyan-500/10 hover:text-cyan-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-500 dark:text-slate-300 dark:hover:bg-cyan-400/20 dark:hover:text-cyan-300 dark:disabled:hover:text-slate-300 ${className ?? ""}`}
+    style={{ clipPath: CLIP.navButton }}
   />
 );
 
-// --- NEW SCI-FI AUTO-BATTLE BUTTON ---
+const ClippedLink = ({
+  className,
+  ...props
+}: React.ComponentProps<"a">) => (
+  <a
+    {...props}
+    className={`relative block p-2 text-slate-500 transition-colors duration-200 hover:bg-cyan-500/10 hover:text-cyan-700 dark:text-slate-300 dark:hover:bg-cyan-400/20 dark:hover:text-cyan-300 ${className ?? ""}`}
+    style={{ clipPath: CLIP.navButton }}
+    target="_blank"
+    rel="noopener noreferrer"
+  />
+);
+
+// --- Social Links Group ---
+
+const SocialLinksGroup = () => (
+  <ClippedGroupContainer>
+    <ClippedLink href={SOCIAL_LINKS.github} title="GitHub">
+      <Github className="h-[18px] w-[18px]" />
+    </ClippedLink>
+    <ClippedLink href={SOCIAL_LINKS.linkedin} title="LinkedIn">
+      <Linkedin className="h-[18px] w-[18px]" />
+    </ClippedLink>
+    <ClippedLink href={`mailto:${SOCIAL_LINKS.email}`} title="Email">
+      <Mail className="h-[18px] w-[18px]" />
+    </ClippedLink>
+  </ClippedGroupContainer>
+);
+
+// --- Current Role Badge ---
+
+
+// --- Auto-Battle Button ---
+
 const AutoBattleButton = () => {
   const { isAutoBattleActive, toggleAutoBattle } = useGame();
 
@@ -121,7 +158,7 @@ const AutoBattleButton = () => {
             />
             <motion.svg
               viewBox="0 0 24 24"
-              className="absolute inset-0 text-cyan-500 dark:text-cyan-300"
+              className="absolute inset-0 text-cyan-600 dark:text-cyan-300"
               style={{ filter: "drop-shadow(0 0 2px currentColor)" }}
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -140,7 +177,7 @@ const AutoBattleButton = () => {
             </motion.svg>
             <motion.svg
               viewBox="0 0 24 24"
-              className="absolute inset-0 text-cyan-500 dark:text-cyan-300"
+              className="absolute inset-0 text-cyan-600 dark:text-cyan-300"
               style={{ filter: "drop-shadow(0 0 2px currentColor)" }}
               animate={{ rotate: -360 }}
               transition={{
@@ -163,43 +200,200 @@ const AutoBattleButton = () => {
         )}
       </AnimatePresence>
       <Bot
-        className={`relative h-5 w-5 transition-colors ${
+        className={`relative h-[18px] w-[18px] transition-colors ${
           isAutoBattleActive
             ? "text-cyan-700 dark:text-white"
-            : "text-slate-600 dark:text-slate-300"
+            : "text-slate-500 dark:text-slate-300"
         }`}
       />
     </ClippedButton>
   );
 };
 
-const BackgroundPreview = ({ nextBgIndex }: { nextBgIndex: number }) => {
+// --- Background Preview Tooltip ---
+
+const BackgroundPreview = ({ nextBgIndex }: { nextBgIndex: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+    transition={{ duration: 0.2, ease: "easeOut" }}
+    className="absolute top-[calc(100%+0.5rem)] right-0 z-[100] mb-3 w-48 rounded-md border border-slate-300 bg-white/80 p-1 shadow-2xl backdrop-blur-md dark:border-cyan-400/50 dark:bg-slate-900/80"
+  >
+    <div className="relative aspect-video w-full overflow-hidden rounded">
+      <Image
+        src={`/images/backgrounds/background-${nextBgIndex}.jpg`}
+        alt={`Preview of background ${nextBgIndex}`}
+        fill
+        className="object-cover"
+      />
+    </div>
+    <p className="mt-1 text-center text-xs font-bold text-slate-700 dark:text-slate-300">
+      Next Arena
+    </p>
+  </motion.div>
+);
+
+// --- Game Controls (contextual) ---
+
+const GameControlsGroup = () => {
+  const {
+    gameState,
+    playerTeam,
+    handleReset,
+    handleRun,
+    handleConfirmTeam,
+    startBattle,
+  } = useGame();
+
+  const showControls =
+    gameState === "fight" ||
+    gameState === "gameOver" ||
+    gameState === "forcedSwitch" ||
+    gameState === "teamSelect" ||
+    gameState === "teamPreview";
+
+  if (!showControls) return null;
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className="absolute top-[calc(100%+0.5rem)] right-0 z-[100] mb-3 w-48 rounded-md border border-slate-300 bg-white/80 p-1 shadow-2xl backdrop-blur-md dark:border-cyan-400/50 dark:bg-slate-900/80"
-    >
-      <div className="relative aspect-video w-full overflow-hidden rounded">
-        <Image
-          src={`/images/backgrounds/background-${nextBgIndex}.jpg`}
-          alt={`Preview of background ${nextBgIndex}`}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <p className="mt-1 text-center text-xs font-bold text-slate-700 dark:text-slate-300">
-        Next Arena
-      </p>
-    </motion.div>
+    <ClippedGroupContainer label="Game">
+      {(gameState === "fight" ||
+        gameState === "gameOver" ||
+        gameState === "forcedSwitch") && (
+        <>
+          <ClippedButton onClick={handleReset} title="Reset Game">
+            <RotateCcw className="h-[18px] w-[18px]" />
+          </ClippedButton>
+          <ClippedButton onClick={handleRun} title="Forfeit Match">
+            <Flag className="h-[18px] w-[18px]" />
+          </ClippedButton>
+          <AutoBattleButton />
+        </>
+      )}
+      {gameState === "teamSelect" && (
+        <ClippedButton
+          onClick={handleConfirmTeam}
+          title="Confirm Team"
+          disabled={playerTeam.length !== 3}
+        >
+          <CheckSquare className="h-[18px] w-[18px]" />
+        </ClippedButton>
+      )}
+      {gameState === "teamPreview" && (
+        <ClippedButton onClick={startBattle} title="Start Battle">
+          <Swords className="h-[18px] w-[18px]" />
+        </ClippedButton>
+      )}
+    </ClippedGroupContainer>
   );
 };
 
+// --- Visual/Settings Controls ---
+
+const SettingsGroup = ({
+  mounted,
+  theme,
+  systemTheme,
+  setTheme,
+  fontInitializer,
+}: {
+  mounted: boolean;
+  theme: string | undefined;
+  systemTheme: string | undefined;
+  setTheme: (theme: string) => void;
+  fontInitializer: () => void;
+}) => {
+  const { cycleBackground, background } = useGame();
+  const [showBgPreview, setShowBgPreview] = useState(false);
+  const nextBgIndex = (background % 6) + 1;
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  return (
+    <div className="relative">
+      <ClippedGroupContainer>
+        <div
+          onMouseEnter={() => setShowBgPreview(true)}
+          onMouseLeave={() => setShowBgPreview(false)}
+        >
+          <ClippedButton onClick={cycleBackground} title="Change Arena">
+            <ImageIcon className="h-[18px] w-[18px]" />
+          </ClippedButton>
+        </div>
+        <ClippedButton
+          onClick={fontInitializer}
+          title="Change Font"
+        >
+          <Type className="h-[18px] w-[18px]" />
+        </ClippedButton>
+        {mounted && (
+          <ClippedButton
+            onClick={() =>
+              setTheme(currentTheme === "dark" ? "light" : "dark")
+            }
+            title={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
+          >
+            {currentTheme === "dark" ? (
+              <Moon className="h-[18px] w-[18px]" />
+            ) : (
+              <Sun className="h-[18px] w-[18px]" />
+            )}
+          </ClippedButton>
+        )}
+      </ClippedGroupContainer>
+      <AnimatePresence>
+        {showBgPreview && <BackgroundPreview nextBgIndex={nextBgIndex} />}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+// --- User/Auth Controls ---
+
+const UserGroup = () => {
+  const { data: session } = useSession();
+
+  return (
+    <ClippedGroupContainer>
+      <div
+        className="relative h-8 w-8 flex-shrink-0 bg-slate-300 p-px dark:bg-cyan-400/50"
+        style={{ clipPath: CLIP.octagon }}
+      >
+        <div
+          className="relative h-full w-full bg-slate-50 dark:bg-cyan-900"
+          style={{ clipPath: CLIP.octagon }}
+        >
+          {session?.user?.image ? (
+            <Image
+              src={session.user.image}
+              alt="Profile"
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <UserIcon className="h-full w-full p-1 text-slate-400 dark:text-cyan-500" />
+          )}
+        </div>
+      </div>
+      <ClippedButton
+        onClick={session ? () => void signOut() : () => void signIn()}
+        title={session ? "Sign Out" : "Sign In"}
+      >
+        {session ? (
+          <LogOut className="h-[18px] w-[18px]" />
+        ) : (
+          <LogIn className="h-[18px] w-[18px]" />
+        )}
+      </ClippedButton>
+    </ClippedGroupContainer>
+  );
+};
+
+// --- Logo Components ---
+
 const AuthorBadge = () => (
   <div
-    className="absolute bottom-1 right-[-0.75rem] z-20 p-px shadow-lg shadow-black/30"
+    className="absolute bottom-1 right-[-0.75rem] z-20 p-px shadow-lg shadow-black/10 dark:shadow-black/30"
     style={{
       clipPath:
         "polygon(5px 0, 100% 0, calc(100% - 10px) 100%, 5px 100%, 0 50%)",
@@ -241,7 +435,10 @@ const PortfolioMonLogo = () => {
     rest: { x: 1, y: -1 },
     hover: { x: 2.5, y: -1.5 },
   };
-  const showdownPlateVariants = { rest: { x: 2, y: 2 }, hover: { x: 1, y: 1 } };
+  const showdownPlateVariants = {
+    rest: { x: 2, y: 2 },
+    hover: { x: 1, y: 1 },
+  };
 
   return (
     <motion.div
@@ -256,21 +453,20 @@ const PortfolioMonLogo = () => {
           <div className="relative">
             <motion.div
               variants={glitchLayer1Variants}
-              className="absolute top-0 left-0 select-none font-orbiter text-2xl font-black uppercase tracking-wide text-cyan-400/60"
+              className="absolute top-0 left-0 select-none font-orbiter text-2xl font-black uppercase tracking-wide text-cyan-500/50 dark:text-cyan-400/60"
               aria-hidden="true"
             >
               PortfolioMon
             </motion.div>
             <motion.div
               variants={glitchLayer2Variants}
-              className="absolute top-0 left-0 select-none font-orbiter text-2xl font-black uppercase tracking-wide text-red-500/60"
+              className="absolute top-0 left-0 select-none font-orbiter text-2xl font-black uppercase tracking-wide text-red-400/50 dark:text-red-500/60"
               aria-hidden="true"
             >
               PortfolioMon
             </motion.div>
             <div
-              className="relative font-orbiter text-2xl font-black uppercase tracking-wide text-slate-100"
-              style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.5)" }}
+              className="relative font-orbiter text-2xl font-black uppercase tracking-wide text-slate-800 drop-shadow-[1px_1px_3px_rgba(0,0,0,0.08)] dark:text-slate-100 dark:drop-shadow-[1px_1px_4px_rgba(0,0,0,0.5)]"
             >
               PortfolioMon
             </div>
@@ -278,15 +474,17 @@ const PortfolioMonLogo = () => {
           <div className="relative -mt-1 w-[150px]">
             <motion.div
               variants={showdownPlateVariants}
-              className="absolute top-0 left-0 h-full w-full bg-slate-500"
+              className="absolute top-0 left-0 h-full w-full bg-slate-300 dark:bg-slate-500"
               style={{
-                clipPath: "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
+                clipPath:
+                  "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
               }}
             />
             <div
               className="relative bg-red-600"
               style={{
-                clipPath: "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
+                clipPath:
+                  "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
               }}
             >
               <div className="justify-left flex items-center gap-2 truncate px-2 py-0.5">
@@ -314,17 +512,25 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
 
   const lineFromLeft = {
     rest: { opacity: 0.1, x: -30 },
-    hover: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    hover: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
   };
 
   const lineFromRight = {
     rest: { opacity: 0.1, x: 30 },
-    hover: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    hover: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
   };
 
   return (
     <motion.div
-      className="relative flex w-full min-w-fit items-center overflow-hidden bg-slate-800/90 py-3 pl-4 pr-12 sm:pl-6 lg:pl-8"
+      className="relative flex w-full min-w-fit items-center overflow-hidden bg-white/80 py-3 pl-4 pr-12 backdrop-blur-sm sm:pl-6 lg:pl-8 dark:bg-slate-800/90"
       style={{
         clipPath: "polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%)",
       }}
@@ -335,21 +541,21 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
       >
         <motion.div
           variants={lineFromLeft}
-          className="absolute inset-0 bg-cyan-400/40"
+          className="absolute inset-0 bg-cyan-500/20 dark:bg-cyan-400/40"
           style={{
             clipPath: "polygon(0 100%, 15% 100%, 85% 0, 70% 0)",
           }}
         />
         <motion.div
           variants={lineFromLeft}
-          className="absolute inset-0 bg-yellow-300/40"
+          className="absolute inset-0 bg-amber-400/20 dark:bg-yellow-300/40"
           style={{
             clipPath: "polygon(0% 0%, 5% 0%, 100% 100%, 95% 100%)",
           }}
         />
         <motion.div
           variants={lineFromRight}
-          className="absolute inset-0 bg-cyan-300/70"
+          className="absolute inset-0 bg-cyan-400/40 dark:bg-cyan-300/70"
           style={{
             clipPath:
               "polygon(100% 0, calc(100% - 3px) 0, calc(100% - 43px) 100%, calc(100% - 40px) 100%)",
@@ -363,10 +569,10 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
 
 const AngledLines = () => {
   const lineData = [
-    { width: "4px", color: "bg-cyan-300/70" },
-    { width: "3px", color: "bg-cyan-300/50" },
-    { width: "2px", color: "bg-yellow-300/40" },
-    { width: "1px", color: "bg-cyan-300/30" },
+    { width: "4px", color: "bg-cyan-400/50 dark:bg-cyan-300/70" },
+    { width: "3px", color: "bg-cyan-400/35 dark:bg-cyan-300/50" },
+    { width: "2px", color: "bg-amber-400/30 dark:bg-yellow-300/40" },
+    { width: "1px", color: "bg-cyan-400/20 dark:bg-cyan-300/30" },
   ];
 
   const slantAngle = -29;
@@ -376,19 +582,13 @@ const AngledLines = () => {
       x: "-80%",
       skewX: slantAngle,
       opacity: 0.5,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
     hover: {
       x: "-30%",
       skewX: slantAngle,
       opacity: 1,
-      transition: {
-        duration: 0.4,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
@@ -405,9 +605,7 @@ const AngledLines = () => {
           <div
             key={index}
             className={`h-full ${line.color}`}
-            style={{
-              width: line.width,
-            }}
+            style={{ width: line.width }}
           />
         ))}
       </motion.div>
@@ -415,12 +613,24 @@ const AngledLines = () => {
   );
 };
 
-const Navbar = (props: {
-  menuHandler: () => void;
+// --- Mobile Menu ---
+
+const MobileMenu = ({
+  isOpen,
+  mounted,
+  theme,
+  systemTheme,
+  setTheme,
+  fontInitializer,
+}: {
+  isOpen: boolean;
+  mounted: boolean;
+  theme: string | undefined;
+  systemTheme: string | undefined;
+  setTheme: (theme: string) => void;
   fontInitializer: () => void;
 }) => {
   const { data: session } = useSession();
-  const { systemTheme, theme, setTheme } = useTheme();
   const {
     gameState,
     playerTeam,
@@ -429,44 +639,165 @@ const Navbar = (props: {
     handleConfirmTeam,
     startBattle,
     cycleBackground,
-    background,
   } = useGame();
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="relative z-20 overflow-hidden border-t border-slate-300 bg-white/95 dark:border-cyan-400/20 dark:bg-slate-900/95 sm:hidden"
+        >
+          <div className="space-y-3 p-4">
+            {/* User */}
+            <ClippedGroupContainer className="w-full">
+              <div className="flex w-full items-center justify-between pl-1 pr-2">
+                <div className="flex items-center gap-2">
+                  <div
+                    className="relative h-7 w-7 bg-slate-300 p-px dark:bg-cyan-400/50"
+                    style={{ clipPath: CLIP.octagon }}
+                  >
+                    <div
+                      className="relative h-full w-full bg-slate-50 dark:bg-cyan-900"
+                      style={{ clipPath: CLIP.octagon }}
+                    >
+                      {session?.user?.image ? (
+                        <Image
+                          src={session.user.image}
+                          alt="Profile"
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <UserIcon className="h-full w-full p-1 text-slate-400 dark:text-cyan-500" />
+                      )}
+                    </div>
+                  </div>
+                  <span className="ml-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+                    {session?.user?.name ?? "Guest"}
+                  </span>
+                </div>
+                <ClippedButton
+                  onClick={
+                    session ? () => void signOut() : () => void signIn()
+                  }
+                >
+                  {session ? (
+                    <LogOut className="h-[18px] w-[18px]" />
+                  ) : (
+                    <LogIn className="h-[18px] w-[18px]" />
+                  )}
+                </ClippedButton>
+              </div>
+            </ClippedGroupContainer>
+
+            {/* Social Links */}
+            <ClippedGroupContainer className="w-full" label="Links">
+              <div className="flex w-full items-center justify-around">
+                <ClippedLink href={SOCIAL_LINKS.github} title="GitHub">
+                  <Github className="h-[18px] w-[18px]" />
+                </ClippedLink>
+                <ClippedLink href={SOCIAL_LINKS.linkedin} title="LinkedIn">
+                  <Linkedin className="h-[18px] w-[18px]" />
+                </ClippedLink>
+                <ClippedLink
+                  href={`mailto:${SOCIAL_LINKS.email}`}
+                  title="Email"
+                >
+                  <Mail className="h-[18px] w-[18px]" />
+                </ClippedLink>
+              </div>
+            </ClippedGroupContainer>
+
+            {/* Game + Settings */}
+            <ClippedGroupContainer className="w-full">
+              <div className="flex w-full items-center justify-around">
+                {(gameState === "fight" ||
+                  gameState === "gameOver" ||
+                  gameState === "forcedSwitch") && (
+                  <>
+                    <ClippedButton onClick={handleReset} title="Reset Game">
+                      <RotateCcw className="h-[18px] w-[18px]" />
+                    </ClippedButton>
+                    <ClippedButton onClick={handleRun} title="Forfeit Match">
+                      <Flag className="h-[18px] w-[18px]" />
+                    </ClippedButton>
+                    <AutoBattleButton />
+                  </>
+                )}
+                {gameState === "teamSelect" && (
+                  <ClippedButton
+                    onClick={handleConfirmTeam}
+                    title="Confirm Team"
+                    disabled={playerTeam.length !== 3}
+                  >
+                    <CheckSquare className="h-[18px] w-[18px]" />
+                  </ClippedButton>
+                )}
+                {gameState === "teamPreview" && (
+                  <ClippedButton onClick={startBattle} title="Start Battle">
+                    <Swords className="h-[18px] w-[18px]" />
+                  </ClippedButton>
+                )}
+                <ClippedButton
+                  onClick={cycleBackground}
+                  title="Change Arena"
+                >
+                  <ImageIcon className="h-[18px] w-[18px]" />
+                </ClippedButton>
+                <ClippedButton onClick={fontInitializer} title="Change Font">
+                  <Type className="h-[18px] w-[18px]" />
+                </ClippedButton>
+                {mounted && (
+                  <ClippedButton
+                    onClick={() =>
+                      setTheme(currentTheme === "dark" ? "light" : "dark")
+                    }
+                    title={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
+                  >
+                    {currentTheme === "dark" ? (
+                      <Moon className="h-[18px] w-[18px]" />
+                    ) : (
+                      <Sun className="h-[18px] w-[18px]" />
+                    )}
+                  </ClippedButton>
+                )}
+              </div>
+            </ClippedGroupContainer>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+// --- Main Navbar ---
+
+const Navbar = (props: {
+  menuHandler: () => void;
+  fontInitializer: () => void;
+}) => {
+  const { systemTheme, theme, setTheme } = useTheme();
+  const { handleReset, background } = useGame();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showBgPreview, setShowBgPreview] = useState(false);
-
-  const nextBgIndex = (background % 6) + 1;
 
   useEffect(() => setMounted(true), []);
 
-  const renderThemeChanger = () => {
-    if (!mounted) return null;
-    const currentTheme = theme === "system" ? systemTheme : theme;
-    return (
-      <ClippedButton
-        onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-        title={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
-      >
-        {currentTheme === "dark" ? (
-          <Moon className="h-5 w-5" />
-        ) : (
-          <Sun className="h-5 w-5" />
-        )}
-      </ClippedButton>
-    );
-  };
-
-  const octagonalClipPath =
-    "polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 0% 100%, 0% 20%)";
-
   return (
     <motion.nav
-      className="relative top-0 z-50 border-b border-slate-200 bg-slate-100 backdrop-blur-md dark:border-cyan-400/20 dark:bg-slate-900"
+      className="relative top-0 z-50 border-b border-slate-300 bg-slate-50 backdrop-blur-md dark:border-cyan-400/20 dark:bg-slate-900"
       initial="rest"
       whileHover="hover"
       animate="rest"
     >
-      <div className="absolute inset-0 aspect-video h-full w-full overflow-hidden rounded opacity-60 dark:opacity-30">
+      {/* Background image */}
+      <div className="absolute inset-0 aspect-video h-full w-full overflow-hidden rounded opacity-30 dark:opacity-30">
         <Image
           src={`/images/backgrounds/background-${background}.jpg`}
           alt={`Background ${background}`}
@@ -474,52 +805,31 @@ const Navbar = (props: {
           className="object-cover"
         />
       </div>
+
+      {/* Decorative overlays */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-slate-200/50 to-slate-100/50 dark:from-slate-800/50 dark:to-slate-900/50"
-          variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+          className="absolute inset-0 bg-gradient-to-b from-white/70 to-slate-50/80 dark:from-slate-800/50 dark:to-slate-900/50"
+          variants={{ rest: { opacity: 0.8 }, hover: { opacity: 1 } }}
           transition={{ duration: 0.3 }}
         />
-        <motion.div
-          className="absolute inset-0 bg-[length:20px_20px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)",
-          }}
-          variants={{
-            rest: { opacity: 0.05, x: -20 },
-            hover: { opacity: 0.2, x: 0 },
-          }}
-          transition={{ duration: 0.5 }}
-        />
-        <div className="absolute inset-0 bg-[length:20px_20px] dark:bg-transparent" />
-        <motion.div
-          className="absolute inset-0 hidden"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #083344 1px, transparent 1px), linear-gradient(to bottom, #083344 1px, transparent 1px)",
-          }}
-          variants={{
-            rest: { opacity: 0, x: -20 },
-            hover: { opacity: 0.4, x: 0 },
-          }}
-          transition={{ duration: 0.5 }}
-        />
+        {/* Grid overlay — light */}
         <div className="dark:hidden">
           <motion.div
             className="absolute inset-0"
             style={{
               backgroundSize: "20px 20px",
               backgroundImage:
-                "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)",
+                "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)",
             }}
             variants={{
               rest: { opacity: 0, x: -20 },
-              hover: { opacity: 1, x: 0 },
+              hover: { opacity: 0.3, x: 0 },
             }}
             transition={{ duration: 0.5 }}
           />
         </div>
+        {/* Grid overlay — dark */}
         <div className="hidden dark:block">
           <motion.div
             className="absolute inset-0"
@@ -536,18 +846,25 @@ const Navbar = (props: {
           />
         </div>
 
+        {/* Decorative diagonal lines */}
         <div className="relative h-full w-full opacity-40">
           <div
-            className="absolute inset-0 bg-cyan-300/50"
-            style={{ clipPath: "polygon(0% 48%, 100% 35%, 100% 37%, 0% 50%)" }}
+            className="absolute inset-0 bg-cyan-400/50 dark:bg-cyan-300/50"
+            style={{
+              clipPath: "polygon(0% 48%, 100% 35%, 100% 37%, 0% 50%)",
+            }}
           />
           <div
-            className="absolute inset-0 bg-yellow-300/25"
-            style={{ clipPath: "polygon(0% 62%, 100% 75%, 100% 77%, 0% 64%)" }}
+            className="absolute inset-0 bg-amber-400/25 dark:bg-yellow-300/25"
+            style={{
+              clipPath: "polygon(0% 62%, 100% 75%, 100% 77%, 0% 64%)",
+            }}
           />
           <div
-            className="absolute inset-0 ml-72 bg-cyan-400/50"
-            style={{ clipPath: "polygon(15% 0, 16% 0, 10% 100%, 9% 100%)" }}
+            className="absolute inset-0 ml-72 bg-cyan-500/50 dark:bg-cyan-400/50"
+            style={{
+              clipPath: "polygon(15% 0, 16% 0, 10% 100%, 9% 100%)",
+            }}
           />
           <motion.div
             variants={{
@@ -558,18 +875,28 @@ const Navbar = (props: {
                 transition: { duration: 0.5, ease: "easeOut" },
               },
             }}
-            className="absolute inset-0 bg-cyan-200/50"
-            style={{ clipPath: "polygon(50% 0, 51% 0, 65% 100%, 64% 100%)" }}
+            className="absolute inset-0 bg-cyan-300/50 dark:bg-cyan-200/50"
+            style={{
+              clipPath: "polygon(50% 0, 51% 0, 65% 100%, 64% 100%)",
+            }}
           />
           <motion.div
-            className="absolute inset-0 bg-cyan-400"
-            style={{ clipPath: "polygon(80% 0, 81% 0, 81% 100%, 80% 100%)" }}
+            className="absolute inset-0 bg-cyan-500 dark:bg-cyan-400"
+            style={{
+              clipPath: "polygon(80% 0, 81% 0, 81% 100%, 80% 100%)",
+            }}
             animate={{ opacity: [0.1, 0.5, 0.1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           />
           <motion.div
-            className="absolute inset-0 bg-yellow-300"
-            style={{ clipPath: "polygon(0% 15%, 25% 15%, 25% 16%, 0% 16%)" }}
+            className="absolute inset-0 bg-amber-400 dark:bg-yellow-300"
+            style={{
+              clipPath: "polygon(0% 15%, 25% 15%, 25% 16%, 0% 16%)",
+            }}
             animate={{ opacity: [0.3, 0.1, 0.3] }}
             transition={{
               duration: 2.5,
@@ -579,8 +906,10 @@ const Navbar = (props: {
             }}
           />
         </div>
+
+        {/* Scanning line */}
         <motion.div
-          className="absolute left-0 right-0 h-px bg-cyan-300/70 shadow-[0_0_10px_theme(colors.cyan.300)]"
+          className="absolute left-0 right-0 h-px bg-cyan-400/70 shadow-[0_0_10px_theme(colors.cyan.400)] dark:bg-cyan-300/70 dark:shadow-[0_0_10px_theme(colors.cyan.300)]"
           initial={{ y: "0%" }}
           animate={{ y: "100%" }}
           transition={{
@@ -592,7 +921,9 @@ const Navbar = (props: {
         />
       </div>
 
+      {/* Main content */}
       <div className="relative z-10 flex h-full w-full items-stretch justify-start">
+        {/* Logo */}
         <button
           onClick={handleReset}
           aria-label="Home"
@@ -604,224 +935,44 @@ const Navbar = (props: {
           <AngledLines />
         </button>
 
-        <div className="ml-auto flex items-center gap-3 pr-4 sm:pr-6 lg:pr-8">
-          <div className="hidden items-center gap-3 sm:flex">
-            <ClippedGroupContainer>
-              <div
-                className="relative h-9 w-9 bg-slate-200 p-px dark:bg-cyan-400/50"
-                style={{ clipPath: octagonalClipPath }}
-              >
-                <div
-                  className="relative h-full w-full bg-slate-100 dark:bg-cyan-900"
-                  style={{ clipPath: octagonalClipPath }}
-                >
-                  {session?.user?.image ? (
-                    <Image
-                      src={session.user.image}
-                      alt="Profile"
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <UserIcon className="h-full w-full pt-1 pr-1 text-slate-400 dark:text-cyan-500" />
-                  )}
-                </div>
-              </div>
-              <ClippedButton
-                onClick={session ? () => void signOut() : () => void signIn()}
-                title={session ? "Sign Out" : "Sign In"}
-              >
-                {session ? (
-                  <LogOut className="h-5 w-5" />
-                ) : (
-                  <LogIn className="h-5 w-5" />
-                )}
-              </ClippedButton>
-            </ClippedGroupContainer>
-
-            {/* Game State Controls */}
-            {(gameState === "fight" ||
-              gameState === "gameOver" ||
-              gameState === "forcedSwitch" ||
-              gameState === "teamSelect" ||
-              gameState === "teamPreview") && (
-              <ClippedGroupContainer>
-                {(gameState === "fight" ||
-                  gameState === "gameOver" ||
-                  gameState === "forcedSwitch") && (
-                  <>
-                    <ClippedButton onClick={handleReset} title="Reset Game">
-                      <RefreshCw className="h-5 w-5" />
-                    </ClippedButton>
-                    <ClippedButton onClick={handleRun} title="Forfeit Match">
-                      <Flag className="h-5 w-5" />
-                    </ClippedButton>
-                    <AutoBattleButton />
-                  </>
-                )}
-                {gameState === "teamSelect" && (
-                  <ClippedButton
-                    onClick={handleConfirmTeam}
-                    title="Confirm Team"
-                    disabled={playerTeam.length !== 3}
-                  >
-                    <CheckSquare className="h-5 w-5" />
-                  </ClippedButton>
-                )}
-                {gameState === "teamPreview" && (
-                  <ClippedButton onClick={startBattle} title="Start Battle">
-                    <Swords className="h-5 w-5" />
-                  </ClippedButton>
-                )}
-              </ClippedGroupContainer>
-            )}
-
-            {/* Game/Visuals Controls */}
-            <div className="relative">
-              <ClippedGroupContainer>
-                <div
-                  onMouseEnter={() => setShowBgPreview(true)}
-                  onMouseLeave={() => setShowBgPreview(false)}
-                >
-                  <ClippedButton
-                    onClick={cycleBackground}
-                    title="Change Background"
-                  >
-                    <Layers className="h-5 w-5" />
-                  </ClippedButton>
-                </div>
-              </ClippedGroupContainer>
-              <AnimatePresence>
-                {showBgPreview && (
-                  <BackgroundPreview nextBgIndex={nextBgIndex} />
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* General Settings */}
-            <ClippedGroupContainer>
-              <ClippedButton
-                onClick={() => props.fontInitializer()}
-                className="font-mono text-lg font-bold"
-                title="Change Font"
-              >
-                <TypeIcon className="h-5 w-5" />
-              </ClippedButton>
-              {renderThemeChanger()}
-            </ClippedGroupContainer>
+        {/* Right side controls */}
+        <div className="ml-auto flex items-center gap-2.5 pr-4 sm:pr-6 lg:pr-8">
+          {/* Desktop controls */}
+          <div className="hidden items-center gap-2.5 sm:flex">
+            <SocialLinksGroup />
+            <GameControlsGroup />
+            <SettingsGroup
+              mounted={mounted}
+              theme={theme}
+              systemTheme={systemTheme}
+              setTheme={setTheme}
+              fontInitializer={props.fontInitializer}
+            />
+            <UserGroup />
           </div>
 
+          {/* Mobile hamburger */}
           <div className="sm:hidden">
             <ClippedButton onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-[18px] w-[18px]" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-[18px] w-[18px]" />
               )}
             </ClippedButton>
           </div>
         </div>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border-t border-slate-200 bg-slate-100/95 dark:border-cyan-400/20 dark:bg-slate-900/95 sm:hidden"
-          >
-            <div className="space-y-3 p-4">
-              <ClippedGroupContainer className="w-full">
-                <div className="flex w-full items-center justify-between pl-1 pr-2">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="relative h-7 w-7 bg-slate-200 p-px dark:bg-cyan-400/50"
-                      style={{ clipPath: octagonalClipPath }}
-                    >
-                      <div
-                        className="relative h-full w-full bg-slate-100 dark:bg-cyan-900"
-                        style={{ clipPath: octagonalClipPath }}
-                      >
-                        {session?.user?.image ? (
-                          <Image
-                            src={session.user.image}
-                            alt="Profile"
-                            fill
-                            className="object-cover"
-                          />
-                        ) : (
-                          <UserIcon className="h-full w-full p-1 text-slate-400 dark:text-cyan-500" />
-                        )}
-                      </div>
-                    </div>
-                    <span className="ml-1 text-sm font-medium text-slate-700 dark:text-slate-300">
-                      {session?.user?.name ?? "Guest"}
-                    </span>
-                  </div>
-                  <ClippedButton
-                    onClick={
-                      session ? () => void signOut() : () => void signIn()
-                    }
-                  >
-                    {session ? (
-                      <LogOut className="h-5 w-5" />
-                    ) : (
-                      <LogIn className="h-5 w-5" />
-                    )}
-                  </ClippedButton>
-                </div>
-              </ClippedGroupContainer>
-
-              <ClippedGroupContainer className="w-full">
-                <div className="flex w-full items-center justify-around">
-                  {(gameState === "fight" ||
-                    gameState === "gameOver" ||
-                    gameState === "forcedSwitch") && (
-                    <>
-                      <ClippedButton onClick={handleReset} title="Reset Game">
-                        <RefreshCw className="h-5 w-5" />
-                      </ClippedButton>
-                      <ClippedButton onClick={handleRun} title="Forfeit Match">
-                        <Flag className="h-5 w-5" />
-                      </ClippedButton>
-                      <AutoBattleButton />
-                    </>
-                  )}
-                  {gameState === "teamSelect" && (
-                    <ClippedButton
-                      onClick={handleConfirmTeam}
-                      title="Confirm Team"
-                      disabled={playerTeam.length !== 3}
-                    >
-                      <CheckSquare className="h-5 w-5" />
-                    </ClippedButton>
-                  )}
-                  {gameState === "teamPreview" && (
-                    <ClippedButton onClick={startBattle} title="Start Battle">
-                      <Swords className="h-5 w-5" />
-                    </ClippedButton>
-                  )}
-                  <ClippedButton
-                    onClick={cycleBackground}
-                    title="Change Background"
-                  >
-                    <Layers className="h-5 w-5" />
-                  </ClippedButton>
-                  <ClippedButton
-                    onClick={() => props.fontInitializer()}
-                    className="font-mono text-lg font-bold"
-                  >
-                    <TypeIcon className="h-5 w-5" />
-                  </ClippedButton>
-                  {renderThemeChanger()}
-                </div>
-              </ClippedGroupContainer>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile menu */}
+      <MobileMenu
+        isOpen={menuOpen}
+        mounted={mounted}
+        theme={theme}
+        systemTheme={systemTheme}
+        setTheme={setTheme}
+        fontInitializer={props.fontInitializer}
+      />
     </motion.nav>
   );
 };

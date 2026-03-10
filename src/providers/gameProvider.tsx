@@ -8,10 +8,12 @@ import React, {
   type ReactNode,
   useMemo,
 } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 import {
   portfolioMonData,
   initialInventory,
   getTypeEffectiveness,
+  getStatMultiplier,
 } from "../context/gameContext";
 import type {
   PortfolioMon,
@@ -24,6 +26,8 @@ import type {
   PlayerInventory,
   NotificationType,
   NotificationItem,
+  StatModifiers,
+  BattleEffect,
 } from "../context/gameContext";
 
 // --- BATTLE BACKGROUNDS ---
@@ -47,11 +51,11 @@ const initialStats: BattleStats = {
 // --- TYPE FOR CONTEXT VALUE ---
 interface IGameContext {
   gameState:
-    | "teamSelect"
-    | "teamPreview"
-    | "fight"
-    | "gameOver"
-    | "forcedSwitch";
+  | "teamSelect"
+  | "teamPreview"
+  | "fight"
+  | "gameOver"
+  | "forcedSwitch";
   playerTeam: PortfolioMon[];
   playerTeamState: BattleReadyMon[];
   cpuTeamState: BattleReadyMon[];
@@ -72,6 +76,8 @@ interface IGameContext {
   playerStats: BattleStats;
   cpuStats: BattleStats;
   background: number;
+  lastMoveType: string | null;
+  activeBattleEffect: BattleEffect | null;
   handleTeamSelect: (mon: PortfolioMon) => void;
   handleConfirmTeam: () => void;
   handleClearTeam: () => void;
@@ -178,9 +184,11 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [cpuStats, setCpuStats] = useState<BattleStats>(initialStats);
   const [isAutoBattleActive, setIsAutoBattleActive] = useState(false);
   const [isProcessingTurn, setIsProcessingTurn] = useState(false);
-  const [background, setBackground] = useState(1);
+  const [background, setBackground] = useLocalStorage<number>("arena-background", 1);
   const [playerDidSwitchLastTurn, setPlayerDidSwitchLastTurn] = useState(false);
   const [cpuDidSwitchLastTurn, setCpuDidSwitchLastTurn] = useState(false);
+  const [lastMoveType, setLastMoveType] = useState<string | null>(null);
+  const [activeBattleEffect, setActiveBattleEffect] = useState<BattleEffect | null>(null);
 
   // --- REFS FOR MANAGING ASYNC OPERATIONS SAFELY ---
   const battleStateRef = useRef({
@@ -254,14 +262,28 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     setBattleLog((prev) => [...prev, message]);
   }, []);
 
+  const DEFAULT_STAT_MODS: StatModifiers = { atk: 0, def: 0, spd: 0 };
+
   const createBattleReadyTeam = (team: PortfolioMon[]): BattleReadyMon[] => {
-    return team.map((mon) => ({
-      ...mon,
-      currentHp: mon.hp,
-      status: null,
-      statusTurns: 0,
-      moves: mon.moves.map((move) => ({ ...move, currentPp: move.pp })),
-    }));
+    return team.map((mon) => {
+      let resolvedName = mon.name;
+      let resolvedImage = mon.image;
+      if (mon.variants && mon.variants.length > 0) {
+        const picked = mon.variants[Math.floor(Math.random() * mon.variants.length)]!;
+        resolvedImage = picked.image;
+        resolvedName = `${mon.name}: ${picked.nameSuffix}`;
+      }
+      return {
+        ...mon,
+        name: resolvedName,
+        image: resolvedImage,
+        currentHp: mon.hp,
+        status: null,
+        statusTurns: 0,
+        moves: mon.moves.map((move) => ({ ...move, currentPp: move.pp })),
+        statModifiers: { ...DEFAULT_STAT_MODS },
+      };
+    });
   };
 
   const updateMonState = useCallback(
@@ -319,6 +341,11 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     setGameState("fight");
     setPlayerAnimation("switchIn");
     setCpuAnimation("switchIn");
+    await sleep(800);
+    setPlayerAnimation("idle");
+    setCpuAnimation("idle");
+    setPlayerTrainerState("idle");
+    setGruntTrainerState("idle");
   }, [playerTeamState, cpuTeamState, addToLog, showNotification]);
 
   const handleFaint = useCallback(
@@ -359,7 +386,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
           await sleep(500);
           setCpuAnimation("switchIn");
           setActiveCpuIndex(nextIndex);
-          await sleep(500);
+          await sleep(600);
           setCpuAnimation("idle");
           setGruntTrainerState("idle");
           setIsPlayerTurn(true);
@@ -461,24 +488,53 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       const setDefenderAnimation =
         attackerTeam === "player" ? setCpuAnimation : setPlayerAnimation;
 
-      if (attacker.status === "sleep" || attacker.status === "stun") {
+      if (attacker.status === "sleep") {
         const newTurns = attacker.statusTurns - 1;
         updateMonState(attackerTeam, attackerIndex, {
           statusTurns: newTurns <= 0 ? 0 : newTurns,
         });
-        addToLog(
-          `${attacker.name} is ${statusVerbs[attacker.status]} and can't move!`
-        );
-        showNotification(
-          `${attacker.name} is ${statusVerbs[attacker.status]}!`,
-          "status"
-        );
+        addToLog(`${attacker.name} is asleep and can't move!`);
+        showNotification(`${attacker.name} is asleep!`, "status");
+        if (attackerTeam === "player") {
+          setDialogue((d) => ({ ...d, player: "" }));
+          setPlayerTrainerState("idle");
+        } else {
+          setGruntTrainerState("idle");
+        }
         if (newTurns <= 0) {
           await sleep(1000);
-          updateMonState(attackerTeam, attackerIndex, { status: null });
+          updateMonState(attackerTeam, attackerIndex, {
+            status: null,
+            statusTurns: 0,
+          });
           addToLog(`${attacker.name} woke up!`);
         }
         return false;
+      }
+
+      if (attacker.status === "stun") {
+        const newTurns = attacker.statusTurns - 1;
+        const stunExpired = newTurns <= 0;
+        updateMonState(attackerTeam, attackerIndex, {
+          statusTurns: stunExpired ? 0 : newTurns,
+          ...(stunExpired ? { status: null } : {}),
+        });
+        if (stunExpired) {
+          await sleep(500);
+          const recoveryMsg = `${attacker.name} is no longer stunned!`;
+          addToLog(recoveryMsg);
+          showNotification(recoveryMsg, "info");
+        } else if (Math.random() < 0.25) {
+          addToLog(`${attacker.name} is stunned and can't move!`);
+          showNotification(`${attacker.name} is stunned!`, "status");
+          if (attackerTeam === "player") {
+            setDialogue((d) => ({ ...d, player: "" }));
+            setPlayerTrainerState("idle");
+          } else {
+            setGruntTrainerState("idle");
+          }
+          return false;
+        }
       }
 
       const newMoves = attacker.moves.map((m) =>
@@ -496,6 +552,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       }
 
       addToLog(`${attacker.name} used ${move.name}!`);
+      setLastMoveType(move.type);
       setAttackerAnimation("attack");
       await sleep(500);
 
@@ -509,8 +566,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
               superEffectiveHits: prev.superEffectiveHits + 1,
             }));
           }
+          const atkMod = getStatMultiplier(attacker.statModifiers.atk);
+          const defMod = getStatMultiplier(defender.statModifiers.def);
           const baseDamage =
-            (move.power * (attacker.stats.atk / defender.stats.def)) / 5 + 2;
+            (move.power * ((attacker.stats.atk * atkMod) / (defender.stats.def * defMod))) / 5 + 2;
           damage = Math.floor(baseDamage * (Math.random() * 0.15 + 0.85));
           damage = Math.floor(damage * effectiveness.multiplier);
 
@@ -538,6 +597,58 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         const newHp = Math.max(0, defender.currentHp - damage);
         updateMonState(defenderTeam, defenderIndex, { currentHp: newHp });
         await sleep(500);
+
+        // --- SELF EFFECTS (drain, recoil, stat boosts, heal) ---
+        if (move.selfEffect && Math.random() < move.selfEffect.chance) {
+          const se = move.selfEffect;
+          setActiveBattleEffect({ type: se.type, target: attackerTeam });
+          if (se.type === "drain" && damage > 0) {
+            const healAmt = Math.floor(damage * se.amount);
+            const drainHp = Math.min(attacker.hp, attacker.currentHp + healAmt);
+            updateMonState(attackerTeam, attackerIndex, { currentHp: drainHp });
+            const msg = `${attacker.name} drained ${healAmt} HP!`;
+            addToLog(msg);
+            showNotification(msg, "drain");
+          } else if (se.type === "recoil" && damage > 0) {
+            const recoilDmg = Math.floor(damage * se.amount);
+            const recoilHp = Math.max(0, attacker.currentHp - recoilDmg);
+            updateMonState(attackerTeam, attackerIndex, { currentHp: recoilHp });
+            const msg = `${attacker.name} took ${recoilDmg} recoil damage!`;
+            addToLog(msg);
+            showNotification(msg, "status");
+          } else if (se.type === "heal") {
+            const healAmt = Math.min(se.amount, attacker.hp - attacker.currentHp);
+            if (healAmt > 0) {
+              updateMonState(attackerTeam, attackerIndex, {
+                currentHp: attacker.currentHp + healAmt,
+              });
+              const msg = `${attacker.name} recovered ${healAmt} HP!`;
+              addToLog(msg);
+              showNotification(msg, "heal");
+            }
+          } else if (
+            se.type === "atkUp" ||
+            se.type === "defUp" ||
+            se.type === "spdUp"
+          ) {
+            const statKey = se.type === "atkUp" ? "atk" : se.type === "defUp" ? "def" : "spd";
+            const currentStage = attacker.statModifiers[statKey];
+            if (currentStage < 3) {
+              const newStage = Math.min(3, currentStage + se.amount);
+              updateMonState(attackerTeam, attackerIndex, {
+                statModifiers: { ...attacker.statModifiers, [statKey]: newStage },
+              });
+              const statName = statKey.toUpperCase();
+              const msg = `${attacker.name}'s ${statName} rose!`;
+              addToLog(msg);
+              showNotification(msg, "boost");
+            }
+          }
+          await sleep(800);
+          setActiveBattleEffect(null);
+        }
+
+        // --- STATUS EFFECTS ON DEFENDER ---
         if (
           move.effect &&
           Math.random() < move.effect.chance &&
@@ -567,6 +678,12 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         if (newHp <= 0) {
           setDefenderAnimation("faint");
           addToLog(`${defender.name} fainted!`);
+          setAttackerAnimation("idle");
+          if (attackerTeam === "player") {
+            setPlayerTrainerState("idle");
+          } else {
+            setGruntTrainerState("idle");
+          }
           await sleep(1500);
           await handleFaint(defenderTeam, defenderIndex);
           return true;
@@ -678,10 +795,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
     const switchOptions = !didSwitchLastTurn
       ? availableSwitches.map((item) => ({
-          type: "switch" as const,
-          index: item.index,
-          score: calculateSwitchScore(item.mon, mon, opponent),
-        }))
+        type: "switch" as const,
+        index: item.index,
+        score: calculateSwitchScore(item.mon, mon, opponent),
+      }))
       : [];
 
     const allOptions = [...moveOptions, ...switchOptions];
@@ -753,6 +870,9 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         addToLog(`CPU switched from ${oldCpuMonName} to ${newCpuMon.name}!`);
         setCpuAnimation("switchOut");
         await sleep(500);
+        updateMonState("cpu", currentActiveCpuIndex, {
+          statModifiers: { ...DEFAULT_STAT_MODS },
+        });
         setActiveCpuIndex(chosenAction.index);
         setCpuAnimation("switchIn");
         await sleep(700);
@@ -875,6 +995,9 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       await sleep(100);
       setPlayerAnimation("switchOut");
       await sleep(500);
+      updateMonState("player", activePlayerIndex, {
+        statModifiers: { ...DEFAULT_STAT_MODS },
+      });
       const oldPlayerMonName = playerTeamState[activePlayerIndex]!.name;
       const newPlayerMon = playerTeamState[index]!;
       const dialogueText = getRandomDialogue("switch", "player", {
@@ -922,28 +1045,56 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       if (!itemInInventory || itemInInventory.quantity <= 0) return;
 
       setIsProcessingTurn(true);
-      const targetMon = playerTeamState[targetIndex];
+      const targetMon = playerTeamState[targetIndex]!;
+      const eff = itemInInventory.item.effect;
       let actionTaken = false;
-      if (itemInInventory.item.effect.type === "heal") {
-        if (targetMon.currentHp < targetMon.hp) {
-          const newHp = Math.min(
-            targetMon.hp,
-            targetMon.currentHp + itemInInventory.item.effect.amount
-          );
+
+      if (eff.type === "heal") {
+        if (targetMon.currentHp < targetMon.hp && targetMon.currentHp > 0) {
+          const newHp = Math.min(targetMon.hp, targetMon.currentHp + eff.amount);
           updateMonState("player", targetIndex, { currentHp: newHp });
+          setActiveBattleEffect({ type: "heal", target: "player" });
           actionTaken = true;
         } else {
           addToLog(`${targetMon.name}'s HP is already full!`);
         }
-      } else if (itemInInventory.item.effect.type === "cureStatus") {
+      } else if (eff.type === "cureStatus") {
         if (targetMon.status) {
-          updateMonState("player", targetIndex, {
-            status: null,
-            statusTurns: 0,
-          });
+          updateMonState("player", targetIndex, { status: null, statusTurns: 0 });
           actionTaken = true;
         } else {
           addToLog(`${targetMon.name} has no status condition!`);
+        }
+      } else if (eff.type === "boostAtk" || eff.type === "boostDef" || eff.type === "boostSpd") {
+        const statKey = eff.type === "boostAtk" ? "atk" : eff.type === "boostDef" ? "def" : "spd";
+        const effectType = eff.type === "boostAtk" ? "atkUp" : eff.type === "boostDef" ? "defUp" : "spdUp";
+        const currentStage = targetMon.statModifiers[statKey];
+        if (currentStage < 3 && targetMon.currentHp > 0) {
+          const newStage = Math.min(3, currentStage + eff.stages);
+          updateMonState("player", targetIndex, {
+            statModifiers: { ...targetMon.statModifiers, [statKey]: newStage },
+          });
+          const statName = statKey.toUpperCase();
+          showNotification(`${targetMon.name}'s ${statName} sharply rose!`, "boost");
+          setActiveBattleEffect({ type: effectType, target: "player" });
+          actionTaken = true;
+        } else if (currentStage >= 3) {
+          addToLog(`${targetMon.name}'s ${statKey.toUpperCase()} can't go any higher!`);
+        }
+      } else if (eff.type === "revive") {
+        if (targetMon.currentHp <= 0) {
+          const reviveHp = Math.floor(targetMon.hp * eff.hpFraction);
+          updateMonState("player", targetIndex, {
+            currentHp: reviveHp,
+            status: null,
+            statusTurns: 0,
+            statModifiers: { ...DEFAULT_STAT_MODS },
+          });
+          showNotification(`${targetMon.name} was revived!`, "heal");
+          setActiveBattleEffect({ type: "heal", target: "player" });
+          actionTaken = true;
+        } else {
+          addToLog(`${targetMon.name} doesn't need reviving!`);
         }
       }
 
@@ -952,6 +1103,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         setPlayerTrainerState("commanding");
         await sleep(100);
         addToLog(`Used ${itemInInventory.item.name} on ${targetMon.name}.`);
+        await sleep(700);
+        setActiveBattleEffect(null);
         setPlayerTrainerState("idle");
         setInventory((prev) => ({
           ...prev,
@@ -1027,7 +1180,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       const next = prev + 1;
       return next > TOTAL_BACKGROUNDS ? 1 : next;
     });
-  }, []);
+  }, [setBackground]);
 
   useEffect(() => {
     if (autoBattleTimerRef.current) {
@@ -1131,6 +1284,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       playerStats,
       cpuStats,
       background,
+      lastMoveType,
+      activeBattleEffect,
       handleTeamSelect,
       handleConfirmTeam,
       handleClearTeam,
@@ -1166,6 +1321,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       playerStats,
       cpuStats,
       background,
+      lastMoveType,
+      activeBattleEffect,
       handleTeamSelect,
       handleConfirmTeam,
       handleClearTeam,
