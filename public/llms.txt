@@ -1,0 +1,84 @@
+# Kevin Liu
+
+> Kevin Liu is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He builds interactive web applications, AI-powered tools, games, and health-tech solutions. His portfolio showcases 30+ projects as an interactive Pokémon Showdown-inspired battle game called PortfolioMon Showdown.
+
+## About Kevin Liu
+
+- [Portfolio Website](https://kevinliu.biz): Interactive developer portfolio built as a Pokémon Showdown-inspired turn-based battle game featuring 30+ projects as PortfolioMons
+- [GitHub](https://github.com/Kevin-Liu-01): Open-source projects and contributions
+- [LinkedIn](https://www.linkedin.com/in/kevin-liu-princeton): Professional profile and experience
+- [Alternate Portfolio](https://www.kevin-liu.tech): Secondary portfolio site
+
+## Key Skills and Expertise
+
+- Full-Stack Web Development: React, Next.js, TypeScript, Node.js, tRPC, Tailwind CSS
+- Artificial Intelligence & Machine Learning: LLM integration, computer vision, speech recognition, AI agents, MCP (Model Context Protocol)
+- Game Development: Browser-based games, interactive experiences, turn-based systems
+- Health Technology: Wearable sensors, digital diagnostics, assistive technology
+- Hardware & IoT: Embedded systems, sensor integration, smart recycling
+- UI/UX Design: Responsive design, Framer Motion animations, accessible interfaces
+- Backend & Data: PostgreSQL, Firebase, MongoDB, Prisma, REST APIs, real-time systems
+- DevOps: Vercel deployment, CI/CD, Docker
+
+## Featured Projects
+
+- [Dedalus](https://dedalus-demo.vercel.app/): Build model-agnostic agents powered by MCP with a production-grade SDK and secure, multi-tenant auth
+- [Sevenfold](https://sevenfold-demo.vercel.app/): Find, digest, and produce research in one centralized AI-powered workplace
+- [Lumachor](https://lumachor.vercel.app/home): A context engine that gives every user the power of an expert prompt engineer
+- [Podium](https://hackprinceton-podium.vercel.app/): Streamlines judging and event management for hackathons
+- [Princeton Tower Defense](https://princeton-tower-defense.vercel.app/): A tower defense game where players defend Princeton from waves of attacks
+- [HD Transcribe](https://hd-transcribe.vercel.app): Accesses a novel speech model for patients with Huntington's Disease
+- [RecyclAIble](https://recyclaible.vercel.app/): Smart recycling solution — Won 1st in Hardware at PennApps XXIII
+- [SnellTech](https://snelltech.vercel.app/): Low-cost digital visual acuity exam using the Snellen Eye Chart
+- [ApneaAlert](https://apnea-alert-git-main-kevin-liu-01.vercel.app/): An affordable wearable sensor to help you sleep soundly
+
+## All Projects
+
+- [Dedalus](https://dedalus-demo.vercel.app/): AI agent SDK with MCP support
+- [Princeton Tower Defense](https://princeton-tower-defense.vercel.app/): Tower defense game
+- [Podium](https://hackprinceton-podium.vercel.app/): Hackathon judging platform
+- [Sevenfold](https://sevenfold-demo.vercel.app/): AI research workspace
+- [Lumachor](https://lumachor.vercel.app/home): AI context engine
+- [HackPrinceton '25F](https://hack-princeton-fall-2025-demo.vercel.app/): Hackathon landing page
+- [Splitway](https://splitway.vercel.app/): Expense splitting app
+- [Lootbox Simulator](https://lootboxsimulator.vercel.app/): Lootbox opening game
+- [PawPointClicker](https://pawpointclicker.vercel.app/): Princeton clicker game
+- [HackPrinceton '25S](https://hack-princeton-spring-2025-demo.vercel.app/): Hackathon landing page
+- [HackPrinceton '24F](https://hack-princeton-fall-2024-demo.vercel.app/): Hackathon landing page
+- [SnellTech](https://snelltech.vercel.app/): Digital eye exam
+- [LetMeCook](https://letmecook.vercel.app/): AI recipe generator
+- [Balladeer](https://balladeer.vercel.app/): AI study guide generator
+- [CompassUSA](https://compass-usa.vercel.app/): Immigrant support tool
+- [ApneaAlert](https://apnea-alert-git-main-kevin-liu-01.vercel.app/): Sleep apnea wearable
+- [Iron Triangle](https://iron-triangle.vercel.app/): Military Industrial Complex analysis
+- [AdventureGPT](https://adventuregpt.vercel.app/): AI story generator
+- [EditorGPT](https://editorgpt.vercel.app/): AI code review editor
+- [OMMC Portal](https://ommc-test-portal.vercel.app/): Math competition test portal
+- [OMMC Sample Portal](https://ommc-sample-portal.vercel.app/): Math competition practice portal
+- [Enkrateia](https://enkrateia.vercel.app/): GPT-3.5/GPT-4 interface
+- [HD Transcribe](https://hd-transcribe.vercel.app): Huntington's Disease speech model
+- [OMMC](https://www.ommcofficial.org): Online Monmouth Math Competition website
+- [OMMC Atlas](https://ommc-atlas.vercel.app/): OMMC question database
+- [RecyclAIble](https://recyclaible.vercel.app/): Smart recycling (PennApps XXIII winner)
+- [PlantSTEM](https://plant-stem.vercel.app/): Math and Physics education
+- [Tutorial](https://tutorial-nu.vercel.app/): Tutor-pupil matching platform
+- [Satellite Crafter](https://satellite-crafter.vercel.app/): Satellite building game
+- [PortfolioMon Showdown](https://kevinliu.biz): This interactive portfolio website
+
+## Education
+
+- Princeton University, Class of 2028, Computer Science (BSE)
+
+## Achievements
+
+- 1st Place in Hardware at PennApps XXIII (RecyclAIble)
+- HackPrinceton organizer and lead developer (multiple semesters)
+- Online Monmouth Math Competition (OMMC) co-founder and developer
+- 30+ shipped projects spanning AI, web, games, health-tech, and hardware
+
+## Contact
+
+- GitHub: https://github.com/Kevin-Liu-01
+- LinkedIn: https://www.linkedin.com/in/kevin-liu-princeton
+- Website: https://kevinliu.biz
+- Twitter: https://twitter.com/kevskgs

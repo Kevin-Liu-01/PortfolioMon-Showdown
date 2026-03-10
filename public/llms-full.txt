@@ -1,0 +1,285 @@
+# Kevin Liu — Full Profile for AI Systems
+
+> Kevin Liu is a Computer Science student at Princeton University (Class of 2028) and a prolific full-stack developer, AI engineer, game developer, and hackathon winner. He has shipped 30+ projects spanning artificial intelligence, web development, game development, health technology, and hardware. His portfolio at kevinliu.biz is an interactive Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown, where each project is a battle-ready character with unique abilities.
+
+## Identity
+
+- Full Name: Kevin Liu
+- Role: Computer Science Student, Full-Stack Developer, AI Engineer
+- University: Princeton University, Class of 2028, BSE in Computer Science
+- Location: Princeton, NJ
+- Primary Website: https://kevinliu.biz
+- Alternate Website: https://www.kevin-liu.tech
+- GitHub: https://github.com/Kevin-Liu-01
+- LinkedIn: https://www.linkedin.com/in/kevin-liu-princeton
+- Twitter/X: https://twitter.com/kevskgs
+
+## Technical Skills
+
+### Programming Languages
+- TypeScript, JavaScript, Python, Java, C, HTML, CSS
+
+### Frontend
+- React, Next.js, Tailwind CSS, Framer Motion, Radix UI, shadcn/ui, Responsive Design, Accessibility (WCAG)
+
+### Backend
+- Node.js, tRPC, REST APIs, GraphQL, Express.js, NextAuth.js
+
+### AI & Machine Learning
+- Large Language Model (LLM) integration (GPT-4, GPT-3.5, Claude)
+- Model Context Protocol (MCP)
+- Computer Vision (OpenCV, object detection)
+- Speech Recognition and NLP
+- AI Agent orchestration
+- Retrieval-Augmented Generation (RAG)
+- Vector embeddings and semantic search
+
+### Databases & Data
+- PostgreSQL, Firebase, MongoDB, Prisma ORM, real-time data synchronization
+
+### DevOps & Infrastructure
+- Vercel, Docker, CI/CD pipelines, GitHub Actions
+
+### Hardware & IoT
+- Embedded systems, wearable sensors, Arduino, Raspberry Pi, hardware prototyping
+
+### Game Development
+- Browser-based games, turn-based combat systems, clicker games, tower defense, interactive simulations
+
+## Professional Experience & Roles
+
+- HackPrinceton Lead Developer & Organizer: Built landing pages and event tooling for Princeton's premier hackathon across multiple semesters (Fall 2024, Spring 2025, Fall 2025)
+- OMMC Co-Founder & Developer: Co-founded and built the tech stack for the Online Monmouth Math Competition, including the official website, test portals, sample portals, and question database (Atlas)
+
+## Achievements & Awards
+
+- 1st Place in Hardware at PennApps XXIII: Won with RecyclAIble, a smart recycling solution using AI object detection
+- HackPrinceton Organizer: Led development for multiple semesters of Princeton's flagship hackathon
+- OMMC Co-Founder: Built and scaled a math competition platform used by students worldwide
+- 30+ Shipped Projects: Prolific builder across AI, web, games, health-tech, and hardware domains
+
+## Detailed Project Catalog
+
+### AI & Machine Learning Projects
+
+#### Dedalus
+- URL: https://dedalus-demo.vercel.app/
+- Description: Build model-agnostic agents powered by MCP with a production-grade SDK and secure, multi-tenant auth. Features an agent marketplace for discovering and connecting tools and servers.
+- Tech Stack: Next.js, TypeScript, MCP, AI Agent SDK
+- Categories: AI, Web
+
+#### Sevenfold
+- URL: https://sevenfold-demo.vercel.app/
+- Description: Sevenfold helps you find, digest, and produce research in one centralized workplace. Features smart search results, document annotation, corpus-level AI chat, and citation tracing.
+- Tech Stack: Next.js, TypeScript, AI/NLP
+- Categories: AI, Data
+
+#### Lumachor
+- URL: https://lumachor.vercel.app/home
+- Description: A context engine that gives every user the power of an expert prompt engineer. Uses vector embeddings and context injection to supercharge AI interactions.
+- Tech Stack: Next.js, TypeScript, Vector Embeddings, AI
+- Categories: AI, Web
+
+#### LetMeCook
+- URL: https://letmecook.vercel.app/
+- Description: Scans your refrigerator to generate recipes using ChatGPT. Combines computer vision for ingredient detection with LLM-powered recipe generation.
+- Tech Stack: React, ChatGPT API, Computer Vision
+- Categories: AI, Mobile
+
+#### Balladeer
+- URL: https://balladeer.vercel.app/
+- Description: Generates full study guides for literary works using AI. Provides textual evidence, literary analysis, and structured educational content.
+- Tech Stack: Next.js, OpenAI API
+- Categories: AI, Data
+
+#### AdventureGPT
+- URL: https://adventuregpt.vercel.app/
+- Description: Generates unique, exciting stories based on a user-inputted prompt. An interactive AI storytelling experience.
+- Tech Stack: React, OpenAI API
+- Categories: AI, Game
+
+#### EditorGPT
+- URL: https://editorgpt.vercel.app/
+- Description: A code editor that allows ChatGPT to review your code. Combines a web-based code editor with AI-powered code analysis.
+- Tech Stack: React, OpenAI API, Monaco Editor
+- Categories: AI, Web
+
+#### Enkrateia
+- URL: https://enkrateia.vercel.app/
+- Description: An application that accesses the ChatGPT 3.5 and GPT-4 models. Early GPT interface with model fine-tuning and token streaming.
+- Tech Stack: React, OpenAI API
+- Categories: AI, Web
+
+#### RecyclAIble
+- URL: https://recyclaible.vercel.app/
+- Description: Hackathon project for smart recycling. Uses AI object detection (OpenCV) to classify recyclable materials. Won 1st Place in Hardware at PennApps XXIII.
+- Tech Stack: Python, OpenCV, React, Hardware
+- Categories: AI, Hardware
+- Award: 1st Place in Hardware at PennApps XXIII
+
+#### HD Transcribe
+- URL: https://hd-transcribe.vercel.app
+- Description: Accesses a novel speech model for patients with Huntington's Disease. Combines AI speech recognition with acoustic modeling to transcribe impaired speech.
+- Tech Stack: Python, AI Speech Models, React
+- Categories: AI, Health
+
+### Web Development Projects
+
+#### HackPrinceton Fall 2025
+- URL: https://hack-princeton-fall-2025-demo.vercel.app/
+- Description: Main landing page for HackPrinceton Fall 2025, Princeton's premier hackathon. Features responsive design, Framer Motion animations, and sponsor showcases.
+- Tech Stack: Next.js, TypeScript, Tailwind CSS, Framer Motion
+- Categories: Web, Design
+
+#### HackPrinceton Spring 2025
+- URL: https://hack-princeton-spring-2025-demo.vercel.app/
+- Description: Main landing page for HackPrinceton Spring 2025, Princeton's premier hackathon.
+- Tech Stack: Next.js, TypeScript, Tailwind CSS
+- Categories: Web, Design
+
+#### HackPrinceton Fall 2024
+- URL: https://hack-princeton-fall-2024-demo.vercel.app/
+- Description: Main landing page for HackPrinceton Fall 2024, Princeton's premier hackathon.
+- Tech Stack: Next.js, TypeScript, Tailwind CSS
+- Categories: Web, Design
+
+#### Splitway
+- URL: https://splitway.vercel.app/
+- Description: Track expenses and split them with friends. Real-time expense tracking and splitting with Firebase synchronization.
+- Tech Stack: React, Firebase, TypeScript
+- Categories: Web, Data
+
+#### Podium
+- URL: https://hackprinceton-podium.vercel.app/
+- Description: An app that streamlines judging and event management for hackathons. Features live leaderboards, spam prevention, and score finalization.
+- Tech Stack: Next.js, TypeScript, tRPC, PostgreSQL
+- Categories: Web, Data
+
+#### CompassUSA
+- URL: https://compass-usa.vercel.app/
+- Description: A tool to help immigrants find support and resources. Connects users with community aid and navigation resources.
+- Tech Stack: React, TypeScript
+- Categories: Web, Data
+
+#### OMMC Official Website
+- URL: https://www.ommcofficial.org
+- Description: The official website of the Online Monmouth Math Competition. Community hub with competition information and sponsor showcases.
+- Tech Stack: Next.js, TypeScript
+- Categories: Web, Design
+
+#### PlantSTEM
+- URL: https://plant-stem.vercel.app/
+- Description: A website to help students learn about Math and Physics. Educational platform with interactive lessons.
+- Tech Stack: React, TypeScript
+- Categories: Web, Data
+
+#### Tutorial
+- URL: https://tutorial-nu.vercel.app/
+- Description: An app to help tutors and pupils connect. Matching platform for educational tutoring.
+- Tech Stack: React, TypeScript
+- Categories: Web, Data
+
+#### Iron Triangle
+- URL: https://iron-triangle.vercel.app/
+- Description: U.S. History II Final project analyzing the Military Industrial Complex. Data visualization and historical analysis.
+- Tech Stack: React, D3.js
+- Categories: Data, Design
+
+### Game Development Projects
+
+#### Princeton Tower Defense
+- URL: https://princeton-tower-defense.vercel.app/
+- Description: A tower defense game where players defend Princeton from waves of attacks. Features Princeton-themed towers and enemies.
+- Tech Stack: React, TypeScript, Canvas/WebGL
+- Categories: Game, Web
+
+#### Lootbox Simulator
+- URL: https://lootboxsimulator.vercel.app/
+- Description: Simulator-style game where users can try opening different kinds of lootboxes. Features rarity systems and collection mechanics.
+- Tech Stack: React, TypeScript
+- Categories: Game, Web
+
+#### PawPointClicker
+- URL: https://pawpointclicker.vercel.app/
+- Description: Cookie Clicker inspired game where you collect Princeton's Paw Points. Incremental game with upgrades.
+- Tech Stack: React, TypeScript
+- Categories: Game, Web
+
+#### Satellite Crafter
+- URL: https://satellite-crafter.vercel.app/
+- Description: Kevin Liu's first app. A game to create satellites from parts. Craft and customize satellites.
+- Tech Stack: React
+- Categories: Game, Hardware
+
+#### PortfolioMon Showdown
+- URL: https://kevinliu.biz
+- GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
+- Description: This interactive portfolio website, built as a Pokémon Showdown-inspired turn-based fighting game. Each of Kevin Liu's 30 projects is a battle-ready PortfolioMon with unique types, stats, and moves. Players select a team and battle through opponents in a strategic combat system with type advantages, status effects, items, and AI opponents.
+- Tech Stack: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, NextAuth.js, Vercel Analytics
+- Categories: Web, Game
+
+### Health Technology Projects
+
+#### SnellTech
+- URL: https://snelltech.vercel.app/
+- Description: Low-cost digital visual acuity exam using the Snellen Eye Chart. Accessible healthcare tool for vision testing.
+- Tech Stack: React, TypeScript
+- Categories: Health, Web
+
+#### ApneaAlert
+- URL: https://apnea-alert-git-main-kevin-liu-01.vercel.app/
+- Description: An affordable wearable sensor to help you sleep soundly. Hardware sensor with real-time monitoring for sleep apnea detection.
+- Tech Stack: React, Hardware Sensors, Arduino
+- Categories: Health, Hardware
+
+### Data & Competition Platforms
+
+#### OMMC Test Portal
+- URL: https://ommc-test-portal.vercel.app/
+- Description: The official test portal of the OMMC competition. Secure testing environment with proctoring and score calculation.
+- Tech Stack: Next.js, TypeScript, PostgreSQL
+- Categories: Web, Data
+
+#### OMMC Sample Portal
+- URL: https://ommc-sample-portal.vercel.app/
+- Description: The official sample test portal of OMMC. Practice environment for competition preparation.
+- Tech Stack: Next.js, TypeScript
+- Categories: Web, Data
+
+#### OMMC Atlas
+- URL: https://ommc-atlas.vercel.app/
+- Description: The fullstack database for all OMMC questions. Searchable archive with admin panel and data management.
+- Tech Stack: Next.js, TypeScript, PostgreSQL, Prisma
+- Categories: Data, Web
+
+## Frequently Asked Questions
+
+### Who is Kevin Liu?
+Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who has built 30+ projects spanning AI, web development, games, health technology, and hardware. He is known for his interactive portfolio at kevinliu.biz which presents his projects as a Pokémon Showdown-style battle game.
+
+### What is Kevin Liu's most notable project?
+Kevin Liu's most notable projects include Dedalus (an AI agent SDK with MCP support), RecyclAIble (which won 1st in Hardware at PennApps XXIII), and his PortfolioMon Showdown portfolio which creatively gamifies project showcasing.
+
+### What technologies does Kevin Liu specialize in?
+Kevin Liu specializes in React, Next.js, TypeScript, Python, AI/ML integration (including LLMs, computer vision, and speech recognition), and full-stack development with tools like tRPC, PostgreSQL, and Firebase.
+
+### What hackathons has Kevin Liu won?
+Kevin Liu won 1st Place in Hardware at PennApps XXIII with RecyclAIble, and has been a lead organizer and developer for HackPrinceton across multiple semesters.
+
+### Where does Kevin Liu go to school?
+Kevin Liu attends Princeton University, pursuing a BSE in Computer Science as part of the Class of 2028.
+
+### How can I contact Kevin Liu?
+You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton), or Twitter (@kevskgs). His portfolio is at https://kevinliu.biz.
+
+### What is PortfolioMon Showdown?
+PortfolioMon Showdown is Kevin Liu's interactive portfolio website built as a Pokémon Showdown-inspired turn-based battle game. Each of his 30+ projects is represented as a PortfolioMon with unique types (AI, Web, Game, Data, Health, Hardware, Design, Mobile), stats (HP, ATK, DEF, SPD), and moves. Players select a team and battle through AI opponents.
+
+### What AI projects has Kevin Liu built?
+Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).
+
+## What We Do Not Do
+
+- This is a personal developer portfolio, not a commercial service
+- No paid products or subscriptions are offered
+- The site does not collect or sell user data

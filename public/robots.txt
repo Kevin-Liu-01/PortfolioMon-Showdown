@@ -1,7 +1,69 @@
 # https://www.robotstxt.org/robotstxt.html
+
+# ===== Search Engine Crawlers =====
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ===== AI Training Crawlers =====
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# ===== AI Citation / Search Crawlers =====
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# ===== Default (all other crawlers) =====
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemaps
 Sitemap: https://kevinliu.biz/sitemap.xml
-Sitemap: https://www.kevin-liu.tech/sitemap.xml
+
+# LLM-readable content
+# See https://kevinliu.biz/llms.txt for AI-optimized site summary
+# See https://kevinliu.biz/llms-full.txt for comprehensive project data
