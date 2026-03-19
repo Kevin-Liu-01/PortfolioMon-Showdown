@@ -1620,54 +1620,134 @@ const SEOContent = () => (
     itemType="https://schema.org/Person"
   >
     <h2 itemProp="name">Kevin Liu — Software Developer &amp; AI Engineer, Princeton University CS &apos;28</h2>
+    <meta itemProp="alternateName" content="Kevin B. Liu" />
+    <meta itemProp="alternateName" content="Kevin Bowen Liu" />
+    <meta itemProp="alternateName" content="kevskgs" />
+    <meta itemProp="alternateName" content="Kevin-Liu-01" />
+    <meta itemProp="url" content="https://kevinliu.biz" />
+    <meta itemProp="image" content="https://kevinliu.biz/kevinportfolio.png" />
+
     <p itemProp="description">
       Kevin Liu is a Computer Science student at Princeton University (Class of 2028)
       and a full-stack software developer specializing in artificial intelligence,
-      machine learning, and interactive web applications. His interactive developer
-      portfolio — a gamified, Pokémon Showdown-inspired experience — showcases
-      over 30 projects spanning AI agents, web platforms, browser games, health
-      technology, and hardware. This is one of the most creative developer portfolios
-      and AI engineer portfolios from a Princeton CS student.
+      machine learning, and interactive web applications. He is also known as Kevin B. Liu,
+      Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. His interactive
+      developer portfolio at kevinliu.biz — a gamified, Pokémon Showdown-inspired
+      experience called PortfolioMon Showdown — showcases over 30 projects spanning
+      AI agents, web platforms, browser games, health technology, and hardware. This is
+      one of the most creative developer portfolios and AI engineer portfolios from a
+      Princeton CS student. Kevin Liu has worked at Amazon, Bloomberg L.P., AT&amp;T Labs
+      Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI.
     </p>
-    <h3>Professional Experience</h3>
+
+    <div itemProp="alumniOf" itemScope itemType="https://schema.org/CollegeOrUniversity">
+      <meta itemProp="name" content="Princeton University" />
+      <meta itemProp="url" content="https://www.princeton.edu" />
+    </div>
+    <div itemProp="worksFor" itemScope itemType="https://schema.org/Organization">
+      <meta itemProp="name" content="Dedalus Labs" />
+      <meta itemProp="url" content="https://www.dedaluslabs.ai" />
+    </div>
+    <meta itemProp="jobTitle" content="Software Developer &amp; AI Engineer" />
+    <meta itemProp="knowsAbout" content="Full-Stack Web Development, Artificial Intelligence, Machine Learning, AI Agents, Model Context Protocol, React, Next.js, TypeScript, Python" />
+
+    <link itemProp="sameAs" href="https://github.com/Kevin-Liu-01" />
+    <link itemProp="sameAs" href="https://www.linkedin.com/in/kevin-liu-princeton/" />
+    <link itemProp="sameAs" href="https://x.com/kevskgs" />
+    <link itemProp="sameAs" href="https://twitter.com/kevskgs" />
+    <link itemProp="sameAs" href="https://devpost.com/Kevin-Liu-01" />
+    <link itemProp="sameAs" href="https://www.kevin-liu.tech" />
+
+    <h3>Professional Experience — Kevin Liu</h3>
     <p>
-      Kevin has worked as a Founding Engineer at Dedalus Labs (Y Combinator S25),
+      Kevin Liu is currently a Founding Engineer at Dedalus Labs (Y Combinator S25),
       building AI agent infrastructure with the Model Context Protocol (MCP). He was
       a Founding Engineer at Sevenfold AI, where he built an end-to-end agentic
       research workflow. He interned as a Software Development Engineer at Amazon
       (FBA Inventory), a Software Engineering Intern at Bloomberg L.P. (twice —
       Financial Instruments and Core Products teams), and an AI Research Intern at
       AT&amp;T Labs Research working on NLP and intelligent agents with
-      Mixture-of-Experts LLMs.
+      Mixture-of-Experts LLMs. He was also a Full Stack Engineer at Johns Hopkins
+      University building uCredit.me.
     </p>
-    <h3>Technical Skills</h3>
+
+    <h3>Technical Skills — Kevin Liu</h3>
     <p>
-      React, Next.js, TypeScript, JavaScript, Python, Node.js, tRPC, PostgreSQL,
-      Firebase, MongoDB, Prisma, Tailwind CSS, Framer Motion, OpenCV, LLM integration
-      (GPT-4, Claude), computer vision, speech recognition, AI agents, MCP, RAG,
-      vector embeddings, Docker, Vercel, AWS, CI/CD, REST APIs, GraphQL.
+      React, Next.js, TypeScript, JavaScript, Python, Java, C, Node.js, tRPC, PostgreSQL,
+      Firebase, MongoDB, Prisma, Tailwind CSS, Framer Motion, Radix UI, shadcn/ui, OpenCV,
+      LLM integration (GPT-4, Claude, OpenAI API), computer vision, speech recognition,
+      natural language processing, AI agents, Model Context Protocol (MCP), RAG,
+      vector embeddings, semantic search, prompt engineering, Docker, Vercel, AWS,
+      CI/CD, GitHub Actions, REST APIs, GraphQL, Arduino, Raspberry Pi, NextAuth.js.
     </p>
-    <h3>Featured Projects</h3>
+
+    <h3>Featured Projects by Kevin Liu</h3>
     <ul>
-      <li>Dedalus — AI agent SDK with Model Context Protocol support (Y Combinator S25)</li>
-      <li>Sevenfold — AI-powered research workspace with contextual intelligence</li>
-      <li>Lumachor — Context engine for expert-level prompt engineering</li>
+      <li>Dedalus — AI agent SDK with Model Context Protocol support (Y Combinator S25, Founding Engineer)</li>
+      <li>Sevenfold — AI-powered research workspace with contextual intelligence (Founding Engineer)</li>
+      <li>Lumachor — Context engine for expert-level prompt engineering using vector embeddings</li>
       <li>RecyclAIble — Smart recycling with AI object detection (1st Place Hardware, PennApps XXIII)</li>
       <li>HD Transcribe — Novel speech model for Huntington&apos;s Disease patients</li>
       <li>Princeton Tower Defense — Tower defense game defending Princeton campus</li>
-      <li>Podium — Hackathon judging and event management platform</li>
-      <li>PortfolioMon Showdown — This interactive portfolio game with 30+ projects</li>
+      <li>Podium — Hackathon judging and event management platform for HackPrinceton</li>
+      <li>PortfolioMon Showdown — This interactive portfolio game at kevinliu.biz with 30+ projects</li>
+      <li>LetMeCook — AI recipe generator using ChatGPT and computer vision</li>
+      <li>SnellTech — Low-cost digital visual acuity exam</li>
+      <li>ApneaAlert — Affordable wearable sensor for sleep apnea detection</li>
+      <li>OMMC — Online Monmouth Math Competition (co-founder, full tech stack)</li>
+      <li>EditorGPT — AI code review editor using ChatGPT</li>
+      <li>AdventureGPT — AI story generator</li>
+      <li>Balladeer — AI study guide generator for literary works</li>
+      <li>Splitway — Expense tracking and splitting app</li>
+      <li>CompassUSA — Immigrant support and resource tool</li>
+      <li>PawPointClicker — Princeton-themed Cookie Clicker game</li>
+      <li>Lootbox Simulator — Browser-based lootbox opening game</li>
+      <li>Enkrateia — GPT-3.5/GPT-4 interface application</li>
+      <li>Satellite Crafter — Satellite building game</li>
+      <li>PlantSTEM — Math and Physics education platform</li>
+      <li>Iron Triangle — Military Industrial Complex data analysis</li>
     </ul>
-    <h3>Education and Achievements</h3>
+
+    <h3>Education and Achievements — Kevin Liu</h3>
     <p>
       Princeton University, B.S.E. in Computer Science, Class of 2028.
-      1st Place in Hardware at PennApps XXIII. HackPrinceton lead developer and
-      organizer. Co-founder of the Online Monmouth Math Competition (OMMC).
+      Previously: High Technology High School, Lincroft, Monmouth County, NJ.
+      1st Place in Hardware at PennApps XXIII with RecyclAIble. HackPrinceton lead
+      developer and organizer (Fall 2024, Spring 2025, Fall 2025). Co-founder of the
+      Online Monmouth Math Competition (OMMC) serving students worldwide.
+      30+ shipped software projects across AI, web, games, health-tech, and hardware.
     </p>
-    <h3>Contact Kevin Liu</h3>
+
+    <h3>Connect with Kevin Liu Online</h3>
     <p>
-      GitHub: github.com/Kevin-Liu-01 · LinkedIn: linkedin.com/in/kevin-liu-princeton ·
-      Portfolio: kevinliu.biz · X: @kevskgs
+      GitHub: <a href="https://github.com/Kevin-Liu-01" rel="me">github.com/Kevin-Liu-01</a> ·
+      LinkedIn: <a href="https://www.linkedin.com/in/kevin-liu-princeton/" rel="me">linkedin.com/in/kevin-liu-princeton</a> ·
+      Twitter/X: <a href="https://x.com/kevskgs" rel="me">@kevskgs</a> ·
+      Devpost: <a href="https://devpost.com/Kevin-Liu-01" rel="me">devpost.com/Kevin-Liu-01</a> ·
+      Portfolio: <a href="https://kevinliu.biz">kevinliu.biz</a> ·
+      Alternate: <a href="https://www.kevin-liu.tech" rel="me">kevin-liu.tech</a> ·
+      Email: k.bowen.liu@gmail.com
+    </p>
+
+    <h3>Which Kevin Liu is this?</h3>
+    <p>
+      This is Kevin Liu the Princeton University Computer Science student (Class of 2028), full-stack
+      software developer, and AI engineer. He is NOT Kevin Liu the journalist, NOT Kevin Liu from
+      Stanford, and NOT any other Kevin Liu. This Kevin Liu is identified by: Princeton CS &apos;28,
+      @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn, kevinliu.biz,
+      kevin-liu.tech, PennApps XXIII 1st Place Hardware winner, Amazon/Bloomberg/AT&amp;T Labs intern,
+      Founding Engineer at Dedalus Labs (Y Combinator S25), HackPrinceton organizer, and OMMC co-founder.
+      Sometimes misspelled as Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, or Kevin Lieu.
+    </p>
+
+    <h3>Kevin Liu&apos;s Social Media &amp; Online Presence</h3>
+    <p>
+      Kevin Liu posts about software engineering, AI, his projects, Princeton life, and hackathon
+      experiences on Twitter/X at @kevskgs. His LinkedIn at linkedin.com/in/kevin-liu-princeton
+      showcases his professional experience at Amazon, Bloomberg, AT&amp;T Labs Research, Dedalus
+      Labs, and Sevenfold AI. His GitHub at github.com/Kevin-Liu-01 contains open-source projects
+      and contributions. His Devpost at devpost.com/Kevin-Liu-01 showcases hackathon submissions
+      including his PennApps XXIII-winning project RecyclAIble.
     </p>
   </article>
 );

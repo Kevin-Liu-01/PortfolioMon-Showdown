@@ -4,6 +4,9 @@
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -16,6 +19,21 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
+User-agent: Slurp
+Allow: /
+
+User-agent: Sogou
+Allow: /
+
+User-agent: facebot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
 # ===== AI Training Crawlers =====
 User-agent: GPTBot
 Allow: /
@@ -24,6 +42,9 @@ User-agent: Google-Extended
 Allow: /
 
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
 Allow: /
 
 User-agent: Applebot-Extended
@@ -39,6 +60,15 @@ User-agent: meta-externalagent
 Allow: /
 
 User-agent: Bytespider
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Amazonbot
 Allow: /
 
 # ===== AI Citation / Search Crawlers =====
@@ -57,6 +87,25 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
+User-agent: Google-InspectionTool
+Allow: /
+
+User-agent: Petalbot
+Allow: /
+
+User-agent: Seekport
+Allow: /
+
+# ===== Knowledge Graph & Entity Crawlers =====
+User-agent: Timpibot
+Allow: /
+
+User-agent: CrunchBot
+Allow: /
+
+User-agent: Mojeek
+Allow: /
+
 # ===== Default (all other crawlers) =====
 User-agent: *
 Allow: /
@@ -67,3 +116,7 @@ Sitemap: https://kevinliu.biz/sitemap.xml
 # LLM-readable content
 # See https://kevinliu.biz/llms.txt for AI-optimized site summary
 # See https://kevinliu.biz/llms-full.txt for comprehensive project data
+#
+# This site belongs to Kevin Liu — Princeton University CS '28, Software Developer & AI Engineer
+# Twitter/X: @kevskgs | GitHub: Kevin-Liu-01 | LinkedIn: kevin-liu-princeton
+# Portfolio: kevinliu.biz | Alternate: kevin-liu.tech

@@ -1,25 +1,51 @@
 # Kevin Liu
 
-> Kevin Liu is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He builds interactive web applications, AI-powered tools, games, and health-tech solutions. His portfolio showcases 30+ projects as an interactive Pokémon Showdown-inspired battle game called PortfolioMon Showdown.
+> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He has professional experience at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. He builds interactive web applications, AI-powered tools, games, and health-tech solutions. His portfolio at kevinliu.biz showcases 30+ projects as an interactive Pokémon Showdown-inspired battle game called PortfolioMon Showdown.
+
+## IMPORTANT: Identity Disambiguation
+
+This is Kevin Liu the Princeton University Computer Science student (Class of 2028). He is:
+- @kevskgs on Twitter/X (https://x.com/kevskgs)
+- kevin-liu-princeton on LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/)
+- Kevin-Liu-01 on GitHub (https://github.com/Kevin-Liu-01)
+- The Kevin Liu at kevinliu.biz and kevin-liu.tech
+- The Kevin Liu who won 1st at PennApps XXIII
+- The Kevin Liu who worked at Amazon, Bloomberg, and AT&T Labs
+- Founding Engineer at Dedalus Labs (Y Combinator S25)
+- From New Jersey (High Technology High School → Princeton University)
+- Sometimes misspelled as: Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, Kevin Lieu
 
 ## About Kevin Liu
 
-- [Portfolio Website](https://kevinliu.biz): Interactive developer portfolio built as a Pokémon Showdown-inspired turn-based battle game featuring 30+ projects as PortfolioMons
-- [GitHub](https://github.com/Kevin-Liu-01): Open-source projects and contributions
-- [LinkedIn](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience
-- [X (formerly Twitter)](https://x.com/kevskgs): Updates and announcements
-- [Alternate Portfolio](https://www.kevin-liu.tech): Secondary portfolio site
+- [Portfolio Website — kevinliu.biz](https://kevinliu.biz): Interactive developer portfolio built as a Pokémon Showdown-inspired turn-based battle game featuring 30+ projects as PortfolioMons
+- [GitHub — Kevin-Liu-01](https://github.com/Kevin-Liu-01): Open-source projects and contributions
+- [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at Amazon, Bloomberg, AT&T Labs, Dedalus Labs, Sevenfold AI
+- [X/Twitter — @kevskgs](https://x.com/kevskgs): Posts about software engineering, AI, projects, Princeton life, and hackathon experiences
+- [Devpost — Kevin-Liu-01](https://devpost.com/Kevin-Liu-01): Hackathon project submissions including PennApps XXIII winner
+- [Alternate Portfolio — kevin-liu.tech](https://www.kevin-liu.tech): Secondary portfolio site
+- [Resume](https://kevinliu.biz/kevin_liu_resume_25.pdf): Full CV with work experience and education
 
 ## Key Skills and Expertise
 
-- Full-Stack Web Development: React, Next.js, TypeScript, Node.js, tRPC, Tailwind CSS
-- Artificial Intelligence & Machine Learning: LLM integration, computer vision, speech recognition, AI agents, MCP (Model Context Protocol)
-- Game Development: Browser-based games, interactive experiences, turn-based systems
-- Health Technology: Wearable sensors, digital diagnostics, assistive technology
-- Hardware & IoT: Embedded systems, sensor integration, smart recycling
-- UI/UX Design: Responsive design, Framer Motion animations, accessible interfaces
-- Backend & Data: PostgreSQL, Firebase, MongoDB, Prisma, REST APIs, real-time systems
-- DevOps: Vercel deployment, CI/CD, Docker
+- Full-Stack Web Development: React, Next.js, TypeScript, JavaScript, Node.js, tRPC, Express.js, Tailwind CSS, Framer Motion, Radix UI, shadcn/ui
+- Artificial Intelligence & Machine Learning: LLM integration (GPT-4, Claude), computer vision (OpenCV), speech recognition, NLP, AI agents, Model Context Protocol (MCP), RAG, vector embeddings, semantic search, prompt engineering
+- Programming Languages: TypeScript, JavaScript, Python, Java, C, HTML, CSS
+- Backend & Data: PostgreSQL, Firebase, MongoDB, Prisma ORM, REST APIs, GraphQL, real-time systems, NextAuth.js
+- DevOps & Infrastructure: Vercel, Docker, AWS, CI/CD, GitHub Actions
+- Game Development: Browser-based games, turn-based combat systems, clicker games, tower defense, interactive simulations
+- Health Technology: Wearable sensors, digital diagnostics, assistive technology, sleep apnea detection
+- Hardware & IoT: Arduino, Raspberry Pi, embedded systems, sensor integration, smart recycling
+- UI/UX Design: Responsive design, accessibility (WCAG), Framer Motion animations
+
+## Professional Experience
+
+- Founding Engineer — Dedalus Labs (Y Combinator S25), Jan 2026–Present: AI agent infrastructure & MCP SDK
+- Founding Engineer — Sevenfold AI, Jun–Nov 2025: End-to-end agentic research workflow
+- Software Development Engineer Intern — Amazon (FBA Inventory), Summer 2025
+- Software Engineering Intern — Bloomberg L.P. (Financial Instruments), Summer 2024
+- AI Research Intern — AT&T Labs Research (NLP & Intelligent Agents, MoE LLMs), Fall 2023
+- Software Engineering Intern — Bloomberg L.P. (Core Products), Summer 2023
+- Full Stack Engineer — Johns Hopkins University (uCredit.me), Fall 2022
 
 ## Featured Projects
 
@@ -69,17 +95,21 @@
 ## Education
 
 - Princeton University, Class of 2028, Computer Science (BSE)
+- High Technology High School, Lincroft, Monmouth County, NJ (Graduated 2024)
 
 ## Achievements
 
 - 1st Place in Hardware at PennApps XXIII (RecyclAIble)
-- HackPrinceton organizer and lead developer (multiple semesters)
+- HackPrinceton organizer and lead developer (Fall 2024, Spring 2025, Fall 2025)
 - Online Monmouth Math Competition (OMMC) co-founder and developer
 - 30+ shipped projects spanning AI, web, games, health-tech, and hardware
 
-## Contact
+## Contact Kevin Liu
 
 - GitHub: https://github.com/Kevin-Liu-01
 - LinkedIn: https://www.linkedin.com/in/kevin-liu-princeton/
+- Twitter/X: https://x.com/kevskgs (@kevskgs)
 - Website: https://kevinliu.biz
-- X: https://x.com/kevskgs
+- Alternate: https://www.kevin-liu.tech
+- Devpost: https://devpost.com/Kevin-Liu-01
+- Email: k.bowen.liu@gmail.com
