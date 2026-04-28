@@ -114,7 +114,7 @@ const PROJECT_CATALOG = [
   { name: "PlantSTEM", url: "https://plant-stem.vercel.app/", description: "A website to help students learn about Math and Physics" },
   { name: "Tutorial", url: "https://tutorial-nu.vercel.app/", description: "An app to help tutors and pupils connect" },
   { name: "Satellite Crafter", url: "https://satellite-crafter.vercel.app/", description: "A game to create satellites from parts" },
-  { name: "PortfolioMon Showdown", url: "https://kevinliu.biz", description: "This interactive portfolio — a Pokémon Showdown-inspired turn-based battle game showcasing 30+ projects" },
+  { name: "PortfolioMon Showdown", url: "https://www.kevin-liu.tech", description: "This interactive portfolio — a Pokémon Showdown-inspired turn-based battle game showcasing 30+ projects" },
 ];
 
 const FAQ_ENTRIES = [

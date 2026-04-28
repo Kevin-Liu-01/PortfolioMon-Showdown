@@ -1624,8 +1624,8 @@ const SEOContent = () => (
     <meta itemProp="alternateName" content="Kevin Bowen Liu" />
     <meta itemProp="alternateName" content="kevskgs" />
     <meta itemProp="alternateName" content="Kevin-Liu-01" />
-    <meta itemProp="url" content="https://kevinliu.biz" />
-    <meta itemProp="image" content="https://kevinliu.biz/kevinportfolio.png" />
+    <meta itemProp="url" content="https://www.kevin-liu.tech" />
+    <meta itemProp="image" content="https://www.kevin-liu.tech/kevinportfolio.png" />
 
     <p itemProp="description">
       Kevin Liu is a Computer Science student at Princeton University (Class of 2028)

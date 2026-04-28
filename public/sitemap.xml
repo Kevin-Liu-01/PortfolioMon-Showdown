@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://kevinliu.biz/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <loc>https://www.kevin-liu.tech/</loc>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://kevinliu.biz/kevinportfolio.png</image:loc>
+      <image:loc>https://www.kevin-liu.tech/kevinportfolio.png</image:loc>
       <image:title>Kevin Liu's PortfolioMon Showdown — Interactive Developer Portfolio | Princeton CS '28</image:title>
       <image:caption>Interactive Pokémon Showdown-inspired developer portfolio by Kevin Liu (Princeton University CS '28, @kevskgs) featuring 30+ projects as battle-ready PortfolioMons. Kevin Liu has worked at Amazon, Bloomberg, AT&amp;T Labs, and Dedalus Labs (Y Combinator S25).</image:caption>
     </image:image>

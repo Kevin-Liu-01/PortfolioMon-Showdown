@@ -64,6 +64,14 @@ const config = {
         ],
       },
       {
+        source: "/kevinportfolio.png",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
         source: "/llms.txt",
         headers: [
           { key: "Content-Type", value: "text/plain; charset=utf-8" },
