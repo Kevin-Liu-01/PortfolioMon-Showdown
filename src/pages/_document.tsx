@@ -132,7 +132,7 @@ export default function Document() {
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href={SITE_URL} />
         <link rel="alternate" hrefLang="en" href={SITE_URL} />
-        <link rel="alternate" hrefLang="en" href="https://www.kevin-liu.tech" />
+        <link rel="alternate" hrefLang="en" href="https://www.kevinliu.biz" />
 
         {/* Social identity verification — rel=me links */}
         <link rel="me" href="https://github.com/Kevin-Liu-01" />
