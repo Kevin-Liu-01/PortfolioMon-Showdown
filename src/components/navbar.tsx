@@ -27,20 +27,36 @@ import { useGame } from "../providers/gameProvider";
 import LogoIcon from "./logoIcon";
 import { CLIP } from "../constants/clipPaths";
 import { SOCIAL_LINKS } from "../constants/site";
+
+const XLogo = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
 // --- Reusable Primitives ---
 
 const ClippedGroupContainer = ({
   children,
   className,
   label,
+  borderColor = "bg-slate-400/60 dark:bg-cyan-400/50",
+  clipPath = CLIP.navGroup,
 }: {
   children: React.ReactNode;
   className?: string;
   label?: string;
+  borderColor?: string;
+  clipPath?: string;
 }) => (
   <motion.div
-    className={`relative bg-slate-400/60 p-px px-0.5 transition-all hover:py-0.5 dark:bg-cyan-400/50 ${className ?? ""}`}
-    style={{ clipPath: CLIP.navGroup }}
+    className={`relative p-px px-0.5 transition-all hover:py-0.5 ${borderColor} ${className ?? ""}`}
+    style={{ clipPath }}
     initial="rest"
     whileHover="hover"
     animate="rest"
@@ -58,10 +74,10 @@ const ClippedGroupContainer = ({
     />
     <div
       className="relative flex h-full w-full items-center gap-0.5 bg-white/90 px-1 py-1 dark:bg-slate-900/80"
-      style={{ clipPath: CLIP.navGroup }}
+      style={{ clipPath }}
     >
       {label && (
-        <span className="pointer-events-none select-none pl-1.5 pr-1 font-hanken text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+        <span className="pointer-events-none select-none pl-1.5 pr-1 font-pangram text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
           {label}
         </span>
       )}
@@ -97,7 +113,12 @@ const ClippedLink = ({
 // --- Social Links Group ---
 
 const SocialLinksGroup = () => (
-  <ClippedGroupContainer>
+  <ClippedGroupContainer
+    borderColor="bg-slate-400/40 dark:bg-slate-500/50"
+  >
+    <ClippedLink href={SOCIAL_LINKS.x} title="X (@kevskgs)">
+      <XLogo className="h-[18px] w-[18px]" />
+    </ClippedLink>
     <ClippedLink href={SOCIAL_LINKS.github} title="GitHub">
       <Github className="h-[18px] w-[18px]" />
     </ClippedLink>
@@ -200,11 +221,10 @@ const AutoBattleButton = () => {
         )}
       </AnimatePresence>
       <Bot
-        className={`relative h-[18px] w-[18px] transition-colors ${
-          isAutoBattleActive
-            ? "text-cyan-700 dark:text-white"
-            : "text-slate-500 dark:text-slate-300"
-        }`}
+        className={`relative h-[18px] w-[18px] transition-colors ${isAutoBattleActive
+          ? "text-cyan-700 dark:text-white"
+          : "text-slate-500 dark:text-slate-300"
+          }`}
       />
     </ClippedButton>
   );
@@ -256,20 +276,23 @@ const GameControlsGroup = () => {
   if (!showControls) return null;
 
   return (
-    <ClippedGroupContainer label="Game">
+    <ClippedGroupContainer
+      label="Game"
+      borderColor="bg-amber-400/50 dark:bg-amber-400/40"
+    >
       {(gameState === "fight" ||
         gameState === "gameOver" ||
         gameState === "forcedSwitch") && (
-        <>
-          <ClippedButton onClick={handleReset} title="Reset Game">
-            <RotateCcw className="h-[18px] w-[18px]" />
-          </ClippedButton>
-          <ClippedButton onClick={handleRun} title="Forfeit Match">
-            <Flag className="h-[18px] w-[18px]" />
-          </ClippedButton>
-          <AutoBattleButton />
-        </>
-      )}
+          <>
+            <ClippedButton onClick={handleReset} title="Reset Game">
+              <RotateCcw className="h-[18px] w-[18px]" />
+            </ClippedButton>
+            <ClippedButton onClick={handleRun} title="Forfeit Match">
+              <Flag className="h-[18px] w-[18px]" />
+            </ClippedButton>
+            <AutoBattleButton />
+          </>
+        )}
       {gameState === "teamSelect" && (
         <ClippedButton
           onClick={handleConfirmTeam}
@@ -311,7 +334,9 @@ const SettingsGroup = ({
 
   return (
     <div className="relative">
-      <ClippedGroupContainer>
+      <ClippedGroupContainer
+        borderColor="bg-cyan-400/40 dark:bg-cyan-400/50"
+      >
         <div
           onMouseEnter={() => setShowBgPreview(true)}
           onMouseLeave={() => setShowBgPreview(false)}
@@ -354,9 +379,11 @@ const UserGroup = () => {
   const { data: session } = useSession();
 
   return (
-    <ClippedGroupContainer>
+    <ClippedGroupContainer
+      borderColor="bg-emerald-400/40 dark:bg-emerald-400/40"
+    >
       <div
-        className="relative h-8 w-8 flex-shrink-0 bg-slate-300 p-px dark:bg-cyan-400/50"
+        className="relative h-8 w-8 flex-shrink-0 bg-slate-300 p-px dark:bg-emerald-400/50"
         style={{ clipPath: CLIP.octagon }}
       >
         <div
@@ -393,7 +420,7 @@ const UserGroup = () => {
 
 const AuthorBadge = () => (
   <div
-    className="absolute bottom-1 right-[-0.75rem] z-20 p-px shadow-lg shadow-black/10 dark:shadow-black/30"
+    className="absolute bottom-2 right-[-0.15rem] z-20 p-px shadow-lg shadow-black/10 dark:shadow-black/30"
     style={{
       clipPath:
         "polygon(5px 0, 100% 0, calc(100% - 10px) 100%, 5px 100%, 0 50%)",
@@ -415,7 +442,7 @@ const AuthorBadge = () => (
         }}
       />
       <span
-        className="font-hanken text-[7px] font-bold uppercase tracking-wider text-slate-800"
+        className="font-pangram text-[7px] font-bold uppercase tracking-wider text-slate-800"
         style={{
           textShadow: "0 1px 0px rgba(255, 255, 255, 0.4)",
         }}
@@ -448,7 +475,7 @@ const PortfolioMonLogo = () => {
       className="relative flex cursor-pointer items-center gap-3"
     >
       <div className="relative z-10 flex items-center gap-3">
-        <LogoIcon className="h-12 w-12 flex-shrink-0" />
+        <LogoIcon className="h-14 w-14 flex-shrink-0" />
         <div className="relative">
           <div className="relative">
             <motion.div
@@ -471,30 +498,45 @@ const PortfolioMonLogo = () => {
               PortfolioMon
             </div>
           </div>
-          <div className="relative -mt-1 w-[150px]">
+          <div className="relative -mt-0.5 w-[150px]">
             <motion.div
               variants={showdownPlateVariants}
               className="absolute top-0 left-0 h-full w-full bg-slate-300 dark:bg-slate-500"
               style={{
                 clipPath:
-                  "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
+                  "polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%)",
               }}
             />
             <div
               className="relative bg-red-600"
               style={{
                 clipPath:
-                  "polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
+                  "polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%)",
               }}
             >
-              <div className="justify-left flex items-center gap-2 truncate px-2 py-0.5">
+              <div className="justify-left flex items-center gap-1.5 truncate px-2 py-0.5">
                 <div className="flex h-4 w-4 items-center justify-center rounded-full bg-slate-900">
                   <Shield className="h-3 w-3 text-red-400" />
                 </div>
-                <div className="font-orbiter text-xs font-extrabold tracking-[0.2em] text-white">
+                <div className="font-orbiter mb-0.5 text-xs font-bold tracking-[0.1em] text-white">
                   SHOWDOWN
                 </div>
               </div>
+              <div
+                className="absolute top-0 -right-[0.15rem] h-full w-8 bg-red-700"
+                style={{
+                  clipPath:
+                    "polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)",
+                }}
+              />
+              <div
+                className="absolute top-0 -right-[0.75rem] h-full w-8 bg-red-800"
+                style={{
+                  clipPath:
+                    "polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)",
+                }}
+              />
+
             </div>
           </div>
         </div>
@@ -519,18 +561,14 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
     },
   };
 
-  const lineFromRight = {
-    rest: { opacity: 0.1, x: 30 },
-    hover: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
+  const lineStatic = {
+    rest: { opacity: 0.7, x: 0 },
+    hover: { opacity: 0.7, x: 0 },
   };
 
   return (
     <motion.div
-      className="relative flex w-full min-w-fit items-center overflow-hidden bg-white/80 py-3 pl-4 pr-12 backdrop-blur-sm sm:pl-6 lg:pl-8 dark:bg-slate-800/90"
+      className="relative flex w-full min-w-fit items-center overflow-hidden bg-white/80 pb-3 pt-1.5 pl-4 pr-12 backdrop-blur-sm sm:pl-6 dark:bg-slate-800/90"
       style={{
         clipPath: "polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%)",
       }}
@@ -541,24 +579,47 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
       >
         <motion.div
           variants={lineFromLeft}
-          className="absolute inset-0 bg-cyan-500/20 dark:bg-cyan-400/40"
+          className="absolute inset-0 bg-cyan-500/15 dark:bg-cyan-400/30"
           style={{
             clipPath: "polygon(0 100%, 15% 100%, 85% 0, 70% 0)",
           }}
         />
         <motion.div
           variants={lineFromLeft}
-          className="absolute inset-0 bg-amber-400/20 dark:bg-yellow-300/40"
+          className="absolute inset-0 bg-cyan-400/10 dark:bg-cyan-300/20"
           style={{
-            clipPath: "polygon(0% 0%, 5% 0%, 100% 100%, 95% 100%)",
+            clipPath: "polygon(10% 100%, 20% 100%, 90% 0, 80% 0)",
           }}
         />
         <motion.div
-          variants={lineFromRight}
+          variants={lineFromLeft}
+          className="absolute inset-0 bg-amber-400/15 dark:bg-yellow-300/30"
+          style={{
+            clipPath: "polygon(0% 0%, 3% 0%, 100% 100%, 97% 100%)",
+          }}
+        />
+        <motion.div
+          variants={lineStatic}
           className="absolute inset-0 bg-cyan-400/40 dark:bg-cyan-300/70"
           style={{
             clipPath:
               "polygon(100% 0, calc(100% - 3px) 0, calc(100% - 43px) 100%, calc(100% - 40px) 100%)",
+          }}
+        />
+        <motion.div
+          variants={lineStatic}
+          className="absolute inset-0 bg-cyan-400/20 dark:bg-cyan-300/40"
+          style={{
+            clipPath:
+              "polygon(calc(100% - 8px) 0, calc(100% - 11px) 0, calc(100% - 51px) 100%, calc(100% - 48px) 100%)",
+          }}
+        />
+        <motion.div
+          variants={lineStatic}
+          className="absolute inset-0 bg-amber-400/15 dark:bg-yellow-300/25"
+          style={{
+            clipPath:
+              "polygon(calc(100% - 18px) 0, calc(100% - 20px) 0, calc(100% - 60px) 100%, calc(100% - 58px) 100%)",
           }}
         />
       </motion.div>
@@ -568,47 +629,57 @@ const LogoContainer = ({ children }: { children: React.ReactNode }) => {
 };
 
 const AngledLines = () => {
-  const lineData = [
-    { width: "4px", color: "bg-cyan-400/50 dark:bg-cyan-300/70" },
-    { width: "3px", color: "bg-cyan-400/35 dark:bg-cyan-300/50" },
-    { width: "2px", color: "bg-amber-400/30 dark:bg-yellow-300/40" },
-    { width: "1px", color: "bg-cyan-400/20 dark:bg-cyan-300/30" },
-  ];
-
   const slantAngle = -29;
 
-  const groupVariants = {
-    rest: {
-      x: "-80%",
-      skewX: slantAngle,
-      opacity: 0.5,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
-    hover: {
-      x: "-30%",
-      skewX: slantAngle,
-      opacity: 1,
-      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-    },
+  const lines = [
+    { width: 5, opacity: 1, color: "cyan", delay: 0 },
+    { width: 3, opacity: 0.9, color: "cyan", delay: 0.02 },
+    { width: 2, opacity: 0.85, color: "amber", delay: 0.04 },
+    { width: 3, opacity: 0.75, color: "cyan", delay: 0.06 },
+    { width: 2, opacity: 0.65, color: "cyan", delay: 0.08 },
+    { width: 1, opacity: 0.6, color: "amber", delay: 0.10 },
+    { width: 2, opacity: 0.5, color: "cyan", delay: 0.12 },
+    { width: 1, opacity: 0.45, color: "cyan", delay: 0.14 },
+    { width: 1, opacity: 0.35, color: "cyan", delay: 0.16 },
+    { width: 1, opacity: 0.3, color: "amber", delay: 0.18 },
+    { width: 1, opacity: 0.25, color: "cyan", delay: 0.20 },
+    { width: 1, opacity: 0.2, color: "cyan", delay: 0.22 },
+    { width: 1, opacity: 0.15, color: "cyan", delay: 0.24 },
+    { width: 1, opacity: 0.1, color: "cyan", delay: 0.26 },
+    { width: 1, opacity: 0.07, color: "cyan", delay: 0.28 },
+  ];
+
+  const colorMap: Record<string, string> = {
+    cyan: "bg-cyan-400 dark:bg-cyan-300",
+    amber: "bg-amber-400 dark:bg-yellow-300",
   };
 
   return (
     <div
-      className="pointer-events-none absolute left-full top-0 h-full w-20"
+      className="pointer-events-none absolute left-full top-0 h-full w-52"
       aria-hidden="true"
+      style={{ transform: `skewX(${slantAngle}deg)`, transformOrigin: "top left" }}
     >
-      <motion.div
-        className="flex h-full w-full origin-left items-center gap-2 pl-3"
-        variants={groupVariants}
-      >
-        {lineData.map((line, index) => (
-          <div
-            key={index}
-            className={`h-full ${line.color}`}
-            style={{ width: line.width }}
+      <div className="flex h-full items-center gap-[5px] pl-2">
+        {lines.map((line, i) => (
+          <motion.div
+            key={i}
+            className={`h-full ${colorMap[line.color]}`}
+            style={{ width: `${line.width}px` }}
+            variants={{
+              rest: { opacity: line.opacity * 0.3 },
+              hover: {
+                opacity: line.opacity,
+                transition: {
+                  duration: 0.35,
+                  delay: line.delay,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+              },
+            }}
           />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -699,6 +770,9 @@ const MobileMenu = ({
             {/* Social Links */}
             <ClippedGroupContainer className="w-full" label="Links">
               <div className="flex w-full items-center justify-around">
+                <ClippedLink href={SOCIAL_LINKS.x} title="X (@kevskgs)">
+                  <XLogo className="h-[18px] w-[18px]" />
+                </ClippedLink>
                 <ClippedLink href={SOCIAL_LINKS.github} title="GitHub">
                   <Github className="h-[18px] w-[18px]" />
                 </ClippedLink>
@@ -720,16 +794,16 @@ const MobileMenu = ({
                 {(gameState === "fight" ||
                   gameState === "gameOver" ||
                   gameState === "forcedSwitch") && (
-                  <>
-                    <ClippedButton onClick={handleReset} title="Reset Game">
-                      <RotateCcw className="h-[18px] w-[18px]" />
-                    </ClippedButton>
-                    <ClippedButton onClick={handleRun} title="Forfeit Match">
-                      <Flag className="h-[18px] w-[18px]" />
-                    </ClippedButton>
-                    <AutoBattleButton />
-                  </>
-                )}
+                    <>
+                      <ClippedButton onClick={handleReset} title="Reset Game">
+                        <RotateCcw className="h-[18px] w-[18px]" />
+                      </ClippedButton>
+                      <ClippedButton onClick={handleRun} title="Forfeit Match">
+                        <Flag className="h-[18px] w-[18px]" />
+                      </ClippedButton>
+                      <AutoBattleButton />
+                    </>
+                  )}
                 {gameState === "teamSelect" && (
                   <ClippedButton
                     onClick={handleConfirmTeam}
@@ -846,20 +920,18 @@ const Navbar = (props: {
           />
         </div>
 
+        {/* Horizontal accent lines */}
+        <div
+          className="absolute inset-0 bg-cyan-400/30 dark:bg-cyan-300/40"
+          style={{ clipPath: "polygon(0% 38%, 100% 38%, 100% 40%, 0% 40%)" }}
+        />
+        <div
+          className="absolute inset-0 bg-amber-400/20 dark:bg-yellow-300/30"
+          style={{ clipPath: "polygon(0% 68%, 100% 68%, 100% 70%, 0% 70%)" }}
+        />
+
         {/* Decorative diagonal lines */}
         <div className="relative h-full w-full opacity-40">
-          <div
-            className="absolute inset-0 bg-cyan-400/50 dark:bg-cyan-300/50"
-            style={{
-              clipPath: "polygon(0% 48%, 100% 35%, 100% 37%, 0% 50%)",
-            }}
-          />
-          <div
-            className="absolute inset-0 bg-amber-400/25 dark:bg-yellow-300/25"
-            style={{
-              clipPath: "polygon(0% 62%, 100% 75%, 100% 77%, 0% 64%)",
-            }}
-          />
           <div
             className="absolute inset-0 ml-72 bg-cyan-500/50 dark:bg-cyan-400/50"
             style={{
@@ -890,19 +962,6 @@ const Navbar = (props: {
               duration: 3,
               repeat: Infinity,
               ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute inset-0 bg-amber-400 dark:bg-yellow-300"
-            style={{
-              clipPath: "polygon(0% 15%, 25% 15%, 25% 16%, 0% 16%)",
-            }}
-            animate={{ opacity: [0.3, 0.1, 0.3] }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
             }}
           />
         </div>

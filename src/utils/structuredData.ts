@@ -85,36 +85,180 @@ const KNOWS_ABOUT = [
 ];
 
 const PROJECT_CATALOG = [
-  { name: "Dedalus", url: "https://dedalus-demo.vercel.app/", description: "Build model-agnostic agents powered by MCP with a production-grade SDK and secure, multi-tenant auth" },
-  { name: "Princeton Tower Defense", url: "https://princeton-tower-defense.vercel.app/", description: "A tower defense game where players defend Princeton from waves of attacks" },
-  { name: "Podium", url: "https://hackprinceton-podium.vercel.app/", description: "An app that streamlines judging and event management for hackathons" },
-  { name: "Sevenfold", url: "https://sevenfold-demo.vercel.app/", description: "Find, digest, and produce research in one centralized AI-powered workplace" },
-  { name: "Lumachor", url: "https://lumachor.vercel.app/home", description: "A context engine that gives every user the power of an expert prompt engineer" },
-  { name: "HackPrinceton '25F", url: "https://hack-princeton-fall-2025-demo.vercel.app/", description: "Main landing page for HackPrinceton Fall 2025" },
-  { name: "Splitway", url: "https://splitway.vercel.app/", description: "Track expenses and split them with friends" },
-  { name: "Lootbox Simulator", url: "https://lootboxsimulator.vercel.app/", description: "Simulator-style game where users try opening different kinds of lootboxes" },
-  { name: "PawPointClicker", url: "https://pawpointclicker.vercel.app/", description: "Cookie Clicker-inspired game where you collect Princeton's Paw Points" },
-  { name: "HackPrinceton '25S", url: "https://hack-princeton-spring-2025-demo.vercel.app/", description: "Main landing page for HackPrinceton Spring 2025" },
-  { name: "HackPrinceton '24F", url: "https://hack-princeton-fall-2024-demo.vercel.app/", description: "Main landing page for HackPrinceton Fall 2024" },
-  { name: "SnellTech", url: "https://snelltech.vercel.app/", description: "Low-cost digital visual acuity exam using the Snellen Eye Chart" },
-  { name: "LetMeCook", url: "https://letmecook.vercel.app/", description: "Scans your refrigerator to generate recipes using ChatGPT" },
-  { name: "Balladeer", url: "https://balladeer.vercel.app/", description: "Generates full study guides for literary works using AI" },
-  { name: "CompassUSA", url: "https://compass-usa.vercel.app/", description: "A tool to help immigrants find support and resources" },
-  { name: "ApneaAlert", url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/", description: "An affordable wearable sensor for sleep apnea detection" },
-  { name: "Iron Triangle", url: "https://iron-triangle.vercel.app/", description: "Analyzes the Military Industrial Complex — U.S. History II Final" },
-  { name: "AdventureGPT", url: "https://adventuregpt.vercel.app/", description: "Generates unique, exciting stories based on user-inputted prompts" },
-  { name: "EditorGPT", url: "https://editorgpt.vercel.app/", description: "A code editor that allows ChatGPT to review your code" },
-  { name: "OMMC Portal", url: "https://ommc-test-portal.vercel.app/", description: "The official test portal of the OMMC competition" },
-  { name: "OMMC Sample Portal", url: "https://ommc-sample-portal.vercel.app/", description: "The official sample test portal of OMMC" },
-  { name: "Enkrateia", url: "https://enkrateia.vercel.app/", description: "An application that accesses GPT-3.5 and GPT-4 models" },
-  { name: "HD Transcribe", url: "https://hd-transcribe.vercel.app", description: "A novel speech model for patients with Huntington's Disease" },
-  { name: "OMMC", url: "https://www.ommcofficial.org", description: "The official website of the Online Monmouth Math Competition" },
-  { name: "OMMC Atlas", url: "https://ommc-atlas.vercel.app/", description: "The fullstack database for all OMMC questions" },
-  { name: "RecyclAIble", url: "https://recyclaible.vercel.app/", description: "Smart recycling with AI — Won 1st in Hardware at PennApps XXIII" },
-  { name: "PlantSTEM", url: "https://plant-stem.vercel.app/", description: "A website to help students learn about Math and Physics" },
-  { name: "Tutorial", url: "https://tutorial-nu.vercel.app/", description: "An app to help tutors and pupils connect" },
-  { name: "Satellite Crafter", url: "https://satellite-crafter.vercel.app/", description: "A game to create satellites from parts" },
-  { name: "PortfolioMon Showdown", url: "https://www.kevin-liu.tech", description: "This interactive portfolio — a Pokémon Showdown-inspired turn-based battle game showcasing 30+ projects" },
+  {
+    name: "Dedalus",
+    url: "https://dedalus-demo.vercel.app/",
+    description:
+      "Build model-agnostic agents powered by MCP with a production-grade SDK and secure, multi-tenant auth",
+  },
+  {
+    name: "Princeton Tower Defense",
+    url: "https://ptd.quest/",
+    description:
+      "A tower defense game where players defend Princeton from waves of attacks",
+  },
+  {
+    name: "Podium",
+    url: "https://hackprinceton-podium.vercel.app/",
+    description:
+      "An app that streamlines judging and event management for hackathons",
+  },
+  {
+    name: "Sevenfold",
+    url: "https://sevenfold-demo.vercel.app/",
+    description:
+      "Find, digest, and produce research in one centralized AI-powered workplace",
+  },
+  {
+    name: "Lumachor",
+    url: "https://lumachor.vercel.app/home",
+    description:
+      "A context engine that gives every user the power of an expert prompt engineer",
+  },
+  {
+    name: "Loop",
+    url: "https://loooop.dev/",
+    description:
+      "Operator desk for agent skills that auto-refresh from tracked sources, evaluate upstream changes, and rewrite skills with full diffs",
+  },
+  {
+    name: "Sigil UI",
+    url: "https://sigil-ui-web.vercel.app/",
+    description:
+      "Agent-first design system with 350+ components, 46 presets, and a single token file controlling color, type, radius, and motion",
+  },
+  {
+    name: "HackPrinceton '25F",
+    url: "https://hack-princeton-fall-2025-demo.vercel.app/",
+    description: "Main landing page for HackPrinceton Fall 2025",
+  },
+  {
+    name: "Splitway",
+    url: "https://splitway.vercel.app/",
+    description: "Track expenses and split them with friends",
+  },
+  {
+    name: "Lootbox Simulator",
+    url: "https://lootboxsimulator.vercel.app/",
+    description:
+      "Simulator-style game where users try opening different kinds of lootboxes",
+  },
+  {
+    name: "PawPointClicker",
+    url: "https://pawpointclicker.vercel.app/",
+    description:
+      "Cookie Clicker-inspired game where you collect Princeton's Paw Points",
+  },
+  {
+    name: "HackPrinceton '25S",
+    url: "https://hack-princeton-spring-2025-demo.vercel.app/",
+    description: "Main landing page for HackPrinceton Spring 2025",
+  },
+  {
+    name: "HackPrinceton '24F",
+    url: "https://hack-princeton-fall-2024-demo.vercel.app/",
+    description: "Main landing page for HackPrinceton Fall 2024",
+  },
+  {
+    name: "SnellTech",
+    url: "https://snelltech.vercel.app/",
+    description:
+      "Low-cost digital visual acuity exam using the Snellen Eye Chart",
+  },
+  {
+    name: "LetMeCook",
+    url: "https://letmecook.vercel.app/",
+    description: "Scans your refrigerator to generate recipes using ChatGPT",
+  },
+  {
+    name: "Balladeer",
+    url: "https://balladeer.vercel.app/",
+    description: "Generates full study guides for literary works using AI",
+  },
+  {
+    name: "CompassUSA",
+    url: "https://compass-usa.vercel.app/",
+    description: "A tool to help immigrants find support and resources",
+  },
+  {
+    name: "ApneaAlert",
+    url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
+    description: "An affordable wearable sensor for sleep apnea detection",
+  },
+  {
+    name: "Iron Triangle",
+    url: "https://iron-triangle.vercel.app/",
+    description:
+      "Analyzes the Military Industrial Complex — U.S. History II Final",
+  },
+  {
+    name: "AdventureGPT",
+    url: "https://adventuregpt.vercel.app/",
+    description:
+      "Generates unique, exciting stories based on user-inputted prompts",
+  },
+  {
+    name: "EditorGPT",
+    url: "https://editorgpt.vercel.app/",
+    description: "A code editor that allows ChatGPT to review your code",
+  },
+  {
+    name: "OMMC Portal",
+    url: "https://ommc-test-portal.vercel.app/",
+    description: "The official test portal of the OMMC competition",
+  },
+  {
+    name: "OMMC Sample Portal",
+    url: "https://ommc-sample-portal.vercel.app/",
+    description: "The official sample test portal of OMMC",
+  },
+  {
+    name: "Enkrateia",
+    url: "https://enkrateia.vercel.app/",
+    description: "An application that accesses GPT-3.5 and GPT-4 models",
+  },
+  {
+    name: "HD Transcribe",
+    url: "https://hd-transcribe.vercel.app",
+    description: "A novel speech model for patients with Huntington's Disease",
+  },
+  {
+    name: "OMMC",
+    url: "https://www.ommcofficial.org",
+    description: "The official website of the Online Monmouth Math Competition",
+  },
+  {
+    name: "OMMC Atlas",
+    url: "https://ommc-atlas.vercel.app/",
+    description: "The fullstack database for all OMMC questions",
+  },
+  {
+    name: "RecyclAIble",
+    url: "https://recyclaible.vercel.app/",
+    description:
+      "Smart recycling with AI — Won 1st in Hardware at PennApps XXIII",
+  },
+  {
+    name: "PlantSTEM",
+    url: "https://plant-stem.vercel.app/",
+    description: "A website to help students learn about Math and Physics",
+  },
+  {
+    name: "Tutorial",
+    url: "https://tutorial-nu.vercel.app/",
+    description: "An app to help tutors and pupils connect",
+  },
+  {
+    name: "Satellite Crafter",
+    url: "https://satellite-crafter.vercel.app/",
+    description: "A game to create satellites from parts",
+  },
+  {
+    name: "PortfolioMon Showdown",
+    url: "https://www.kevin-liu.tech",
+    description:
+      "This interactive portfolio — a Pokémon Showdown-inspired turn-based battle game showcasing 30+ projects",
+  },
 ];
 
 const FAQ_ENTRIES = [
@@ -136,7 +280,7 @@ const FAQ_ENTRIES = [
   {
     question: "What are Kevin Liu's best projects?",
     answer:
-      "Kevin Liu's standout projects include: Dedalus (an AI agent SDK with MCP support for building model-agnostic agents), RecyclAIble (smart recycling using AI object detection — Won 1st in Hardware at PennApps XXIII), Sevenfold (AI-powered research workspace), Lumachor (AI context engine for prompt engineering), HD Transcribe (speech model for Huntington's Disease patients), and PortfolioMon Showdown (his interactive portfolio game).",
+      "Kevin Liu's standout projects include: Dedalus (an AI agent SDK with MCP support for building model-agnostic agents), RecyclAIble (smart recycling using AI object detection — Won 1st in Hardware at PennApps XXIII), Sevenfold (AI-powered research workspace), Lumachor (AI context engine for prompt engineering), Loop (an operator desk for self-updating agent skills), HD Transcribe (speech model for Huntington's Disease patients), and PortfolioMon Showdown (his interactive portfolio game).",
   },
   {
     question: "What hackathons has Kevin Liu won?",
@@ -151,7 +295,7 @@ const FAQ_ENTRIES = [
   {
     question: "What AI projects has Kevin Liu built?",
     answer:
-      "Kevin Liu has built numerous AI projects including: Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), LetMeCook (AI recipe generator using ChatGPT and computer vision), EditorGPT (AI code review editor), AdventureGPT (AI story generator), Enkrateia (GPT-3.5/GPT-4 interface), RecyclAIble (AI recycling with OpenCV), HD Transcribe (speech model for Huntington's Disease), and Balladeer (AI study guide generator).",
+      "Kevin Liu has built numerous AI projects including: Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), Loop (operator desk for auto-refreshing agent skills), LetMeCook (AI recipe generator using ChatGPT and computer vision), EditorGPT (AI code review editor), AdventureGPT (AI story generator), Enkrateia (GPT-3.5/GPT-4 interface), RecyclAIble (AI recycling with OpenCV), HD Transcribe (speech model for Huntington's Disease), and Balladeer (AI study guide generator).",
   },
   {
     question: "How can I contact Kevin Liu?",
@@ -265,7 +409,11 @@ function buildPersonNode(siteUrl: string, imageUrl: string) {
         "@type": "HighSchool",
         name: "High Technology High School",
         url: "https://www.hths.mcvsd.org",
-        address: { "@type": "PostalAddress", addressLocality: "Lincroft", addressRegion: "NJ" },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Lincroft",
+          addressRegion: "NJ",
+        },
       },
     ],
     worksFor: {
@@ -475,17 +623,45 @@ function buildWebPageNode(
     specialty:
       "Software Development, Artificial Intelligence, AI Agent Infrastructure, Interactive Web Applications, Full-Stack Development, Machine Learning, Game Development, Health Technology",
     mentions: [
-      { "@type": "Organization", name: "Princeton University", url: "https://www.princeton.edu" },
-      { "@type": "Organization", name: "Amazon", url: "https://www.amazon.com" },
-      { "@type": "Organization", name: "Bloomberg L.P.", url: "https://www.bloomberg.com" },
+      {
+        "@type": "Organization",
+        name: "Princeton University",
+        url: "https://www.princeton.edu",
+      },
+      {
+        "@type": "Organization",
+        name: "Amazon",
+        url: "https://www.amazon.com",
+      },
+      {
+        "@type": "Organization",
+        name: "Bloomberg L.P.",
+        url: "https://www.bloomberg.com",
+      },
       { "@type": "Organization", name: "AT&T Labs Research" },
-      { "@type": "Organization", name: "Y Combinator", url: "https://www.ycombinator.com" },
-      { "@type": "Organization", name: "Dedalus Labs", url: "https://www.dedaluslabs.ai" },
+      {
+        "@type": "Organization",
+        name: "Y Combinator",
+        url: "https://www.ycombinator.com",
+      },
+      {
+        "@type": "Organization",
+        name: "Dedalus Labs",
+        url: "https://www.dedaluslabs.ai",
+      },
       { "@type": "Organization", name: "Sevenfold AI" },
-      { "@type": "Organization", name: "Johns Hopkins University", url: "https://www.jhu.edu" },
+      {
+        "@type": "Organization",
+        name: "Johns Hopkins University",
+        url: "https://www.jhu.edu",
+      },
       { "@type": "Organization", name: "HackPrinceton" },
       { "@type": "Organization", name: "PennApps" },
-      { "@type": "Organization", name: "Online Monmouth Math Competition", url: "https://www.ommcofficial.org" },
+      {
+        "@type": "Organization",
+        name: "Online Monmouth Math Competition",
+        url: "https://www.ommcofficial.org",
+      },
       { "@type": "Organization", name: "High Technology High School" },
       { "@type": "SoftwareApplication", name: "React" },
       { "@type": "SoftwareApplication", name: "Next.js" },

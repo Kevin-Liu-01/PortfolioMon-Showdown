@@ -39,7 +39,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## Professional Experience
 
-- Founding Engineer — Dedalus Labs (Y Combinator S25), Jan 2026–Present: AI agent infrastructure & MCP SDK
+- Founding Engineer — Dedalus Labs (Y Combinator S25), Jan 2026–Present: Fastest sandboxes for agents. Persistent runtime. Never sleep. Only pay for active compute.
 - Founding Engineer — Sevenfold AI, Jun–Nov 2025: End-to-end agentic research workflow
 - Software Development Engineer Intern — Amazon (FBA Inventory), Summer 2025
 - Software Engineering Intern — Bloomberg L.P. (Financial Instruments), Summer 2024
@@ -49,11 +49,13 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## Featured Projects
 
-- [Dedalus](https://dedalus-demo.vercel.app/): Build model-agnostic agents powered by MCP with a production-grade SDK and secure, multi-tenant auth
+- [Dedalus](https://dedaluslabs.ai/): The fastest sandboxes for agents. Persistent runtime. Never sleep. Only pay for active compute.
 - [Sevenfold](https://sevenfold-demo.vercel.app/): Find, digest, and produce research in one centralized AI-powered workplace
 - [Lumachor](https://lumachor.vercel.app/home): A context engine that gives every user the power of an expert prompt engineer
+- [Loop](https://loooop.dev/): Operator desk for agent skills that auto-refresh from tracked sources and rewrite skills with full diffs
+- [Sigil UI](https://sigil-ui-web.vercel.app/): Agent-first design system with 350+ components, 46 presets, and one token file controlling the full visual system
 - [Podium](https://hackprinceton-podium.vercel.app/): Streamlines judging and event management for hackathons
-- [Princeton Tower Defense](https://princeton-tower-defense.vercel.app/): A tower defense game where players defend Princeton from waves of attacks
+- [Princeton Tower Defense](https://ptd.quest/): A tower defense game where players defend Princeton from waves of attacks
 - [HD Transcribe](https://hd-transcribe.vercel.app): Accesses a novel speech model for patients with Huntington's Disease
 - [RecyclAIble](https://recyclaible.vercel.app/): Smart recycling solution — Won 1st in Hardware at PennApps XXIII
 - [SnellTech](https://snelltech.vercel.app/): Low-cost digital visual acuity exam using the Snellen Eye Chart
@@ -62,10 +64,12 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 ## All Projects
 
 - [Dedalus](https://dedalus-demo.vercel.app/): AI agent SDK with MCP support
-- [Princeton Tower Defense](https://princeton-tower-defense.vercel.app/): Tower defense game
+- [Princeton Tower Defense](https://ptd.quest/): Tower defense game
 - [Podium](https://hackprinceton-podium.vercel.app/): Hackathon judging platform
 - [Sevenfold](https://sevenfold-demo.vercel.app/): AI research workspace
 - [Lumachor](https://lumachor.vercel.app/home): AI context engine
+- [Loop](https://loooop.dev/): Operator desk for agent skills
+- [Sigil UI](https://sigil-ui-web.vercel.app/): Agent-first design system
 - [HackPrinceton '25F](https://hack-princeton-fall-2025-demo.vercel.app/): Hackathon landing page
 - [Splitway](https://splitway.vercel.app/): Expense splitting app
 - [Lootbox Simulator](https://lootboxsimulator.vercel.app/): Lootbox opening game

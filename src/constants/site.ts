@@ -4,7 +4,7 @@ export const SITE_TITLE =
   "Kevin Liu | Software Developer & AI Engineer — Princeton CS '28";
 
 export const SITE_DESCRIPTION =
-  "Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who builds AI-powered applications, interactive games, and full-stack web platforms. Explore 30+ projects — including AI agent SDKs, hackathon-winning apps, health-tech tools, and browser games — showcased as battle-ready PortfolioMons in this Pokémon Showdown-inspired interactive portfolio.";
+  "Kevin Liu is a Founding Engineer at Dedalus Labs (YC S25) and a Princeton University CS student (Class of 2028) building production agent infrastructure with MCP. Previously at Amazon, Bloomberg (2x), AT&T Labs, and Sevenfold AI. Explore 30+ projects showcased as battle-ready PortfolioMons in this Pokemon Showdown-inspired interactive portfolio.";
 
 export const OG_IMAGE = `${SITE_URL}/kevinportfolio.png`;
 
@@ -170,6 +170,16 @@ const PROJECT_KEYWORDS = [
   "Sevenfold AI workspace",
   "Lumachor context engine",
   "Lumachor AI",
+  "Loop",
+  "Loop operator desk",
+  "Loop agent skills",
+  "looooop.dev",
+  "agent skills auto-refresh",
+  "Sigil UI",
+  "Sigil UI design system",
+  "agent-first design system",
+  "create-sigil-app",
+  "design tokens system",
   "Princeton Tower Defense",
   "Princeton Tower Defense game",
   "RecyclAIble PennApps",

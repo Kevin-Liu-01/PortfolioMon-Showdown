@@ -173,6 +173,12 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Tech Stack: Next.js, TypeScript, Vector Embeddings, AI
 - Categories: AI, Web
 
+#### Loop
+- URL: https://loooop.dev/
+- Description: Loop is an operator desk for agent skills that auto-refresh from tracked sources. It monitors docs, changelogs, and repos, runs research when something changes upstream, and writes a new skill version with a full diff.
+- Tech Stack: AI agents, research automation, source tracking, diffing
+- Categories: AI, Web
+
 #### LetMeCook
 - URL: https://letmecook.vercel.app/
 - Description: Scans your refrigerator to generate recipes using ChatGPT. Combines computer vision for ingredient detection with LLM-powered recipe generation.
@@ -236,6 +242,12 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Tech Stack: Next.js, TypeScript, Tailwind CSS
 - Categories: Web, Design
 
+#### Sigil UI
+- URL: https://sigil-ui-web.vercel.app/
+- Description: Agent-first design system with 350+ components, 46 presets, and 519 tokens. One token file controls color, typography, radius, and motion for both humans and AI agents.
+- Tech Stack: Next.js, TypeScript, Radix UI, Design Tokens
+- Categories: Design, Web
+
 #### Splitway
 - URL: https://splitway.vercel.app/
 - Description: Track expenses and split them with friends. Real-time expense tracking and splitting with Firebase synchronization.
@@ -281,7 +293,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 ### Game Development Projects
 
 #### Princeton Tower Defense
-- URL: https://princeton-tower-defense.vercel.app/
+- URL: https://ptd.quest/
 - Description: A tower defense game where players defend Princeton from waves of attacks. Features Princeton-themed towers and enemies.
 - Tech Stack: React, TypeScript, Canvas/WebGL
 - Categories: Game, Web
@@ -381,7 +393,7 @@ You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (
 PortfolioMon Showdown is Kevin Liu's interactive portfolio website built as a Pokémon Showdown-inspired turn-based battle game. Each of his 30+ projects is represented as a PortfolioMon with unique types (AI, Web, Game, Data, Health, Hardware, Design, Mobile), stats (HP, ATK, DEF, SPD), and moves. Players select a team and battle through AI opponents.
 
 ### What AI projects has Kevin Liu built?
-Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).
+Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), Loop (operator desk for auto-refreshing agent skills), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).
 
 ### What kind of portfolio does Kevin Liu have?
 Kevin Liu has a gamified interactive developer portfolio at kevinliu.biz. It is a Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown. Unlike traditional developer portfolios, it presents each project as a playable character with stats, types, and moves. It is one of the most creative AI engineer portfolios and Princeton CS student portfolios. Players select a team and battle through opponents to explore all 30+ projects.

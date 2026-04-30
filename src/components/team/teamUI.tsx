@@ -43,6 +43,8 @@ import {
   Gauge,
   Heart,
   Droplets,
+  Github,
+  Star,
 } from "lucide-react";
 
 // --- BATTLE UI EFFECT COMPONENTS ---
@@ -604,7 +606,7 @@ const MonDetailView = ({
             </div>
           </div>
           <div className="absolute top-3 left-4 z-40">
-            <h2 className="text-2xl font-black tracking-tighter text-white [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)]">
+            <h2 className="text-2xl font-bold tracking-tight text-white [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)]">
               {displayName}
             </h2>
             <span className="font-kode text-base font-bold text-slate-600 [text-shadow:1px_1px_2px_rgba(255,255,255,0.2)] dark:text-slate-400 dark:[text-shadow:1px_1px_2px_rgba(0,0,0,0.5)]">
@@ -645,35 +647,44 @@ const MonDetailView = ({
               <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
                 {mon.description}
               </p>
-              <div className="mt-2 grid grid-cols-2 gap-2 border-t border-slate-300 pt-2 dark:border-slate-700">
+              <div className="mt-2 flex flex-col gap-2 border-t border-slate-300 pt-2 dark:border-slate-700">
                 <Link href={mon.url} target="_blank" rel="noopener noreferrer">
                   <ActionButton
-                    as="a"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="bg-orange-500/80 hover:bg-orange-500/100"
                     clipPath="polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px)"
                   >
-                    Visit <ExternalLink className="h-3 w-3" />
+                    View App <ExternalLink className="h-3 w-3" />
                   </ActionButton>
                 </Link>
-                <ActionButton
-                  onClick={() => onTeamSelect(mon)}
-                  disabled={buttonDisabled}
-                  className={
-                    isSelectedOnTeam
-                      ? "bg-red-600/80 hover:bg-red-500/100"
-                      : "bg-green-600/80 hover:bg-green-500/100"
-                  }
-                  clipPath="polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)"
-                >
-                  {isSelectedOnTeam ? "Remove" : "Add"}
-                  {isSelectedOnTeam ? (
-                    <XCircle className="h-4 w-4" />
-                  ) : (
-                    <PlusCircle className="h-4 w-4" />
+                <div className="grid grid-cols-2 gap-2">
+                  {mon.github && (
+                    <Link href={mon.github} target="_blank" rel="noopener noreferrer">
+                      <ActionButton
+                        className="bg-slate-900/80 hover:bg-slate-800/100"
+                        clipPath="polygon(0 0, 100% 0, 100% 100%, 12px 100%, 0 calc(100% - 12px))"
+                      >
+                        <Github className="h-3 w-3" /> GitHub
+                      </ActionButton>
+                    </Link>
                   )}
-                </ActionButton>
+                  <ActionButton
+                    onClick={() => onTeamSelect(mon)}
+                    disabled={buttonDisabled}
+                    className={
+                      isSelectedOnTeam
+                        ? "bg-red-600/80 hover:bg-red-500/100"
+                        : "bg-green-600/80 hover:bg-green-500/100"
+                    }
+                    clipPath="polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)"
+                  >
+                    {isSelectedOnTeam ? "Remove" : "Add"}
+                    {isSelectedOnTeam ? (
+                      <XCircle className="h-4 w-4" />
+                    ) : (
+                      <PlusCircle className="h-4 w-4" />
+                    )}
+                  </ActionButton>
+                </div>
               </div>
             </div>
           </UpgradedClippedContainer>
@@ -697,9 +708,9 @@ const MonDetailView = ({
             className="flex-1 pl-1"
             clipPath="polygon(0 12px, 12px 0, 100% 0, 100% 100%, 0 100%)"
           >
-            <div className="flex h-full flex-col px-2.5 pt-2">
+            <div className="flex flex-col px-2.5 pt-2">
               <SectionHeader>Type Matchups</SectionHeader>
-              <div className="flex flex-grow flex-col justify-around gap-1 pb-2 text-xs">
+              <div className="flex flex-col gap-2 pb-2 text-xs">
                 <div className="flex items-start gap-2">
                   <Sparkles className="mt-0.5 h-3 w-3 flex-shrink-0 text-cyan-400" />
                   <div className="flex flex-wrap gap-1">
@@ -752,7 +763,7 @@ const MonDetailView = ({
                   return (
                     <div
                       key={move.name}
-                      className={`group flex-1 p-px pr-1 transition-all duration-300 hover:pr-1.5 ${bgClass} hover:brightness-110`}
+                      className={`group flex-1 p-px pr-1 transition-all duration-300 ${bgClass} hover:brightness-110`}
                       style={{ clipPath }}
                     >
                       <div
@@ -1031,6 +1042,7 @@ const TrainerInfoPanel = ({
   onClearTeam: () => void;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isColorPhoto, setIsColorPhoto] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -1196,35 +1208,46 @@ const TrainerInfoPanel = ({
                 style={{ clipPath: innerImageClipPath }}
               >
                 {/* This inner container holds the image and is also clipped */}
-                <div
-                  className="relative h-full w-full overflow-hidden"
+                <button
+                  onClick={() => setIsColorPhoto((prev) => !prev)}
+                  className="relative h-full w-full cursor-pointer overflow-hidden"
                   style={{ clipPath: innerImageClipPath }}
                 >
-                  <Image
-                    src="/images/kevin_sidebar.png"
-                    fill
-                    alt="Kevin Liu"
-                    className="scale-110 object-cover object-top"
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={isColorPhoto ? "color" : "bw"}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={isColorPhoto ? "/images/kevin_powerlifting_color.png" : "/images/kevin_powerlifting_bw.png"}
+                        fill
+                        alt="Kevin Liu"
+                        className="scale-140 object-cover object-top"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent dark:from-slate-900/70" />
-                </div>
+                </button>
               </div>
 
-              <div className="relative flex h-full flex-col justify-between [transform:translateZ(20px)]">
-                <div className="ml-1">
-                  <p className="font-kode text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
-                    PRINCETON
-                  </p>
-                  <p className="font-kode text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.5)]">
-                    5/19/2024
+              <div className="pointer-events-none relative flex h-full flex-col justify-between [transform:translateZ(20px)]">
+                <div className="ml-auto text-right mr-1">
+                  <p className="font-orbiter text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.95)]">
+                    IVY LEAGUE CUP                 </p>
+                  <p className="font-orbiter text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.95)]">
+                    10/08/25
                   </p>
                 </div>
                 <div>
-                  <h1 className="ml-1 text-2xl font-black tracking-wider text-cyan-200 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-white">
+                  <h1 className="ml-1 font-nacelle text-2xl font-extrabold tracking-wider text-cyan-200 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-white">
                     KEVIN LIU
                   </h1>
                   <p className="ml-2 text-xs font-bold tracking-wide text-cyan-300 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-cyan-400">
-                    Software Developer & AI Engineer · Princeton &apos;28
+                    <span className="text-cyan-200 dark:text-cyan-300mn">Founding Engineer</span> <br /> Dedalus Labs (YC S25) · Princeton &apos;28
                   </p>
                 </div>
               </div>
@@ -1236,6 +1259,20 @@ const TrainerInfoPanel = ({
               clipPath="polygon(12px 0px, 100% 0px, 100% 100%, 0% 100%, 0px 12px)"
             >
               <div className="flex items-center justify-center gap-4 p-2.5">
+                <Link
+                  href="https://x.com/kevskgs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 transition-colors hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400"
+                >
+                  <Image
+                    width={20}
+                    height={20}
+                    src="/images/x.svg"
+                    className="h-5 w-5 dark:invert"
+                    alt="X (@kevskgs)"
+                  />
+                </Link>
                 <Link
                   href="https://www.linkedin.com/in/kevin-liu-princeton/"
                   target="_blank"
@@ -1287,20 +1324,18 @@ const TrainerInfoPanel = ({
               </div>
             </UpgradedClippedContainer>
             <UpgradedClippedContainer
-              className="pr-1 transition-all hover:pr-2"
+              className="pr-1 transition-all"
               clipPath="polygon(0px 0px, 100% 0px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0px 100%)"
             >
               <div className="space-y-2 p-3">
                 <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
                   <BrainCircuit className="h-4 w-4 flex-shrink-0 text-cyan-600 dark:text-cyan-400" />
-                  <span>Princeton University &apos;28, B.S.E. in Computer Science</span>
+                  <span>
+                    Turning My Ideas Into Reality
+                  </span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
-                  Full-stack developer and AI engineer with experience at
-                  Amazon, Bloomberg, AT&amp;T Labs, and Y Combinator-backed
-                  startups. I build with React, Next.js, TypeScript, and Python, from AI agents to interactive games. Pick your team and
-                  battle through 30+ projects!
-                </p>
+                  {`I build because I love building. Engineering at a startup is the most "work" I've done in my life, yet the first time the work feels like the thing I'd be doing anyway at 3am on a Saturday. Hackathons, personal projects, games, open-source contributions, I've always done my best work when nobody assigned it. When you want it bad enough, you don't have to force yourself to keep going. You have to force yourself to stop.`}                </p>
               </div>
             </UpgradedClippedContainer>
           </motion.div>
@@ -1581,9 +1616,9 @@ const MonGridItem = ({
             </div>
           </div>
         </div>
-        <span className="absolute top-1 right-2 z-10 font-kode text-xs font-bold text-slate-400 dark:text-slate-500">
-          No.{String(mon.id).padStart(3, "0")}
-        </span>
+        {mon.favorite && (
+          <Star className="absolute top-1.5 right-2 z-10 h-3 w-3 fill-amber-400 text-amber-400 drop-shadow-[0_0_3px_rgba(251,191,36,0.5)]" />
+        )}
       </button>
       <motion.button
         onClick={(e) => {
@@ -1648,8 +1683,8 @@ const SEOContent = () => (
       <meta itemProp="name" content="Dedalus Labs" />
       <meta itemProp="url" content="https://www.dedaluslabs.ai" />
     </div>
-    <meta itemProp="jobTitle" content="Software Developer &amp; AI Engineer" />
-    <meta itemProp="knowsAbout" content="Full-Stack Web Development, Artificial Intelligence, Machine Learning, AI Agents, Model Context Protocol, React, Next.js, TypeScript, Python" />
+    <meta itemProp="jobTitle" content="Founding Engineer" />
+    <meta itemProp="knowsAbout" content="Agent Infrastructure, Model Context Protocol, MCP, Full-Stack Web Development, AI Agents, MicroVM Workspaces, Container Orchestration, React, Next.js, TypeScript, Python, Machine Learning, NLP" />
 
     <link itemProp="sameAs" href="https://github.com/Kevin-Liu-01" />
     <link itemProp="sameAs" href="https://www.linkedin.com/in/kevin-liu-princeton/" />
@@ -1661,61 +1696,59 @@ const SEOContent = () => (
     <h3>Professional Experience — Kevin Liu</h3>
     <p>
       Kevin Liu is currently a Founding Engineer at Dedalus Labs (Y Combinator S25),
-      building AI agent infrastructure with the Model Context Protocol (MCP). He was
-      a Founding Engineer at Sevenfold AI, where he built an end-to-end agentic
-      research workflow. He interned as a Software Development Engineer at Amazon
-      (FBA Inventory), a Software Engineering Intern at Bloomberg L.P. (twice —
-      Financial Instruments and Core Products teams), and an AI Research Intern at
-      AT&amp;T Labs Research working on NLP and intelligent agents with
-      Mixture-of-Experts LLMs. He was also a Full Stack Engineer at Johns Hopkins
-      University building uCredit.me.
+      building production agent infrastructure: an MCP-powered SDK, multi-tenant auth
+      (DAuth), and sandboxed execution via microVM workspaces and container orchestration.
+      He works across the full surface area of agent needs: harnesses, reasoning, model
+      handoffs, tool use, remote control, and executable environments. Previously he was
+      a Founding Engineer at Sevenfold AI, where he built an agent-powered research
+      workflow with vector search boosting LLM relevance by 4.6x. He interned as an SDE
+      at Amazon Web Services (FBA Inventory, LLM dashboard with Amazon-Q), a Software
+      Engineering Intern at Bloomberg L.P. (twice: Financial Instruments and Core Products,
+      including an ML classifier with 86% accuracy), and an AI Research Intern at AT&amp;T
+      Labs Research designing MoE agents that reduced document analysis time by 85%. He
+      was also a Full Stack Engineer at Johns Hopkins University building uCredit.me for
+      6k+ students. He is also an Undergraduate Researcher at Princeton under Danqi Chen,
+      studying agent orchestration with CoTCodec.
     </p>
 
     <h3>Technical Skills — Kevin Liu</h3>
     <p>
-      React, Next.js, TypeScript, JavaScript, Python, Java, C, Node.js, tRPC, PostgreSQL,
+      React, Next.js, TypeScript, JavaScript, Python, Java, C, C++, Node.js, tRPC, PostgreSQL,
       Firebase, MongoDB, Prisma, Tailwind CSS, Framer Motion, Radix UI, shadcn/ui, OpenCV,
-      LLM integration (GPT-4, Claude, OpenAI API), computer vision, speech recognition,
-      natural language processing, AI agents, Model Context Protocol (MCP), RAG,
-      vector embeddings, semantic search, prompt engineering, Docker, Vercel, AWS,
-      CI/CD, GitHub Actions, REST APIs, GraphQL, Arduino, Raspberry Pi, NextAuth.js.
+      TensorFlow, PyTorch, Keras, AutoML, LLM integration (GPT-4, Claude, OpenAI API),
+      computer vision, speech recognition, natural language processing, AI agents,
+      Model Context Protocol (MCP), RAG, vector embeddings, semantic search, prompt
+      engineering, microVMs, container orchestration, Docker, Vercel, AWS, Supabase,
+      Clerk, CI/CD, GitHub Actions, REST APIs, GraphQL, Arduino, Raspberry Pi.
     </p>
 
     <h3>Featured Projects by Kevin Liu</h3>
     <ul>
-      <li>Dedalus — AI agent SDK with Model Context Protocol support (Y Combinator S25, Founding Engineer)</li>
-      <li>Sevenfold — AI-powered research workspace with contextual intelligence (Founding Engineer)</li>
-      <li>Lumachor — Context engine for expert-level prompt engineering using vector embeddings</li>
-      <li>RecyclAIble — Smart recycling with AI object detection (1st Place Hardware, PennApps XXIII)</li>
-      <li>HD Transcribe — Novel speech model for Huntington&apos;s Disease patients</li>
-      <li>Princeton Tower Defense — Tower defense game defending Princeton campus</li>
-      <li>Podium — Hackathon judging and event management platform for HackPrinceton</li>
-      <li>PortfolioMon Showdown — This interactive portfolio game at kevinliu.biz with 30+ projects</li>
-      <li>LetMeCook — AI recipe generator using ChatGPT and computer vision</li>
-      <li>SnellTech — Low-cost digital visual acuity exam</li>
-      <li>ApneaAlert — Affordable wearable sensor for sleep apnea detection</li>
-      <li>OMMC — Online Monmouth Math Competition (co-founder, full tech stack)</li>
-      <li>EditorGPT — AI code review editor using ChatGPT</li>
-      <li>AdventureGPT — AI story generator</li>
-      <li>Balladeer — AI study guide generator for literary works</li>
-      <li>Splitway — Expense tracking and splitting app</li>
-      <li>CompassUSA — Immigrant support and resource tool</li>
-      <li>PawPointClicker — Princeton-themed Cookie Clicker game</li>
-      <li>Lootbox Simulator — Browser-based lootbox opening game</li>
-      <li>Enkrateia — GPT-3.5/GPT-4 interface application</li>
-      <li>Satellite Crafter — Satellite building game</li>
-      <li>PlantSTEM — Math and Physics education platform</li>
-      <li>Iron Triangle — Military Industrial Complex data analysis</li>
+      <li>Dedalus — Cloud machines for agentic workloads with persistent environments, filesystem, compute, and tool access (Y Combinator S25, Founding Engineer)</li>
+      <li>Sigil UI — Agent-first design system with 350+ components, 46 presets, and single token file control</li>
+      <li>Loop — Operator desk for agent skills that auto-refresh from tracked docs, changelogs, and repos</li>
+      <li>Sevenfold — AI-powered research workspace with semantic search, annotations, and citation tracing (Founding Engineer)</li>
+      <li>Lumachor — Context engine with vector search for expert-level prompt engineering</li>
+      <li>PortfolioMon Showdown — This interactive portfolio: a fully playable Pokemon Showdown-inspired battle game at kevinliu.biz</li>
+      <li>Princeton Tower Defense — Browser-based tower defense game with 5 maps, 15+ towers, and custom sprite rendering</li>
+      <li>Podium — Hackathon judging platform used by 100+ judges across 3 HackPrinceton seasons</li>
+      <li>RecyclAIble — Smart recycling with OpenCV on Raspberry Pi (1st Place Hardware, PennApps XXIII)</li>
+      <li>HD Transcribe — Custom speech model for Huntington&apos;s Disease patients (published at IYRC)</li>
+      <li>OMMC — Online Monmouth Math Competition (co-founder, $32k raised, 6k+ community, 501(c)(3))</li>
+      <li>CoTCodec — Research on agent orchestration variables under Danqi Chen at Princeton</li>
     </ul>
 
-    <h3>Education and Achievements — Kevin Liu</h3>
+    <h3>Education, Research, and Achievements — Kevin Liu</h3>
     <p>
-      Princeton University, B.S.E. in Computer Science, Class of 2028.
-      Previously: High Technology High School, Lincroft, Monmouth County, NJ.
-      1st Place in Hardware at PennApps XXIII with RecyclAIble. HackPrinceton lead
-      developer and organizer (Fall 2024, Spring 2025, Fall 2025). Co-founder of the
-      Online Monmouth Math Competition (OMMC) serving students worldwide.
-      30+ shipped software projects across AI, web, games, health-tech, and hardware.
+      Princeton University, B.S.E. in Computer Science, Class of 2028. Undergraduate
+      Researcher under Danqi Chen studying agent orchestration (CoTCodec). Coursework:
+      Programming Systems, Data Structures &amp; Algorithms, Statistics, Vector Calculus,
+      Linear Algebra. Organizations: Hoagie Software Development Club, TigerApps,
+      HackPrinceton, Princeton Powerlifting, Sympoh Dance Co. Previously: High Technology
+      High School, Lincroft, Monmouth County, NJ. 1st Place in Hardware at PennApps XXIII.
+      HackPrinceton lead developer and organizer (Fall 2024, Spring 2025, Fall 2025).
+      Co-founder of OMMC (501(c)(3)), $32k raised, 6k+ community. 2 publications (IEEE
+      MIT URTC, IYRC). 30+ shipped software projects.
     </p>
 
     <h3>Connect with Kevin Liu Online</h3>
@@ -1819,9 +1852,9 @@ export const TeamSelectScreen = () => {
         <main className="relative col-span-12 flex flex-col sm:min-h-0 lg:col-span-9 lg:grid lg:grid-cols-9">
           <aside className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4" aria-label="Project roster">
             <div className="flex-shrink-0 p-4">
-              <h2 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
+              {/* <h2 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
                 Kevin Liu&apos;s Software Projects
-              </h2>
+              </h2> */}
               <div
                 className="group relative bg-cyan-400/20 p-px px-1 transition-colors duration-300 focus-within:bg-cyan-400 focus-within:shadow-[0_0_15px_theme(colors.cyan.400)]"
                 style={{

@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- Nacelle (default sans) --- */
+@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* --- PP Radio Grotesk --- */
+@font-face { font-family: 'Radio Grotesk'; src: url('/fonts/PPRadioGrotesk-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Radio Grotesk'; src: url('/fonts/PPRadioGrotesk-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* --- PP Pangram Sans --- */
+@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Extrabold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+
+/* --- PP Telegraf --- */
+@font-face { font-family: 'Telegraf'; src: url('/fonts/PPTelegraf-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Telegraf'; src: url('/fonts/PPTelegraf-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Telegraf'; src: url('/fonts/PPTelegraf-UltraBold.ttf') format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* --- PP Mori --- */
+@font-face { font-family: 'PP Mori'; src: url('/fonts/PPMori-Extralight.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'PP Mori'; src: url('/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'PP Mori'; src: url('/fonts/PPMori-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+
 .text-shadow {
   text-shadow: 2px 2px #63b55a;
 }

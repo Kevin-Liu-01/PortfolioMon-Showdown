@@ -6,12 +6,12 @@ import GameScreenManager from "../components/game/gameScreenManager";
 
 const FONT_CLASSES = [
   "font-orbiter",
-  "font-general",
-  "font-clash",
-  "font-satoshi",
+  "font-nacelle",
+  "font-radio",
+  "font-pangram",
+  "font-telegraf",
+  "font-mori",
   "font-kode",
-  "font-play",
-  "font-racing",
 ];
 
 const Home: NextPage = () => {
@@ -36,8 +36,7 @@ const Home: NextPage = () => {
       <main
         className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
         style={{
-          fontFamily:
-            font === "font-orbiter" ? "'Orbiter', sans-serif" : undefined,
+          fontFamily: undefined,
         }}
       >
         <div className="relative z-20">

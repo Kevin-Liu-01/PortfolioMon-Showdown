@@ -7,16 +7,13 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sedgwick: ["Sedgwick Ave Display", "Inter"],
-        racing: ["Racing Sans One", "Inter"],
-        orbiter: ["TASA Orbiter", "Inter"],
-        general: ["General Sans", "Inter"],
-        azeret: ["Azeret Mono", "Inter"],
-        clash: ["Clash Grotesk", "Inter"],
-        satoshi: ["Satoshi", "Inter"],
-        kode: ["Kode Mono", "Inter"],
-        hanken: ["Hanken Grotesk", "Inter"],
-        play: ["Play", "Inter"],
+        orbiter: ["TASA Orbiter", "system-ui", "sans-serif"],
+        nacelle: ["Nacelle", "system-ui", "sans-serif"],
+        radio: ["Radio Grotesk", "system-ui", "sans-serif"],
+        pangram: ["Pangram Sans", "system-ui", "sans-serif"],
+        telegraf: ["Telegraf", "system-ui", "sans-serif"],
+        mori: ["PP Mori", "system-ui", "sans-serif"],
+        kode: ["Kode Mono", "monospace"],
       },
       colors: {
         gpt: "#f97316",

@@ -39,13 +39,13 @@ export default function Document() {
 
         {/* GEO — Entity and topic signals for AI models */}
         <meta name="subject" content="Kevin Liu — Software Developer, AI Engineer, Princeton CS '28 — Developer Portfolio & Software Projects" />
-        <meta name="topic" content="Software Development, Artificial Intelligence, Computer Science, Machine Learning, AI Agents, Model Context Protocol, Full-Stack Development" />
+        <meta name="topic" content="Software Development, Artificial Intelligence, Computer Science, Machine Learning, AI Agents, Model Context Protocol, Full-Stack Development, Containers, VMs, Virtual Machines" />
         <meta name="classification" content="Developer Portfolio" />
         <meta name="category" content="Technology, Software Engineering, AI, Computer Science, Princeton University" />
         <meta name="coverage" content="Worldwide" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
-        <meta name="abstract" content="Kevin Liu is a Princeton University Computer Science student (Class of 2028), full-stack developer, and AI engineer. He has worked at Amazon, Bloomberg, AT&T Labs Research, and Y Combinator-backed startups. His portfolio at kevinliu.biz features 30+ projects across AI, web, games, health-tech, and hardware in a Pokémon Showdown-inspired battle game called PortfolioMon Showdown." />
+        <meta name="abstract" content="Kevin Liu is a Princeton University Computer Science student (Class of 2028), full-stack developer, and AI engineer. He has worked at Amazon, Bloomberg, AT&T Labs Research, and Dedalus Labs (Y Combinator S25 Startup). His portfolio at kevin-liu.tech and kevinliu.biz features 30+ projects across AI, web, design, games, health-tech, and hardware in a Pokémon Showdown-inspired battle game called PortfolioMon Showdown." />
         <meta name="summary" content="Kevin Liu — Princeton CS '28, software developer, AI engineer. Founding Engineer at Dedalus Labs (YC S25). Experience at Amazon, Bloomberg, AT&T Labs. 30+ projects. @kevskgs on Twitter/X." />
 
         {/* Dublin Core metadata for enhanced discoverability */}
@@ -83,7 +83,7 @@ export default function Document() {
         <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
-          content="Kevin Liu's PortfolioMon Showdown — Interactive Developer Portfolio with 30+ Projects"
+          content="Kevin Liu's PortfolioMon Showdown"
         />
         <meta property="og:site_name" content="Kevin Liu — Developer Portfolio" />
         <meta property="og:locale" content="en_US" />
@@ -108,7 +108,7 @@ export default function Document() {
         <meta property="article:tag" content="Dedalus Labs" />
         <meta property="article:tag" content="HackPrinceton" />
         <meta property="article:tag" content="PennApps" />
-        <meta property="article:tag" content="MCP AI Agents" />
+        <meta property="article:tag" content="AI Agents" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -120,7 +120,7 @@ export default function Document() {
         <meta name="twitter:image" content={OG_IMAGE} />
         <meta
           name="twitter:image:alt"
-          content="Kevin Liu's PortfolioMon Showdown — Interactive Developer Portfolio"
+          content="Kevin Liu's PortfolioMon Showdown"
         />
 
         {/* Viewport — must be in _document for immediate availability to crawlers */}
@@ -141,12 +141,14 @@ export default function Document() {
         <link rel="me" href="https://twitter.com/kevskgs" />
         <link rel="me" href="https://devpost.com/Kevin-Liu-01" />
         <link rel="me" href="https://www.kevin-liu.tech" />
+        <link rel="me" href="https://www.kevinliu.biz" />
         <link rel="me" href="mailto:k.bowen.liu@gmail.com" />
         <link rel="author" href="https://www.linkedin.com/in/kevin-liu-princeton/" />
         <link rel="author" href="https://github.com/Kevin-Liu-01" />
 
         {/* Preload critical images */}
-        <link rel="preload" as="image" href="/images/kevin_sidebar.png" />
+        <link rel="preload" as="image" href="/images/kevin_powerlifting_bw.png" />
+        <link rel="preload" as="image" href="/images/kevin_powerlifting_color.png" />
         <link rel="preload" as="image" href="/kevinportfolio.png" />
 
         {/* Sitemap */}
@@ -166,24 +168,15 @@ export default function Document() {
           }}
         />
 
-        {/* Fonts */}
+        {/* Fonts — Kode Mono + TASA Orbiter from Google, everything else self-hosted */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link rel="preconnect" href="https://api.fontshare.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&f[]=general-sans@701,200,500,301,201,300,601,600,401,501,400,700&f[]=clash-grotesk@200,700,400,600,300,1,500&f[]=azeret-mono@501,701,800,801,200,401,500,601,900,600,300,901,700,400,100,1&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Play:wght@400;700&family=Racing+Sans+One&family=Sedgwick+Ave+Display&family=TASA+Orbiter:wght@400..800&family=Young+Serif&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=TASA+Orbiter:wght@400..800&display=swap"
           rel="stylesheet"
         />
       </Head>
@@ -226,9 +219,11 @@ export default function Document() {
               <li><a href="https://dedalus-demo.vercel.app/">Dedalus</a> — AI agent SDK with MCP support (Y Combinator S25)</li>
               <li><a href="https://sevenfold-demo.vercel.app/">Sevenfold</a> — AI-powered research workspace</li>
               <li><a href="https://lumachor.vercel.app/home">Lumachor</a> — AI context engine for prompt engineering</li>
+              <li><a href="https://loooop.dev/">Loop</a> — Operator desk for agent skills that auto-refresh from tracked sources</li>
+              <li><a href="https://sigil-ui-web.vercel.app/">Sigil UI</a> — Agent-first design system with 350+ components and token-driven theming</li>
               <li><a href="https://recyclaible.vercel.app/">RecyclAIble</a> — Smart recycling with AI (1st Place Hardware, PennApps XXIII)</li>
               <li><a href="https://hd-transcribe.vercel.app">HD Transcribe</a> — Speech model for Huntington&apos;s Disease patients</li>
-              <li><a href="https://princeton-tower-defense.vercel.app/">Princeton Tower Defense</a> — Tower defense game set at Princeton</li>
+              <li><a href="https://ptd.quest/">Princeton Tower Defense</a> — Tower defense game set at Princeton</li>
               <li><a href="https://hackprinceton-podium.vercel.app/">Podium</a> — Hackathon judging and event management platform</li>
               <li><a href="https://snelltech.vercel.app/">SnellTech</a> — Digital visual acuity exam</li>
               <li><a href="https://letmecook.vercel.app/">LetMeCook</a> — AI recipe generator using ChatGPT and computer vision</li>
@@ -247,23 +242,24 @@ export default function Document() {
 
             <h2>Work Experience</h2>
             <ul>
-              <li>Founding Engineer — Dedalus Labs (Y Combinator S25), Jan 2026–Present — AI agent infrastructure &amp; MCP SDK</li>
-              <li>Founding Engineer — Sevenfold AI, Jun–Nov 2025 — End-to-end agentic research workflow</li>
-              <li>Software Development Engineer Intern — Amazon (FBA Inventory), Summer 2025</li>
-              <li>Software Engineering Intern — Bloomberg L.P. (Financial Instruments), Summer 2024</li>
-              <li>AI Research Intern — AT&amp;T Labs Research (NLP &amp; Intelligent Agents), Fall 2023</li>
-              <li>Software Engineering Intern — Bloomberg L.P. (Core Products), Summer 2023</li>
-              <li>Full Stack Engineer — Johns Hopkins University (uCredit.me), Fall 2022</li>
+              <li>Founding Engineer — Dedalus Labs (YC S25), Spring 2026–Present — Agent infrastructure: MCP SDK, DAuth, microVM workspaces, container orchestration</li>
+              <li>Founding Engineer — Sevenfold AI, Jun–Nov 2025 — Agent-powered research workflow, vector search, 4.6x LLM relevance boost</li>
+              <li>SDE Intern — Amazon Web Services (FBA Inventory), Summer 2025 — Internal APIs, Amazon-Q LLM dashboard</li>
+              <li>SWE Intern — Bloomberg L.P. (Core Products, DT-CADEA), Summer 2024 — Random Forest ML classifier, 86% accuracy</li>
+              <li>AI Research Intern — AT&amp;T Labs Research, Fall 2023 — MoE agents, 85% analysis time reduction</li>
+              <li>SWE Intern — Bloomberg L.P. (Financial Instruments, DT-FI), Summer 2023 — Real-time market feed, 4x remediation speed</li>
+              <li>Full Stack Engineer — Johns Hopkins University (uCredit.me), Fall 2022 — Course platform for 6k+ students</li>
             </ul>
 
-            <h2>Education</h2>
-            <p>Princeton University, B.S.E. in Computer Science, Class of 2028. Previously: High Technology High School, Lincroft, NJ.</p>
+            <h2>Education &amp; Research</h2>
+            <p>Princeton University, B.S.E. in Computer Science, Class of 2028. Undergraduate Researcher under Danqi Chen (CoTCodec: agent orchestration variables). Coursework: Programming Systems, Data Structures &amp; Algorithms, Statistics, Linear Algebra. Organizations: Hoagie Club, TigerApps, HackPrinceton, Princeton Powerlifting, Sympoh Dance Co. Previously: High Technology High School, Lincroft, NJ.</p>
 
-            <h2>Achievements &amp; Awards</h2>
+            <h2>Achievements, Awards &amp; Publications</h2>
             <ul>
               <li>1st Place in Hardware at PennApps XXIII (RecyclAIble)</li>
-              <li>HackPrinceton Lead Developer &amp; Organizer (Fall 2024, Spring 2025, Fall 2025)</li>
-              <li>OMMC Co-Founder — math competition serving students worldwide</li>
+              <li>HackPrinceton Lead Developer &amp; Organizer (Fall 2024, Spring 2025, Fall 2025). Sponsored HackPrinceton for Dedalus Labs.</li>
+              <li>OMMC Co-Founder (501(c)(3)) — $32k raised, 6k+ community, international math competition</li>
+              <li>2 publications: IEEE MIT URTC (thermal conductivity in Li-ion batteries) and IYRC (speech transcription for Huntington&apos;s Disease)</li>
               <li>30+ shipped software projects across AI, web, games, health-tech, and hardware</li>
             </ul>
 
