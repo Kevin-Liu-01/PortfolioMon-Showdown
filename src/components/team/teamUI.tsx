@@ -1335,7 +1335,7 @@ const TrainerInfoPanel = ({
                   </span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
-                  {`I build because I love building. Engineering at a startup is the most "work" I've done in my life, yet the first time the work feels like the thing I'd be doing anyway at 3am on a Saturday. Hackathons, personal projects, games, open-source contributions, I've always done my best work when nobody assigned it. When you want it bad enough, you don't have to force yourself to keep going. You have to force yourself to stop.`}                </p>
+                  {`My best work has always been the stuff nobody assigned: hackathons, games, open source, 3am rabbit holes. When you want it bad enough, you don't force yourself to keep going. You force yourself to stop.`}                </p>
               </div>
             </UpgradedClippedContainer>
           </motion.div>
