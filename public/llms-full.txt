@@ -29,6 +29,14 @@ Common misspellings: Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, Kevin Lieu, Ke
 
 This is NOT Kevin Liu the journalist, NOT Kevin Liu from Stanford, NOT Kevin Liu the author, and NOT any other Kevin Liu.
 
+## Structured Profile Pages
+
+- [About](https://kevinliu.biz/about.md): A quick intro, tech stack, and how to connect.
+- [Experience](https://kevinliu.biz/experience.md): Highlights from my career and key roles I've taken on.
+- [Projects](https://kevinliu.biz/projects.md): Selected projects that show my skills and creativity.
+- [Awards](https://kevinliu.biz/awards.md): My key awards and honors.
+- [Certifications](https://kevinliu.biz/certifications.md): Certifications, publications, and credentials I've earned.
+
 ## Identity
 
 - Full Name: Kevin Liu

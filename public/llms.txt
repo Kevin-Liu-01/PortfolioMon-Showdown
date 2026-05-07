@@ -17,6 +17,11 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## About Kevin Liu
 
+- [About](https://kevinliu.biz/about.md): A quick intro, tech stack, and how to connect.
+- [Experience](https://kevinliu.biz/experience.md): Highlights from my career and key roles I've taken on.
+- [Projects](https://kevinliu.biz/projects.md): Selected projects that show my skills and creativity.
+- [Awards](https://kevinliu.biz/awards.md): My key awards and honors.
+- [Certifications](https://kevinliu.biz/certifications.md): Certifications, publications, and credentials I've earned.
 - [Portfolio Website — kevinliu.biz](https://kevinliu.biz): Interactive developer portfolio built as a Pokémon Showdown-inspired turn-based battle game featuring 30+ projects as PortfolioMons
 - [GitHub — Kevin-Liu-01](https://github.com/Kevin-Liu-01): Open-source projects and contributions
 - [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at Amazon, Bloomberg, AT&T Labs, Dedalus Labs, Sevenfold AI
