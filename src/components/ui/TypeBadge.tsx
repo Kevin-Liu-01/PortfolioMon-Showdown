@@ -18,6 +18,11 @@ export const TYPE_STYLES: {
     border: "border-yellow-400",
     text: "text-black",
   },
+  Infra: {
+    bg: "bg-cyan-600",
+    border: "border-cyan-400",
+    text: "text-white",
+  },
   Game: {
     bg: "bg-orange-500",
     border: "border-orange-400",

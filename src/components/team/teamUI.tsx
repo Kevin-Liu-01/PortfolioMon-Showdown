@@ -1789,7 +1789,9 @@ const SEOContent = () => (
 export const TeamSelectScreen = () => {
   const { playerTeam, handleTeamSelect, handleConfirmTeam, handleClearTeam } =
     useGame();
-  const [selectedId, setSelectedId] = useState<number | null>(1);
+  const [selectedId, setSelectedId] = useState<number | null>(
+    portfolioMonData[0]?.id ?? null
+  );
   const selectedMon = portfolioMonData.find((m) => m.id === selectedId);
   const [searchTerm, setSearchTerm] = useState("");
 

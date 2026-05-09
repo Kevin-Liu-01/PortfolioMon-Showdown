@@ -193,6 +193,7 @@ const TYPE_ATTACK_COLORS: Record<string, string> = {
   Health: "239, 68, 68",
   Mobile: "234, 179, 8",
   Game: "249, 115, 22",
+  Infra: "8, 145, 178",
 };
 
 // --- SELF EFFECT VISUAL OVERLAYS ---

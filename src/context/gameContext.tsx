@@ -255,6 +255,60 @@ export const initialInventory: PlayerInventory = {
 // --- PORTFOLIO-MON DATA ---
 export const portfolioMonData: PortfolioMon[] = [
   {
+    id: 0,
+    name: "Agent Machines",
+    url: "https://www.agent-machines.dev/",
+    github: "https://github.com/Kevin-Liu-01/Agent-Machines",
+    favorite: true,
+    description:
+      "Persistent Linux machines built for AI agents. Agent Machines gives coding agents durable compute, filesystem state, and tool access so work can survive beyond a single chat session.",
+    image: "/images/agentmachines.png",
+    sprite: <Server />,
+    type1: "AI",
+    type2: "Infra",
+    hp: 345,
+    stats: { hp: 345, atk: 145, def: 125, spd: 90 },
+    moves: [
+      {
+        name: "Machine Spawn",
+        power: 0,
+        type: "Infra",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Boots a persistent agent machine, sharply raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
+      },
+      {
+        name: "Agent Shell",
+        power: 105,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.15,
+        description: "Runs an agent inside a live shell for heavy damage.",
+      },
+      {
+        name: "Filesystem Snapshot",
+        power: 70,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "Captures durable state, anchoring the next strike.",
+      },
+      {
+        name: "Resume State",
+        power: 0,
+        type: "Infra",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Restores progress from disk, recovering HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 65 },
+      },
+    ],
+  },
+
+  {
     id: 1,
     name: "Dedalus",
     url: "https://dedaluslabs.ai/",
@@ -302,8 +356,8 @@ export const portfolioMonData: PortfolioMon[] = [
         type: "Infra",
         accuracy: 1.0,
         pp: 10,
-        description: "Locks in progress across sessions, restoring HP over time.",
-        selfEffect: { type: "healOverTime", chance: 1.0, amount: 20 },
+        description: "Locks in progress across sessions, restoring HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 20 },
       },
     ],
   },
@@ -2023,6 +2077,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Health: 1,
     Design: 1,
     Mobile: 1,
+    Infra: 1,
   },
   Data: {
     AI: 0.5,
@@ -2032,6 +2087,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Web: 1,
     Hardware: 1,
     Mobile: 1,
+    Infra: 2,
   },
   Web: {
     Mobile: 2,
@@ -2041,6 +2097,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Hardware: 1,
     Game: 1,
     Health: 1,
+    Infra: 0.5,
   },
   Design: {
     Web: 2,
@@ -2050,6 +2107,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Hardware: 1,
     Health: 1,
     Mobile: 1,
+    Infra: 0.5,
   },
   Hardware: {
     AI: 2,
@@ -2059,6 +2117,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Game: 1,
     Data: 1,
     Design: 1,
+    Infra: 2,
   },
   Health: {
     Hardware: 2,
@@ -2068,6 +2127,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Web: 1,
     Design: 1,
     Mobile: 1,
+    Infra: 1,
   },
   Mobile: {
     Web: 0.5,
@@ -2077,6 +2137,7 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     AI: 1,
     Data: 1,
     Health: 1,
+    Infra: 1,
   },
   Game: {
     AI: 0.5,
@@ -2086,6 +2147,18 @@ export const typeChart: { [attacker: string]: { [defender: string]: number } } =
     Mobile: 0.5,
     Web: 1,
     Hardware: 1,
+    Infra: 0.5,
+  },
+  Infra: {
+    AI: 2,
+    Data: 0.5,
+    Web: 2,
+    Design: 1,
+    Hardware: 0.5,
+    Health: 1,
+    Mobile: 1,
+    Game: 1,
+    Infra: 0.5,
   },
 };
 
