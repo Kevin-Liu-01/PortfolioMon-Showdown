@@ -27,6 +27,7 @@ import {
   Zap,
   Trophy, // <-- Added Trophy
 } from "lucide-react";
+import { HIDDEN_PROJECT_GITHUB } from "../constants/game";
 
 // --- CORE TYPE DEFINITIONS ---
 
@@ -122,6 +123,7 @@ export interface PortfolioMon {
   id: number;
   name: string;
   url: string;
+  /** Omit for no button; use HIDDEN_PROJECT_GITHUB to link profile instead of repo. */
   github?: string;
   description: string;
   image: string;
@@ -419,6 +421,60 @@ export const portfolioMonData: PortfolioMon[] = [
 
   {
     id: 3,
+    name: "050525",
+    url: "https://050525.vercel.app/",
+    github: HIDDEN_PROJECT_GITHUB,
+    favorite: true,
+    description:
+      "Interactive CRT terminal celebrating Dedalus's first birthday. A nostalgic DCD Terminal v1.9 on a cluttered desk, where you can type commands, explore polaroid memories, and unlock hidden moments from year one of Dedalus.",
+    image: "/images/050525.png",
+    sprite: <Terminal />,
+    type1: "Web",
+    type2: "Design",
+    hp: 275,
+    stats: { hp: 275, atk: 110, def: 95, spd: 105 },
+    moves: [
+      {
+        name: "Terminal Boot",
+        power: 0,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Boots DCD Terminal v1.9, raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 1 },
+      },
+      {
+        name: "Password Gate",
+        power: 85,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.15,
+        description: "Unlocks a hidden layer with a command-line strike.",
+      },
+      {
+        name: "Polaroid Scroll",
+        power: 70,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "Cycles through crew memories for steady damage.",
+      },
+      {
+        name: "Birthday Candle",
+        power: 45,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 20,
+        description: "Lights all four candles, recovering HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 50 },
+      },
+    ],
+  },
+
+  {
+    id: 4,
     name: "Loop",
     url: "https://loooop.dev/",
     github: "https://github.com/Kevin-Liu-01/Loop",
@@ -473,7 +529,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 4,
+    id: 5,
     name: "Princeton TD",
     url: "https://ptd.quest/",
     github: "https://github.com/Kevin-Liu-01/Princeton-Tower-Defense",
@@ -536,7 +592,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "Dedalus Demo",
     url: "https://dedalus-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Dedalus-Demo",
@@ -590,7 +646,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Podium",
@@ -643,7 +699,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     name: "Sevenfold",
     url: "https://sevenfold-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sevenfold-Demo",
@@ -696,7 +752,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 8,
+    id: 9,
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     github: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
@@ -750,7 +806,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 9,
+    id: 10,
     name: "Lumachor",
     url: "https://lumachor.vercel.app/home",
     github: "https://github.com/Kevin-Liu-01/Lumachor",
@@ -804,7 +860,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 10,
+    id: 11,
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2025",
@@ -858,7 +914,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 11,
+    id: 12,
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SplitWay",
@@ -910,7 +966,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 12,
+    id: 13,
     name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Lootbox-Simulator",
@@ -964,7 +1020,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 13,
+    id: 14,
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PawPointClicker",
@@ -1018,7 +1074,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 14,
+    id: 15,
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Spring-2025",
@@ -1071,7 +1127,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 15,
+    id: 16,
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2024",
@@ -1125,7 +1181,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 16,
+    id: 17,
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SnellTech-Solutions",
@@ -1177,7 +1233,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17,
+    id: 18,
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/LetMeCook",
@@ -1229,7 +1285,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18,
+    id: 19,
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Balladeer",
@@ -1280,7 +1336,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19,
+    id: 20,
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/CompassUSA",
@@ -1332,10 +1388,10 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20,
+    id: 21,
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
-    github: "https://github.com/Kevin-Liu-01",
+    github: HIDDEN_PROJECT_GITHUB,
     description: "Affordable wearable sleep apnea detection system using Arduino sensors and real-time data streaming. Monitors blood oxygen and breathing patterns overnight, flags apnea events, and visualizes sleep data on a companion web dashboard.",
     image: "/images/apnea-alert.png",
     sprite: <Cpu />,
@@ -1385,7 +1441,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21,
+    id: 22,
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Iron-Triangle",
@@ -1437,7 +1493,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 22,
+    id: 23,
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/AdventureGPT",
@@ -1491,7 +1547,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23,
+    id: 24,
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/EditorGPT",
@@ -1542,7 +1598,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24,
+    id: 25,
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Math-Comp",
@@ -1594,7 +1650,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25,
+    id: 26,
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Sample-Portal",
@@ -1645,7 +1701,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26,
+    id: 27,
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Enkrateia",
@@ -1698,10 +1754,10 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 27,
+    id: 28,
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
-    github: "https://github.com/Kevin-Liu-01",
+    github: HIDDEN_PROJECT_GITHUB,
     description:
       "Speech transcription tool trained on the unique vocal patterns of Huntington's Disease patients. Custom acoustic model improves recognition accuracy for dysarthric speech — bridging a critical accessibility gap in existing STT systems.",
     image: "/images/hd-transcribe.png",
@@ -1751,7 +1807,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 28,
+    id: 29,
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     github: "https://github.com/Kevin-Liu-01/OMMC-Website",
@@ -1805,7 +1861,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 29,
+    id: 30,
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Atlas",
@@ -1856,7 +1912,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 30,
+    id: 31,
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/RecyclAIble",
@@ -1908,7 +1964,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 31,
+    id: 32,
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PlantSTEM",
@@ -1960,7 +2016,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 32,
+    id: 33,
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Tutorial",
@@ -2012,7 +2068,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 33,
+    id: 34,
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SatelliteCrafter",

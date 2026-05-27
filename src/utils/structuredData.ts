@@ -128,6 +128,12 @@ const PROJECT_CATALOG = [
       "Agent-first design system with 350+ components, 46 presets, and a single token file controlling color, type, radius, and motion",
   },
   {
+    name: "050525",
+    url: "https://050525.vercel.app/",
+    description:
+      "Interactive CRT terminal celebrating Dedalus's first birthday. A nostalgic DCD Terminal v1.9 on a cluttered desk, where you can type commands, explore polaroid memories, and unlock hidden moments from year one of Dedalus.",
+  },
+  {
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     description: "Main landing page for HackPrinceton Fall 2025",

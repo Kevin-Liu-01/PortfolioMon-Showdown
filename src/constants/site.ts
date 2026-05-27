@@ -180,6 +180,8 @@ const PROJECT_KEYWORDS = [
   "agent-first design system",
   "create-sigil-app",
   "design tokens system",
+  "050525 Dedalus birthday",
+  "050525 terminal experience",
   "Princeton Tower Defense",
   "Princeton Tower Defense game",
   "RecyclAIble PennApps",

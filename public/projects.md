@@ -28,6 +28,14 @@ Skills: Open Source, Next.js, TypeScript, Radix UI, Design Tokens, OKLCH
 
 Agent-first design system with 350+ components, 46 presets, and 519 tokens. One token file controls color, typography, radius, and motion for both humans and AI agents.
 
+## 050525
+
+Project URL: https://050525.vercel.app
+
+Skills: Next.js, TypeScript, Interactive Design, Terminal UI, Framer Motion
+
+Interactive CRT terminal celebrating Dedalus's first birthday. A nostalgic DCD Terminal v1.9 on a cluttered desk, where you can type commands, explore polaroid memories, and unlock hidden moments from year one of Dedalus.
+
 ## Loop
 
 Project URL: https://loooop.dev

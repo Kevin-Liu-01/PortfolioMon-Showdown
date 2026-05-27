@@ -256,6 +256,12 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Tech Stack: Next.js, TypeScript, Radix UI, Design Tokens
 - Categories: Design, Web
 
+#### 050525
+- URL: https://050525.vercel.app/
+- Description: Interactive CRT terminal celebrating Dedalus's first birthday. A nostalgic DCD Terminal v1.9 on a cluttered desk, where you can type commands, explore polaroid memories, and unlock hidden moments from year one of Dedalus.
+- Tech Stack: Next.js, TypeScript, Interactive Design, Terminal UI, Framer Motion
+- Categories: Web, Design
+
 #### Splitway
 - URL: https://splitway.vercel.app/
 - Description: Track expenses and split them with friends. Real-time expense tracking and splitting with Firebase synchronization.

@@ -59,6 +59,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [Lumachor](https://lumachor.vercel.app/home): A context engine that gives every user the power of an expert prompt engineer
 - [Loop](https://loooop.dev/): Operator desk for agent skills that auto-refresh from tracked sources and rewrite skills with full diffs
 - [Sigil UI](https://sigil-ui-web.vercel.app/): Agent-first design system with 350+ components, 46 presets, and one token file controlling the full visual system
+- [050525](https://050525.vercel.app/): Interactive CRT terminal celebrating Dedalus's first birthday — type commands, explore polaroid memories, and unlock hidden moments from year one of Dedalus
 - [Podium](https://hackprinceton-podium.vercel.app/): Streamlines judging and event management for hackathons
 - [Princeton Tower Defense](https://ptd.quest/): A tower defense game where players defend Princeton from waves of attacks
 - [HD Transcribe](https://hd-transcribe.vercel.app): Accesses a novel speech model for patients with Huntington's Disease
@@ -75,6 +76,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [Lumachor](https://lumachor.vercel.app/home): AI context engine
 - [Loop](https://loooop.dev/): Operator desk for agent skills
 - [Sigil UI](https://sigil-ui-web.vercel.app/): Agent-first design system
+- [050525](https://050525.vercel.app/): Interactive CRT terminal celebrating Dedalus's first birthday — type commands, explore polaroid memories, and unlock hidden moments from year one of Dedalus
 - [HackPrinceton '25F](https://hack-princeton-fall-2025-demo.vercel.app/): Hackathon landing page
 - [Splitway](https://splitway.vercel.app/): Expense splitting app
 - [Lootbox Simulator](https://lootboxsimulator.vercel.app/): Lootbox opening game

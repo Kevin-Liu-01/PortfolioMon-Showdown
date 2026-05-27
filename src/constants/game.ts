@@ -1,3 +1,5 @@
+import { SOCIAL_LINKS } from "./site";
+
 /** Maximum non-HP stat value for scaling stat bars (ATK/DEF/SPD range: 50–150) */
 export const MAX_STAT_VALUE = 160;
 
@@ -32,3 +34,6 @@ export const BATTLE = {
 
 /** SM breakpoint in pixels (Tailwind sm) */
 export const SM_BREAKPOINT = 640;
+
+/** Profile GitHub URL when a project's repo is private or should stay hidden. */
+export const HIDDEN_PROJECT_GITHUB = SOCIAL_LINKS.github;
