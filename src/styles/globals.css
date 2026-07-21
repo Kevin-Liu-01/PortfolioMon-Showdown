@@ -3,33 +3,147 @@
 @tailwind utilities;
 
 /* --- Nacelle (default sans) --- */
-@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Nacelle'; src: url('/fonts/Nacelle-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face {
+  font-family: "Nacelle";
+  src: url("/fonts/Nacelle-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nacelle";
+  src: url("/fonts/Nacelle-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nacelle";
+  src: url("/fonts/Nacelle-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nacelle";
+  src: url("/fonts/Nacelle-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nacelle";
+  src: url("/fonts/Nacelle-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nacelle";
+  src: url("/fonts/Nacelle-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* --- PP Radio Grotesk --- */
-@font-face { font-family: 'Radio Grotesk'; src: url('/fonts/PPRadioGrotesk-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Radio Grotesk'; src: url('/fonts/PPRadioGrotesk-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face {
+  font-family: "Radio Grotesk";
+  src: url("/fonts/PPRadioGrotesk-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Radio Grotesk";
+  src: url("/fonts/PPRadioGrotesk-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* --- PP Pangram Sans --- */
-@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Pangram Sans'; src: url('/fonts/PPPangramSans-Extrabold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/PPPangramSans-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/PPPangramSans-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/PPPangramSans-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/PPPangramSans-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/PPPangramSans-Extrabold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* --- PP Telegraf --- */
-@font-face { font-family: 'Telegraf'; src: url('/fonts/PPTelegraf-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Telegraf'; src: url('/fonts/PPTelegraf-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Telegraf'; src: url('/fonts/PPTelegraf-UltraBold.ttf') format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face {
+  font-family: "Telegraf";
+  src: url("/fonts/PPTelegraf-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Telegraf";
+  src: url("/fonts/PPTelegraf-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Telegraf";
+  src: url("/fonts/PPTelegraf-UltraBold.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* --- PP Mori --- */
-@font-face { font-family: 'PP Mori'; src: url('/fonts/PPMori-Extralight.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
-@font-face { font-family: 'PP Mori'; src: url('/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'PP Mori'; src: url('/fonts/PPMori-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-Extralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 .text-shadow {
   text-shadow: 2px 2px #63b55a;
@@ -66,4 +180,45 @@
 .svgfill-gray {
   filter: invert(68%) sepia(15%) saturate(206%) hue-rotate(179deg)
     brightness(91%) contrast(95%);
+}
+
+.project-index-grid {
+  background-image: linear-gradient(
+    to right,
+    transparent calc(100% - 1px),
+    rgb(16 16 16 / 0.035) 1px
+  );
+  background-size: min(8.333vw, 120px) 100%;
+}
+
+.bw-portfolio {
+  background-image: linear-gradient(rgb(11 11 11 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 11 11 / 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.spotlight-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgb(216 255 54 / 0.16),
+    transparent 70%
+  );
+  transition: opacity 300ms ease;
+}
+
+.spotlight-field:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bw-portfolio *,
+  .bw-portfolio *::before,
+  .bw-portfolio *::after {
+    scroll-behavior: auto !important;
+  }
 }

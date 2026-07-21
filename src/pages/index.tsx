@@ -1,8 +1,10 @@
 import Head from "next/head";
 import { type NextPage } from "next";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "../components/navbar";
 import GameScreenManager from "../components/game/gameScreenManager";
+import ProjectIndexLanding from "../components/landing/projectIndexLanding";
 
 const FONT_CLASSES = [
   "font-orbiter",
@@ -16,40 +18,73 @@ const FONT_CLASSES = [
 
 const Home: NextPage = () => {
   const [translate, setTranslate] = useState(false);
-  const [font, setFont] = useState(FONT_CLASSES[0]);
+  const [font, setFont] = useState<string>(FONT_CLASSES[1] ?? "font-nacelle");
+  const [hasEntered, setHasEntered] = useState(false);
+
+  const enterWorld = useCallback(() => setHasEntered(true), []);
+  const exitWorld = useCallback(() => setHasEntered(false), []);
 
   const fontInitializer = () => {
     setFont((currentFont) => {
       const currentIndex = FONT_CLASSES.indexOf(currentFont);
       const nextIndex = (currentIndex + 1) % FONT_CLASSES.length;
-      return FONT_CLASSES[nextIndex];
+      return FONT_CLASSES[nextIndex] ?? FONT_CLASSES[0] ?? "font-nacelle";
     });
   };
 
   return (
     <div>
       <Head>
-        <title>Kevin Liu | Software Developer &amp; AI Engineer — Princeton CS &apos;28 | PortfolioMon Showdown | @kevskgs</title>
-        <meta name="description" content="Kevin Liu (@kevskgs) is a Princeton University CS student (Class of 2028), full-stack developer, and AI engineer who has worked at Amazon, Bloomberg, AT&T Labs, and Y Combinator-backed startups. He has built 30+ projects across AI, web, games, and health-tech. Explore his interactive developer portfolio — a Pokémon Showdown-inspired battle game called PortfolioMon Showdown at kevinliu.biz." />
-        <meta name="theme-color" content="#0f172a" />
+        <title>
+          Kevin Liu | Software Developer &amp; AI Engineer — Princeton CS
+          &apos;28 | PortfolioMon Showdown | @kevskgs
+        </title>
+        <meta
+          name="description"
+          content="Kevin Liu is a founding engineer at Dedalus and a Princeton CS student building agent infrastructure, expressive interfaces, and browser games. Explore selected work and play PortfolioMon, his archived Pokémon-inspired portfolio battle game."
+        />
+        <meta name="theme-color" content="#0a0a0a" />
       </Head>
-      <main
-        className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
-        style={{
-          fontFamily: undefined,
-        }}
-      >
-        <div className="relative z-20">
-          <Navbar
-            menuHandler={() => setTranslate(!translate)}
-            fontInitializer={fontInitializer}
-          />
-        </div>
+      <AnimatePresence mode="wait">
+        {!hasEntered ? (
+          <ProjectIndexLanding key="project-index" onEnter={enterWorld} />
+        ) : (
+          <motion.main
+            key="playground"
+            initial={{
+              opacity: 0,
+              scale: 1.025,
+              filter: "saturate(1.4) blur(8px)",
+            }}
+            animate={{ opacity: 1, scale: 1, filter: "saturate(1) blur(0px)" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
+          >
+            <div className="relative z-20">
+              <Navbar
+                menuHandler={() => setTranslate(!translate)}
+                fontInitializer={fontInitializer}
+              />
+            </div>
 
-        <div className="relative z-10 h-[calc(100vh-4.8rem)] w-full">
-          <GameScreenManager />
-        </div>
-      </main>
+            <button
+              type="button"
+              onClick={exitWorld}
+              className="absolute left-3 top-[5.2rem] z-[100] border border-white/40 bg-black/80 px-3 py-2 font-kode text-[8px] uppercase tracking-[0.16em] text-white backdrop-blur-md transition hover:border-white hover:bg-white hover:text-black"
+              style={{
+                clipPath:
+                  "polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px)",
+              }}
+            >
+              ← Exit to portfolio
+            </button>
+
+            <div className="relative z-10 h-[calc(100vh-4.8rem)] w-full">
+              <GameScreenManager />
+            </div>
+          </motion.main>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

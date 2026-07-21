@@ -83,7 +83,13 @@ const TypeParticles = ({
   </>
 );
 
-const SlashLines = ({ color, isPlayer }: { color: string; isPlayer: boolean }) => (
+const SlashLines = ({
+  color,
+  isPlayer,
+}: {
+  color: string;
+  isPlayer: boolean;
+}) => (
   <>
     {[0, 1, 2].map((i) => (
       <motion.div
@@ -106,6 +112,101 @@ const SlashLines = ({ color, isPlayer }: { color: string; isPlayer: boolean }) =
   </>
 );
 
+const SpeedLineField = ({
+  color,
+  isPlayer,
+}: {
+  color: string;
+  isPlayer: boolean;
+}) => (
+  <div className="absolute inset-0 overflow-hidden">
+    {Array.from({ length: 18 }, (_, index) => {
+      const top = 4 + ((index * 5.7) % 88);
+      const width = 10 + ((index * 17) % 28);
+      return (
+        <motion.div
+          key={index}
+          className="absolute h-px"
+          style={{
+            top: `${top}%`,
+            width: `${width}%`,
+            left: isPlayer ? "-34%" : "104%",
+            background: `linear-gradient(${
+              isPlayer ? "90deg" : "270deg"
+            }, transparent, rgba(${color}, ${
+              0.28 + (index % 4) * 0.12
+            }), white)`,
+            boxShadow: `0 0 8px rgba(${color}, .45)`,
+          }}
+          animate={{
+            x: isPlayer ? [0, "980%"] : [0, "-980%"],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 0.34 + (index % 5) * 0.045,
+            delay: (index % 6) * 0.025,
+            ease: "circIn",
+          }}
+        />
+      );
+    })}
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        background: `linear-gradient(${
+          isPlayer ? "105deg" : "255deg"
+        }, transparent 35%, rgba(${color}, .18) 50%, transparent 65%)`,
+      }}
+      initial={{ x: isPlayer ? "-100%" : "100%" }}
+      animate={{ x: isPlayer ? "100%" : "-100%" }}
+      transition={{ duration: 0.48, ease: "circIn" }}
+    />
+  </div>
+);
+
+const ImpactReticle = ({
+  color,
+  x,
+  y,
+}: {
+  color: string;
+  x: string;
+  y: string;
+}) => (
+  <div
+    className="absolute h-40 w-40 -translate-x-1/2 -translate-y-1/2"
+    style={{ left: x, top: y }}
+  >
+    {[0, 1, 2].map((index) => (
+      <motion.div
+        key={index}
+        className="absolute inset-0 rounded-full border"
+        style={{ borderColor: `rgba(${color}, ${0.9 - index * 0.22})` }}
+        initial={{ scale: 0.05, opacity: 1, rotate: index * 30 }}
+        animate={{
+          scale: 1.2 + index * 0.35,
+          opacity: 0,
+          rotate: 90 + index * 45,
+        }}
+        transition={{ duration: 0.52 + index * 0.09, ease: "circOut" }}
+      />
+    ))}
+    {[0, 45, 90, 135].map((angle) => (
+      <motion.span
+        key={angle}
+        className="absolute left-1/2 top-1/2 h-px w-[170%] -translate-x-1/2 -translate-y-1/2"
+        style={{
+          rotate: angle,
+          background: `linear-gradient(90deg, transparent, rgba(${color}, .95), white, rgba(${color}, .95), transparent)`,
+        }}
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: [0, 1, 0.55], opacity: [0, 1, 0] }}
+        transition={{ duration: 0.4, ease: "circOut" }}
+      />
+    ))}
+  </div>
+);
+
 export const BackgroundEffects = ({
   playerAnimation,
   cpuAnimation,
@@ -116,7 +217,7 @@ export const BackgroundEffects = ({
   lastMoveType: string | null;
 }) => {
   const typeColor = lastMoveType
-    ? (TYPE_ATTACK_COLORS[lastMoveType] ?? "0, 220, 255")
+    ? TYPE_ATTACK_COLORS[lastMoveType] ?? "0, 220, 255"
     : "0, 220, 255";
 
   return (
@@ -133,6 +234,7 @@ export const BackgroundEffects = ({
             transition={{ duration: 0.5, times: [0, 0.5, 1] }}
           />
           <SlashLines color={typeColor} isPlayer={true} />
+          <SpeedLineField color={typeColor} isPlayer={true} />
         </>
       )}
 
@@ -148,6 +250,12 @@ export const BackgroundEffects = ({
             transition={{ duration: 0.4, ease: "easeOut" }}
           />
           <TypeParticles originX="70%" originY="25%" color={typeColor} />
+          <ImpactReticle color={typeColor} x="70%" y="25%" />
+          <motion.div
+            className="absolute inset-0 bg-white mix-blend-overlay"
+            animate={{ opacity: [0, 0.7, 0] }}
+            transition={{ duration: 0.18 }}
+          />
         </>
       )}
 
@@ -163,6 +271,7 @@ export const BackgroundEffects = ({
             transition={{ duration: 0.5, times: [0, 0.5, 1] }}
           />
           <SlashLines color={typeColor} isPlayer={false} />
+          <SpeedLineField color={typeColor} isPlayer={false} />
         </>
       )}
 
@@ -178,6 +287,12 @@ export const BackgroundEffects = ({
             transition={{ duration: 0.4, ease: "easeOut" }}
           />
           <TypeParticles originX="25%" originY="55%" color={typeColor} />
+          <ImpactReticle color={typeColor} x="25%" y="55%" />
+          <motion.div
+            className="absolute inset-0 bg-white mix-blend-overlay"
+            animate={{ opacity: [0, 0.7, 0] }}
+            transition={{ duration: 0.18 }}
+          />
         </>
       )}
     </>
@@ -198,16 +313,21 @@ const TYPE_ATTACK_COLORS: Record<string, string> = {
 
 // --- SELF EFFECT VISUAL OVERLAYS ---
 
-const EFFECT_COLORS: Record<SelfEffectType, { primary: string; glow: string }> = {
-  atkUp: { primary: "239, 68, 68", glow: "248, 113, 113" },
-  defUp: { primary: "59, 130, 246", glow: "96, 165, 250" },
-  spdUp: { primary: "234, 179, 8", glow: "250, 204, 21" },
-  heal: { primary: "34, 197, 94", glow: "74, 222, 128" },
-  drain: { primary: "139, 92, 246", glow: "167, 139, 250" },
-  recoil: { primary: "249, 115, 22", glow: "251, 146, 60" },
-};
+const EFFECT_COLORS: Record<SelfEffectType, { primary: string; glow: string }> =
+  {
+    atkUp: { primary: "239, 68, 68", glow: "248, 113, 113" },
+    defUp: { primary: "59, 130, 246", glow: "96, 165, 250" },
+    spdUp: { primary: "234, 179, 8", glow: "250, 204, 21" },
+    heal: { primary: "34, 197, 94", glow: "74, 222, 128" },
+    drain: { primary: "139, 92, 246", glow: "167, 139, 250" },
+    recoil: { primary: "249, 115, 22", glow: "251, 146, 60" },
+  };
 
-const StatBoostEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+const StatBoostEffect = ({
+  color,
+}: {
+  color: { primary: string; glow: string };
+}) => (
   <>
     {Array.from({ length: 8 }, (_, i) => {
       const x = 20 + Math.random() * 60;
@@ -226,7 +346,11 @@ const StatBoostEffect = ({ color }: { color: { primary: string; glow: string } }
             borderRadius: 2,
           }}
           initial={{ y: 0, opacity: 0, scaleY: 0.5 }}
-          animate={{ y: -80 - Math.random() * 40, opacity: [0, 1, 1, 0], scaleY: 1 }}
+          animate={{
+            y: -80 - Math.random() * 40,
+            opacity: [0, 1, 1, 0],
+            scaleY: 1,
+          }}
           transition={{ duration: 0.7, delay, ease: "easeOut" }}
         />
       );
@@ -243,7 +367,11 @@ const StatBoostEffect = ({ color }: { color: { primary: string; glow: string } }
   </>
 );
 
-const HealEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+const HealEffect = ({
+  color,
+}: {
+  color: { primary: string; glow: string };
+}) => (
   <>
     {Array.from({ length: 12 }, (_, i) => {
       const x = 15 + Math.random() * 70;
@@ -262,7 +390,11 @@ const HealEffect = ({ color }: { color: { primary: string; glow: string } }) => 
             boxShadow: `0 0 8px rgba(${color.primary}, 0.6)`,
           }}
           initial={{ y: 0, opacity: 0, scale: 0 }}
-          animate={{ y: -60 - Math.random() * 50, opacity: [0, 1, 0.8, 0], scale: [0, 1.2, 0.6] }}
+          animate={{
+            y: -60 - Math.random() * 50,
+            opacity: [0, 1, 0.8, 0],
+            scale: [0, 1.2, 0.6],
+          }}
           transition={{ duration: 0.8, delay, ease: "easeOut" }}
         />
       );
@@ -279,7 +411,11 @@ const HealEffect = ({ color }: { color: { primary: string; glow: string } }) => 
   </>
 );
 
-const DrainEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+const DrainEffect = ({
+  color,
+}: {
+  color: { primary: string; glow: string };
+}) => (
   <>
     {Array.from({ length: 10 }, (_, i) => {
       const startX = 30 + Math.random() * 40;
@@ -320,7 +456,11 @@ const DrainEffect = ({ color }: { color: { primary: string; glow: string } }) =>
   </>
 );
 
-const RecoilEffect = ({ color }: { color: { primary: string; glow: string } }) => (
+const RecoilEffect = ({
+  color,
+}: {
+  color: { primary: string; glow: string };
+}) => (
   <>
     <motion.div
       className="absolute inset-0"
@@ -359,7 +499,10 @@ const RecoilEffect = ({ color }: { color: { primary: string; glow: string } }) =
   </>
 );
 
-const EFFECT_RENDERERS: Record<SelfEffectType, React.FC<{ color: { primary: string; glow: string } }>> = {
+const EFFECT_RENDERERS: Record<
+  SelfEffectType,
+  React.FC<{ color: { primary: string; glow: string } }>
+> = {
   atkUp: StatBoostEffect,
   defUp: StatBoostEffect,
   spdUp: StatBoostEffect,
@@ -531,10 +674,10 @@ const StatBar = ({
     pct >= 75
       ? "from-emerald-400 to-cyan-400 shadow-[0_0_8px_theme(colors.emerald.500)]"
       : pct >= 50
-        ? "from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
-        : pct >= 30
-          ? "from-amber-400 to-orange-500 shadow-[0_0_8px_theme(colors.amber.500)]"
-          : "from-red-400 to-rose-600 shadow-[0_0_8px_theme(colors.red.500)]";
+      ? "from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
+      : pct >= 30
+      ? "from-amber-400 to-orange-500 shadow-[0_0_8px_theme(colors.amber.500)]"
+      : "from-red-400 to-rose-600 shadow-[0_0_8px_theme(colors.red.500)]";
 
   return (
     <div className="grid grid-cols-6 items-center gap-2">
@@ -710,29 +853,31 @@ export const GuideModal = ({
                         the user&apos;s ATK by 1 stage (+25% per stage, max +3).
                       </li>
                       <li>
-                        <strong className="text-blue-400">DEF Up:</strong> Raises
-                        the user&apos;s DEF by 1 stage.
+                        <strong className="text-blue-400">DEF Up:</strong>{" "}
+                        Raises the user&apos;s DEF by 1 stage.
                       </li>
                       <li>
-                        <strong className="text-yellow-400">SPD Up:</strong> Raises
-                        the user&apos;s SPD by 1 stage.
+                        <strong className="text-yellow-400">SPD Up:</strong>{" "}
+                        Raises the user&apos;s SPD by 1 stage.
                       </li>
                     </ul>
                   </div>
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold">Special Effects</h3>
+                    <h3 className="mb-2 text-lg font-semibold">
+                      Special Effects
+                    </h3>
                     <ul className="list-inside list-disc space-y-2 text-slate-300">
                       <li>
-                        <strong className="text-emerald-400">Heal:</strong> Restores
-                        a fixed amount of HP.
+                        <strong className="text-emerald-400">Heal:</strong>{" "}
+                        Restores a fixed amount of HP.
                       </li>
                       <li>
-                        <strong className="text-violet-400">Drain:</strong> Recovers
-                        HP equal to 50% of damage dealt.
+                        <strong className="text-violet-400">Drain:</strong>{" "}
+                        Recovers HP equal to 50% of damage dealt.
                       </li>
                       <li>
-                        <strong className="text-orange-400">Recoil:</strong> User takes
-                        a fraction of damage dealt as self-damage.
+                        <strong className="text-orange-400">Recoil:</strong>{" "}
+                        User takes a fraction of damage dealt as self-damage.
                       </li>
                     </ul>
                   </div>
@@ -777,7 +922,8 @@ export const GuideModal = ({
                             </td>
 
                             {types.map((def) => {
-                              const multiplier = sharedTypeChart[atk]?.[def] ?? 1;
+                              const multiplier =
+                                sharedTypeChart[atk]?.[def] ?? 1;
                               return (
                                 <td key={def} className="p-1 font-mono">
                                   <span
