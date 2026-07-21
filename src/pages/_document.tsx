@@ -216,6 +216,11 @@ export default function Document() {
 
             <h2>Featured Projects by Kevin Liu</h2>
             <ul>
+              <li><a href="https://reticle-demo.vercel.app/">Reticle</a> — Interactive launch site for Dedalus persistent computers</li>
+              <li><a href="https://ariadne.dedaluslabs.ai/">Ariadne</a> — Phone-first live event agent for Run(way)time</li>
+              <li><a href="https://sandboxarena.vercel.app/">Sandbox Arena</a> — Live cloud sandbox benchmark with objective metrics and crowd Elo</li>
+              <li><a href="https://aryan-birthday.vercel.app/">Aryan 21</a> — Interactive birthday shrine with a labyrinth and photo archives</li>
+              <li><a href="https://wiki.kevinliu.biz/">Kevin&apos;s Wiki</a> — Compiled searchable knowledge base with Wikibot</li>
               <li><a href="https://dedalus-demo.vercel.app/">Dedalus</a> — AI agent SDK with MCP support (Y Combinator S25)</li>
               <li><a href="https://sevenfold-demo.vercel.app/">Sevenfold</a> — AI-powered research workspace</li>
               <li><a href="https://lumachor.vercel.app/home">Lumachor</a> — AI context engine for prompt engineering</li>

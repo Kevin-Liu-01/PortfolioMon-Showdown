@@ -258,6 +258,278 @@ export const initialInventory: PlayerInventory = {
 export const portfolioMonData: PortfolioMon[] = [
   {
     id: 0,
+    name: "Reticle",
+    url: "https://reticle-demo.vercel.app/",
+    github: "https://github.com/dedalus-labs",
+    favorite: true,
+    description:
+      "Launch site for Dedalus's persistent Linux computers for AI agents. Presents sub-second machine startup, durable runtime state, and usage-based compute through an interactive, motion-rich product experience.",
+    image: "/images/reticle.png",
+    sprite: <Eye />,
+    type1: "Infra",
+    type2: "Design",
+    hp: 320,
+    stats: { hp: 320, atk: 130, def: 125, spd: 130 },
+    moves: [
+      {
+        name: "Reticle Lock",
+        power: 95,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.2,
+        description: "Acquires the target with a precise visual strike.",
+      },
+      {
+        name: "Instant Boot",
+        power: 105,
+        type: "Infra",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.15,
+        description: "Starts a persistent machine before the foe can react.",
+      },
+      {
+        name: "Never Sleep",
+        power: 0,
+        type: "Infra",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Keeps the runtime warm, sharply raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
+      },
+      {
+        name: "Active Compute",
+        power: 70,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 15,
+        description: "Meters every active cycle and drains the foe's energy.",
+        selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
+      },
+    ],
+  },
+
+  {
+    id: 1,
+    name: "Ariadne",
+    url: "https://ariadne.dedaluslabs.ai/",
+    github: "https://github.com/Kevin-Liu-01/Ariadne",
+    favorite: true,
+    description:
+      "Phone-first agent experience for Dedalus's Run(way)time event at Lume Studios. Guests text Ariadne to check in, receive a color gem and secret word, complete live quests, request songs, and order drinks.",
+    image: "/images/ariadne.png",
+    sprite: <Puzzle />,
+    type1: "AI",
+    type2: "Design",
+    hp: 285,
+    stats: { hp: 285, atk: 125, def: 95, spd: 130 },
+    moves: [
+      {
+        name: "Thread of Fate",
+        power: 90,
+        type: "AI",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.15,
+        description:
+          "Guides the target through the labyrinth with perfect timing.",
+      },
+      {
+        name: "Gem Assignment",
+        power: 70,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 15,
+        description: "Marks the foe with one of six shifting colors.",
+      },
+      {
+        name: "Secret Quest",
+        power: 85,
+        type: "Game",
+        accuracy: 0.9,
+        pp: 15,
+        effect: { type: "stun", chance: 0.3 },
+        description:
+          "Sends the foe into a live mission that may leave them stunned.",
+      },
+      {
+        name: "Room Pulse",
+        power: 0,
+        type: "AI",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Reads the whole event at once, sharply raising SPD.",
+        selfEffect: { type: "spdUp", chance: 1.0, amount: 2 },
+      },
+    ],
+  },
+
+  {
+    id: 2,
+    name: "Sandbox Arena",
+    url: "https://sandboxarena.vercel.app/",
+    github: "https://github.com/Kevin-Liu-01/Sandbox-Arena",
+    favorite: true,
+    description:
+      "Public head-to-head benchmark for cloud code-execution sandboxes. Runs open workloads across providers, streams both races live, scores objective performance metrics, and combines results with crowd Elo rankings.",
+    image: "/images/sandbox-arena.png",
+    sprite: <Trophy />,
+    type1: "Infra",
+    type2: "Data",
+    hp: 310,
+    stats: { hp: 310, atk: 135, def: 110, spd: 125 },
+    moves: [
+      {
+        name: "Green Flag",
+        power: 80,
+        type: "Infra",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "Starts two sandboxes side by side at full speed.",
+      },
+      {
+        name: "Live Timing",
+        power: 100,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.2,
+        description: "Streams auditable timing data for a decisive hit.",
+      },
+      {
+        name: "Crowd Elo",
+        power: 65,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 15,
+        description:
+          "Turns every matchup into ranking pressure and raises ATK.",
+        selfEffect: { type: "atkUp", chance: 1.0, amount: 1 },
+      },
+      {
+        name: "Checkered Flag",
+        power: 115,
+        type: "Infra",
+        accuracy: 0.85,
+        pp: 5,
+        critChance: 0.2,
+        description: "Takes the flag with an all-out final benchmark.",
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    name: "Aryan 21",
+    url: "https://aryan-birthday.vercel.app/",
+    github: HIDDEN_PROJECT_GITHUB,
+    favorite: true,
+    description:
+      "Interactive birthday shrine built for Aryan's twenty-first. Combines liquid-chrome typography, a cinematic monochrome hero, an explorable labyrinth, photo archives, and an atmospheric reliquary into a personal web experience.",
+    image: "/images/aryan-21.png",
+    sprite: <Sparkles />,
+    type1: "Design",
+    type2: "Web",
+    hp: 275,
+    stats: { hp: 275, atk: 115, def: 90, spd: 125 },
+    moves: [
+      {
+        name: "Liquid Chrome",
+        power: 95,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.15,
+        description: "Warps metallic type into a fluid visual strike.",
+      },
+      {
+        name: "Pocha Anointing",
+        power: 70,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 15,
+        description: "Calls on birthday tradition to restore HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 55 },
+      },
+      {
+        name: "Labyrinth Walk",
+        power: 80,
+        type: "Game",
+        accuracy: 0.9,
+        pp: 15,
+        effect: { type: "stun", chance: 0.25 },
+        description: "Draws the foe into a maze that may leave them stunned.",
+      },
+      {
+        name: "Archive Flash",
+        power: 75,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 15,
+        critChance: 0.1,
+        description: "Unleashes a rapid sequence of memories from the archive.",
+      },
+    ],
+  },
+
+  {
+    id: 4,
+    name: "Kevin's Wiki",
+    url: "https://wiki.kevinliu.biz/",
+    github: HIDDEN_PROJECT_GITHUB,
+    favorite: true,
+    description:
+      "Compiled personal knowledge base spanning architecture, agent operations, design, tools, skills, projects, and philosophy. Keeps flat Markdown canonical while adding instant search, native diagrams, a knowledge graph, and Wikibot.",
+    image: "/images/wiki.png",
+    sprite: <Library />,
+    type1: "Data",
+    type2: "AI",
+    hp: 315,
+    stats: { hp: 315, atk: 120, def: 130, spd: 105 },
+    moves: [
+      {
+        name: "Compiled Brain",
+        power: 90,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.15,
+        description: "Compiles raw notes into durable, searchable knowledge.",
+      },
+      {
+        name: "Knowledge Graph",
+        power: 80,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 15,
+        description:
+          "Connects distant concepts to expose the foe's weak point.",
+      },
+      {
+        name: "Wikibot Query",
+        power: 95,
+        type: "AI",
+        accuracy: 0.9,
+        pp: 10,
+        effect: { type: "stun", chance: 0.25 },
+        description: "Answers from the full corpus and may overwhelm the foe.",
+      },
+      {
+        name: "Canonical Markdown",
+        power: 0,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Returns to the source of truth, sharply raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
+      },
+    ],
+  },
+
+  {
+    id: 5,
     name: "Agent Machines",
     url: "https://www.agent-machines.dev/",
     github: "https://github.com/Kevin-Liu-01/Agent-Machines",
@@ -311,7 +583,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 1,
+    id: 6,
     name: "Dedalus",
     url: "https://dedaluslabs.ai/",
     github: "https://github.com/dedalus-labs",
@@ -365,7 +637,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 2,
+    id: 7,
     name: "Sigil UI",
     url: "https://sigil-ui-web.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sigil-UI",
@@ -420,7 +692,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 3,
+    id: 8,
     name: "050525",
     url: "https://050525.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -474,7 +746,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 4,
+    id: 9,
     name: "Loop",
     url: "https://loooop.dev/",
     github: "https://github.com/Kevin-Liu-01/Loop",
@@ -529,14 +801,14 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 5,
+    id: 10,
     name: "Princeton TD",
     url: "https://ptd.quest/",
     github: "https://github.com/Kevin-Liu-01/Princeton-Tower-Defense",
     favorite: true,
     description:
       "Browser-based tower defense game set on Princeton's campus. 26 hand-crafted maps, 7 tower types, 9 heroes, and 100+ enemies. Built with just Next.js, React, and HTML5 Canvas with custom sprite rendering.",
-    image: "/images/princetontd/gameplay_desert_ui.png",
+    image: "/images/princetontd.png",
     sprite: <Scale />,
     type1: "Game",
     type2: "Web",
@@ -592,7 +864,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 6,
+    id: 11,
     name: "Dedalus Demo",
     url: "https://dedalus-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Dedalus-Demo",
@@ -646,7 +918,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 7,
+    id: 12,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Podium",
@@ -699,7 +971,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 8,
+    id: 13,
     name: "Sevenfold",
     url: "https://sevenfold-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sevenfold-Demo",
@@ -752,7 +1024,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 9,
+    id: 14,
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     github: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
@@ -806,7 +1078,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 10,
+    id: 15,
     name: "Lumachor",
     url: "https://lumachor.vercel.app/home",
     github: "https://github.com/Kevin-Liu-01/Lumachor",
@@ -860,7 +1132,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 11,
+    id: 16,
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2025",
@@ -914,7 +1186,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 12,
+    id: 17,
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SplitWay",
@@ -966,7 +1238,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 13,
+    id: 18,
     name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Lootbox-Simulator",
@@ -1020,7 +1292,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 14,
+    id: 19,
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PawPointClicker",
@@ -1074,7 +1346,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 15,
+    id: 20,
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Spring-2025",
@@ -1127,7 +1399,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 16,
+    id: 21,
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2024",
@@ -1181,7 +1453,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17,
+    id: 22,
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SnellTech-Solutions",
@@ -1233,7 +1505,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18,
+    id: 23,
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/LetMeCook",
@@ -1285,11 +1557,11 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19,
+    id: 24,
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Balladeer",
-    description: "AI-powered study guide generator for literary works. Input any book or text and get chapter summaries, character analyses, theme breakdowns, key quotes with context, and essay prompts, all generated via GPT with structured formatting.", image: "/images/balladeer.jpg",
+    description: "AI-powered study guide generator for literary works. Input any book or text and get chapter summaries, character analyses, theme breakdowns, key quotes with context, and essay prompts, all generated via GPT with structured formatting.", image: "/images/balladeer.png",
     sprite: <Library />,
     type1: "AI",
     type2: "Data",
@@ -1336,12 +1608,12 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20,
+    id: 25,
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/CompassUSA",
     description: "Resource hub for immigrants navigating the U.S. system. Aggregates legal aid organizations, ESL programs, healthcare access, and government services by location, with multilingual support and step-by-step guides for common processes.",
-    image: "/images/compassusa.jpg",
+    image: "/images/compassusa.png",
     sprite: <User />,
     type1: "Web",
     type2: "Data",
@@ -1388,7 +1660,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21,
+    id: 26,
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -1441,7 +1713,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 22,
+    id: 27,
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Iron-Triangle",
@@ -1493,7 +1765,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23,
+    id: 28,
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/AdventureGPT",
@@ -1547,7 +1819,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24,
+    id: 29,
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/EditorGPT",
@@ -1598,12 +1870,12 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25,
+    id: 30,
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Math-Comp",
     description: "Official competition portal for the Online Monmouth Math Competition. Handles timed test delivery, answer submission, anti-cheat proctoring, real-time score calculation, and leaderboard generation for hundreds of concurrent participants.",
-    image: "/images/ommcportal.jpg",
+    image: "/images/ommcportal.png",
     sprite: <Calculator />,
     type1: "Web",
     type2: "Data",
@@ -1650,7 +1922,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26,
+    id: 31,
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Sample-Portal",
@@ -1701,7 +1973,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 27,
+    id: 32,
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Enkrateia",
@@ -1754,7 +2026,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 28,
+    id: 33,
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
     github: HIDDEN_PROJECT_GITHUB,
@@ -1807,7 +2079,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 29,
+    id: 34,
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     github: "https://github.com/Kevin-Liu-01/OMMC-Website",
@@ -1861,7 +2133,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 30,
+    id: 35,
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Atlas",
@@ -1912,7 +2184,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 31,
+    id: 36,
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/RecyclAIble",
@@ -1964,7 +2236,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 32,
+    id: 37,
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PlantSTEM",
@@ -2016,7 +2288,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 33,
+    id: 38,
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Tutorial",
@@ -2068,7 +2340,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 34,
+    id: 39,
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SatelliteCrafter",

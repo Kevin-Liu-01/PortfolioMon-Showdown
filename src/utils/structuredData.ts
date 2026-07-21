@@ -86,6 +86,36 @@ const KNOWS_ABOUT = [
 
 const PROJECT_CATALOG = [
   {
+    name: "Reticle",
+    url: "https://reticle-demo.vercel.app/",
+    description:
+      "Interactive launch site for Dedalus's persistent Linux computers for AI agents, featuring sub-second startup and usage-based compute",
+  },
+  {
+    name: "Ariadne",
+    url: "https://ariadne.dedaluslabs.ai/",
+    description:
+      "Phone-first event agent for Run(way)time that guides guests through check-in, live quests, song requests, and drink ordering",
+  },
+  {
+    name: "Sandbox Arena",
+    url: "https://sandboxarena.vercel.app/",
+    description:
+      "Public head-to-head arena for benchmarking cloud code-execution sandboxes with live races, objective metrics, and crowd Elo",
+  },
+  {
+    name: "Aryan 21",
+    url: "https://aryan-birthday.vercel.app/",
+    description:
+      "Interactive twenty-first birthday shrine with liquid-chrome typography, a labyrinth, photo archives, and an atmospheric reliquary",
+  },
+  {
+    name: "Kevin's Wiki",
+    url: "https://wiki.kevinliu.biz/",
+    description:
+      "Compiled personal knowledge base with canonical Markdown, instant search, native diagrams, a knowledge graph, and Wikibot",
+  },
+  {
     name: "Dedalus",
     url: "https://dedalus-demo.vercel.app/",
     description:

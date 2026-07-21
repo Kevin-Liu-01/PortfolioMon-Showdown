@@ -1,5 +1,49 @@
 # Projects
 
+## Reticle
+
+Project URL: https://reticle-demo.vercel.app
+
+Skills: Next.js, TypeScript, Interactive Design, Agent Infrastructure, Framer Motion
+
+Launch site for Dedalus's persistent Linux computers for AI agents. Presents sub-second machine startup, durable runtime state, and usage-based compute through an interactive, motion-rich product experience.
+
+## Ariadne
+
+Project URL: https://ariadne.dedaluslabs.ai
+
+Skills: AI Agents, Next.js, TypeScript, Event Technology, Interactive Design
+
+Phone-first agent experience for Dedalus's Run(way)time event at Lume Studios. Guests text Ariadne to check in, receive a color gem and secret word, complete live quests, request songs, and order drinks.
+
+- GitHub: https://github.com/Kevin-Liu-01/Ariadne
+
+## Sandbox Arena
+
+Project URL: https://sandboxarena.vercel.app
+
+Skills: Next.js, TypeScript, Cloud Sandboxes, Benchmarking, Data Visualization
+
+Public head-to-head benchmark for cloud code-execution sandboxes. Runs open workloads across providers, streams both races live, scores objective performance metrics, and combines results with crowd Elo rankings.
+
+- GitHub: https://github.com/Kevin-Liu-01/Sandbox-Arena
+
+## Aryan 21
+
+Project URL: https://aryan-birthday.vercel.app
+
+Skills: Next.js, TypeScript, Interactive Design, Creative Development, Framer Motion
+
+Interactive birthday shrine built for Aryan's twenty-first. Combines liquid-chrome typography, a cinematic monochrome hero, an explorable labyrinth, photo archives, and an atmospheric reliquary into a personal web experience.
+
+## Kevin's Wiki
+
+Project URL: https://wiki.kevinliu.biz
+
+Skills: Next.js, TypeScript, Markdown, Search, Knowledge Graphs, AI Agents
+
+Compiled personal knowledge base spanning architecture, agent operations, design, tools, skills, projects, and philosophy. Keeps flat Markdown canonical while adding instant search, native diagrams, a knowledge graph, and Wikibot.
+
 ## Dedalus
 
 Project URL: https://dedaluslabs.ai
