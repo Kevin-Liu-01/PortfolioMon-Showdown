@@ -108,11 +108,11 @@ A context engine that gives every user the power of an expert prompt engineer. U
 
 ## PortfolioMon Showdown
 
-Project URL: https://kevinliu.biz
+Project URL: https://kevinliu.biz/#portfoliomon
 
 Skills: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, Vercel
 
-This interactive portfolio — a fully playable Pokémon Showdown-inspired turn-based battle game. 30+ projects as battle-ready characters with unique types, stats, and moves.
+Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable project. Forty real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
 
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
 

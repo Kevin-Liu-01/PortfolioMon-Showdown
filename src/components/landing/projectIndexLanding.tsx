@@ -116,6 +116,42 @@ const ARCHIVE_PROJECTS = [
   ],
 ] as const;
 
+const PHILOSOPHIES = [
+  {
+    id: "unassigned",
+    number: "01",
+    eyebrow: "On obsession",
+    title: "Build what nobody assigned.",
+    paragraphs: [
+      "My best work has always been the stuff nobody assigned: hackathons, games, open source, 3 a.m. rabbit holes. The absence of a rubric is the point. It forces me to decide what good means, then care enough to keep sanding the thing after it already works.",
+      "When I want something badly enough, I don’t force myself to keep going. I force myself to stop. Obsession is not a productivity system, but it is the most honest signal I know that a project deserves to exist.",
+    ],
+    annotation: "Curiosity → voluntary difficulty → craft",
+  },
+  {
+    id: "taste",
+    number: "02",
+    eyebrow: "On interfaces",
+    title: "Taste is part of the system.",
+    paragraphs: [
+      "Design is not the coat of paint after the engineering is finished. A good interface teaches its mental model before anyone opens the documentation. Spacing, motion, language, and feedback are behavior—not decoration.",
+      "I want software to feel inevitable on first use and specific enough that it could only have been made by this team. Clarity earns the right to personality. Personality makes the clarity memorable.",
+    ],
+    annotation: "Utility × legibility × a point of view",
+  },
+  {
+    id: "play",
+    number: "03",
+    eyebrow: "On complexity",
+    title: "Play is serious infrastructure.",
+    paragraphs: [
+      "I like turning opaque systems into things people can poke. A benchmark becomes a race. A portfolio becomes a battle. An agent substrate becomes a world with visible rules. Play makes complexity legible because it replaces explanation with consequence.",
+      "Gameful does not mean noisy. The rules still need to be coherent, the feedback immediate, and the delight useful. If an interaction makes someone curious enough to understand the system underneath it, the play did real work.",
+    ],
+    annotation: "Rules → feedback → curiosity → understanding",
+  },
+] as const;
+
 const BAYER_4 = [
   [0, 8, 2, 10],
   [12, 4, 14, 6],
@@ -130,11 +166,13 @@ const DitherMedia = ({
   src,
   alt,
   priority = false,
+  tone = "binary",
   className = "",
 }: {
   src: string;
   alt: string;
   priority?: boolean;
+  tone?: "binary" | "soft";
   className?: string;
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -151,7 +189,8 @@ const DitherMedia = ({
       const bounds = canvas.getBoundingClientRect();
       if (!bounds.width || !bounds.height) return;
 
-      const pixelSize = bounds.width < 520 ? 2.6 : 3.2;
+      const pixelSize =
+        tone === "soft" ? (bounds.width < 520 ? 2 : 2.5) : bounds.width < 520 ? 2.6 : 3.2;
       const width = Math.max(1, Math.ceil(bounds.width / pixelSize));
       const height = Math.max(1, Math.ceil(bounds.height / pixelSize));
       canvas.width = width;
@@ -196,8 +235,16 @@ const DitherMedia = ({
           const green = pixels.data[offset + 1] ?? 0;
           const blue = pixels.data[offset + 2] ?? 0;
           const luminance = red * 0.299 + green * 0.587 + blue * 0.114;
-          const threshold = (((BAYER_4[y % 4]?.[x % 4] ?? 0) + 0.5) / 16) * 255;
-          const value = luminance > threshold ? 244 : 12;
+          const matrixValue = BAYER_4[y % 4]?.[x % 4] ?? 0;
+          const threshold = ((matrixValue + 0.5) / 16) * 255;
+          const softOffset = (matrixValue / 15 - 0.5) * 46;
+          const quantized = Math.round((luminance + softOffset) / 64) * 64;
+          const value =
+            tone === "soft"
+              ? Math.max(16, Math.min(244, quantized))
+              : luminance > threshold
+                ? 244
+                : 12;
           pixels.data[offset] = value;
           pixels.data[offset + 1] = value;
           pixels.data[offset + 2] = value;
@@ -215,12 +262,10 @@ const DitherMedia = ({
       disposed = true;
       observer.disconnect();
     };
-  }, [src]);
+  }, [src, tone]);
 
   return (
-    <div
-      className={`group overflow-hidden bg-[#111] ${className}`}
-    >
+    <div className={`group overflow-hidden bg-[#111] ${className}`}>
       <Image
         src={src}
         alt={alt}
@@ -284,9 +329,9 @@ const ProjectCard = ({
         className="relative h-full bg-[#f4f3ec]"
         style={{ clipPath: CHOPPED }}
       >
-        <div className="grid min-h-[440px] grid-cols-1 lg:grid-cols-12">
+        <div className="grid min-h-[560px] grid-cols-1 lg:grid-cols-12">
           <div
-            className={`relative min-h-[280px] overflow-hidden border-black/20 lg:min-h-[440px] ${
+            className={`relative min-h-[360px] overflow-hidden border-black/20 sm:min-h-[420px] lg:min-h-[560px] ${
               index % 2 === 0
                 ? "border-b lg:col-span-7 lg:border-b-0 lg:border-r"
                 : "border-b lg:order-2 lg:col-span-7 lg:border-b-0 lg:border-l"
@@ -322,7 +367,7 @@ const ProjectCard = ({
               {project.internal && <BallGlyph />}
             </div>
             <div className="my-12 lg:my-0">
-              <h3 className="font-telegraf text-4xl font-black tracking-[-0.06em] sm:text-5xl">
+              <h3 className="font-telegraf text-4xl font-black tracking-[-0.025em] sm:text-5xl">
                 {project.name}
               </h3>
               <p className="mt-4 max-w-md font-nacelle text-xl font-medium leading-tight">
@@ -479,7 +524,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
       <section
         id="top"
         onMouseMove={followPointer}
-        className="spotlight-field relative mx-auto grid min-h-[calc(100svh-72px)] max-w-[1600px] grid-cols-1 border-x border-black/20 lg:grid-cols-12"
+        className="spotlight-field relative mx-auto grid min-h-[calc(100svh-72px)] max-w-[1600px] grid-cols-1 border-x border-black/20 bg-[#f4f3ec] lg:grid-cols-12"
       >
         <div className="relative z-10 flex flex-col justify-between border-b border-black p-5 sm:p-8 lg:col-span-7 lg:border-b-0 lg:border-r lg:p-12">
           <div className="flex items-center justify-between gap-4 font-kode text-[8px] uppercase tracking-[0.2em] text-black/50 sm:text-[9px]">
@@ -499,7 +544,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
             >
               Software with utility / interfaces with bite
             </motion.p>
-            <h1 className="font-telegraf text-[clamp(4.3rem,9vw,9.8rem)] font-black leading-[0.76] tracking-[-0.085em]">
+            <h1 className="font-telegraf text-[clamp(4.3rem,9vw,9.8rem)] font-black leading-[0.84] tracking-[-0.035em]">
               I build
               <br />
               <span className="font-normal italic">useful</span>
@@ -532,6 +577,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
               src="/images/kevin_powerlifting_color.png"
               alt="Kevin Liu"
               priority
+              tone="soft"
               className="absolute inset-0"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
@@ -585,7 +631,6 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-0 opacity-[0.045] [background-image:linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] [background-size:56px_56px]" />
       </section>
 
       <div className="overflow-hidden border-y border-black bg-black py-3 text-white">
@@ -616,7 +661,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
             <p className="font-kode text-[9px] uppercase tracking-[0.2em] text-black/45">
               Field research / 06 selected
             </p>
-            <h2 className="mt-3 font-telegraf text-5xl font-black tracking-[-0.07em] sm:text-7xl lg:text-8xl">
+            <h2 className="mt-3 font-telegraf text-5xl font-black tracking-[-0.035em] sm:text-7xl lg:text-8xl">
               Built in the wild.
             </h2>
           </div>
@@ -649,7 +694,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
               <BallGlyph inverted />
               Legacy artifact / Remastered
             </div>
-            <h2 className="mt-10 font-telegraf text-[clamp(3.8rem,7vw,7.8rem)] font-black leading-[0.82] tracking-[-0.075em]">
+            <h2 className="mt-10 font-telegraf text-[clamp(3.8rem,7vw,7.8rem)] font-black leading-[0.9] tracking-[-0.035em]">
               The old
               <br />
               portfolio
@@ -671,7 +716,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
               <DitherMedia
                 src="/images/kevinportfolio.png"
                 alt="PortfolioMon battle interface"
-                className="relative aspect-[16/9]"
+                className="relative aspect-[4/3]"
               />
               <div className="absolute left-4 top-4 bg-black px-3 py-2 font-kode text-[8px] uppercase tracking-[0.18em] text-white">
                 Playable build / v2.6
@@ -689,7 +734,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
                 <span className="block font-kode text-[8px] uppercase tracking-[0.2em] text-black/50">
                   Press B anytime
                 </span>
-                <span className="mt-1 block font-telegraf text-2xl font-black tracking-[-0.04em] sm:text-4xl">
+                <span className="mt-1 block font-telegraf text-2xl font-black tracking-[-0.02em] sm:text-4xl">
                   {isLaunching ? "Loading your team..." : "Enter PortfolioMon"}
                 </span>
               </span>
@@ -708,7 +753,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
             <p className="font-kode text-[9px] uppercase tracking-[0.2em] text-black/45">
               PC storage / More experiments
             </p>
-            <h2 className="mt-3 font-telegraf text-5xl font-black tracking-[-0.06em] sm:text-6xl">
+            <h2 className="mt-3 font-telegraf text-5xl font-black tracking-[-0.03em] sm:text-6xl">
               The archive.
             </h2>
           </div>
@@ -744,7 +789,7 @@ const ProjectIndexLanding = ({ onEnter }: { onEnter: () => void }) => {
           <div className="mt-4 flex flex-col justify-between gap-10 sm:flex-row sm:items-end">
             <Link
               href="mailto:k.bowen.liu@gmail.com"
-              className="font-telegraf text-[clamp(3.4rem,8vw,8.5rem)] font-black leading-[0.8] tracking-[-0.08em] hover:italic"
+              className="font-telegraf text-[clamp(3.4rem,8vw,8.5rem)] font-black leading-[0.88] tracking-[-0.035em] hover:italic"
             >
               Let’s talk.
             </Link>

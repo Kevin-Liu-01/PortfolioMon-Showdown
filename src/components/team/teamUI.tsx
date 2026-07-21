@@ -11,7 +11,11 @@ import {
 } from "framer-motion";
 import { Tooltip } from "@radix-ui/themes";
 import { useGame } from "../../providers/gameProvider";
-import { type PortfolioMon, type Move, portfolioMonData } from "../../context/gameContext";
+import {
+  type PortfolioMon,
+  type Move,
+  portfolioMonData,
+} from "../../context/gameContext";
 import { TypeBadge, TYPE_STYLES } from "../ui/TypeBadge";
 import { CLIP } from "../../constants/clipPaths";
 import { MAX_STAT_VALUE, MAX_HP_VALUE } from "../../constants/game";
@@ -116,7 +120,7 @@ const UpgradedClippedContainer = ({
   >
     {showSheen && (
       <motion.div
-        className="absolute top-0 left-0 h-full w-12 bg-black/10 blur-md dark:bg-white/20"
+        className="absolute left-0 top-0 h-full w-12 bg-black/10 blur-md dark:bg-white/20"
         variants={{
           rest: { x: "-150%", skewX: -20 },
           hover: {
@@ -202,10 +206,10 @@ const StatBar = ({
     pct >= 75
       ? "from-emerald-400 to-cyan-400 shadow-[0_0_8px_theme(colors.emerald.500)]"
       : pct >= 50
-        ? "from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
-        : pct >= 30
-          ? "from-amber-400 to-orange-500 shadow-[0_0_8px_theme(colors.amber.500)]"
-          : "from-red-400 to-rose-600 shadow-[0_0_8px_theme(colors.red.500)]";
+      ? "from-cyan-400 to-blue-500 shadow-[0_0_8px_theme(colors.cyan.500)]"
+      : pct >= 30
+      ? "from-amber-400 to-orange-500 shadow-[0_0_8px_theme(colors.amber.500)]"
+      : "from-red-400 to-rose-600 shadow-[0_0_8px_theme(colors.red.500)]";
 
   return (
     <div className="grid grid-cols-6 items-center gap-2">
@@ -230,8 +234,14 @@ const StatBar = ({
     </div>
   );
 };
-const STATUS_EFFECT_TAG_STYLES: Record<string, { icon: JSX.Element; bg: string }> = {
-  stun: { icon: <Zap className="h-2.5 w-2.5" />, bg: "bg-yellow-500 text-black" },
+const STATUS_EFFECT_TAG_STYLES: Record<
+  string,
+  { icon: JSX.Element; bg: string }
+> = {
+  stun: {
+    icon: <Zap className="h-2.5 w-2.5" />,
+    bg: "bg-yellow-500 text-black",
+  },
   poison: { icon: <Biohazard className="h-2.5 w-2.5" />, bg: "bg-purple-500" },
   burn: { icon: <Flame className="h-2.5 w-2.5" />, bg: "bg-orange-500" },
   freeze: { icon: <Snowflake className="h-2.5 w-2.5" />, bg: "bg-blue-400" },
@@ -249,13 +259,16 @@ const StatusEffectTag = ({ move }: { move: Move }) => {
       style={{ clipPath: CLIP.typeBadge }}
     >
       {style.icon}
-      <span className="hidden sm:inline uppercase">{move.effect.type}</span>
+      <span className="hidden uppercase sm:inline">{move.effect.type}</span>
       <span className="opacity-75">{move.effect.chance * 100}%</span>
     </div>
   );
 };
 
-const SELF_EFFECT_TAG_STYLES: Record<string, { icon: JSX.Element; bg: string; label: string }> = {
+const SELF_EFFECT_TAG_STYLES: Record<
+  string,
+  { icon: JSX.Element; bg: string; label: string }
+> = {
   atkUp: {
     icon: <Swords className="h-2.5 w-2.5" />,
     bg: "bg-red-500",
@@ -293,9 +306,8 @@ const SelfEffectTag = ({ move }: { move: Move }) => {
   const style = SELF_EFFECT_TAG_STYLES[move.selfEffect.type];
   if (!style) return null;
 
-  const chanceText = move.selfEffect.chance < 1
-    ? `${move.selfEffect.chance * 100}%`
-    : null;
+  const chanceText =
+    move.selfEffect.chance < 1 ? `${move.selfEffect.chance * 100}%` : null;
 
   return (
     <div className="group relative flex items-center">
@@ -324,8 +336,10 @@ const SelfEffectTag = ({ move }: { move: Move }) => {
             : ""}
           {style.label}
           {move.selfEffect.type === "heal" && ` +${move.selfEffect.amount} HP`}
-          {move.selfEffect.type === "drain" && ` ${move.selfEffect.amount * 100}% of damage`}
-          {move.selfEffect.type === "recoil" && ` ${move.selfEffect.amount * 100}% self-damage`}
+          {move.selfEffect.type === "drain" &&
+            ` ${move.selfEffect.amount * 100}% of damage`}
+          {move.selfEffect.type === "recoil" &&
+            ` ${move.selfEffect.amount * 100}% self-damage`}
         </div>
       </div>
     </div>
@@ -409,7 +423,9 @@ const MonDetailView = ({
   const [variantIndex, setVariantIndex] = useState(() =>
     hasVariants ? Math.floor(Math.random() * mon.variants!.length) : 0
   );
-  const resolvedVariant = hasVariants ? (mon.variants![variantIndex % mon.variants!.length] ?? null) : null;
+  const resolvedVariant = hasVariants
+    ? mon.variants![variantIndex % mon.variants!.length] ?? null
+    : null;
 
   const cycleVariant = () => {
     if (!hasVariants) return;
@@ -502,7 +518,7 @@ const MonDetailView = ({
           className="relative h-full w-full bg-white/50 p-4 dark:bg-slate-900/50"
           style={{ clipPath: mainPanelClipPath }}
         >
-          <DetailViewCornerBracket className="top-1 left-1" />
+          <DetailViewCornerBracket className="left-1 top-1" />
           <DetailViewCornerBracket className="bottom-1 right-1 scale-x-[-1] scale-y-[-1]" />
           <div className="absolute -bottom-4 right-1 font-kode text-[10rem] font-black leading-none text-slate-300/40">
             {String(mon.id).padStart(3, "0")}
@@ -605,7 +621,7 @@ const MonDetailView = ({
               </div>
             </div>
           </div>
-          <div className="absolute top-3 left-4 z-40">
+          <div className="absolute left-4 top-3 z-40">
             <h2 className="text-2xl font-bold tracking-tight text-white [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)]">
               {displayName}
             </h2>
@@ -613,7 +629,7 @@ const MonDetailView = ({
               No.{String(mon.id).padStart(3, "0")}
             </span>
           </div>
-          <div className="absolute top-3 right-8 z-40 flex gap-2">
+          <div className="absolute right-8 top-3 z-40 flex gap-2">
             <TypeBadge type={mon.type1} size="sm" />
             {mon.type2 && <TypeBadge type={mon.type2} size="sm" />}
           </div>
@@ -621,15 +637,19 @@ const MonDetailView = ({
           {hasVariants && (
             <motion.button
               onClick={cycleVariant}
-              className="absolute right-3 bottom-3 z-40 flex items-center gap-1.5 border border-cyan-400/50 bg-slate-900/80 px-2.5 py-1.5 text-[10px] font-bold text-cyan-300 backdrop-blur-sm transition-colors hover:border-cyan-400 hover:bg-slate-800/90 hover:text-cyan-200"
-              style={{ clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))" }}
+              className="absolute bottom-3 right-3 z-40 flex items-center gap-1.5 border border-cyan-400/50 bg-slate-900/80 px-2.5 py-1.5 text-[10px] font-bold text-cyan-300 backdrop-blur-sm transition-colors hover:border-cyan-400 hover:bg-slate-800/90 hover:text-cyan-200"
+              style={{
+                clipPath:
+                  "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <ArrowRight className="h-3 w-3" />
               <span>{resolvedVariant?.nameSuffix ?? "Base"}</span>
               <span className="text-[8px] text-slate-400">
-                {(variantIndex % mon.variants!.length) + 1}/{mon.variants!.length}
+                {(variantIndex % mon.variants!.length) + 1}/
+                {mon.variants!.length}
               </span>
             </motion.button>
           )}
@@ -658,7 +678,11 @@ const MonDetailView = ({
                 </Link>
                 <div className="grid grid-cols-2 gap-2">
                   {mon.github && (
-                    <Link href={mon.github} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={mon.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ActionButton
                         className="bg-slate-900/80 hover:bg-slate-800/100"
                         clipPath="polygon(0 0, 100% 0, 100% 100%, 12px 100%, 0 calc(100% - 12px))"
@@ -696,7 +720,11 @@ const MonDetailView = ({
             <div className="p-2.5 pt-2">
               <SectionHeader>Base Stats</SectionHeader>
               <div className="flex flex-col justify-center space-y-1">
-                <StatBar label="HP" value={mon.stats.hp} maxValue={MAX_HP_VALUE} />
+                <StatBar
+                  label="HP"
+                  value={mon.stats.hp}
+                  maxValue={MAX_HP_VALUE}
+                />
                 <StatBar label="ATK" value={mon.stats.atk} />
                 <StatBar label="DEF" value={mon.stats.def} />
                 <StatBar label="SPD" value={mon.stats.spd} />
@@ -796,8 +824,9 @@ const MonDetailView = ({
                             />
                             <MoveStatChip
                               label="CRIT"
-                              value={`${move.critChance ? move.critChance * 100 : "—"
-                                }%`}
+                              value={`${
+                                move.critChance ? move.critChance * 100 : "—"
+                              }%`}
                             />
                             <MoveStatChip label="PP" value={move.pp} />
                           </div>
@@ -889,7 +918,7 @@ export const PulsingCircuit = () => {
 export const HighTechEffects = () => (
   <div className="pointer-events-none absolute inset-0 z-50 overflow-hidden">
     <motion.div
-      className="absolute top-0 left-0 h-1/3 w-full"
+      className="absolute left-0 top-0 h-1/3 w-full"
       style={{
         background:
           "linear-gradient(to bottom, rgba(6, 182, 212, 0.15), transparent)",
@@ -927,11 +956,11 @@ const TimelineItem = ({
   description: string;
   isLast: boolean;
 }) => (
-  <div className="relative pl-6 pb-4">
+  <div className="relative pb-4 pl-6">
     {!isLast && (
-      <div className="absolute top-2 left-[5px] h-full w-0.5 bg-slate-300 dark:bg-cyan-400/20"></div>
+      <div className="absolute left-[5px] top-2 h-full w-0.5 bg-slate-300 dark:bg-cyan-400/20"></div>
     )}
-    <div className="absolute top-2 left-0 h-3 w-3 rounded-full border-2 border-cyan-500 bg-white dark:border-cyan-400 dark:bg-slate-800"></div>
+    <div className="absolute left-0 top-2 h-3 w-3 rounded-full border-2 border-cyan-500 bg-white dark:border-cyan-400 dark:bg-slate-800"></div>
     <p className="text-sm font-bold text-slate-900 dark:text-white">{role}</p>
     <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400">
       {company}
@@ -1175,7 +1204,7 @@ const TrainerInfoPanel = ({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute top-6 right-0 z-40 flex bg-cyan-500/80 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-cyan-500/20 backdrop-blur-sm transition-all transition hover:bg-cyan-500/100 hover:pr-2 sm:hidden"
+          className="absolute right-0 top-6 z-40 flex bg-cyan-500/80 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-cyan-500/20 backdrop-blur-sm transition transition-all hover:bg-cyan-500/100 hover:pr-2 sm:hidden"
           style={{
             clipPath:
               "polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px), 0 8px)",
@@ -1196,7 +1225,7 @@ const TrainerInfoPanel = ({
               transformStyle: "preserve-3d",
               clipPath: imagePanelClipPath,
             }}
-            className="dark:shadow-slate-950/40 relative h-full w-full bg-cyan-400/30 p-0.5 shadow-xl shadow-slate-300/40"
+            className="relative h-full w-full bg-cyan-400/30 p-0.5 shadow-xl shadow-slate-300/40 dark:shadow-slate-950/40"
           >
             <div
               className="relative h-96 w-full bg-slate-100/50 p-4 dark:bg-slate-800/50 sm:h-full"
@@ -1223,7 +1252,11 @@ const TrainerInfoPanel = ({
                       className="absolute inset-0"
                     >
                       <Image
-                        src={isColorPhoto ? "/images/kevin_powerlifting_color.png" : "/images/kevin_powerlifting_bw.png"}
+                        src={
+                          isColorPhoto
+                            ? "/images/kevin_powerlifting_color.png"
+                            : "/images/kevin_powerlifting_bw.png"
+                        }
                         fill
                         alt="Kevin Liu"
                         className="scale-140 object-cover object-top"
@@ -1235,9 +1268,10 @@ const TrainerInfoPanel = ({
               </div>
 
               <div className="pointer-events-none relative flex h-full flex-col justify-between [transform:translateZ(20px)]">
-                <div className="ml-auto text-right mr-1">
+                <div className="ml-auto mr-1 text-right">
                   <p className="font-orbiter text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.95)]">
-                    IVY LEAGUE CUP                 </p>
+                    IVY LEAGUE CUP{" "}
+                  </p>
                   <p className="font-orbiter text-xs font-bold text-cyan-300 dark:[text-shadow:1px_1px_3px_rgba(0,0,0,0.95)]">
                     10/08/25
                   </p>
@@ -1247,7 +1281,10 @@ const TrainerInfoPanel = ({
                     KEVIN LIU
                   </h1>
                   <p className="ml-2 text-xs font-bold tracking-wide text-cyan-300 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-cyan-400">
-                    <span className="text-cyan-200 dark:text-cyan-300mn">Founding Engineer</span> <br /> Dedalus Labs (YC S25) · Princeton &apos;28
+                    <span className="dark:text-cyan-300mn text-cyan-200">
+                      Founding Engineer
+                    </span>{" "}
+                    <br /> Dedalus Labs (YC S25) · Princeton &apos;28
                   </p>
                 </div>
               </div>
@@ -1330,12 +1367,11 @@ const TrainerInfoPanel = ({
               <div className="space-y-2 p-3">
                 <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
                   <BrainCircuit className="h-4 w-4 flex-shrink-0 text-cyan-600 dark:text-cyan-400" />
-                  <span>
-                    Turning My Ideas Into Reality
-                  </span>
+                  <span>Turning My Ideas Into Reality</span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
-                  {`My best work has always been the stuff nobody assigned: hackathons, games, open source, 3am rabbit holes. When you want it bad enough, you don't force yourself to keep going. You force yourself to stop.`}                </p>
+                  {`My best work has always been the stuff nobody assigned: hackathons, games, open source, 3am rabbit holes. When you want it bad enough, you don't force yourself to keep going. You force yourself to stop.`}{" "}
+                </p>
               </div>
             </UpgradedClippedContainer>
           </motion.div>
@@ -1352,7 +1388,7 @@ const TrainerInfoPanel = ({
               <SectionHeader>Deploy Team</SectionHeader>
               <div ref={gridRef} className="relative mt-2">
                 <svg
-                  className="pointer-events-none absolute top-0 left-0 h-full w-full overflow-visible"
+                  className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-visible"
                   aria-hidden="true"
                 >
                   <defs>
@@ -1426,7 +1462,7 @@ const TrainerInfoPanel = ({
                 }}
                 whileTap={{ scale: 0.98 }}
                 disabled={playerTeam.length === 0}
-                className="absolute top-3 right-0 inline-flex items-center justify-center bg-gradient-to-r from-red-500 to-orange-600 px-2 pb-1 pt-0.5 text-sm font-bold text-white shadow-lg transition-opacity disabled:cursor-not-allowed disabled:from-slate-600 disabled:to-slate-700 disabled:opacity-50"
+                className="absolute right-0 top-3 inline-flex items-center justify-center bg-gradient-to-r from-red-500 to-orange-600 px-2 pb-1 pt-0.5 text-sm font-bold text-white shadow-lg transition-opacity disabled:cursor-not-allowed disabled:from-slate-600 disabled:to-slate-700 disabled:opacity-50"
                 style={{
                   clipPath:
                     "polygon(4px 0, 100% 0, 100% 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)",
@@ -1487,7 +1523,7 @@ const TrainerInfoPanel = ({
             </div>
             <div className="custom-scrollbar relative z-10 flex h-full flex-col gap-6 overflow-y-auto p-4">
               <div>
-                <h2 className="mb-1 -ml-3 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
+                <h2 className="-ml-3 mb-1 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
                   Software Engineering Experience
                 </h2>
                 <div className="mt-2 flex flex-col">
@@ -1501,7 +1537,7 @@ const TrainerInfoPanel = ({
                 </div>
               </div>
               <div>
-                <h2 className="mb-1 -ml-3 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
+                <h2 className="-ml-3 mb-1 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
                   Education — Princeton University
                 </h2>
                 <div className="mt-2 flex flex-col">
@@ -1567,17 +1603,19 @@ const MonGridItem = ({
 
   const gridImage = useMemo(() => {
     if (!mon.variants || mon.variants.length === 0) return mon.image;
-    const picked = mon.variants[Math.floor(Math.random() * mon.variants.length)];
+    const picked =
+      mon.variants[Math.floor(Math.random() * mon.variants.length)];
     return picked?.image ?? mon.image;
   }, [mon.variants, mon.image]);
 
   return (
     <motion.div
       layout="position"
-      className={`group relative w-full overflow-hidden p-px pl-1 text-left transition-all duration-200 ${isSelected
-        ? "bg-cyan-400 shadow-[0_0_15px_theme(colors.cyan.400)]"
-        : "bg-cyan-400/20 hover:bg-cyan-400/40"
-        }`}
+      className={`group relative w-full overflow-hidden p-px pl-1 text-left transition-all duration-200 ${
+        isSelected
+          ? "bg-cyan-400 shadow-[0_0_15px_theme(colors.cyan.400)]"
+          : "bg-cyan-400/20 hover:bg-cyan-400/40"
+      }`}
       style={{
         clipPath:
           "polygon(0 12px, 12px 0, 100% 0, 100% 100%, 12px 100%, 0 100%)",
@@ -1592,7 +1630,7 @@ const MonGridItem = ({
         }}
       >
         {isOnTeam && (
-          <CheckCircle2 className="absolute top-2 left-2 z-20 h-4 w-4 text-green-400 drop-shadow-[0_0_2px_currentColor]" />
+          <CheckCircle2 className="absolute left-2 top-2 z-20 h-4 w-4 text-green-400 drop-shadow-[0_0_2px_currentColor]" />
         )}
         <div className="pointer-events-none absolute -bottom-2 -right-2 z-0 font-kode text-5xl font-black text-slate-900/5 dark:text-white/5">
           {String(mon.id).padStart(3, "0")}
@@ -1617,7 +1655,7 @@ const MonGridItem = ({
           </div>
         </div>
         {mon.favorite && (
-          <Star className="absolute top-1.5 right-2 z-10 h-3 w-3 fill-amber-400 text-amber-400 drop-shadow-[0_0_3px_rgba(251,191,36,0.5)]" />
+          <Star className="absolute right-2 top-1.5 z-10 h-3 w-3 fill-amber-400 text-amber-400 drop-shadow-[0_0_3px_rgba(251,191,36,0.5)]" />
         )}
       </button>
       <motion.button
@@ -1626,10 +1664,11 @@ const MonGridItem = ({
           onTeamSelect(mon);
         }}
         disabled={buttonDisabled}
-        className={`absolute bottom-2 right-2 z-20 flex items-center justify-center p-1 pb-0.5 transition-all group-hover:opacity-100 ${isOnTeam
-          ? "bg-red-500 text-white opacity-100"
-          : "bg-green-500 text-white opacity-0"
-          } disabled:cursor-not-allowed disabled:bg-slate-600 disabled:opacity-0`}
+        className={`absolute bottom-2 right-2 z-20 flex items-center justify-center p-1 pb-0.5 transition-all group-hover:opacity-100 ${
+          isOnTeam
+            ? "bg-red-500 text-white opacity-100"
+            : "bg-green-500 text-white opacity-0"
+        } disabled:cursor-not-allowed disabled:bg-slate-600 disabled:opacity-0`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         style={{
@@ -1654,133 +1693,215 @@ const SEOContent = () => (
     itemScope
     itemType="https://schema.org/Person"
   >
-    <h2 itemProp="name">Kevin Liu — Software Developer &amp; AI Engineer, Princeton University CS &apos;28</h2>
+    <h2 itemProp="name">
+      Kevin Liu — Software Developer &amp; AI Engineer, Princeton University CS
+      &apos;28
+    </h2>
     <meta itemProp="alternateName" content="Kevin B. Liu" />
     <meta itemProp="alternateName" content="Kevin Bowen Liu" />
     <meta itemProp="alternateName" content="kevskgs" />
     <meta itemProp="alternateName" content="Kevin-Liu-01" />
-    <meta itemProp="url" content="https://www.kevin-liu.tech" />
-    <meta itemProp="image" content="https://www.kevin-liu.tech/kevinportfolio.png" />
+    <meta itemProp="url" content="https://kevinliu.biz" />
+    <meta
+      itemProp="image"
+      content="https://kevinliu.biz/images/kevin_powerlifting_bw.png"
+    />
 
     <p itemProp="description">
-      Kevin Liu is a Computer Science student at Princeton University (Class of 2028)
-      and a full-stack software developer specializing in artificial intelligence,
-      machine learning, and interactive web applications. He is also known as Kevin B. Liu,
-      Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. His interactive
-      developer portfolio at kevinliu.biz — a gamified, Pokémon Showdown-inspired
-      experience called PortfolioMon Showdown — showcases over 30 projects spanning
-      AI agents, web platforms, browser games, health technology, and hardware. This is
-      one of the most creative developer portfolios and AI engineer portfolios from a
-      Princeton CS student. Kevin Liu has worked at Amazon, Bloomberg L.P., AT&amp;T Labs
-      Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI.
+      Kevin Liu is a Computer Science student at Princeton University (Class of
+      2028) and a full-stack software developer specializing in artificial
+      intelligence, machine learning, and interactive web applications. He is
+      also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and
+      Kevin-Liu-01 on GitHub. His portfolio at kevinliu.biz presents work across
+      agent infrastructure, expressive interfaces, design systems, and games
+      through a black-and-white, motion-rich visual system. PortfolioMon, his
+      former Pokémon-inspired game portfolio, is preserved within it as one
+      playable project containing forty builds. Kevin Liu has worked at Amazon,
+      Bloomberg L.P., AT&amp;T Labs Research, Dedalus Labs (Y Combinator S25),
+      and Sevenfold AI.
     </p>
 
-    <div itemProp="alumniOf" itemScope itemType="https://schema.org/CollegeOrUniversity">
+    <div
+      itemProp="alumniOf"
+      itemScope
+      itemType="https://schema.org/CollegeOrUniversity"
+    >
       <meta itemProp="name" content="Princeton University" />
       <meta itemProp="url" content="https://www.princeton.edu" />
     </div>
-    <div itemProp="worksFor" itemScope itemType="https://schema.org/Organization">
+    <div
+      itemProp="worksFor"
+      itemScope
+      itemType="https://schema.org/Organization"
+    >
       <meta itemProp="name" content="Dedalus Labs" />
       <meta itemProp="url" content="https://www.dedaluslabs.ai" />
     </div>
     <meta itemProp="jobTitle" content="Founding Engineer" />
-    <meta itemProp="knowsAbout" content="Agent Infrastructure, Model Context Protocol, MCP, Full-Stack Web Development, AI Agents, MicroVM Workspaces, Container Orchestration, React, Next.js, TypeScript, Python, Machine Learning, NLP" />
+    <meta
+      itemProp="knowsAbout"
+      content="Agent Infrastructure, Model Context Protocol, MCP, Full-Stack Web Development, AI Agents, MicroVM Workspaces, Container Orchestration, React, Next.js, TypeScript, Python, Machine Learning, NLP"
+    />
 
     <link itemProp="sameAs" href="https://github.com/Kevin-Liu-01" />
-    <link itemProp="sameAs" href="https://www.linkedin.com/in/kevin-liu-princeton/" />
+    <link
+      itemProp="sameAs"
+      href="https://www.linkedin.com/in/kevin-liu-princeton/"
+    />
     <link itemProp="sameAs" href="https://x.com/kevskgs" />
     <link itemProp="sameAs" href="https://twitter.com/kevskgs" />
     <link itemProp="sameAs" href="https://devpost.com/Kevin-Liu-01" />
-    <link itemProp="sameAs" href="https://www.kevin-liu.tech" />
+    <link itemProp="sameAs" href="https://kevinliu.biz" />
 
     <h3>Professional Experience — Kevin Liu</h3>
     <p>
-      Kevin Liu is currently a Founding Engineer at Dedalus Labs (Y Combinator S25),
-      building production agent infrastructure: an MCP-powered SDK, multi-tenant auth
-      (DAuth), and sandboxed execution via microVM workspaces and container orchestration.
-      He works across the full surface area of agent needs: harnesses, reasoning, model
-      handoffs, tool use, remote control, and executable environments. Previously he was
-      a Founding Engineer at Sevenfold AI, where he built an agent-powered research
-      workflow with vector search boosting LLM relevance by 4.6x. He interned as an SDE
-      at Amazon Web Services (FBA Inventory, LLM dashboard with Amazon-Q), a Software
-      Engineering Intern at Bloomberg L.P. (twice: Financial Instruments and Core Products,
-      including an ML classifier with 86% accuracy), and an AI Research Intern at AT&amp;T
-      Labs Research designing MoE agents that reduced document analysis time by 85%. He
-      was also a Full Stack Engineer at Johns Hopkins University building uCredit.me for
-      6k+ students. He is also an Undergraduate Researcher at Princeton under Danqi Chen,
-      studying agent orchestration with CoTCodec.
+      Kevin Liu is currently a Founding Engineer at Dedalus Labs (Y Combinator
+      S25), building production agent infrastructure: an MCP-powered SDK,
+      multi-tenant auth (DAuth), and sandboxed execution via microVM workspaces
+      and container orchestration. He works across the full surface area of
+      agent needs: harnesses, reasoning, model handoffs, tool use, remote
+      control, and executable environments. Previously he was a Founding
+      Engineer at Sevenfold AI, where he built an agent-powered research
+      workflow with vector search boosting LLM relevance by 4.6x. He interned as
+      an SDE at Amazon Web Services (FBA Inventory, LLM dashboard with
+      Amazon-Q), a Software Engineering Intern at Bloomberg L.P. (twice:
+      Financial Instruments and Core Products, including an ML classifier with
+      86% accuracy), and an AI Research Intern at AT&amp;T Labs Research
+      designing MoE agents that reduced document analysis time by 85%. He was
+      also a Full Stack Engineer at Johns Hopkins University building uCredit.me
+      for 6k+ students. He is also an Undergraduate Researcher at Princeton
+      under Danqi Chen, studying agent orchestration with CoTCodec.
     </p>
 
     <h3>Technical Skills — Kevin Liu</h3>
     <p>
-      React, Next.js, TypeScript, JavaScript, Python, Java, C, C++, Node.js, tRPC, PostgreSQL,
-      Firebase, MongoDB, Prisma, Tailwind CSS, Framer Motion, Radix UI, shadcn/ui, OpenCV,
-      TensorFlow, PyTorch, Keras, AutoML, LLM integration (GPT-4, Claude, OpenAI API),
-      computer vision, speech recognition, natural language processing, AI agents,
-      Model Context Protocol (MCP), RAG, vector embeddings, semantic search, prompt
-      engineering, microVMs, container orchestration, Docker, Vercel, AWS, Supabase,
-      Clerk, CI/CD, GitHub Actions, REST APIs, GraphQL, Arduino, Raspberry Pi.
+      React, Next.js, TypeScript, JavaScript, Python, Java, C, C++, Node.js,
+      tRPC, PostgreSQL, Firebase, MongoDB, Prisma, Tailwind CSS, Framer Motion,
+      Radix UI, shadcn/ui, OpenCV, TensorFlow, PyTorch, Keras, AutoML, LLM
+      integration (GPT-4, Claude, OpenAI API), computer vision, speech
+      recognition, natural language processing, AI agents, Model Context
+      Protocol (MCP), RAG, vector embeddings, semantic search, prompt
+      engineering, microVMs, container orchestration, Docker, Vercel, AWS,
+      Supabase, Clerk, CI/CD, GitHub Actions, REST APIs, GraphQL, Arduino,
+      Raspberry Pi.
     </p>
 
     <h3>Featured Projects by Kevin Liu</h3>
     <ul>
-      <li>Dedalus — Cloud machines for agentic workloads with persistent environments, filesystem, compute, and tool access (Y Combinator S25, Founding Engineer)</li>
-      <li>Sigil UI — Agent-first design system with 350+ components, 46 presets, and single token file control</li>
-      <li>Loop — Operator desk for agent skills that auto-refresh from tracked docs, changelogs, and repos</li>
-      <li>Sevenfold — AI-powered research workspace with semantic search, annotations, and citation tracing (Founding Engineer)</li>
-      <li>Lumachor — Context engine with vector search for expert-level prompt engineering</li>
-      <li>PortfolioMon Showdown — This interactive portfolio: a fully playable Pokemon Showdown-inspired battle game at kevinliu.biz</li>
-      <li>Princeton Tower Defense — Browser-based tower defense game with 5 maps, 15+ towers, and custom sprite rendering</li>
-      <li>Podium — Hackathon judging platform used by 100+ judges across 3 HackPrinceton seasons</li>
-      <li>RecyclAIble — Smart recycling with OpenCV on Raspberry Pi (1st Place Hardware, PennApps XXIII)</li>
-      <li>HD Transcribe — Custom speech model for Huntington&apos;s Disease patients (published at IYRC)</li>
-      <li>OMMC — Online Monmouth Math Competition (co-founder, $32k raised, 6k+ community, 501(c)(3))</li>
-      <li>CoTCodec — Research on agent orchestration variables under Danqi Chen at Princeton</li>
+      <li>
+        Dedalus — Cloud machines for agentic workloads with persistent
+        environments, filesystem, compute, and tool access (Y Combinator S25,
+        Founding Engineer)
+      </li>
+      <li>
+        Sigil UI — Agent-first design system with 350+ components, 46 presets,
+        and single token file control
+      </li>
+      <li>
+        Loop — Operator desk for agent skills that auto-refresh from tracked
+        docs, changelogs, and repos
+      </li>
+      <li>
+        Sevenfold — AI-powered research workspace with semantic search,
+        annotations, and citation tracing (Founding Engineer)
+      </li>
+      <li>
+        Lumachor — Context engine with vector search for expert-level prompt
+        engineering
+      </li>
+      <li>
+        PortfolioMon Showdown — Kevin&apos;s former portfolio, preserved as a
+        fully playable Pokémon-inspired battle project inside kevinliu.biz
+      </li>
+      <li>
+        Princeton Tower Defense — Browser-based tower defense game with 5 maps,
+        15+ towers, and custom sprite rendering
+      </li>
+      <li>
+        Podium — Hackathon judging platform used by 100+ judges across 3
+        HackPrinceton seasons
+      </li>
+      <li>
+        RecyclAIble — Smart recycling with OpenCV on Raspberry Pi (1st Place
+        Hardware, PennApps XXIII)
+      </li>
+      <li>
+        HD Transcribe — Custom speech model for Huntington&apos;s Disease
+        patients (published at IYRC)
+      </li>
+      <li>
+        OMMC — Online Monmouth Math Competition (co-founder, $32k raised, 6k+
+        community, 501(c)(3))
+      </li>
+      <li>
+        CoTCodec — Research on agent orchestration variables under Danqi Chen at
+        Princeton
+      </li>
     </ul>
 
     <h3>Education, Research, and Achievements — Kevin Liu</h3>
     <p>
-      Princeton University, B.S.E. in Computer Science, Class of 2028. Undergraduate
-      Researcher under Danqi Chen studying agent orchestration (CoTCodec). Coursework:
-      Programming Systems, Data Structures &amp; Algorithms, Statistics, Vector Calculus,
-      Linear Algebra. Organizations: Hoagie Software Development Club, TigerApps,
-      HackPrinceton, Princeton Powerlifting, Sympoh Dance Co. Previously: High Technology
-      High School, Lincroft, Monmouth County, NJ. 1st Place in Hardware at PennApps XXIII.
-      HackPrinceton lead developer and organizer (Fall 2024, Spring 2025, Fall 2025).
-      Co-founder of OMMC (501(c)(3)), $32k raised, 6k+ community. 2 publications (IEEE
-      MIT URTC, IYRC). 30+ shipped software projects.
+      Princeton University, B.S.E. in Computer Science, Class of 2028.
+      Undergraduate Researcher under Danqi Chen studying agent orchestration
+      (CoTCodec). Coursework: Programming Systems, Data Structures &amp;
+      Algorithms, Statistics, Vector Calculus, Linear Algebra. Organizations:
+      Hoagie Software Development Club, TigerApps, HackPrinceton, Princeton
+      Powerlifting, Sympoh Dance Co. Previously: High Technology High School,
+      Lincroft, Monmouth County, NJ. 1st Place in Hardware at PennApps XXIII.
+      HackPrinceton lead developer and organizer (Fall 2024, Spring 2025, Fall
+      2025). Co-founder of OMMC (501(c)(3)), $32k raised, 6k+ community. 2
+      publications (IEEE MIT URTC, IYRC). 30+ shipped software projects.
     </p>
 
     <h3>Connect with Kevin Liu Online</h3>
     <p>
-      GitHub: <a href="https://github.com/Kevin-Liu-01" rel="me">github.com/Kevin-Liu-01</a> ·
-      LinkedIn: <a href="https://www.linkedin.com/in/kevin-liu-princeton/" rel="me">linkedin.com/in/kevin-liu-princeton</a> ·
-      Twitter/X: <a href="https://x.com/kevskgs" rel="me">@kevskgs</a> ·
-      Devpost: <a href="https://devpost.com/Kevin-Liu-01" rel="me">devpost.com/Kevin-Liu-01</a> ·
-      Portfolio: <a href="https://kevinliu.biz">kevinliu.biz</a> ·
-      Alternate: <a href="https://www.kevin-liu.tech" rel="me">kevin-liu.tech</a> ·
-      Email: k.bowen.liu@gmail.com
+      GitHub:{" "}
+      <a href="https://github.com/Kevin-Liu-01" rel="me">
+        github.com/Kevin-Liu-01
+      </a>{" "}
+      · LinkedIn:{" "}
+      <a href="https://www.linkedin.com/in/kevin-liu-princeton/" rel="me">
+        linkedin.com/in/kevin-liu-princeton
+      </a>{" "}
+      · Twitter/X:{" "}
+      <a href="https://x.com/kevskgs" rel="me">
+        @kevskgs
+      </a>{" "}
+      · Devpost:{" "}
+      <a href="https://devpost.com/Kevin-Liu-01" rel="me">
+        devpost.com/Kevin-Liu-01
+      </a>{" "}
+      · Portfolio: <a href="https://kevinliu.biz">kevinliu.biz</a> · Alternate:{" "}
+      <a href="https://www.kevin-liu.tech" rel="me">
+        kevin-liu.tech
+      </a>{" "}
+      · Email: k.bowen.liu@gmail.com
     </p>
 
     <h3>Which Kevin Liu is this?</h3>
     <p>
-      This is Kevin Liu the Princeton University Computer Science student (Class of 2028), full-stack
-      software developer, and AI engineer. He is NOT Kevin Liu the journalist, NOT Kevin Liu from
-      Stanford, and NOT any other Kevin Liu. This Kevin Liu is identified by: Princeton CS &apos;28,
-      @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn, kevinliu.biz,
-      kevin-liu.tech, PennApps XXIII 1st Place Hardware winner, Amazon/Bloomberg/AT&amp;T Labs intern,
-      Founding Engineer at Dedalus Labs (Y Combinator S25), HackPrinceton organizer, and OMMC co-founder.
-      Sometimes misspelled as Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, or Kevin Lieu.
+      This is Kevin Liu the Princeton University Computer Science student (Class
+      of 2028), full-stack software developer, and AI engineer. He is NOT Kevin
+      Liu the journalist, NOT Kevin Liu from Stanford, and NOT any other Kevin
+      Liu. This Kevin Liu is identified by: Princeton CS &apos;28, @kevskgs on
+      Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn,
+      kevinliu.biz, kevin-liu.tech, PennApps XXIII 1st Place Hardware winner,
+      Amazon/Bloomberg/AT&amp;T Labs intern, Founding Engineer at Dedalus Labs
+      (Y Combinator S25), HackPrinceton organizer, and OMMC co-founder.
+      Sometimes misspelled as Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, or
+      Kevin Lieu.
     </p>
 
     <h3>Kevin Liu&apos;s Social Media &amp; Online Presence</h3>
     <p>
-      Kevin Liu posts about software engineering, AI, his projects, Princeton life, and hackathon
-      experiences on Twitter/X at @kevskgs. His LinkedIn at linkedin.com/in/kevin-liu-princeton
-      showcases his professional experience at Amazon, Bloomberg, AT&amp;T Labs Research, Dedalus
-      Labs, and Sevenfold AI. His GitHub at github.com/Kevin-Liu-01 contains open-source projects
-      and contributions. His Devpost at devpost.com/Kevin-Liu-01 showcases hackathon submissions
-      including his PennApps XXIII-winning project RecyclAIble.
+      Kevin Liu posts about software engineering, AI, his projects, Princeton
+      life, and hackathon experiences on Twitter/X at @kevskgs. His LinkedIn at
+      linkedin.com/in/kevin-liu-princeton showcases his professional experience
+      at Amazon, Bloomberg, AT&amp;T Labs Research, Dedalus Labs, and Sevenfold
+      AI. His GitHub at github.com/Kevin-Liu-01 contains open-source projects
+      and contributions. His Devpost at devpost.com/Kevin-Liu-01 showcases
+      hackathon submissions including his PennApps XXIII-winning project
+      RecyclAIble.
     </p>
   </article>
 );
@@ -1852,7 +1973,10 @@ export const TeamSelectScreen = () => {
           onClearTeam={handleClearTeam}
         />
         <main className="relative col-span-12 flex flex-col sm:min-h-0 lg:col-span-9 lg:grid lg:grid-cols-9">
-          <aside className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4" aria-label="Project roster">
+          <aside
+            className="flex h-96 min-h-0 flex-col border-r border-slate-300 dark:border-cyan-400/20 sm:h-auto lg:col-span-4"
+            aria-label="Project roster"
+          >
             <div className="flex-shrink-0 p-4">
               {/* <h2 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:text-cyan-300">
                 Kevin Liu&apos;s Software Projects

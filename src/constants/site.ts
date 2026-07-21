@@ -1,12 +1,12 @@
-export const SITE_URL = "https://www.kevin-liu.tech";
+export const SITE_URL = "https://kevinliu.biz";
 
 export const SITE_TITLE =
-  "Kevin Liu | Software Developer & AI Engineer — Princeton CS '28";
+  "Kevin Liu — Engineer, Designer & Builder | Princeton CS '28";
 
 export const SITE_DESCRIPTION =
-  "Kevin Liu is a Founding Engineer at Dedalus Labs (YC S25) and a Princeton University CS student (Class of 2028) building production agent infrastructure with MCP. Previously at Amazon, Bloomberg (2x), AT&T Labs, and Sevenfold AI. Explore 30+ projects showcased as battle-ready PortfolioMons in this Pokemon Showdown-inspired interactive portfolio.";
+  "Kevin Liu is a Founding Engineer at Dedalus Labs (YC S25) and a Princeton CS student building production agent infrastructure, expressive interfaces, and browser games. Explore selected work and play PortfolioMon, his archived Pokemon-inspired portfolio battle game.";
 
-export const OG_IMAGE = `${SITE_URL}/kevinportfolio.png`;
+export const OG_IMAGE = `${SITE_URL}/images/kevin_powerlifting_bw.png`;
 
 // Name variants, misspellings, and phonetic near-misses people actually search
 const NAME_VARIANTS = [

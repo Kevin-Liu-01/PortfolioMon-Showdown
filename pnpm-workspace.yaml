@@ -1,3 +1,6 @@
+packages:
+  - "."
+
 minimumReleaseAgeExclude:
   - "@next/env@16.2.11"
   - "@next/swc-darwin-arm64@16.2.11"

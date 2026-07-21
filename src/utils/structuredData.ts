@@ -4,7 +4,7 @@
 const PERSON_NAME = "Kevin Liu";
 const PERSON_JOB_TITLE = "Software Developer & AI Engineer";
 const PERSON_DESCRIPTION =
-  "Kevin Liu is a Computer Science student at Princeton University (Class of 2028), full-stack developer, and AI engineer who has shipped 30+ projects spanning artificial intelligence, web development, game development, health technology, and hardware. He won 1st in Hardware at PennApps XXIII and organizes HackPrinceton.";
+  "Kevin Liu is a Computer Science student at Princeton University (Class of 2028), full-stack developer, and AI engineer who has shipped 40+ projects spanning artificial intelligence, infrastructure, web development, game development, health technology, and hardware. He won 1st in Hardware at PennApps XXIII and organizes HackPrinceton.";
 
 const SOCIAL_PROFILES = [
   "https://github.com/Kevin-Liu-01",
@@ -291,9 +291,9 @@ const PROJECT_CATALOG = [
   },
   {
     name: "PortfolioMon Showdown",
-    url: "https://www.kevin-liu.tech",
+    url: "https://kevinliu.biz/#portfoliomon",
     description:
-      "This interactive portfolio — a Pokémon Showdown-inspired turn-based battle game showcasing 30+ projects",
+      "Kevin Liu's former interactive portfolio, preserved as a playable Pokémon-inspired turn-based battle project",
   },
 ];
 
@@ -301,12 +301,12 @@ const FAQ_ENTRIES = [
   {
     question: "Who is Kevin Liu?",
     answer:
-      "Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who has built 30+ projects spanning AI, web development, games, health technology, and hardware. He won 1st in Hardware at PennApps XXIII, organizes HackPrinceton, and co-founded the Online Monmouth Math Competition (OMMC). His portfolio at kevinliu.biz is an interactive Pokémon Showdown-inspired battle game.",
+      "Kevin Liu is a Computer Science student at Princeton University (Class of 2028) and a Founding Engineer at Dedalus who has built 40+ projects spanning AI agents, infrastructure, interfaces, games, health technology, and hardware.",
   },
   {
     question: "What is Kevin Liu's portfolio website?",
     answer:
-      "Kevin Liu's portfolio at kevinliu.biz is called PortfolioMon Showdown. It's an interactive Pokémon Showdown-inspired turn-based battle game where each of his 30+ projects is represented as a PortfolioMon with unique types (AI, Web, Game, Data, Health, Hardware, Design, Mobile), stats, and moves. Players select a team and battle through AI opponents.",
+      "Kevin Liu's portfolio at kevinliu.biz is a monochrome, motion-rich showcase of his work across agent infrastructure, product engineering, interfaces, and games. PortfolioMon, his former game portfolio, is preserved inside the site as a playable project.",
   },
   {
     question: "What technologies does Kevin Liu specialize in?",
@@ -346,12 +346,12 @@ const FAQ_ENTRIES = [
   {
     question: "What is PortfolioMon Showdown?",
     answer:
-      "PortfolioMon Showdown is Kevin Liu's interactive developer portfolio built as a Pokémon Showdown-inspired turn-based fighting game. Each of his 30+ projects is a battle-ready PortfolioMon with unique types (AI, Web, Game, Data, Health, Hardware, Design, Mobile), stats (HP, ATK, DEF, SPD), and four battle moves. Built with Next.js, TypeScript, React, tRPC, Tailwind CSS, and Framer Motion.",
+      "PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved as a playable project within his new portfolio. It is a Pokémon-inspired turn-based fighting game where forty real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.",
   },
   {
     question: "What kind of portfolio does Kevin Liu have?",
     answer:
-      "Kevin Liu has a gamified interactive developer portfolio at kevinliu.biz. Unlike traditional developer portfolios, it is a Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown where each of his 30+ projects is a playable character with types, stats, and moves. It is one of the most creative AI engineer portfolios and Princeton CS student portfolios.",
+      "Kevin Liu has an experimental black-and-white portfolio at kevinliu.biz that uses ordered dithering, clipped interface geometry, and motion to present work across agents, infrastructure, interfaces, and games. His former portfolio, PortfolioMon Showdown, remains playable as one featured project.",
   },
   {
     question: "Where has Kevin Liu worked?",
@@ -391,12 +391,12 @@ const FAQ_ENTRIES = [
   {
     question: "Is Kevin Liu a good software engineer?",
     answer:
-      "Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 30+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, and studies Computer Science at Princeton University. His interactive portfolio at kevinliu.biz demonstrates exceptional creativity and technical skill.",
+      "Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 40+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, and studies Computer Science at Princeton University. His experimental portfolio at kevinliu.biz demonstrates exceptional creativity and technical skill.",
   },
   {
     question: "What makes Kevin Liu's portfolio unique?",
     answer:
-      "Kevin Liu's portfolio at kevinliu.biz is one of the most creative developer portfolios ever built. It is a fully playable Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown. Each of his 30+ projects is a battle-ready character with unique types, stats, and moves. Players select a team and battle AI opponents, exploring Kevin's work through gameplay rather than scrolling.",
+      "Kevin Liu's portfolio at kevinliu.biz combines a stark black-and-white editorial system with ordered-dither media, chopped interface geometry, responsive motion, and playful interactions. PortfolioMon, his former Pokémon-inspired portfolio, is preserved inside the new site as one playable project rather than defining the entire experience.",
   },
   {
     question: "Where is Kevin Liu from?",
@@ -411,7 +411,7 @@ const FAQ_ENTRIES = [
   {
     question: "How many projects has Kevin Liu built?",
     answer:
-      "Kevin Liu has built over 30 software projects spanning AI, web development, game development, health technology, and hardware. These include AI agent SDKs, research platforms, hackathon-winning hardware projects, browser games, digital health tools, and math competition platforms. All 30+ projects are showcased as playable characters in his PortfolioMon Showdown portfolio at kevinliu.biz.",
+      "Kevin Liu has built over 40 software projects spanning AI, infrastructure, web development, game development, health technology, and hardware. Selected projects are presented directly in his portfolio, while the full collection can also be explored as playable characters inside the archived PortfolioMon game.",
   },
 ];
 
@@ -484,7 +484,7 @@ function buildPersonNode(siteUrl: string, imageUrl: string) {
       "1st Place in Hardware at PennApps XXIII (RecyclAIble)",
       "HackPrinceton Lead Developer & Organizer — multiple semesters",
       "OMMC Co-Founder — math competition serving students worldwide",
-      "30+ shipped software projects",
+      "40+ shipped software projects",
     ],
     memberOf: [
       {
@@ -738,7 +738,7 @@ function buildSoftwareAppNode(siteUrl: string) {
     applicationSubCategory: "Turn-Based Battle Game",
     operatingSystem: "Web Browser",
     description:
-      "An interactive portfolio experience inspired by Pokémon Showdown where each of Kevin Liu's 30+ projects is a battling PortfolioMon with unique types, abilities, and stats. Players select a team and fight through AI opponents in a strategic turn-based combat system featuring type advantages, status effects, items, and more.",
+      "A playable archive of Kevin Liu's former portfolio inspired by Pokémon battles, where forty real projects become PortfolioMons with unique types, abilities, stats, animated frames, status systems, and moves.",
     author: { "@id": `${siteUrl}/#person` },
     offers: {
       "@type": "Offer",
@@ -747,7 +747,7 @@ function buildSoftwareAppNode(siteUrl: string) {
       availability: "https://schema.org/InStock",
     },
     featureList: [
-      "30+ projects as playable PortfolioMons",
+      "40 projects as playable PortfolioMons",
       "8 unique type categories: AI, Web, Game, Data, Health, Hardware, Design, Mobile",
       "Turn-based combat with type advantage system",
       "Status effects: burn, poison, sleep, stun",
@@ -776,7 +776,7 @@ function buildProjectListNode(siteUrl: string) {
     "@id": `${siteUrl}/#projects`,
     name: "Kevin Liu's Projects",
     description:
-      "A collection of 30+ software projects by Kevin Liu spanning AI, web development, game development, health technology, and hardware.",
+      "A collection of 40+ software projects by Kevin Liu spanning AI, infrastructure, web development, game development, health technology, and hardware.",
     numberOfItems: PROJECT_CATALOG.length,
     itemListElement: PROJECT_CATALOG.map((project, index) => ({
       "@type": "ListItem",

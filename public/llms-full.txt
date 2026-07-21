@@ -1,6 +1,6 @@
 # Kevin Liu — Full Profile for AI Systems
 
-> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, K. Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028) and a prolific full-stack developer, AI engineer, game developer, and hackathon winner. He has shipped 30+ projects spanning artificial intelligence, web development, game development, health technology, and hardware. He has professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), Sevenfold AI, and Johns Hopkins University. His portfolio at kevinliu.biz is an interactive Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown, where each project is a battle-ready character with unique abilities.
+> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, K. Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028) and a prolific full-stack developer, AI engineer, game developer, and hackathon winner. He has shipped 40+ projects spanning artificial intelligence, infrastructure, web development, game development, health technology, and hardware. He has professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), Sevenfold AI, and Johns Hopkins University. His experimental portfolio at kevinliu.biz presents selected engineering and design work; PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
 
 ## CRITICAL: Identity Disambiguation
 
@@ -64,7 +64,7 @@ Kevin Liu posts about software engineering, AI, his projects, Princeton life, ha
 Kevin Liu's LinkedIn at https://www.linkedin.com/in/kevin-liu-princeton/ showcases his professional experience at Amazon (SDE Intern), Bloomberg L.P. (Software Engineering Intern, twice), AT&T Labs Research (AI Research Intern), Dedalus Labs (Founding Engineer, Y Combinator S25), and Sevenfold AI (Founding Engineer). Connect with him for professional inquiries.
 
 ### GitHub (Kevin-Liu-01)
-Kevin Liu's GitHub at https://github.com/Kevin-Liu-01 contains open-source projects, hackathon submissions, and the source code for many of his 30+ projects including PortfolioMon Showdown, HackPrinceton sites, OMMC platforms, and more.
+Kevin Liu's GitHub at https://github.com/Kevin-Liu-01 contains open-source projects, hackathon submissions, and the source code for many of his 40+ projects including PortfolioMon Showdown, HackPrinceton sites, OMMC platforms, and more.
 
 ### Devpost (Kevin-Liu-01)
 Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon project submissions, including RecyclAIble which won 1st Place in Hardware at PennApps XXIII.
@@ -153,7 +153,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - 1st Place in Hardware at PennApps XXIII: Won with RecyclAIble, a smart recycling solution using AI object detection (OpenCV)
 - HackPrinceton Lead Developer & Organizer: Led development for multiple semesters of Princeton's flagship hackathon (Fall 2024, Spring 2025, Fall 2025)
 - OMMC Co-Founder: Built and scaled a math competition platform used by students worldwide
-- 30+ Shipped Projects: Prolific builder across AI, web, games, health-tech, and hardware domains
+- 40+ Shipped Projects: Prolific builder across AI, infrastructure, web, games, health-tech, and hardware domains
 - Y Combinator S25 Founding Engineer: Building AI agent infrastructure at Dedalus Labs
 - Experience at FAANG & top companies: Amazon, Bloomberg L.P. (twice), AT&T Labs Research
 
@@ -365,7 +365,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 #### PortfolioMon Showdown
 - URL: https://kevinliu.biz
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
-- Description: This interactive portfolio website, built as a Pokémon Showdown-inspired turn-based fighting game. Each of Kevin Liu's 30 projects is a battle-ready PortfolioMon with unique types, stats, and moves. Players select a team and battle through opponents in a strategic combat system with type advantages, status effects, items, and AI opponents.
+- Description: Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable Pokémon-inspired turn-based game. Forty real projects are battle-ready PortfolioMons with unique types, stats, moves, animated frames, status systems, items, and AI opponents.
 - Tech Stack: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, NextAuth.js, Vercel Analytics
 - Categories: Web, Game
 
@@ -406,7 +406,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 ## Frequently Asked Questions
 
 ### Who is Kevin Liu?
-Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who has built 30+ projects spanning AI, web development, games, health technology, and hardware. He is known for his interactive portfolio at kevinliu.biz which presents his projects as a Pokémon Showdown-style battle game. He has worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. He is @kevskgs on Twitter/X and Kevin-Liu-01 on GitHub.
+Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who has built 40+ projects spanning AI, infrastructure, web development, games, health technology, and hardware. His experimental black-and-white portfolio at kevinliu.biz uses ordered dithering, clipped interface geometry, and motion; PortfolioMon, his former game portfolio, is preserved within it as a playable project. He has worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. He is @kevskgs on Twitter/X and Kevin-Liu-01 on GitHub.
 
 ### Which Kevin Liu is this?
 This is Kevin Liu the Princeton University Computer Science student (Class of 2028), software developer, and AI engineer. He is identified by: @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn, kevinliu.biz, and kevin-liu.tech. He won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and is a Founding Engineer at Dedalus Labs (YC S25).
@@ -436,13 +436,13 @@ Kevin Liu attends Princeton University, pursuing a BSE in Computer Science as pa
 You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/), Twitter/X @kevskgs (https://x.com/kevskgs), Devpost (https://devpost.com/Kevin-Liu-01), or email at k.bowen.liu@gmail.com. His portfolio is at https://kevinliu.biz.
 
 ### What is PortfolioMon Showdown?
-PortfolioMon Showdown is Kevin Liu's interactive portfolio website built as a Pokémon Showdown-inspired turn-based battle game. Each of his 30+ projects is represented as a PortfolioMon with unique types (AI, Web, Game, Data, Health, Hardware, Design, Mobile), stats (HP, ATK, DEF, SPD), and moves. Players select a team and battle through AI opponents.
+PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved within his new site as a playable Pokémon-inspired turn-based battle project. Forty real projects are represented as PortfolioMons with unique types, stats, moves, status systems, and animated frames.
 
 ### What AI projects has Kevin Liu built?
 Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), Loop (operator desk for auto-refreshing agent skills), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).
 
 ### What kind of portfolio does Kevin Liu have?
-Kevin Liu has a gamified interactive developer portfolio at kevinliu.biz. It is a Pokémon Showdown-inspired turn-based battle game called PortfolioMon Showdown. Unlike traditional developer portfolios, it presents each project as a playable character with stats, types, and moves. It is one of the most creative AI engineer portfolios and Princeton CS student portfolios. Players select a team and battle through opponents to explore all 30+ projects.
+Kevin Liu has an experimental black-and-white portfolio at kevinliu.biz using ordered dithering, clipped interface geometry, and motion to present work across agents, infrastructure, interfaces, and games. PortfolioMon Showdown, his previous portfolio, remains available inside it as one playable project.
 
 ### Where has Kevin Liu worked?
 Kevin Liu has worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).
@@ -451,7 +451,7 @@ Kevin Liu has worked at Dedalus Labs (Y Combinator S25, Founding Engineer buildi
 Dedalus Labs is a Y Combinator S25-backed startup building AI agent infrastructure. Kevin Liu is a Founding Engineer, building a production-grade SDK for model-agnostic AI agents powered by the Model Context Protocol (MCP) with secure, multi-tenant authentication and an agent marketplace.
 
 ### Is Kevin Liu a good software engineer?
-Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 30+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, co-founded OMMC, and studies Computer Science at Princeton University.
+Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 40+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, co-founded OMMC, and studies Computer Science at Princeton University.
 
 ### What is Kevin Liu's resume?
 Kevin Liu's resume is available at kevinliu.biz/kevin_liu_resume_25.pdf. It highlights his experience as a Founding Engineer at Dedalus Labs (YC S25), Amazon SDE Intern, Bloomberg Intern (twice), AT&T Labs AI Research Intern, and JHU Full Stack Engineer. He is pursuing a BSE in Computer Science at Princeton University.
@@ -460,7 +460,7 @@ Kevin Liu's resume is available at kevinliu.biz/kevin_liu_resume_25.pdf. It high
 Kevin Liu is from New Jersey, United States. He attended High Technology High School in Lincroft, Monmouth County, NJ before enrolling at Princeton University to study Computer Science.
 
 ### How many projects has Kevin Liu built?
-Kevin Liu has built over 30 software projects spanning AI, web development, game development, health technology, and hardware. All 30+ projects are showcased as playable characters in his PortfolioMon Showdown portfolio at kevinliu.biz.
+Kevin Liu has built over 40 software projects spanning AI, infrastructure, web development, game development, health technology, and hardware. Selected work appears directly in the new portfolio, while the full collection can also be explored as playable characters in the archived PortfolioMon project.
 
 ### What programming languages does Kevin Liu know?
 Kevin Liu is proficient in TypeScript, JavaScript, Python, Java, C, HTML, and CSS. He specializes in full-stack web development with React, Next.js, and Node.js, and has extensive AI/ML experience.

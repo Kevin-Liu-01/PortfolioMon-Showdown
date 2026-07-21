@@ -3,7 +3,7 @@
 - Founding Engineer at Dedalus Labs (YC S25), building production agent infrastructure: MCP-powered SDK, multi-tenant auth (DAuth), and sandboxed execution via microVM workspaces and container orchestration. Took a gap semester from Princeton to build full-time in SF.
 - Undergraduate Researcher at Princeton under Danqi Chen, studying agent orchestration with CoTCodec — how language choice in framework-visible messages affects context efficiency and multi-agent coordination.
 - Builder of 30+ shipped projects spanning AI agents, web platforms, browser games, health technology, and hardware. Previously: founding engineer at Sevenfold AI, SDE intern at AWS, SWE intern at Bloomberg (2x), AI research intern at AT&T Labs, full-stack engineer at JHU. Co-founder of OMMC (501(c)(3), $32k raised, 6k+ community).
-- Creator of [Hermes Machines](https://github.com/Kevin-Liu-01/hermes-machines) (persistent agent on Dedalus microVM with Cursor SDK bridge), [PortfolioMon Showdown](https://kevinliu.biz) (gamified portfolio), and [Sigil UI](https://sigil-ui-web.vercel.app) (agent-first design system, 350+ components).
+- Creator of [Hermes Machines](https://github.com/Kevin-Liu-01/hermes-machines) (persistent agent on Dedalus microVM with Cursor SDK bridge), [PortfolioMon Showdown](https://kevinliu.biz/#portfoliomon) (playable archive of his former game portfolio), and [Sigil UI](https://sigil-ui-web.vercel.app) (agent-first design system, 350+ components).
 
 ## Personal Information
 

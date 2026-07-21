@@ -1,11 +1,11 @@
 {
-  "name": "Kevin Liu — Software Developer & AI Engineer | PortfolioMon Showdown",
+  "name": "Kevin Liu — Engineer, Designer & Builder",
   "short_name": "Kevin Liu Portfolio",
-  "description": "Interactive developer portfolio by Kevin Liu (Princeton CS '28). Battle through 30+ projects as PortfolioMons in this Pokémon Showdown-inspired experience.",
+  "description": "Experimental portfolio by Kevin Liu featuring agent infrastructure, expressive interfaces, games, and the playable PortfolioMon archive.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#f4f3ec",
+  "theme_color": "#0b0b0b",
   "orientation": "any",
   "icons": [
     {

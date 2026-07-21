@@ -36,12 +36,15 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>
-          Kevin Liu | Software Developer &amp; AI Engineer — Princeton CS
-          &apos;28 | PortfolioMon Showdown | @kevskgs
+          Kevin Liu — Engineer, Designer &amp; Builder | Princeton CS &apos;28
         </title>
         <meta
           name="description"
           content="Kevin Liu is a founding engineer at Dedalus and a Princeton CS student building agent infrastructure, expressive interfaces, and browser games. Explore selected work and play PortfolioMon, his archived Pokémon-inspired portfolio battle game."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
         />
         <meta name="theme-color" content="#0a0a0a" />
       </Head>

@@ -6,7 +6,7 @@ export default function LogoIcon(props) {
       fill="none"
       {...props}
     >
-      <g transform="scale(1.3)" transform-origin="32 32">
+      <g transform="scale(1.3)" transformOrigin="32 32">
         <defs>
           {/* === Gradients for New & Updated Elements === */}
           <linearGradient

@@ -1,6 +1,6 @@
 # Kevin Liu
 
-> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He has professional experience at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. He builds interactive web applications, AI-powered tools, games, and health-tech solutions. His portfolio at kevinliu.biz showcases 30+ projects as an interactive Pokémon Showdown-inspired battle game called PortfolioMon Showdown.
+> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He has professional experience at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. His experimental portfolio at kevinliu.biz showcases 40+ projects across agent infrastructure, interfaces, design systems, games, health technology, and hardware. PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
 
 ## IMPORTANT: Identity Disambiguation
 
@@ -22,7 +22,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [Projects](https://kevinliu.biz/projects.md): Selected projects that show my skills and creativity.
 - [Awards](https://kevinliu.biz/awards.md): My key awards and honors.
 - [Certifications](https://kevinliu.biz/certifications.md): Certifications, publications, and credentials I've earned.
-- [Portfolio Website — kevinliu.biz](https://kevinliu.biz): Interactive developer portfolio built as a Pokémon Showdown-inspired turn-based battle game featuring 30+ projects as PortfolioMons
+- [Portfolio Website — kevinliu.biz](https://kevinliu.biz): Monochrome interactive portfolio featuring selected engineering and design work, plus the playable PortfolioMon archive
 - [GitHub — Kevin-Liu-01](https://github.com/Kevin-Liu-01): Open-source projects and contributions
 - [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at Amazon, Bloomberg, AT&T Labs, Dedalus Labs, Sevenfold AI
 - [X/Twitter — @kevskgs](https://x.com/kevskgs): Posts about software engineering, AI, projects, Princeton life, and hackathon experiences
@@ -111,7 +111,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [PlantSTEM](https://plant-stem.vercel.app/): Math and Physics education
 - [Tutorial](https://tutorial-nu.vercel.app/): Tutor-pupil matching platform
 - [Satellite Crafter](https://satellite-crafter.vercel.app/): Satellite building game
-- [PortfolioMon Showdown](https://kevinliu.biz): This interactive portfolio website
+- [PortfolioMon Showdown](https://kevinliu.biz/#portfoliomon): Kevin's former interactive portfolio, preserved as a playable project within the new site
 
 ## Education
 
@@ -123,7 +123,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - 1st Place in Hardware at PennApps XXIII (RecyclAIble)
 - HackPrinceton organizer and lead developer (Fall 2024, Spring 2025, Fall 2025)
 - Online Monmouth Math Competition (OMMC) co-founder and developer
-- 30+ shipped projects spanning AI, web, games, health-tech, and hardware
+- 40+ shipped projects spanning AI, infrastructure, web, games, health-tech, and hardware
 
 ## Contact Kevin Liu
 
