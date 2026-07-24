@@ -59,7 +59,7 @@ export default function Document() {
         <meta name="rating" content="general" />
         <meta
           name="abstract"
-          content="Kevin Liu is a Princeton University Computer Science student (Class of 2028), full-stack developer, and AI engineer. His portfolio at kevinliu.biz presents work across agent infrastructure, interfaces, design systems, and games. PortfolioMon, his former game portfolio, is preserved as a playable project inside the new site."
+          content="Kevin Liu is a Princeton University Computer Science student, full-stack developer, and AI engineer. PortfolioMon Showdown is his original interactive portfolio: a Pokémon-inspired battle game built from forty shipped projects."
         />
         <meta
           name="summary"
@@ -247,9 +247,9 @@ export default function Document() {
               artificial intelligence, machine learning, and interactive web
               applications. He has professional experience at Amazon, Bloomberg
               L.P., AT&amp;T Labs Research, and Y Combinator-backed startups.
-              This portfolio presents selected work across agent infrastructure,
-              interfaces, design systems, and games. PortfolioMon, his former
-              game portfolio, remains available as a playable project.
+              This is PortfolioMon Showdown, Kevin&apos;s original interactive
+              portfolio: a playable Pokémon-inspired battle game built from his
+              projects across AI, infrastructure, interfaces, and games.
             </p>
 
             <h2>About Kevin Liu — Princeton Developer &amp; AI Engineer</h2>
@@ -513,10 +513,9 @@ export default function Document() {
             </p>
             <p>
               <strong>What is Kevin Liu&apos;s portfolio?</strong> Kevin
-              Liu&apos;s portfolio at kevinliu.biz is a monochrome interactive
-              showcase of his work in agent infrastructure, product engineering,
-              interfaces, and games. PortfolioMon, his former Pokémon-inspired
-              game portfolio, is preserved within it as a playable project.
+              Liu&apos;s portfolio at kevinliu.biz is PortfolioMon Showdown, a
+              Pokémon-inspired battle game where his shipped projects become
+              playable fighters with their own types, stats, moves, and effects.
             </p>
             <p>
               <strong>How to contact Kevin Liu?</strong> GitHub:

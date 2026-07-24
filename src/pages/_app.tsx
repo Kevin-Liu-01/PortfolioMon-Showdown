@@ -14,10 +14,10 @@ const App: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <ThemeProvider
-      enableSystem={false}
+      enableSystem={true}
       attribute="class"
-      defaultTheme="light"
-      storageKey="portfolio-theme"
+      defaultTheme="dark"
+      storageKey="portfoliomon-theme"
     >
       <SessionProvider session={session}>
         <GameProvider>

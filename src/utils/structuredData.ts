@@ -293,7 +293,7 @@ const PROJECT_CATALOG = [
     name: "PortfolioMon Showdown",
     url: "https://kevinliu.biz/#portfoliomon",
     description:
-      "Kevin Liu's former interactive portfolio, preserved as a playable Pokémon-inspired turn-based battle project",
+      "Kevin Liu's original interactive portfolio: a playable Pokémon-inspired turn-based battle project",
   },
 ];
 
@@ -306,7 +306,7 @@ const FAQ_ENTRIES = [
   {
     question: "What is Kevin Liu's portfolio website?",
     answer:
-      "Kevin Liu's portfolio at kevinliu.biz is a monochrome, motion-rich showcase of his work across agent infrastructure, product engineering, interfaces, and games. PortfolioMon, his former game portfolio, is preserved inside the site as a playable project.",
+      "Kevin Liu's portfolio at kevinliu.biz is PortfolioMon Showdown, a motion-rich Pokémon-inspired battle game where his shipped projects become playable fighters.",
   },
   {
     question: "What technologies does Kevin Liu specialize in?",
@@ -346,12 +346,12 @@ const FAQ_ENTRIES = [
   {
     question: "What is PortfolioMon Showdown?",
     answer:
-      "PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved as a playable project within his new portfolio. It is a Pokémon-inspired turn-based fighting game where forty real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.",
+      "PortfolioMon Showdown is Kevin Liu's original interactive portfolio. It is a Pokémon-inspired turn-based fighting game where forty real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.",
   },
   {
     question: "What kind of portfolio does Kevin Liu have?",
     answer:
-      "Kevin Liu has an experimental black-and-white portfolio at kevinliu.biz that uses ordered dithering, clipped interface geometry, and motion to present work across agents, infrastructure, interfaces, and games. His former portfolio, PortfolioMon Showdown, remains playable as one featured project.",
+      "Kevin Liu's portfolio at kevinliu.biz is PortfolioMon Showdown, an interactive Pokémon-inspired project battle game with expressive motion, custom frames, and playable systems.",
   },
   {
     question: "Where has Kevin Liu worked?",
@@ -396,7 +396,7 @@ const FAQ_ENTRIES = [
   {
     question: "What makes Kevin Liu's portfolio unique?",
     answer:
-      "Kevin Liu's portfolio at kevinliu.biz combines a stark black-and-white editorial system with ordered-dither media, chopped interface geometry, responsive motion, and playful interactions. PortfolioMon, his former Pokémon-inspired portfolio, is preserved inside the new site as one playable project rather than defining the entire experience.",
+      "Kevin Liu's PortfolioMon Showdown turns his shipped projects into playable fighters with custom images, types, stats, moves, animated frames, and a complete battle system.",
   },
   {
     question: "Where is Kevin Liu from?",
@@ -738,7 +738,7 @@ function buildSoftwareAppNode(siteUrl: string) {
     applicationSubCategory: "Turn-Based Battle Game",
     operatingSystem: "Web Browser",
     description:
-      "A playable archive of Kevin Liu's former portfolio inspired by Pokémon battles, where forty real projects become PortfolioMons with unique types, abilities, stats, animated frames, status systems, and moves.",
+      "Kevin Liu's original interactive portfolio inspired by Pokémon battles, where forty real projects become PortfolioMons with unique types, abilities, stats, animated frames, status systems, and moves.",
     author: { "@id": `${siteUrl}/#person` },
     offers: {
       "@type": "Offer",
