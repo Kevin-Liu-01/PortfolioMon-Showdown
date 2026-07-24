@@ -70,6 +70,8 @@ export type SelfEffectType =
   | "atkUp"
   | "defUp"
   | "spdUp"
+  | "critUp"
+  | "barrier"
   | "heal"
   | "drain"
   | "recoil";
@@ -105,6 +107,14 @@ export interface Move {
   accuracy: number;
   pp: number;
   critChance?: number;
+  /** Acts before normal-priority moves. */
+  priority?: number;
+  /** Resolves as a sequence of hits, each contributing to the listed power. */
+  hits?: { min: number; max: number };
+  /** Fraction of positive defensive stat stages ignored, from 0 to 1. */
+  piercing?: number;
+  /** Deals bonus damage when the target is below this HP fraction. */
+  executeThreshold?: number;
   effect?: Effect;
   selfEffect?: SelfEffect;
   description: string;
@@ -127,7 +137,7 @@ export interface PortfolioMon {
   github?: string;
   description: string;
   image: string;
-  sprite: JSX.Element;
+  sprite: React.ReactElement;
   type1: string;
   type2?: string;
   hp: number;
@@ -185,7 +195,7 @@ export const statusEffectStyles: {
 };
 
 export const statusEffectIcons: {
-  [key in StatusEffect & string]: JSX.Element;
+  [key in StatusEffect & string]: React.ReactElement;
 } = {
   burn: <Flame className="h-3 w-3 sm:h-4 sm:w-4" />,
   poison: <Bubbles className="h-3 w-3 sm:h-4 sm:w-4" />,
@@ -278,7 +288,9 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 1.0,
         pp: 10,
         critChance: 0.2,
-        description: "Acquires the target with a precise visual strike.",
+        description:
+          "Acquires the target and calibrates the next move's critical path.",
+        selfEffect: { type: "critUp", chance: 1.0, amount: 0.2 },
       },
       {
         name: "Instant Boot",
@@ -287,6 +299,7 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.95,
         pp: 10,
         critChance: 0.15,
+        priority: 1,
         description: "Starts a persistent machine before the foe can react.",
       },
       {
@@ -332,6 +345,7 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 1.0,
         pp: 10,
         critChance: 0.15,
+        priority: 1,
         description:
           "Guides the target through the labyrinth with perfect timing.",
       },
@@ -415,7 +429,9 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.85,
         pp: 5,
         critChance: 0.2,
-        description: "Takes the flag with an all-out final benchmark.",
+        executeThreshold: 0.35,
+        description:
+          "Takes the flag with a finisher that surges against weakened builds.",
       },
     ],
   },
@@ -603,7 +619,8 @@ export const portfolioMonData: PortfolioMon[] = [
         type: "Infra",
         accuracy: 1.0,
         pp: 10,
-        description: "Boots a persistent cloud machine, raising DEF and enabling future moves.",
+        description:
+          "Boots a persistent cloud machine, raising DEF and enabling future moves.",
         selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
       },
       {
@@ -613,7 +630,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.95,
         pp: 15,
         critChance: 0.1,
-        description: "Anchors context to disk, ensuring continuity across turns.",
+        description:
+          "Anchors context to disk, ensuring continuity across turns.",
       },
       {
         name: "Agent Runtime",
@@ -622,7 +640,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.9,
         pp: 10,
         critChance: 0.2,
-        description: "Executes a full agent loop inside the machine for heavy damage.",
+        description:
+          "Executes a full agent loop inside the machine for heavy damage.",
       },
       {
         name: "State Persistence",
@@ -658,7 +677,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 1.0,
         pp: 10,
         critChance: 0.15,
-        description: "Launches a dense burst of design tokens with precise force.",
+        description:
+          "Launches a dense burst of design tokens with precise force.",
       },
       {
         name: "Preset Forge",
@@ -686,7 +706,8 @@ export const portfolioMonData: PortfolioMon[] = [
         pp: 15,
         critChance: 0.05,
         effect: { type: "stun", chance: 0.3 },
-        description: "Humans and agents edit the same surface, may stun the foe.",
+        description:
+          "Humans and agents edit the same surface, may stun the foe.",
       },
     ],
   },
@@ -767,7 +788,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 1.0,
         pp: 20,
         critChance: 0.1,
-        description: "Tracks docs, changelogs, and repos to keep pressure constant.",
+        description:
+          "Tracks docs, changelogs, and repos to keep pressure constant.",
       },
       {
         name: "Research Refresh",
@@ -776,7 +798,8 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.95,
         pp: 10,
         critChance: 0.15,
-        description: "Runs a research agent on upstream changes for a high-impact strike.",
+        description:
+          "Runs a research agent on upstream changes for a high-impact strike.",
       },
       {
         name: "Full Diff",
@@ -785,8 +808,10 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.9,
         pp: 15,
         critChance: 0.05,
+        piercing: 0.75,
         effect: { type: "stun", chance: 0.3 },
-        description: "Drops a line-by-line rewrite that may stun the foe.",
+        description:
+          "Drops an armor-piercing rewrite that may also stun the foe.",
       },
       {
         name: "Skill Rewrite",
@@ -815,11 +840,26 @@ export const portfolioMonData: PortfolioMon[] = [
     hp: 300,
     stats: { hp: 300, atk: 120, def: 90, spd: 90 },
     variants: [
-      { image: "/images/princetontd/gameplay_desert_ui.png", nameSuffix: "Desert" },
-      { image: "/images/princetontd/gameplay_grounds_ui.png", nameSuffix: "Grounds" },
-      { image: "/images/princetontd/gameplay_frontier_ui.png", nameSuffix: "Frontier" },
-      { image: "/images/princetontd/gameplay_volcano_ui.png", nameSuffix: "Volcano" },
-      { image: "/images/princetontd/gameplay_swamp_ui.png", nameSuffix: "Swamp" },
+      {
+        image: "/images/princetontd/gameplay_desert_ui.png",
+        nameSuffix: "Desert",
+      },
+      {
+        image: "/images/princetontd/gameplay_grounds_ui.png",
+        nameSuffix: "Grounds",
+      },
+      {
+        image: "/images/princetontd/gameplay_frontier_ui.png",
+        nameSuffix: "Frontier",
+      },
+      {
+        image: "/images/princetontd/gameplay_volcano_ui.png",
+        nameSuffix: "Volcano",
+      },
+      {
+        image: "/images/princetontd/gameplay_swamp_ui.png",
+        nameSuffix: "Swamp",
+      },
     ],
     moves: [
       {
@@ -833,12 +873,13 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "Fortify Walls",
-        power: 50,
+        power: 35,
         type: "Game",
         accuracy: 1.0,
         pp: 20,
-        description: "Reinforces defenses while dealing chip damage. Raises DEF.",
-        selfEffect: { type: "defUp", chance: 1.0, amount: 1 },
+        description:
+          "Deals chip damage and deploys a barrier against the next attack.",
+        selfEffect: { type: "barrier", chance: 1.0, amount: 0.45 },
       },
       // abilities
       {
@@ -912,7 +953,8 @@ export const portfolioMonData: PortfolioMon[] = [
         type: "Data",
         accuracy: 1.0,
         pp: 15,
-        description: "Connects tools and servers, siphoning energy from the foe.",
+        description:
+          "Connects tools and servers, siphoning energy from the foe.",
         selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
       },
     ],
@@ -1050,12 +1092,14 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "UI Overhaul",
-        power: 80,
+        power: 38,
         type: "Design",
         accuracy: 1.0,
         pp: 15,
         critChance: 0.1,
-        description: "A visually stunning move that deals consistent damage.",
+        hits: { min: 2, max: 3 },
+        description:
+          "A two-to-three pass redesign that stacks multiple clean hits.",
       },
       {
         name: "Game Logic",
@@ -1165,13 +1209,15 @@ export const portfolioMonData: PortfolioMon[] = [
       },
       {
         name: "DDoS Attack",
-        power: 80,
+        power: 30,
         type: "Web",
         accuracy: 0.85,
         pp: 10,
         critChance: 0.1,
+        hits: { min: 2, max: 4 },
         effect: { type: "stun", chance: 0.3 },
-        description: "Floods the opponent's server, may cause a stun.",
+        description:
+          "Floods the opponent with two-to-four packets and may cause a stun.",
       },
       {
         name: "Framer Motion",
@@ -1190,7 +1236,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SplitWay",
-    description: "Expense tracking and bill-splitting app with real-time sync. Create groups, log expenses, auto-calculate debts, and settle up, all backed by Firebase Realtime Database with instant updates across all connected devices.",
+    description:
+      "Expense tracking and bill-splitting app with real-time sync. Create groups, log expenses, auto-calculate debts, and settle up, all backed by Firebase Realtime Database with instant updates across all connected devices.",
     image: "/images/splitway.png",
     sprite: <Expand />,
     type1: "Web",
@@ -1200,12 +1247,13 @@ export const portfolioMonData: PortfolioMon[] = [
     moves: [
       {
         name: "Calculate Split",
-        power: 70,
+        power: 38,
         type: "Data",
         accuracy: 1.0,
         pp: 20,
         critChance: 0.1,
-        description: "Divides the target's focus, causing consistent damage.",
+        hits: { min: 2, max: 2 },
+        description: "Divides the target's focus into two guaranteed hits.",
       },
       {
         name: "Firebase Sync",
@@ -1308,12 +1356,13 @@ export const portfolioMonData: PortfolioMon[] = [
     moves: [
       {
         name: "100 Clicks Per Second",
-        power: 100,
+        power: 24,
         type: "Game",
         accuracy: 0.9,
         pp: 5,
         critChance: 0.1,
-        description: "A massive attack that builds up over time.",
+        hits: { min: 3, max: 5 },
+        description: "A rapid three-to-five hit input burst.",
       },
       {
         name: "TigerCard Swipe",
@@ -1509,7 +1558,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/LetMeCook",
-    description: "AI recipe generator that uses computer vision to scan your fridge contents, then calls ChatGPT to generate step-by-step recipes from available ingredients. Supports dietary filters, cuisine preferences, and meal type selection.",
+    description:
+      "AI recipe generator that uses computer vision to scan your fridge contents, then calls ChatGPT to generate step-by-step recipes from available ingredients. Supports dietary filters, cuisine preferences, and meal type selection.",
     image: "/images/letmecook.png",
     sprite: <Lightbulb />,
     type1: "AI",
@@ -1551,7 +1601,8 @@ export const portfolioMonData: PortfolioMon[] = [
         type: "AI",
         accuracy: 1.0,
         pp: 8,
-        description: "A perfectly crafted dish that restores 70 HP and raises ATK.",
+        description:
+          "A perfectly crafted dish that restores 70 HP and raises ATK.",
         selfEffect: { type: "heal", chance: 1.0, amount: 70 },
       },
     ],
@@ -1561,7 +1612,9 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Balladeer",
-    description: "AI-powered study guide generator for literary works. Input any book or text and get chapter summaries, character analyses, theme breakdowns, key quotes with context, and essay prompts, all generated via GPT with structured formatting.", image: "/images/balladeer.png",
+    description:
+      "AI-powered study guide generator for literary works. Input any book or text and get chapter summaries, character analyses, theme breakdowns, key quotes with context, and essay prompts, all generated via GPT with structured formatting.",
+    image: "/images/balladeer.png",
     sprite: <Library />,
     type1: "AI",
     type2: "Data",
@@ -1602,6 +1655,7 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 1.0,
         pp: 15,
         critChance: 0.15,
+        priority: 1,
         description: "An unexpected turn of events that raises ATK.",
         selfEffect: { type: "atkUp", chance: 1.0, amount: 1 },
       },
@@ -1612,7 +1666,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/CompassUSA",
-    description: "Resource hub for immigrants navigating the U.S. system. Aggregates legal aid organizations, ESL programs, healthcare access, and government services by location, with multilingual support and step-by-step guides for common processes.",
+    description:
+      "Resource hub for immigrants navigating the U.S. system. Aggregates legal aid organizations, ESL programs, healthcare access, and government services by location, with multilingual support and step-by-step guides for common processes.",
     image: "/images/compassusa.png",
     sprite: <User />,
     type1: "Web",
@@ -1664,7 +1719,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
-    description: "Affordable wearable sleep apnea detection system using Arduino sensors and real-time data streaming. Monitors blood oxygen and breathing patterns overnight, flags apnea events, and visualizes sleep data on a companion web dashboard.",
+    description:
+      "Affordable wearable sleep apnea detection system using Arduino sensors and real-time data streaming. Monitors blood oxygen and breathing patterns overnight, flags apnea events, and visualizes sleep data on a companion web dashboard.",
     image: "/images/apnea-alert.png",
     sprite: <Cpu />,
     type1: "Health",
@@ -1717,7 +1773,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Iron-Triangle",
-    description: "Interactive data visualization exploring the U.S. Military Industrial Complex for a History II final project. Charts defense spending, lobbying flows, and contractor relationships with animated D3-style graphs and scrollytelling narrative.",
+    description:
+      "Interactive data visualization exploring the U.S. Military Industrial Complex for a History II final project. Charts defense spending, lobbying flows, and contractor relationships with animated D3-style graphs and scrollytelling narrative.",
     image: "/images/irontriangle.png",
     sprite: <Scale />,
     type1: "Data",
@@ -1823,7 +1880,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/EditorGPT",
-    description: "In-browser code editor with integrated ChatGPT-powered code review. Paste or write code, get AI feedback on bugs, style, performance, and best practices, with syntax highlighting, diff views, and one-click refactoring suggestions.",
+    description:
+      "In-browser code editor with integrated ChatGPT-powered code review. Paste or write code, get AI feedback on bugs, style, performance, and best practices, with syntax highlighting, diff views, and one-click refactoring suggestions.",
     image: "/images/editorgpt.png",
     sprite: <FileSearch />,
     type1: "AI",
@@ -1874,7 +1932,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Math-Comp",
-    description: "Official competition portal for the Online Monmouth Math Competition. Handles timed test delivery, answer submission, anti-cheat proctoring, real-time score calculation, and leaderboard generation for hundreds of concurrent participants.",
+    description:
+      "Official competition portal for the Online Monmouth Math Competition. Handles timed test delivery, answer submission, anti-cheat proctoring, real-time score calculation, and leaderboard generation for hundreds of concurrent participants.",
     image: "/images/ommcportal.png",
     sprite: <Calculator />,
     type1: "Web",
@@ -1908,7 +1967,9 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.95,
         pp: 10,
         critChance: 0.2,
-        description: "A swift calculation that results in a critical hit.",
+        executeThreshold: 0.3,
+        description:
+          "A high-crit calculation that finishes builds below 30% integrity.",
       },
       {
         name: "Server Crash",
@@ -1926,7 +1987,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Sample-Portal",
-    description: "Practice environment for the OMMC math competition. Provides past problems with timed conditions, instant scoring, solution walkthroughs, and performance analytics so students can prepare under realistic competition settings.",
+    description:
+      "Practice environment for the OMMC math competition. Provides past problems with timed conditions, instant scoring, solution walkthroughs, and performance analytics so students can prepare under realistic competition settings.",
     image: "/images/ommcsampleportal.png",
     sprite: <Calculator />,
     type1: "Web",
@@ -2137,7 +2199,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Atlas",
-    description: "Full-stack searchable database of every OMMC competition problem. Filter by year, round, difficulty, and topic with LaTeX rendering, solution discussions, and an admin panel for problem management. React frontend with a Node.js/MongoDB backend.",
+    description:
+      "Full-stack searchable database of every OMMC competition problem. Filter by year, round, difficulty, and topic with LaTeX rendering, solution discussions, and an admin panel for problem management. React frontend with a Node.js/MongoDB backend.",
     image: "/images/ommc-atlas.png",
     sprite: <Server />,
     type1: "Data",
@@ -2240,7 +2303,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PlantSTEM",
-    description: "Interactive STEM education platform with visual lessons for math and physics concepts. Features animated diagrams, practice problems with step-by-step solutions, progress tracking, and topic-based curriculum navigation.",
+    description:
+      "Interactive STEM education platform with visual lessons for math and physics concepts. Features animated diagrams, practice problems with step-by-step solutions, progress tracking, and topic-based curriculum navigation.",
     image: "/images/plantstem.png",
     sprite: <Bookmark />,
     type1: "Web",
@@ -2292,7 +2356,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Tutorial",
-    description: "Tutoring marketplace connecting students with tutors by subject, availability, and location. Tutor profiles with ratings, session booking, subject filtering, and a messaging system, built with React, Firebase Auth, and Firestore.",
+    description:
+      "Tutoring marketplace connecting students with tutors by subject, availability, and location. Tutor profiles with ratings, session booking, subject filtering, and a messaging system, built with React, Firebase Auth, and Firestore.",
     image: "/images/tutorial.png",
     sprite: <Paperclip />,
     type1: "Web",
@@ -2344,7 +2409,8 @@ export const portfolioMonData: PortfolioMon[] = [
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SatelliteCrafter",
-    description: "My first-ever web app: a satellite assembly game where players pick components (solar panels, thrusters, antennas) to build and launch custom satellites. The project that got me hooked on building software.",
+    description:
+      "My first-ever web app: a satellite assembly game where players pick components (solar panels, thrusters, antennas) to build and launch custom satellites. The project that got me hooked on building software.",
     image: "/images/satellitecrafter.png",
     sprite: <Puzzle />,
     type1: "Game",
@@ -2368,7 +2434,9 @@ export const portfolioMonData: PortfolioMon[] = [
         accuracy: 0.95,
         pp: 15,
         critChance: 0.1,
-        description: "Builds up parts for a solid hardware attack.",
+        description:
+          "Builds up parts for a solid strike and a temporary barrier.",
+        selfEffect: { type: "barrier", chance: 1.0, amount: 0.35 },
       },
       {
         name: "Orbital Launch",
@@ -2396,99 +2464,99 @@ export const portfolioMonData: PortfolioMon[] = [
 // --- GAME LOGIC & UTILITIES ---
 
 export const typeChart: { [attacker: string]: { [defender: string]: number } } =
-{
-  AI: {
-    Data: 2,
-    Web: 0.5,
-    Hardware: 0.5,
-    Game: 2,
-    Health: 1,
-    Design: 1,
-    Mobile: 1,
-    Infra: 1,
-  },
-  Data: {
-    AI: 0.5,
-    Design: 2,
-    Health: 2,
-    Game: 0.5,
-    Web: 1,
-    Hardware: 1,
-    Mobile: 1,
-    Infra: 2,
-  },
-  Web: {
-    Mobile: 2,
-    AI: 2,
-    Design: 0.5,
-    Data: 0.5,
-    Hardware: 1,
-    Game: 1,
-    Health: 1,
-    Infra: 0.5,
-  },
-  Design: {
-    Web: 2,
-    Game: 2,
-    Data: 0.5,
-    AI: 1,
-    Hardware: 1,
-    Health: 1,
-    Mobile: 1,
-    Infra: 0.5,
-  },
-  Hardware: {
-    AI: 2,
-    Health: 0.5,
-    Mobile: 2,
-    Web: 0.5,
-    Game: 1,
-    Data: 1,
-    Design: 1,
-    Infra: 2,
-  },
-  Health: {
-    Hardware: 2,
-    Game: 0.5,
-    Data: 0.5,
-    AI: 1,
-    Web: 1,
-    Design: 1,
-    Mobile: 1,
-    Infra: 1,
-  },
-  Mobile: {
-    Web: 0.5,
-    Hardware: 0.5,
-    Game: 2,
-    Design: 2,
-    AI: 1,
-    Data: 1,
-    Health: 1,
-    Infra: 1,
-  },
-  Game: {
-    AI: 0.5,
-    Design: 0.5,
-    Health: 2,
-    Data: 2,
-    Mobile: 0.5,
-    Web: 1,
-    Hardware: 1,
-    Infra: 0.5,
-  },
-  Infra: {
-    AI: 2,
-    Data: 0.5,
-    Web: 2,
-    Design: 1,
-    Hardware: 0.5,
-    Health: 1,
-    Mobile: 1,
-    Game: 1,
-    Infra: 0.5,
-  },
-};
+  {
+    AI: {
+      Data: 2,
+      Web: 0.5,
+      Hardware: 0.5,
+      Game: 2,
+      Health: 1,
+      Design: 1,
+      Mobile: 1,
+      Infra: 1,
+    },
+    Data: {
+      AI: 0.5,
+      Design: 2,
+      Health: 2,
+      Game: 0.5,
+      Web: 1,
+      Hardware: 1,
+      Mobile: 1,
+      Infra: 2,
+    },
+    Web: {
+      Mobile: 2,
+      AI: 2,
+      Design: 0.5,
+      Data: 0.5,
+      Hardware: 1,
+      Game: 1,
+      Health: 1,
+      Infra: 0.5,
+    },
+    Design: {
+      Web: 2,
+      Game: 2,
+      Data: 0.5,
+      AI: 1,
+      Hardware: 1,
+      Health: 1,
+      Mobile: 1,
+      Infra: 0.5,
+    },
+    Hardware: {
+      AI: 2,
+      Health: 0.5,
+      Mobile: 2,
+      Web: 0.5,
+      Game: 1,
+      Data: 1,
+      Design: 1,
+      Infra: 2,
+    },
+    Health: {
+      Hardware: 2,
+      Game: 0.5,
+      Data: 0.5,
+      AI: 1,
+      Web: 1,
+      Design: 1,
+      Mobile: 1,
+      Infra: 1,
+    },
+    Mobile: {
+      Web: 0.5,
+      Hardware: 0.5,
+      Game: 2,
+      Design: 2,
+      AI: 1,
+      Data: 1,
+      Health: 1,
+      Infra: 1,
+    },
+    Game: {
+      AI: 0.5,
+      Design: 0.5,
+      Health: 2,
+      Data: 2,
+      Mobile: 0.5,
+      Web: 1,
+      Hardware: 1,
+      Infra: 0.5,
+    },
+    Infra: {
+      AI: 2,
+      Data: 0.5,
+      Web: 2,
+      Design: 1,
+      Hardware: 0.5,
+      Health: 1,
+      Mobile: 1,
+      Game: 1,
+      Infra: 0.5,
+    },
+  };
 
 export const getTypeEffectiveness = (
   moveType: string,

@@ -7,6 +7,7 @@
     "dev": "next dev",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "start": "next start",
+    "sync:trainers": "node scripts/sync-gen-v-trainers.mjs",
     "validate:previews": "node scripts/validate-project-previews.mjs"
   },
   "dependencies": {

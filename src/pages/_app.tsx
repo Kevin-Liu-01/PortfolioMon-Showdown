@@ -13,7 +13,12 @@ const App: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <ThemeProvider enableSystem={true} attribute="class" defaultTheme="dark">
+    <ThemeProvider
+      enableSystem={false}
+      attribute="class"
+      defaultTheme="light"
+      storageKey="portfolio-theme"
+    >
       <SessionProvider session={session}>
         <GameProvider>
           <Component {...pageProps} />

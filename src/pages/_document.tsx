@@ -157,8 +157,8 @@ export default function Document() {
         />
 
         {/* Favicons & Icons */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/images/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href={SITE_URL} />
         <link rel="alternate" hrefLang="en" href={SITE_URL} />
