@@ -86,6 +86,20 @@ const SELF_EFFECT_STYLES: Record<SelfEffectType, SelfEffectStyle> = {
     border: "bg-yellow-300",
     text: "text-black",
   },
+  critUp: {
+    label: "CRIT ▲",
+    icon: <Star className="h-full w-full" />,
+    bg: "bg-fuchsia-600",
+    border: "bg-fuchsia-400",
+    text: "text-white",
+  },
+  barrier: {
+    label: "BARRIER",
+    icon: <ShieldCheck className="h-full w-full" />,
+    bg: "bg-cyan-700",
+    border: "bg-cyan-300",
+    text: "text-white",
+  },
   heal: {
     label: "HEAL",
     icon: <Heart className="h-full w-full" />,
@@ -120,6 +134,10 @@ const SelfEffectBadge = ({ selfEffect }: { selfEffect: SelfEffect }) => {
     detail = `${selfEffect.amount * 100}% DMG`;
   } else if (selfEffect.type === "recoil") {
     detail = `${selfEffect.amount * 100}% DMG`;
+  } else if (selfEffect.type === "critUp") {
+    detail = `+${selfEffect.amount * 100}% CRIT`;
+  } else if (selfEffect.type === "barrier") {
+    detail = `${selfEffect.amount * 100}% GUARD`;
   }
 
   return (

@@ -16,7 +16,7 @@ const FONT_CLASSES = [
 
 const Home: NextPage = () => {
   const [, setTranslate] = useState(false);
-  const [font, setFont] = useState(FONT_CLASSES[0]);
+  const [font, setFont] = useState<string>(FONT_CLASSES[0]!);
 
   const cycleFont = () => {
     setFont((currentFont) => {
@@ -40,7 +40,9 @@ const Home: NextPage = () => {
         <meta name="theme-color" content="#0f172a" />
       </Head>
 
-      <main className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}>
+      <main
+        className={`relative h-screen overflow-hidden bg-slate-100 dark:bg-slate-900 ${font}`}
+      >
         <div className="relative z-20">
           <Navbar
             menuHandler={() => setTranslate((current) => !current)}

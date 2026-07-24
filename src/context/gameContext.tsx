@@ -158,6 +158,10 @@ export interface BattleReadyMon extends PortfolioMon {
   statusTurns: number;
   moves: BattleReadyMove[];
   statModifiers: StatModifiers;
+  /** Bonus critical-hit chance prepared by a move such as Target Lock. */
+  critBoost: number;
+  /** Fraction of the next incoming hit absorbed by an active barrier. */
+  barrier: number | null;
 }
 
 export interface Item {

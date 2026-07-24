@@ -51,11 +51,11 @@ const initialStats: BattleStats = {
 // --- TYPE FOR CONTEXT VALUE ---
 interface IGameContext {
   gameState:
-  | "teamSelect"
-  | "teamPreview"
-  | "fight"
-  | "gameOver"
-  | "forcedSwitch";
+    | "teamSelect"
+    | "teamPreview"
+    | "fight"
+    | "gameOver"
+    | "forcedSwitch";
   playerTeam: PortfolioMon[];
   playerTeamState: BattleReadyMon[];
   cpuTeamState: BattleReadyMon[];
@@ -184,11 +184,15 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [cpuStats, setCpuStats] = useState<BattleStats>(initialStats);
   const [isAutoBattleActive, setIsAutoBattleActive] = useState(false);
   const [isProcessingTurn, setIsProcessingTurn] = useState(false);
-  const [background, setBackground] = useLocalStorage<number>("arena-background", 1);
+  const [background, setBackground] = useLocalStorage<number>(
+    "arena-background",
+    1
+  );
   const [playerDidSwitchLastTurn, setPlayerDidSwitchLastTurn] = useState(false);
   const [cpuDidSwitchLastTurn, setCpuDidSwitchLastTurn] = useState(false);
   const [lastMoveType, setLastMoveType] = useState<string | null>(null);
-  const [activeBattleEffect, setActiveBattleEffect] = useState<BattleEffect | null>(null);
+  const [activeBattleEffect, setActiveBattleEffect] =
+    useState<BattleEffect | null>(null);
 
   // --- REFS FOR MANAGING ASYNC OPERATIONS SAFELY ---
   const battleStateRef = useRef({
@@ -269,7 +273,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       let resolvedName = mon.name;
       let resolvedImage = mon.image;
       if (mon.variants && mon.variants.length > 0) {
-        const picked = mon.variants[Math.floor(Math.random() * mon.variants.length)]!;
+        const picked =
+          mon.variants[Math.floor(Math.random() * mon.variants.length)]!;
         resolvedImage = picked.image;
         resolvedName = `${mon.name}: ${picked.nameSuffix}`;
       }
@@ -282,6 +287,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         statusTurns: 0,
         moves: mon.moves.map((move) => ({ ...move, currentPp: move.pp })),
         statModifiers: { ...DEFAULT_STAT_MODS },
+        critBoost: 0,
+        barrier: null,
       };
     });
   };
@@ -558,6 +565,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
       if (Math.random() < move.accuracy) {
         let damage = 0;
+        let hitCount = 1;
         if (move.power > 0) {
           const effectiveness = getTypeEffectiveness(move.type, defender);
           if (effectiveness.multiplier > 1) {
@@ -567,13 +575,42 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
             }));
           }
           const atkMod = getStatMultiplier(attacker.statModifiers.atk);
-          const defMod = getStatMultiplier(defender.statModifiers.def);
+          const rawDefenseStage = defender.statModifiers.def;
+          const defenseStage =
+            rawDefenseStage > 0
+              ? rawDefenseStage * (1 - (move.piercing ?? 0))
+              : rawDefenseStage;
+          const defMod = getStatMultiplier(defenseStage);
           const baseDamage =
-            (move.power * ((attacker.stats.atk * atkMod) / (defender.stats.def * defMod))) / 5 + 2;
+            (move.power *
+              ((attacker.stats.atk * atkMod) / (defender.stats.def * defMod))) /
+              5 +
+            2;
           damage = Math.floor(baseDamage * (Math.random() * 0.15 + 0.85));
           damage = Math.floor(damage * effectiveness.multiplier);
 
-          const isCrit = move.critChance && Math.random() < move.critChance;
+          hitCount = move.hits
+            ? move.hits.min +
+              Math.floor(Math.random() * (move.hits.max - move.hits.min + 1))
+            : 1;
+          damage *= hitCount;
+
+          const isExecute = Boolean(
+            move.executeThreshold &&
+              defender.currentHp / defender.hp <= move.executeThreshold
+          );
+          if (isExecute) {
+            damage = Math.floor(damage * 1.3);
+            const executeMessage = "Finisher threshold activated!";
+            addToLog(executeMessage);
+            showNotification(executeMessage, "critical");
+          }
+
+          const critChance = Math.min(
+            0.75,
+            (move.critChance ?? 0) + attacker.critBoost
+          );
+          const isCrit = critChance > 0 && Math.random() < critChance;
           if (isCrit) {
             damage = Math.floor(damage * 1.5);
             showNotification("A critical hit!", "critical");
@@ -582,6 +619,32 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
               ...prev,
               critsLanded: prev.critsLanded + 1,
             }));
+          }
+          if (attacker.critBoost > 0) {
+            updateMonState(attackerTeam, attackerIndex, { critBoost: 0 });
+          }
+
+          if (hitCount > 1) {
+            const hitMessage = `${hitCount} hits connected!`;
+            addToLog(hitMessage);
+            showNotification(hitMessage, "info");
+          }
+          if (move.piercing) {
+            addToLog(
+              `${move.name} pierced ${Math.round(
+                move.piercing * 100
+              )}% of raised defense!`
+            );
+          }
+
+          const barrierStrength = defender.barrier ?? 0;
+          if (barrierStrength > 0 && damage > 0) {
+            const incomingDamage = damage;
+            damage = Math.max(1, Math.floor(damage * (1 - barrierStrength)));
+            const absorbed = incomingDamage - damage;
+            const barrierMessage = `${defender.name}'s barrier absorbed ${absorbed} damage!`;
+            addToLog(barrierMessage);
+            showNotification(barrierMessage, "info");
           }
           setAttackerStats((prev) => ({
             ...prev,
@@ -593,10 +656,20 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
             addToLog(effectiveness.message);
           }
         }
-        setDefenderAnimation("hit");
+        for (let hit = 0; hit < hitCount; hit += 1) {
+          setDefenderAnimation("hit");
+          await sleep(hitCount > 1 ? 170 : 500);
+          if (hit < hitCount - 1) {
+            setDefenderAnimation("idle");
+            await sleep(70);
+          }
+        }
         const newHp = Math.max(0, defender.currentHp - damage);
-        updateMonState(defenderTeam, defenderIndex, { currentHp: newHp });
-        await sleep(500);
+        updateMonState(defenderTeam, defenderIndex, {
+          currentHp: newHp,
+          ...(defender.barrier && damage > 0 ? { barrier: null } : {}),
+        });
+        await sleep(hitCount > 1 ? 250 : 500);
 
         // --- SELF EFFECTS (drain, recoil, stat boosts, heal) ---
         if (move.selfEffect && Math.random() < move.selfEffect.chance) {
@@ -612,12 +685,17 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
           } else if (se.type === "recoil" && damage > 0) {
             const recoilDmg = Math.floor(damage * se.amount);
             const recoilHp = Math.max(0, attacker.currentHp - recoilDmg);
-            updateMonState(attackerTeam, attackerIndex, { currentHp: recoilHp });
+            updateMonState(attackerTeam, attackerIndex, {
+              currentHp: recoilHp,
+            });
             const msg = `${attacker.name} took ${recoilDmg} recoil damage!`;
             addToLog(msg);
             showNotification(msg, "status");
           } else if (se.type === "heal") {
-            const healAmt = Math.min(se.amount, attacker.hp - attacker.currentHp);
+            const healAmt = Math.min(
+              se.amount,
+              attacker.hp - attacker.currentHp
+            );
             if (healAmt > 0) {
               updateMonState(attackerTeam, attackerIndex, {
                 currentHp: attacker.currentHp + healAmt,
@@ -626,17 +704,34 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
               addToLog(msg);
               showNotification(msg, "heal");
             }
+          } else if (se.type === "critUp") {
+            const critBoost = Math.min(0.5, se.amount);
+            updateMonState(attackerTeam, attackerIndex, { critBoost });
+            const msg = `${attacker.name} calibrated its critical path!`;
+            addToLog(msg);
+            showNotification(msg, "boost");
+          } else if (se.type === "barrier") {
+            updateMonState(attackerTeam, attackerIndex, {
+              barrier: Math.min(0.75, se.amount),
+            });
+            const msg = `${attacker.name} deployed a barrier!`;
+            addToLog(msg);
+            showNotification(msg, "boost");
           } else if (
             se.type === "atkUp" ||
             se.type === "defUp" ||
             se.type === "spdUp"
           ) {
-            const statKey = se.type === "atkUp" ? "atk" : se.type === "defUp" ? "def" : "spd";
+            const statKey =
+              se.type === "atkUp" ? "atk" : se.type === "defUp" ? "def" : "spd";
             const currentStage = attacker.statModifiers[statKey];
             if (currentStage < 3) {
               const newStage = Math.min(3, currentStage + se.amount);
               updateMonState(attackerTeam, attackerIndex, {
-                statModifiers: { ...attacker.statModifiers, [statKey]: newStage },
+                statModifiers: {
+                  ...attacker.statModifiers,
+                  [statKey]: newStage,
+                },
               });
               const statName = statKey.toUpperCase();
               const msg = `${attacker.name}'s ${statName} rose!`;
@@ -726,6 +821,25 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         stabBonus *
         effectiveness;
 
+      if (move.hits) {
+        score *= (move.hits.min + move.hits.max) / 2;
+      }
+
+      if (
+        move.executeThreshold &&
+        defender.currentHp / defender.hp <= move.executeThreshold
+      ) {
+        score *= 1.3;
+      }
+
+      if (move.piercing && defender.statModifiers.def > 0) {
+        score *= 1 + move.piercing * 0.25;
+      }
+
+      if (move.priority) {
+        score += move.priority * 12;
+      }
+
       if (move.effect && defender.status === null) {
         score += 45 * move.effect.chance;
       }
@@ -795,10 +909,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
     const switchOptions = !didSwitchLastTurn
       ? availableSwitches.map((item) => ({
-        type: "switch" as const,
-        index: item.index,
-        score: calculateSwitchScore(item.mon, mon, opponent),
-      }))
+          type: "switch" as const,
+          index: item.index,
+          score: calculateSwitchScore(item.mon, mon, opponent),
+        }))
       : [];
 
     const allOptions = [...moveOptions, ...switchOptions];
@@ -824,101 +938,110 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     return candidatePool[randomIndex];
   };
 
-  const endPlayerTurn = useCallback(async () => {
-    showNotification("Opponent's Turn", "turn");
-    await sleep(1500);
+  const endPlayerTurn = useCallback(
+    async (skipOpponentAction = false) => {
+      if (!skipOpponentAction) {
+        showNotification("Opponent's Turn", "turn");
+        await sleep(1500);
+      }
 
-    const {
-      cpuTeamState: currentCpuTeamState,
-      playerTeamState: currentPlayerTeamState,
-      activeCpuIndex: currentActiveCpuIndex,
-      activePlayerIndex: currentActivePlayerIndex,
-      gameState: currentGameState,
-    } = battleStateRef.current;
+      const {
+        cpuTeamState: currentCpuTeamState,
+        playerTeamState: currentPlayerTeamState,
+        activeCpuIndex: currentActiveCpuIndex,
+        activePlayerIndex: currentActivePlayerIndex,
+        gameState: currentGameState,
+      } = battleStateRef.current;
 
-    const cpuMon = currentCpuTeamState[currentActiveCpuIndex]!;
-    const playerMon = currentPlayerTeamState[currentActivePlayerIndex]!;
+      const cpuMon = currentCpuTeamState[currentActiveCpuIndex]!;
+      const playerMon = currentPlayerTeamState[currentActivePlayerIndex]!;
 
-    let faintedDuringTurn = false;
+      let faintedDuringTurn = false;
 
-    if (
-      cpuMon?.currentHp > 0 &&
-      playerMon?.currentHp > 0 &&
-      currentGameState === "fight"
-    ) {
-      const chosenAction = chooseAiAction(
-        cpuMon,
-        playerMon,
-        currentCpuTeamState,
-        currentActiveCpuIndex,
-        cpuDidSwitchLastTurn
-      );
-
-      if (chosenAction?.type === "switch") {
-        setCpuDidSwitchLastTurn(true);
-        setGruntTrainerState("commanding");
-        await sleep(100);
-        const oldCpuMonName = cpuMon.name;
-        const newCpuMon = currentCpuTeamState[chosenAction.index]!;
-        const dialogueText = getRandomDialogue("switch", "cpu", {
-          oldMon: oldCpuMonName,
-          newMon: newCpuMon.name,
-        });
-        setDialogue({ player: "", cpu: dialogueText });
-        setTimeout(() => setDialogue((d) => ({ ...d, cpu: "" })), 3000);
-
-        addToLog(`CPU switched from ${oldCpuMonName} to ${newCpuMon.name}!`);
-        setCpuAnimation("switchOut");
-        await sleep(500);
-        updateMonState("cpu", currentActiveCpuIndex, {
-          statModifiers: { ...DEFAULT_STAT_MODS },
-        });
-        setActiveCpuIndex(chosenAction.index);
-        setCpuAnimation("switchIn");
-        await sleep(700);
-        setCpuAnimation("idle");
-        setGruntTrainerState("idle");
-      } else if (chosenAction?.type === "move") {
-        setCpuDidSwitchLastTurn(false);
-        setGruntTrainerState("commanding");
-        await sleep(100);
-        faintedDuringTurn = await processTurn(
+      if (
+        !skipOpponentAction &&
+        cpuMon?.currentHp > 0 &&
+        playerMon?.currentHp > 0 &&
+        currentGameState === "fight"
+      ) {
+        const chosenAction = chooseAiAction(
           cpuMon,
           playerMon,
-          chosenAction.move,
-          "cpu"
+          currentCpuTeamState,
+          currentActiveCpuIndex,
+          cpuDidSwitchLastTurn
         );
-      } else {
-        addToLog(`${cpuMon.name} has no moves left!`);
+
+        if (chosenAction?.type === "switch") {
+          setCpuDidSwitchLastTurn(true);
+          setGruntTrainerState("commanding");
+          await sleep(100);
+          const oldCpuMonName = cpuMon.name;
+          const newCpuMon = currentCpuTeamState[chosenAction.index]!;
+          const dialogueText = getRandomDialogue("switch", "cpu", {
+            oldMon: oldCpuMonName,
+            newMon: newCpuMon.name,
+          });
+          setDialogue({ player: "", cpu: dialogueText });
+          setTimeout(() => setDialogue((d) => ({ ...d, cpu: "" })), 3000);
+
+          addToLog(`CPU switched from ${oldCpuMonName} to ${newCpuMon.name}!`);
+          setCpuAnimation("switchOut");
+          await sleep(500);
+          updateMonState("cpu", currentActiveCpuIndex, {
+            statModifiers: { ...DEFAULT_STAT_MODS },
+          });
+          setActiveCpuIndex(chosenAction.index);
+          setCpuAnimation("switchIn");
+          await sleep(700);
+          setCpuAnimation("idle");
+          setGruntTrainerState("idle");
+        } else if (chosenAction?.type === "move") {
+          setCpuDidSwitchLastTurn(false);
+          setGruntTrainerState("commanding");
+          await sleep(100);
+          faintedDuringTurn = await processTurn(
+            cpuMon,
+            playerMon,
+            chosenAction.move,
+            "cpu"
+          );
+        } else {
+          addToLog(`${cpuMon.name} has no moves left!`);
+        }
+
+        if (
+          !faintedDuringTurn &&
+          battleStateRef.current.gameState === "fight"
+        ) {
+          await applyEndOfTurnStatusEffects("cpu");
+        }
       }
 
-      if (!faintedDuringTurn && battleStateRef.current.gameState === "fight") {
-        await applyEndOfTurnStatusEffects("cpu");
+      if (
+        battleStateRef.current.gameState === "fight" ||
+        battleStateRef.current.gameState === "forcedSwitch"
+      ) {
+        setTurnCount((prev) => {
+          const newTurn = prev + 1;
+          addToLog(`--- Turn ${newTurn} ---`);
+          return newTurn;
+        });
+        showNotification("Your Turn", "turn");
+        setIsPlayerTurn(true);
       }
-    }
-
-    if (
-      battleStateRef.current.gameState === "fight" ||
-      battleStateRef.current.gameState === "forcedSwitch"
-    ) {
-      setTurnCount((prev) => {
-        const newTurn = prev + 1;
-        addToLog(`--- Turn ${newTurn} ---`);
-        return newTurn;
-      });
-      showNotification("Your Turn", "turn");
-      setIsPlayerTurn(true);
-    }
-    setIsProcessingTurn(false);
-  }, [
-    processTurn,
-    applyEndOfTurnStatusEffects,
-    showNotification,
-    addToLog,
-    calculateMoveScore,
-    calculateSwitchScore,
-    cpuDidSwitchLastTurn,
-  ]);
+      setIsProcessingTurn(false);
+    },
+    [
+      processTurn,
+      applyEndOfTurnStatusEffects,
+      showNotification,
+      addToLog,
+      calculateMoveScore,
+      calculateSwitchScore,
+      cpuDidSwitchLastTurn,
+    ]
+  );
 
   const handleMoveSelect = useCallback(
     async (move: BattleReadyMove) => {
@@ -945,6 +1068,46 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       setDialogue({ player: dialogueText, cpu: "" });
       setTimeout(() => setDialogue((d) => ({ ...d, player: "" })), 3000);
       const cpuMon = cpuTeamState[activeCpuIndex]!;
+      const cpuPriorityAction = chooseAiAction(
+        cpuMon,
+        playerMon,
+        cpuTeamState,
+        activeCpuIndex,
+        cpuDidSwitchLastTurn
+      );
+      const cpuMoveHasPriority =
+        cpuPriorityAction?.type === "move" &&
+        (cpuPriorityAction.move.priority ?? 0) > (move.priority ?? 0);
+
+      if (cpuMoveHasPriority) {
+        setCpuDidSwitchLastTurn(false);
+        const priorityMessage = `${cpuMon.name}'s ${cpuPriorityAction.move.name} cut in with priority!`;
+        addToLog(priorityMessage);
+        showNotification("Priority interrupt!", "turn");
+        setGruntTrainerState("commanding");
+        await sleep(250);
+        const playerFainted = await processTurn(
+          cpuMon,
+          playerMon,
+          cpuPriorityAction.move,
+          "cpu"
+        );
+        if (playerFainted || battleStateRef.current.gameState !== "fight") {
+          setIsProcessingTurn(false);
+          return;
+        }
+        const playerFaintedFromStatus = await applyEndOfTurnStatusEffects(
+          "cpu"
+        );
+        if (
+          playerFaintedFromStatus ||
+          battleStateRef.current.gameState !== "fight"
+        ) {
+          setIsProcessingTurn(false);
+          return;
+        }
+      }
+
       const didFaintFromMove = await processTurn(
         playerMon,
         cpuMon,
@@ -957,7 +1120,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
           !didFaintFromStatus &&
           battleStateRef.current.gameState === "fight"
         ) {
-          await endPlayerTurn();
+          await endPlayerTurn(cpuMoveHasPriority);
         }
       } else {
         setIsProcessingTurn(false);
@@ -975,6 +1138,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       applyEndOfTurnStatusEffects,
       endPlayerTurn,
       isAutoBattleActive,
+      cpuDidSwitchLastTurn,
     ]
   );
 
@@ -1051,7 +1215,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
       if (eff.type === "heal") {
         if (targetMon.currentHp < targetMon.hp && targetMon.currentHp > 0) {
-          const newHp = Math.min(targetMon.hp, targetMon.currentHp + eff.amount);
+          const newHp = Math.min(
+            targetMon.hp,
+            targetMon.currentHp + eff.amount
+          );
           updateMonState("player", targetIndex, { currentHp: newHp });
           setActiveBattleEffect({ type: "heal", target: "player" });
           actionTaken = true;
@@ -1060,14 +1227,31 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         }
       } else if (eff.type === "cureStatus") {
         if (targetMon.status) {
-          updateMonState("player", targetIndex, { status: null, statusTurns: 0 });
+          updateMonState("player", targetIndex, {
+            status: null,
+            statusTurns: 0,
+          });
           actionTaken = true;
         } else {
           addToLog(`${targetMon.name} has no status condition!`);
         }
-      } else if (eff.type === "boostAtk" || eff.type === "boostDef" || eff.type === "boostSpd") {
-        const statKey = eff.type === "boostAtk" ? "atk" : eff.type === "boostDef" ? "def" : "spd";
-        const effectType = eff.type === "boostAtk" ? "atkUp" : eff.type === "boostDef" ? "defUp" : "spdUp";
+      } else if (
+        eff.type === "boostAtk" ||
+        eff.type === "boostDef" ||
+        eff.type === "boostSpd"
+      ) {
+        const statKey =
+          eff.type === "boostAtk"
+            ? "atk"
+            : eff.type === "boostDef"
+            ? "def"
+            : "spd";
+        const effectType =
+          eff.type === "boostAtk"
+            ? "atkUp"
+            : eff.type === "boostDef"
+            ? "defUp"
+            : "spdUp";
         const currentStage = targetMon.statModifiers[statKey];
         if (currentStage < 3 && targetMon.currentHp > 0) {
           const newStage = Math.min(3, currentStage + eff.stages);
@@ -1075,11 +1259,16 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
             statModifiers: { ...targetMon.statModifiers, [statKey]: newStage },
           });
           const statName = statKey.toUpperCase();
-          showNotification(`${targetMon.name}'s ${statName} sharply rose!`, "boost");
+          showNotification(
+            `${targetMon.name}'s ${statName} sharply rose!`,
+            "boost"
+          );
           setActiveBattleEffect({ type: effectType, target: "player" });
           actionTaken = true;
         } else if (currentStage >= 3) {
-          addToLog(`${targetMon.name}'s ${statKey.toUpperCase()} can't go any higher!`);
+          addToLog(
+            `${targetMon.name}'s ${statKey.toUpperCase()} can't go any higher!`
+          );
         }
       } else if (eff.type === "revive") {
         if (targetMon.currentHp <= 0) {

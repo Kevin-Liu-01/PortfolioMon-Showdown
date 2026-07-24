@@ -318,6 +318,8 @@ const EFFECT_COLORS: Record<SelfEffectType, { primary: string; glow: string }> =
     atkUp: { primary: "239, 68, 68", glow: "248, 113, 113" },
     defUp: { primary: "59, 130, 246", glow: "96, 165, 250" },
     spdUp: { primary: "234, 179, 8", glow: "250, 204, 21" },
+    critUp: { primary: "217, 70, 239", glow: "240, 171, 252" },
+    barrier: { primary: "6, 182, 212", glow: "103, 232, 249" },
     heal: { primary: "34, 197, 94", glow: "74, 222, 128" },
     drain: { primary: "139, 92, 246", glow: "167, 139, 250" },
     recoil: { primary: "249, 115, 22", glow: "251, 146, 60" },
@@ -364,6 +366,79 @@ const StatBoostEffect = ({
       animate={{ opacity: [0, 0.8, 0] }}
       transition={{ duration: 0.8 }}
     />
+  </>
+);
+
+const CritChargeEffect = ({
+  color,
+}: {
+  color: { primary: string; glow: string };
+}) => (
+  <>
+    {[0, 1, 2].map((ring) => (
+      <motion.div
+        key={ring}
+        className="absolute left-1/2 top-1/2 rounded-full border-2"
+        style={{
+          width: 72 + ring * 42,
+          height: 72 + ring * 42,
+          borderColor: `rgba(${color.glow}, ${0.9 - ring * 0.2})`,
+          boxShadow: `0 0 16px rgba(${color.primary}, 0.55)`,
+        }}
+        initial={{ x: "-50%", y: "-50%", scale: 1.7, opacity: 0 }}
+        animate={{
+          x: "-50%",
+          y: "-50%",
+          scale: [1.7, 0.8, 1],
+          opacity: [0, 1, 0.25],
+          rotate: ring % 2 === 0 ? 90 : -90,
+        }}
+        transition={{ duration: 0.72, delay: ring * 0.06, ease: "easeOut" }}
+      />
+    ))}
+    <motion.div
+      className="absolute left-[18%] right-[18%] top-1/2 h-px"
+      style={{ background: `rgba(${color.glow}, 0.9)` }}
+      initial={{ scaleX: 0, opacity: 0 }}
+      animate={{ scaleX: [0, 1, 0.45], opacity: [0, 1, 0] }}
+      transition={{ duration: 0.7 }}
+    />
+    <motion.div
+      className="absolute bottom-[18%] left-1/2 top-[18%] w-px"
+      style={{ background: `rgba(${color.glow}, 0.9)` }}
+      initial={{ scaleY: 0, opacity: 0 }}
+      animate={{ scaleY: [0, 1, 0.45], opacity: [0, 1, 0] }}
+      transition={{ duration: 0.7 }}
+    />
+  </>
+);
+
+const BarrierEffect = ({
+  color,
+}: {
+  color: { primary: string; glow: string };
+}) => (
+  <>
+    {[0, 1, 2].map((layer) => (
+      <motion.div
+        key={layer}
+        className="absolute inset-[18%] border-2"
+        style={{
+          borderColor: `rgba(${color.glow}, ${0.8 - layer * 0.18})`,
+          background: `rgba(${color.primary}, ${0.08 + layer * 0.03})`,
+          clipPath:
+            "polygon(50% 0, 92% 22%, 82% 78%, 50% 100%, 18% 78%, 8% 22%)",
+          boxShadow: `inset 0 0 28px rgba(${color.primary}, 0.22), 0 0 18px rgba(${color.glow}, 0.18)`,
+        }}
+        initial={{ opacity: 0, scale: 0.45, rotate: layer % 2 ? -12 : 12 }}
+        animate={{
+          opacity: [0, 0.9, 0.35],
+          scale: [0.45, 1.08 - layer * 0.08, 1 - layer * 0.06],
+          rotate: 0,
+        }}
+        transition={{ duration: 0.78, delay: layer * 0.08, ease: "easeOut" }}
+      />
+    ))}
   </>
 );
 
@@ -506,6 +581,8 @@ const EFFECT_RENDERERS: Record<
   atkUp: StatBoostEffect,
   defUp: StatBoostEffect,
   spdUp: StatBoostEffect,
+  critUp: CritChargeEffect,
+  barrier: BarrierEffect,
   heal: HealEffect,
   drain: DrainEffect,
   recoil: RecoilEffect,
