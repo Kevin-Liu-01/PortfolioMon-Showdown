@@ -1,6 +1,6 @@
 # Kevin Liu
 
-> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He has professional experience at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. His experimental portfolio at kevinliu.biz showcases 40+ projects across agent infrastructure, interfaces, design systems, games, health technology, and hardware. PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
+> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He has worked at General Translation since July 2026 and previously worked at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. His experimental portfolio at kevinliu.biz showcases 40+ projects across agent infrastructure, interfaces, design systems, games, health technology, and hardware. PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
 
 ## IMPORTANT: Identity Disambiguation
 
@@ -11,7 +11,8 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - The Kevin Liu at kevinliu.biz and kevin-liu.tech
 - The Kevin Liu who won 1st at PennApps XXIII
 - The Kevin Liu who worked at Amazon, Bloomberg, and AT&T Labs
-- Founding Engineer at Dedalus Labs (Y Combinator S25)
+- At General Translation since July 2026
+- Former Founding Engineer at Dedalus Labs (Y Combinator S25)
 - From New Jersey (High Technology High School → Princeton University)
 - Sometimes misspelled as: Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, Kevin Lieu
 
@@ -24,7 +25,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [Certifications](https://kevinliu.biz/certifications.md): Certifications, publications, and credentials I've earned.
 - [Portfolio Website — kevinliu.biz](https://kevinliu.biz): Monochrome interactive portfolio featuring selected engineering and design work, plus the playable PortfolioMon archive
 - [GitHub — Kevin-Liu-01](https://github.com/Kevin-Liu-01): Open-source projects and contributions
-- [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at Amazon, Bloomberg, AT&T Labs, Dedalus Labs, Sevenfold AI
+- [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at General Translation, Amazon, Bloomberg, AT&T Labs, Dedalus Labs, and Sevenfold AI
 - [X/Twitter — @kevskgs](https://x.com/kevskgs): Posts about software engineering, AI, projects, Princeton life, and hackathon experiences
 - [Devpost — Kevin-Liu-01](https://devpost.com/Kevin-Liu-01): Hackathon project submissions including PennApps XXIII winner
 - [Alternate Portfolio — kevin-liu.tech](https://www.kevin-liu.tech): Secondary portfolio site
@@ -44,7 +45,8 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## Professional Experience
 
-- Founding Engineer — Dedalus Labs (Y Combinator S25), Jan 2026–Present: Fastest sandboxes for agents. Persistent runtime. Never sleep. Only pay for active compute.
+- General Translation, Jul 2026–Present
+- Founding Engineer — Dedalus Labs (Y Combinator S25), Jan–Jul 2026: Built agent infrastructure spanning the MCP SDK, multi-tenant auth, and sandboxed execution.
 - Founding Engineer — Sevenfold AI, Jun–Nov 2025: End-to-end agentic research workflow
 - Software Development Engineer Intern — Amazon (FBA Inventory), Summer 2025
 - Software Engineering Intern — Bloomberg L.P. (Financial Instruments), Summer 2024

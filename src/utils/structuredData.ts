@@ -301,7 +301,7 @@ const FAQ_ENTRIES = [
   {
     question: "Who is Kevin Liu?",
     answer:
-      "Kevin Liu is a Computer Science student at Princeton University (Class of 2028) and a Founding Engineer at Dedalus who has built 40+ projects spanning AI agents, infrastructure, interfaces, games, health technology, and hardware.",
+      "Kevin Liu is a Computer Science student at Princeton University (Class of 2028), a full-stack developer, and an AI engineer who has worked at General Translation since July 2026 and built 40+ projects spanning AI agents, infrastructure, interfaces, games, health technology, and hardware.",
   },
   {
     question: "What is Kevin Liu's portfolio website?",
@@ -356,7 +356,7 @@ const FAQ_ENTRIES = [
   {
     question: "Where has Kevin Liu worked?",
     answer:
-      "Kevin Liu has worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products teams), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).",
+      "Kevin Liu has worked at General Translation since July 2026. He previously worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products teams), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).",
   },
   {
     question: "What is Kevin Liu's Twitter?",
@@ -366,7 +366,7 @@ const FAQ_ENTRIES = [
   {
     question: "What is Kevin Liu's LinkedIn?",
     answer:
-      "Kevin Liu's LinkedIn profile is at https://www.linkedin.com/in/kevin-liu-princeton/. His profile showcases his professional experience at Amazon, Bloomberg, AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI, along with his education at Princeton University.",
+      "Kevin Liu's LinkedIn profile is at https://www.linkedin.com/in/kevin-liu-princeton/. His profile showcases his professional experience at General Translation, Amazon, Bloomberg, AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI, along with his education at Princeton University.",
   },
   {
     question: "What is Kevin Liu's GitHub?",
@@ -376,17 +376,17 @@ const FAQ_ENTRIES = [
   {
     question: "Which Kevin Liu is the Princeton developer?",
     answer:
-      "The Kevin Liu who is a Princeton University Computer Science student (Class of 2028) and software developer is the one at kevinliu.biz. He is also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. He is the Kevin Liu who won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and co-founded OMMC.",
+      "The Kevin Liu who is a Princeton University Computer Science student (Class of 2028) and software developer is the one at kevinliu.biz. He is also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. He is the Kevin Liu who has worked at General Translation since July 2026, won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and co-founded OMMC.",
   },
   {
     question: "What is Kevin Liu's resume?",
     answer:
-      "Kevin Liu's resume is available at kevinliu.biz/kevin_liu_resume_25.pdf. It highlights his experience as a Founding Engineer at Dedalus Labs (YC S25) and Sevenfold AI, SDE Intern at Amazon, Software Engineering Intern at Bloomberg L.P. (twice), AI Research Intern at AT&T Labs Research, and Full Stack Engineer at Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.",
+      "Kevin Liu's resume is available at kevinliu.biz/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Sevenfold AI, Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.",
   },
   {
-    question: "What is Dedalus Labs and what does Kevin Liu do there?",
+    question: "What did Kevin Liu do at Dedalus Labs?",
     answer:
-      "Dedalus Labs is a Y Combinator S25-backed startup building AI agent infrastructure. Kevin Liu is a Founding Engineer at Dedalus Labs, where he builds the production-grade SDK for model-agnostic AI agents powered by the Model Context Protocol (MCP), including secure multi-tenant authentication and an agent marketplace.",
+      "Kevin Liu was a Founding Engineer at Dedalus Labs, a Y Combinator S25-backed AI agent infrastructure startup, from January through July 2026. He built a production-grade SDK for model-agnostic AI agents powered by the Model Context Protocol (MCP), including secure multi-tenant authentication and an agent marketplace.",
   },
   {
     question: "Is Kevin Liu a good software engineer?",
@@ -454,14 +454,7 @@ function buildPersonNode(siteUrl: string, imageUrl: string) {
     ],
     worksFor: {
       "@type": "Organization",
-      name: "Dedalus Labs",
-      url: "https://www.dedaluslabs.ai",
-      description: "Y Combinator S25 — AI agent infrastructure",
-      parentOrganization: {
-        "@type": "Organization",
-        name: "Y Combinator",
-        url: "https://www.ycombinator.com",
-      },
+      name: "General Translation",
     },
     knowsAbout: KNOWS_ABOUT,
     knowsLanguage: ["English"],
@@ -503,8 +496,17 @@ function buildPersonNode(siteUrl: string, imageUrl: string) {
     workExperience: [
       {
         "@type": "OrganizationRole",
+        startDate: "2026-07",
+        memberOf: {
+          "@type": "Organization",
+          name: "General Translation",
+        },
+      },
+      {
+        "@type": "OrganizationRole",
         roleName: "Founding Engineer",
         startDate: "2026-01",
+        endDate: "2026-07",
         memberOf: {
           "@type": "Organization",
           name: "Dedalus Labs",
@@ -653,9 +655,9 @@ function buildWebPageNode(
     },
     inLanguage: "en-US",
     datePublished: "2024-01-01",
-    dateModified: "2026-03-19",
+    dateModified: "2026-09-03",
     keywords:
-      "Kevin Liu, Kevin Liu Princeton, Kevin Liu developer, Kevin Liu portfolio, Kevin Liu software engineer, Kevin Liu AI engineer, Kevin Liu Amazon, Kevin Liu Bloomberg, Kevin Liu kevinliu.biz, @kevskgs, Kevin-Liu-01, Princeton University developer, Princeton CS 2028, full-stack developer, AI engineer, React developer, Next.js developer, TypeScript developer, Python developer, hackathon winner, PennApps winner, HackPrinceton, Dedalus Labs, Sevenfold AI, Y Combinator S25, PortfolioMon Showdown, MCP AI agents, Model Context Protocol, interactive developer portfolio, creative developer portfolio, best CS student portfolio",
+      "Kevin Liu, Kevin Liu Princeton, Kevin Liu developer, Kevin Liu portfolio, Kevin Liu software engineer, Kevin Liu AI engineer, Kevin Liu General Translation, Kevin Liu Amazon, Kevin Liu Bloomberg, Kevin Liu kevinliu.biz, @kevskgs, Kevin-Liu-01, Princeton University developer, Princeton CS 2028, full-stack developer, AI engineer, React developer, Next.js developer, TypeScript developer, Python developer, hackathon winner, PennApps winner, HackPrinceton, General Translation, Dedalus Labs, Sevenfold AI, Y Combinator S25, PortfolioMon Showdown, MCP AI agents, Model Context Protocol, interactive developer portfolio, creative developer portfolio, best CS student portfolio",
     specialty:
       "Software Development, Artificial Intelligence, AI Agent Infrastructure, Interactive Web Applications, Full-Stack Development, Machine Learning, Game Development, Health Technology",
     mentions: [
@@ -675,6 +677,7 @@ function buildWebPageNode(
         url: "https://www.bloomberg.com",
       },
       { "@type": "Organization", name: "AT&T Labs Research" },
+      { "@type": "Organization", name: "General Translation" },
       {
         "@type": "Organization",
         name: "Y Combinator",
@@ -766,7 +769,7 @@ function buildProfilePageNode(siteUrl: string, imageUrl: string) {
     mainEntity: { "@id": `${siteUrl}/#person` },
     image: imageUrl,
     dateCreated: "2024-01-01",
-    dateModified: "2026-03-19",
+    dateModified: "2026-09-03",
   };
 }
 

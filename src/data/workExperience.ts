@@ -7,11 +7,17 @@ export interface WorkExperienceEntry {
 
 export const workExperience: WorkExperienceEntry[] = [
   {
+    role: "",
+    company: "General Translation",
+    date: "Jul 2026 – Present",
+    description: "Joined General Translation in July 2026.",
+  },
+  {
     role: "Founding Engineer",
     company: "Dedalus Labs (YC S25)",
-    date: "Spring 2026 – Present",
+    date: "Jan 2026 – Jul 2026",
     description:
-      "Building agent infrastructure: MCP-powered SDK, multi-tenant auth (DAuth), and sandboxed execution via microVM workspaces and container orchestration.",
+      "Built agent infrastructure: an MCP-powered SDK, multi-tenant auth (DAuth), and sandboxed execution via microVM workspaces and container orchestration.",
   },
   {
     role: "Founding Engineer",

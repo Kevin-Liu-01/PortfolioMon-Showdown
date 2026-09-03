@@ -1,14 +1,20 @@
 # Experience
 
+## General Translation
+
+Duration: Jul 2026 - Present
+
+- Joined General Translation in July 2026.
+
 ## Founding Engineer | Dedalus Labs (YC S25)
 
-Duration: Spring 2026 - Present
+Duration: Jan 2026 - Jul 2026
 
 Skills: TypeScript, Next.js, MCP, MicroVM, Container Orchestration, Multi-Tenant Auth, Agent SDK, Rust, Go, Kubernetes
 
-- Building agent infrastructure on flagship model-agnostic MCP-powered SDK.
+- Built agent infrastructure on the flagship model-agnostic MCP-powered SDK.
 - Shipped multi-tenant auth system (DAuth) and sandboxed execution layer using microVM workspaces and container orchestration.
-- Working across the full surface area of production agent needs: harnesses, reasoning, model handoffs, tool use, remote control, and executable environments.
+- Worked across the full surface area of production agent needs: harnesses, reasoning, model handoffs, tool use, remote control, and executable environments.
 - Took a gap semester from Princeton to build full-time in SF; confirmed building as a vocation.
 - Sponsored and presented Dedalus Machines (<50ms cold start) at HackPrinceton (Fall 2025, Spring 2026) — mentored teams building agentic workflows on DMs in 36 hours.
 
