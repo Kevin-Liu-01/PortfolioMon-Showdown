@@ -2,9 +2,9 @@
 // Consolidated @graph approach for tighter entity relationships.
 
 const PERSON_NAME = "Kevin Liu";
-const PERSON_JOB_TITLE = "Software Developer & AI Engineer";
+const PERSON_JOB_TITLE = "Infra + Product";
 const PERSON_DESCRIPTION =
-  "Kevin Liu is a Computer Science student at Princeton University (Class of 2028), full-stack developer, and AI engineer who has shipped 40+ projects spanning artificial intelligence, infrastructure, web development, game development, health technology, and hardware. He won 1st in Hardware at PennApps XXIII and organizes HackPrinceton.";
+  "Kevin Liu works in Infra + Product at General Translation and is a Computer Science student at Princeton University (Class of 2028), full-stack developer, and AI engineer who has shipped 40+ projects spanning artificial intelligence, infrastructure, web development, game development, health technology, and hardware. He won 1st in Hardware at PennApps XXIII and organizes HackPrinceton.";
 
 const SOCIAL_PROFILES = [
   "https://github.com/Kevin-Liu-01",
@@ -301,7 +301,7 @@ const FAQ_ENTRIES = [
   {
     question: "Who is Kevin Liu?",
     answer:
-      "Kevin Liu is a Computer Science student at Princeton University (Class of 2028), a full-stack developer, and an AI engineer who has worked at General Translation since July 2026 and built 40+ projects spanning AI agents, infrastructure, interfaces, games, health technology, and hardware.",
+      "Kevin Liu is a Computer Science student at Princeton University (Class of 2028), a full-stack developer, and an AI engineer who has worked in Infra + Product at General Translation since July 2026 and built 40+ projects spanning AI agents, infrastructure, interfaces, games, health technology, and hardware.",
   },
   {
     question: "What is Kevin Liu's portfolio website?",
@@ -356,7 +356,7 @@ const FAQ_ENTRIES = [
   {
     question: "Where has Kevin Liu worked?",
     answer:
-      "Kevin Liu has worked at General Translation since July 2026. He previously worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products teams), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).",
+      "Kevin Liu has worked in Infra + Product at General Translation since July 2026. He previously worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products teams), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).",
   },
   {
     question: "What is Kevin Liu's Twitter?",
@@ -376,7 +376,7 @@ const FAQ_ENTRIES = [
   {
     question: "Which Kevin Liu is the Princeton developer?",
     answer:
-      "The Kevin Liu who is a Princeton University Computer Science student (Class of 2028) and software developer is the one at kevinliu.biz. He is also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. He is the Kevin Liu who has worked at General Translation since July 2026, won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and co-founded OMMC.",
+      "The Kevin Liu who is a Princeton University Computer Science student (Class of 2028) and software developer is the one at kevinliu.biz. He is also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. He is the Kevin Liu who has worked in Infra + Product at General Translation since July 2026, won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and co-founded OMMC.",
   },
   {
     question: "What is Kevin Liu's resume?",
@@ -496,6 +496,7 @@ function buildPersonNode(siteUrl: string, imageUrl: string) {
     workExperience: [
       {
         "@type": "OrganizationRole",
+        roleName: "Infra + Product",
         startDate: "2026-07",
         memberOf: {
           "@type": "Organization",
@@ -657,7 +658,7 @@ function buildWebPageNode(
     datePublished: "2024-01-01",
     dateModified: "2026-09-03",
     keywords:
-      "Kevin Liu, Kevin Liu Princeton, Kevin Liu developer, Kevin Liu portfolio, Kevin Liu software engineer, Kevin Liu AI engineer, Kevin Liu General Translation, Kevin Liu Amazon, Kevin Liu Bloomberg, Kevin Liu kevinliu.biz, @kevskgs, Kevin-Liu-01, Princeton University developer, Princeton CS 2028, full-stack developer, AI engineer, React developer, Next.js developer, TypeScript developer, Python developer, hackathon winner, PennApps winner, HackPrinceton, General Translation, Dedalus Labs, Sevenfold AI, Y Combinator S25, PortfolioMon Showdown, MCP AI agents, Model Context Protocol, interactive developer portfolio, creative developer portfolio, best CS student portfolio",
+      "Kevin Liu, Kevin Liu Princeton, Kevin Liu developer, Kevin Liu portfolio, Kevin Liu software engineer, Kevin Liu AI engineer, Kevin Liu General Translation, Kevin Liu Infra + Product, Kevin Liu Amazon, Kevin Liu Bloomberg, Kevin Liu kevinliu.biz, @kevskgs, Kevin-Liu-01, Princeton University developer, Princeton CS 2028, full-stack developer, AI engineer, React developer, Next.js developer, TypeScript developer, Python developer, hackathon winner, PennApps winner, HackPrinceton, General Translation, Dedalus Labs, Sevenfold AI, Y Combinator S25, PortfolioMon Showdown, MCP AI agents, Model Context Protocol, interactive developer portfolio, creative developer portfolio, best CS student portfolio",
     specialty:
       "Software Development, Artificial Intelligence, AI Agent Infrastructure, Interactive Web Applications, Full-Stack Development, Machine Learning, Game Development, Health Technology",
     mentions: [

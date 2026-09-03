@@ -1284,9 +1284,9 @@ const TrainerInfoPanel = ({
                   </h1>
                   <p className="ml-2 text-xs font-bold tracking-wide text-cyan-300 [text-shadow:1px_1px_3px_rgba(0,0,0,0.5)] dark:text-cyan-400">
                     <span className="dark:text-cyan-300mn text-cyan-200">
-                      General Translation
+                      Infra + Product
                     </span>{" "}
-                    <br /> Princeton &apos;28
+                    <br /> General Translation · Princeton &apos;28
                   </p>
                 </div>
               </div>
@@ -1717,9 +1717,9 @@ const SEOContent = () => (
       Kevin-Liu-01 on GitHub. His portfolio at kevinliu.biz is PortfolioMon
       Showdown, a Pokémon-inspired battle game where forty shipped projects
       become playable fighters with unique types, stats, moves, images, and
-      animations. Kevin Liu currently works at General Translation and has
-      previously worked at Amazon, Bloomberg L.P., AT&amp;T Labs Research,
-      Dedalus Labs (Y Combinator S25), and Sevenfold AI.
+      animations. Kevin Liu currently works in Infra + Product at General
+      Translation and has previously worked at Amazon, Bloomberg L.P., AT&amp;T
+      Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI.
     </p>
 
     <div
@@ -1737,6 +1737,7 @@ const SEOContent = () => (
     >
       <meta itemProp="name" content="General Translation" />
     </div>
+    <meta itemProp="jobTitle" content="Infra + Product" />
     <meta
       itemProp="knowsAbout"
       content="Agent Infrastructure, Model Context Protocol, MCP, Full-Stack Web Development, AI Agents, MicroVM Workspaces, Container Orchestration, React, Next.js, TypeScript, Python, Machine Learning, NLP"
@@ -1754,21 +1755,21 @@ const SEOContent = () => (
 
     <h3>Professional Experience — Kevin Liu</h3>
     <p>
-      Kevin Liu has worked at General Translation since July 2026. Previously,
-      he was a Founding Engineer at Dedalus Labs (Y Combinator S25) from January
-      through July 2026, where he built production agent infrastructure: an
-      MCP-powered SDK, multi-tenant auth (DAuth), and sandboxed execution via
-      microVM workspaces and container orchestration. He was also a Founding
-      Engineer at Sevenfold AI, where he built an agent-powered research
-      workflow with vector search boosting LLM relevance by 4.6x. He interned as
-      an SDE at Amazon Web Services (FBA Inventory, LLM dashboard with
-      Amazon-Q), a Software Engineering Intern at Bloomberg L.P. (twice:
-      Financial Instruments and Core Products, including an ML classifier with
-      86% accuracy), and an AI Research Intern at AT&amp;T Labs Research
-      designing MoE agents that reduced document analysis time by 85%. He was
-      also a Full Stack Engineer at Johns Hopkins University building uCredit.me
-      for 6k+ students. He is also an Undergraduate Researcher at Princeton
-      under Danqi Chen, studying agent orchestration with CoTCodec.
+      Kevin Liu has worked in Infra + Product at General Translation since July
+      2026. Previously, he was a Founding Engineer at Dedalus Labs (Y Combinator
+      S25) from January through July 2026, where he built production agent
+      infrastructure: an MCP-powered SDK, multi-tenant auth (DAuth), and
+      sandboxed execution via microVM workspaces and container orchestration. He
+      was also a Founding Engineer at Sevenfold AI, where he built an
+      agent-powered research workflow with vector search boosting LLM relevance
+      by 4.6x. He interned as an SDE at Amazon Web Services (FBA Inventory, LLM
+      dashboard with Amazon-Q), a Software Engineering Intern at Bloomberg L.P.
+      (twice: Financial Instruments and Core Products, including an ML
+      classifier with 86% accuracy), and an AI Research Intern at AT&amp;T Labs
+      Research designing MoE agents that reduced document analysis time by 85%.
+      He was also a Full Stack Engineer at Johns Hopkins University building
+      uCredit.me for 6k+ students. He is also an Undergraduate Researcher at
+      Princeton under Danqi Chen, studying agent orchestration with CoTCodec.
     </p>
 
     <h3>Technical Skills — Kevin Liu</h3>
@@ -1884,10 +1885,10 @@ const SEOContent = () => (
       Liu. This Kevin Liu is identified by: Princeton CS &apos;28, @kevskgs on
       Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn,
       kevinliu.biz, kevin-liu.tech, PennApps XXIII 1st Place Hardware winner,
-      Amazon/Bloomberg/AT&amp;T Labs intern, at General Translation since July
-      2026, former Founding Engineer at Dedalus Labs (Y Combinator S25),
-      HackPrinceton organizer, and OMMC co-founder. Sometimes misspelled as
-      Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, or Kevin Lieu.
+      Amazon/Bloomberg/AT&amp;T Labs intern, in Infra + Product at General
+      Translation since July 2026, former Founding Engineer at Dedalus Labs (Y
+      Combinator S25), HackPrinceton organizer, and OMMC co-founder. Sometimes
+      misspelled as Keven Liu, Kevin Lui, Kelvin Liu, Kevin Lue, or Kevin Lieu.
     </p>
 
     <h3>Kevin Liu&apos;s Social Media &amp; Online Presence</h3>

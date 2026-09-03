@@ -7,10 +7,11 @@ export interface WorkExperienceEntry {
 
 export const workExperience: WorkExperienceEntry[] = [
   {
-    role: "",
+    role: "Infra + Product",
     company: "General Translation",
     date: "Jul 2026 – Present",
-    description: "Joined General Translation in July 2026.",
+    description:
+      "Works across infrastructure and product at General Translation.",
   },
   {
     role: "Founding Engineer",

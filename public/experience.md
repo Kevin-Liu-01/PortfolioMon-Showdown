@@ -1,10 +1,10 @@
 # Experience
 
-## General Translation
+## Infra + Product | General Translation
 
 Duration: Jul 2026 - Present
 
-- Joined General Translation in July 2026.
+- Working across infrastructure and product at General Translation.
 
 ## Founding Engineer | Dedalus Labs (YC S25)
 

@@ -63,7 +63,7 @@ export default function Document() {
         />
         <meta
           name="summary"
-          content="Kevin Liu — Princeton CS '28, software developer, AI engineer. At General Translation since July 2026. Former Founding Engineer at Dedalus Labs (YC S25). Experience at Amazon, Bloomberg, and AT&T Labs. 40+ projects. @kevskgs on Twitter/X."
+          content="Kevin Liu — Princeton CS '28, software developer, AI engineer. Infra + Product at General Translation since July 2026. Former Founding Engineer at Dedalus Labs (YC S25). Experience at Amazon, Bloomberg, and AT&T Labs. 40+ projects. @kevskgs on Twitter/X."
         />
 
         {/* Dublin Core metadata for enhanced discoverability */}
@@ -246,21 +246,22 @@ export default function Document() {
               is a Computer Science student at Princeton University (Class of
               2028) and a full-stack software developer specializing in
               artificial intelligence, machine learning, and interactive web
-              applications. He has worked at General Translation since July 2026
-              and has previous professional experience at Amazon, Bloomberg
-              L.P., AT&amp;T Labs Research, and Y Combinator-backed startups.
-              This is PortfolioMon Showdown, Kevin&apos;s original interactive
-              portfolio: a playable Pokémon-inspired battle game built from his
-              projects across AI, infrastructure, interfaces, and games.
+              applications. He has worked in Infra + Product at General
+              Translation since July 2026 and has previous professional
+              experience at Amazon, Bloomberg L.P., AT&amp;T Labs Research, and
+              Y Combinator-backed startups. This is PortfolioMon Showdown,
+              Kevin&apos;s original interactive portfolio: a playable
+              Pokémon-inspired battle game built from his projects across AI,
+              infrastructure, interfaces, and games.
             </p>
 
             <h2>About Kevin Liu — Princeton Developer &amp; AI Engineer</h2>
             <p>
-              Kevin Liu has worked at General Translation since July 2026.
-              Previously, he was a Founding Engineer at Dedalus Labs (Y
-              Combinator S25) from January through July 2026, building AI agent
-              infrastructure with the Model Context Protocol (MCP). He was also
-              a Founding Engineer at Sevenfold AI (AI-powered research
+              Kevin Liu has worked in Infra + Product at General Translation
+              since July 2026. Previously, he was a Founding Engineer at Dedalus
+              Labs (Y Combinator S25) from January through July 2026, building
+              AI agent infrastructure with the Model Context Protocol (MCP). He
+              was also a Founding Engineer at Sevenfold AI (AI-powered research
               workspace), a Software Development Engineer Intern at Amazon (FBA
               Inventory), and a Software Engineering Intern at Bloomberg L.P.
               (twice — Financial Instruments and Core Products teams). He also
@@ -399,7 +400,7 @@ export default function Document() {
 
             <h2>Work Experience</h2>
             <ul>
-              <li>General Translation, Jul 2026–Present</li>
+              <li>Infra + Product — General Translation, Jul 2026–Present</li>
               <li>
                 Founding Engineer — Dedalus Labs (YC S25), Jan–Jul 2026 — Built
                 agent infrastructure: MCP SDK, DAuth, microVM workspaces, and
