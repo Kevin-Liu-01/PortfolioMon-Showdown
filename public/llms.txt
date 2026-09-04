@@ -56,6 +56,12 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## Featured Projects
 
+- [Claude of Tanks](https://cot.kevinliu.studio/): Browser-native Three.js armored combat simulator with plate-level armor, ballistics, modules, physics, and destructible battlefields
+- [Glyphfield](https://www.glyphfield.com/): Open-source brand studio for identity systems, motion, graphics, materials, templates, and agent-ready artifacts
+- [Prototemplate](https://www.prototemplate.com/): Living General Translation brand lab with real localized prototypes, presentation tooling, and pixel-level visual audits
+- [Local Search](https://www.lsearch.dev/): Rust CLI that turns a local browser into structured search and browser tools for shell-capable agents
+- [HDRPop](https://hdr.kevinliu.studio/): Local-first PQ-tagged HDR image converter and live SDR/HDR comparison experiment
+- [Aurematica](https://aurematica.vercel.app/): Cinematic photography archive organized as six editorial collections
 - [Reticle](https://reticle-demo.vercel.app/): Interactive launch site for Dedalus's persistent Linux computers for AI agents
 - [Ariadne](https://ariadne.dedaluslabs.ai/): Phone-first agent for the Run(way)time live event experience
 - [Sandbox Arena](https://sandboxarena.vercel.app/): Live head-to-head benchmark for cloud code-execution sandboxes
@@ -76,6 +82,12 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## All Projects
 
+- [Claude of Tanks](https://cot.kevinliu.studio/): Browser-native armored combat simulator
+- [Glyphfield](https://www.glyphfield.com/): Open-source brand design and motion studio
+- [Prototemplate](https://www.prototemplate.com/): General Translation brand identity lab
+- [Local Search](https://www.lsearch.dev/): Local-browser search CLI for agents
+- [HDRPop](https://hdr.kevinliu.studio/): PQ-tagged HDR image converter and explainer
+- [Aurematica](https://aurematica.vercel.app/): Editorial photography archive
 - [Reticle](https://reticle-demo.vercel.app/): Dedalus persistent-compute launch site
 - [Ariadne](https://ariadne.dedaluslabs.ai/): Phone-first live event agent
 - [Sandbox Arena](https://sandboxarena.vercel.app/): Cloud sandbox benchmarking arena

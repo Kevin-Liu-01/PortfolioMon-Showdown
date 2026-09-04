@@ -1715,7 +1715,7 @@ const SEOContent = () => (
       intelligence, machine learning, and interactive web applications. He is
       also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and
       Kevin-Liu-01 on GitHub. His portfolio at kevinliu.biz is PortfolioMon
-      Showdown, a Pokémon-inspired battle game where forty shipped projects
+      Showdown, a Pokémon-inspired battle game where forty-six shipped projects
       become playable fighters with unique types, stats, moves, images, and
       animations. Kevin Liu currently works in Infra + Product at General
       Translation and has previously worked at Amazon, Bloomberg L.P., AT&amp;T

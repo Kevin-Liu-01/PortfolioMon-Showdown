@@ -59,7 +59,7 @@ export default function Document() {
         <meta name="rating" content="general" />
         <meta
           name="abstract"
-          content="Kevin Liu is a Princeton University Computer Science student, full-stack developer, and AI engineer. PortfolioMon Showdown is his original interactive portfolio: a Pokémon-inspired battle game built from forty shipped projects."
+          content="Kevin Liu is a Princeton University Computer Science student, full-stack developer, and AI engineer. PortfolioMon Showdown is his original interactive portfolio: a Pokémon-inspired battle game built from forty-six shipped projects."
         />
         <meta
           name="summary"
@@ -280,6 +280,30 @@ export default function Document() {
 
             <h2>Featured Projects by Kevin Liu</h2>
             <ul>
+              <li>
+                <a href="https://cot.kevinliu.studio/">Claude of Tanks</a> —
+                Browser-native Three.js armored combat simulator
+              </li>
+              <li>
+                <a href="https://www.glyphfield.com/">Glyphfield</a> —
+                Open-source brand design and motion studio
+              </li>
+              <li>
+                <a href="https://www.prototemplate.com/">Prototemplate</a> —
+                Living General Translation brand identity lab
+              </li>
+              <li>
+                <a href="https://www.lsearch.dev/">Local Search</a> — Rust CLI
+                that turns a local browser into structured search for agents
+              </li>
+              <li>
+                <a href="https://hdr.kevinliu.studio/">HDRPop</a> — PQ-tagged
+                HDR image converter and SDR/HDR comparison experiment
+              </li>
+              <li>
+                <a href="https://aurematica.vercel.app/">Aurematica</a> —
+                Cinematic editorial photography archive
+              </li>
               <li>
                 <a href="https://reticle-demo.vercel.app/">Reticle</a> —
                 Interactive launch site for Dedalus persistent computers

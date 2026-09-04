@@ -1,5 +1,63 @@
 # Projects
 
+## Claude of Tanks
+
+Project URL: https://cot.kevinliu.studio
+
+Skills: Three.js, Vite, TypeScript, Game Development, Simulation, Multi-Agent Development
+
+Browser-native armored combat simulator with plate-level armor, ballistics, modules, spotting, physics, and destructible battlefields. Built as a complete desktop-and-mobile tank game through a multi-agent Claude and Codex pipeline.
+
+- GitHub: https://github.com/Kevin-Liu-01/Claude-of-Tanks
+
+## Glyphfield
+
+Project URL: https://www.glyphfield.com
+
+Skills: Next.js, TypeScript, Brand Systems, Motion, WebGL, Agent Interfaces
+
+Open-source, local-first brand studio for identity systems, motion, graphics, materials, templates, and product-ready artifacts. People and agents operate the same connected workspace and export authentic visual assets.
+
+- GitHub: https://github.com/Kevin-Liu-01/Glyphfield
+
+## Prototemplate
+
+Project URL: https://www.prototemplate.com
+
+Skills: Next.js, TypeScript, Brand Design, Localization, Visual Auditing, Design Systems
+
+Living brand-guideline and design lab for General Translation. Twenty-plus art directions compete as real localized pages, supported by a scroll presenter, design canon, comparison tooling, and pixel-level visual audits.
+
+- GitHub: https://github.com/Kevin-Liu-01/Prototemplate
+
+## Local Search
+
+Project URL: https://www.lsearch.dev
+
+Skills: Rust, Chrome DevTools Protocol, Browser Automation, AI Agents, CLI Design
+
+Small open-source Rust CLI that turns a local Chrome or Chromium browser into structured search and browser tools for shell-capable agents, without a hosted API key or metered search account.
+
+- GitHub: https://github.com/Kevin-Liu-01/Local-Search
+
+## HDRPop
+
+Project URL: https://hdr.kevinliu.studio
+
+Skills: Next.js, HDR Imaging, Rec.2020, PQ Encoding, Image Processing
+
+Local-first image experiment that converts ordinary images into PQ-tagged HDR JPEGs, compares SDR and HDR live, and explains why bright logos can visually exceed the white of a surrounding interface on compatible XDR displays.
+
+- GitHub: https://github.com/Kevin-Liu-01/HDRPop
+
+## Aurematica
+
+Project URL: https://aurematica.vercel.app
+
+Skills: Next.js, Photography, Editorial Design, Art Direction, Motion
+
+Cinematic photography archive organized as six editorial collections spanning portrait, stonework, ritual, witness, group, and motion studies shot on a Canon Rebel T2i.
+
 ## Reticle
 
 Project URL: https://reticle-demo.vercel.app
@@ -112,7 +170,7 @@ Project URL: https://kevinliu.biz/#portfoliomon
 
 Skills: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, Vercel
 
-Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable project. Forty real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
+Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable project. Forty-six real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
 
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
 

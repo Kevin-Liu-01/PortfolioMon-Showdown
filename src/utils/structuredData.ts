@@ -86,6 +86,42 @@ const KNOWS_ABOUT = [
 
 const PROJECT_CATALOG = [
   {
+    name: "Claude of Tanks",
+    url: "https://cot.kevinliu.studio/",
+    description:
+      "Browser-native Three.js armored combat simulator with plate-level armor, ballistics, modules, physics, and destructible battlefields",
+  },
+  {
+    name: "Glyphfield",
+    url: "https://www.glyphfield.com/",
+    description:
+      "Open-source brand studio for identity systems, motion, graphics, materials, templates, and agent-ready artifacts",
+  },
+  {
+    name: "Prototemplate",
+    url: "https://www.prototemplate.com/",
+    description:
+      "Living General Translation brand lab with real localized prototypes, presentation tooling, and pixel-level visual audits",
+  },
+  {
+    name: "Local Search",
+    url: "https://www.lsearch.dev/",
+    description:
+      "Rust CLI that turns a local browser into structured search and browser tools for shell-capable agents",
+  },
+  {
+    name: "HDRPop",
+    url: "https://hdr.kevinliu.studio/",
+    description:
+      "Local-first PQ-tagged HDR image converter and live SDR/HDR comparison experiment",
+  },
+  {
+    name: "Aurematica",
+    url: "https://aurematica.vercel.app/",
+    description:
+      "Cinematic photography archive organized as six editorial collections",
+  },
+  {
     name: "Reticle",
     url: "https://reticle-demo.vercel.app/",
     description:
@@ -346,7 +382,7 @@ const FAQ_ENTRIES = [
   {
     question: "What is PortfolioMon Showdown?",
     answer:
-      "PortfolioMon Showdown is Kevin Liu's original interactive portfolio. It is a Pokémon-inspired turn-based fighting game where forty real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.",
+      "PortfolioMon Showdown is Kevin Liu's original interactive portfolio. It is a Pokémon-inspired turn-based fighting game where forty-six real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.",
   },
   {
     question: "What kind of portfolio does Kevin Liu have?",
@@ -742,7 +778,7 @@ function buildSoftwareAppNode(siteUrl: string) {
     applicationSubCategory: "Turn-Based Battle Game",
     operatingSystem: "Web Browser",
     description:
-      "Kevin Liu's original interactive portfolio inspired by Pokémon battles, where forty real projects become PortfolioMons with unique types, abilities, stats, animated frames, status systems, and moves.",
+      "Kevin Liu's original interactive portfolio inspired by Pokémon battles, where forty-six real projects become PortfolioMons with unique types, abilities, stats, animated frames, status systems, and moves.",
     author: { "@id": `${siteUrl}/#person` },
     offers: {
       "@type": "Offer",
@@ -751,7 +787,7 @@ function buildSoftwareAppNode(siteUrl: string) {
       availability: "https://schema.org/InStock",
     },
     featureList: [
-      "40 projects as playable PortfolioMons",
+      "46 projects as playable PortfolioMons",
       "8 unique type categories: AI, Web, Game, Data, Health, Hardware, Design, Mobile",
       "Turn-based combat with type advantage system",
       "Status effects: burn, poison, sleep, stun",

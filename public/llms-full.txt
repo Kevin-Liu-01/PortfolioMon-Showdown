@@ -163,6 +163,49 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 
 ## Detailed Project Catalog
 
+### Newest Projects
+
+#### Claude of Tanks
+- URL: https://cot.kevinliu.studio/
+- Description: Browser-native armored combat simulator with plate-level armor, ballistics, modules, spotting, physics, and destructible battlefields. Built as a complete desktop-and-mobile tank game through a multi-agent Claude and Codex pipeline.
+- Tech Stack: Three.js, Vite, TypeScript, Game Simulation
+- Categories: Game, Web
+- GitHub: https://github.com/Kevin-Liu-01/Claude-of-Tanks
+
+#### Glyphfield
+- URL: https://www.glyphfield.com/
+- Description: Open-source, local-first brand studio for identity systems, motion, graphics, materials, templates, and product-ready artifacts that people and agents operate through the same connected workspace.
+- Tech Stack: Next.js, TypeScript, WebGL, Motion, Agent Interfaces
+- Categories: Design, Web
+- GitHub: https://github.com/Kevin-Liu-01/Glyphfield
+
+#### Prototemplate
+- URL: https://www.prototemplate.com/
+- Description: Living brand-guideline and design lab for General Translation where twenty-plus art directions compete as real localized pages, backed by presentation, comparison, and pixel-audit tooling.
+- Tech Stack: Next.js, TypeScript, Localization, Visual Auditing
+- Categories: Design, Web
+- GitHub: https://github.com/Kevin-Liu-01/Prototemplate
+
+#### Local Search
+- URL: https://www.lsearch.dev/
+- Description: Small open-source Rust CLI that turns a local Chrome or Chromium browser into structured search and browser tools for shell-capable agents without a hosted API key or metered search account.
+- Tech Stack: Rust, Chrome DevTools Protocol, Browser Automation
+- Categories: Infra, AI
+- GitHub: https://github.com/Kevin-Liu-01/Local-Search
+
+#### HDRPop
+- URL: https://hdr.kevinliu.studio/
+- Description: Local-first image experiment that converts ordinary images into PQ-tagged HDR JPEGs, compares SDR and HDR live, and explains why bright logos can exceed interface white on compatible XDR displays.
+- Tech Stack: Next.js, Rec.2020, PQ Encoding, Image Processing
+- Categories: Web, Design
+- GitHub: https://github.com/Kevin-Liu-01/HDRPop
+
+#### Aurematica
+- URL: https://aurematica.vercel.app/
+- Description: Cinematic photography archive organized as six editorial collections spanning portrait, stonework, ritual, witness, group, and motion studies shot on a Canon Rebel T2i.
+- Tech Stack: Next.js, Photography, Editorial Design, Motion
+- Categories: Design, Web
+
 ### AI & Machine Learning Projects
 
 #### Reticle
@@ -369,7 +412,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 #### PortfolioMon Showdown
 - URL: https://kevinliu.biz
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
-- Description: Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable Pokémon-inspired turn-based game. Forty real projects are battle-ready PortfolioMons with unique types, stats, moves, animated frames, status systems, items, and AI opponents.
+- Description: Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable Pokémon-inspired turn-based game. Forty-six real projects are battle-ready PortfolioMons with unique types, stats, moves, animated frames, status systems, items, and AI opponents.
 - Tech Stack: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, NextAuth.js, Vercel Analytics
 - Categories: Web, Game
 
@@ -440,7 +483,7 @@ Kevin Liu attends Princeton University, pursuing a BSE in Computer Science as pa
 You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/), Twitter/X @kevskgs (https://x.com/kevskgs), Devpost (https://devpost.com/Kevin-Liu-01), or email at k.bowen.liu@gmail.com. His portfolio is at https://kevinliu.biz.
 
 ### What is PortfolioMon Showdown?
-PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved within his new site as a playable Pokémon-inspired turn-based battle project. Forty real projects are represented as PortfolioMons with unique types, stats, moves, status systems, and animated frames.
+PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved within his new site as a playable Pokémon-inspired turn-based battle project. Forty-six real projects are represented as PortfolioMons with unique types, stats, moves, status systems, and animated frames.
 
 ### What AI projects has Kevin Liu built?
 Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), Loop (operator desk for auto-refreshing agent skills), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).

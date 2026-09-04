@@ -35,7 +35,13 @@ if (config.projects.length !== roster.length) {
   );
 }
 
-for (const project of config.projects) {
+for (const [expectedId, project] of config.projects.entries()) {
+  if (project.id !== expectedId) {
+    errors.push(
+      `Config position ${expectedId} uses id ${project.id} (${project.name}).`
+    );
+  }
+
   const mon = roster.find(({ id }) => id === project.id);
   if (!mon) {
     errors.push(
@@ -54,6 +60,14 @@ for (const project of config.projects) {
     );
   }
 
+  if (roster[expectedId]?.id !== expectedId) {
+    errors.push(
+      `Roster position ${expectedId} uses id ${
+        roster[expectedId]?.id ?? "missing"
+      }.`
+    );
+  }
+
   try {
     const png = await readFile(path.join(root, project.output));
     const signature = png.subarray(0, 8).toString("hex");
@@ -69,7 +83,8 @@ for (const project of config.projects) {
       );
     }
   } catch (error) {
-    errors.push(`${project.output} could not be read: ${error.message}`);
+    const message = error instanceof Error ? error.message : String(error);
+    errors.push(`${project.output} could not be read: ${message}`);
   }
 }
 

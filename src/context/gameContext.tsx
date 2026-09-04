@@ -26,6 +26,12 @@ import {
   BedDouble,
   Zap,
   Trophy, // <-- Added Trophy
+  Crosshair,
+  Palette,
+  LayoutTemplate,
+  Search,
+  SunMedium,
+  Camera,
 } from "lucide-react";
 import { HIDDEN_PROJECT_GITHUB } from "../constants/game";
 
@@ -272,6 +278,336 @@ export const initialInventory: PlayerInventory = {
 export const portfolioMonData: PortfolioMon[] = [
   {
     id: 0,
+    name: "Claude of Tanks",
+    url: "https://cot.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/Claude-of-Tanks",
+    favorite: true,
+    description:
+      "Browser-native armored combat simulator built with Vite and pure Three.js. Models plate-level armor, ballistics, modules, spotting, physics, and destructible battlefields in a complete desktop-and-mobile tank game built by a multi-agent Claude and Codex pipeline.",
+    image: "/images/claude-of-tanks.png",
+    sprite: <Crosshair />,
+    type1: "Game",
+    type2: "Web",
+    hp: 350,
+    stats: { hp: 350, atk: 145, def: 135, spd: 95 },
+    moves: [
+      {
+        name: "Sabot Round",
+        power: 110,
+        type: "Game",
+        accuracy: 0.9,
+        pp: 8,
+        critChance: 0.2,
+        piercing: 0.5,
+        description:
+          "Fires a high-velocity round through the foe's armor plate.",
+      },
+      {
+        name: "Armor Angle",
+        power: 0,
+        type: "Hardware",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Turns the hull into the shot, sharply raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
+      },
+      {
+        name: "Module Hit",
+        power: 80,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 12,
+        effect: { type: "stun", chance: 0.3 },
+        description: "Targets a critical module and may leave the foe stunned.",
+      },
+      {
+        name: "Destructible Front",
+        power: 42,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 12,
+        hits: { min: 2, max: 3 },
+        description: "Breaks through the battlefield in a multi-hit advance.",
+      },
+    ],
+  },
+
+  {
+    id: 1,
+    name: "Glyphfield",
+    url: "https://www.glyphfield.com/",
+    github: "https://github.com/Kevin-Liu-01/Glyphfield",
+    favorite: true,
+    description:
+      "Open-source, local-first brand studio for identity systems, motion, graphics, materials, templates, and product-ready artifacts. People and agents operate the same connected workspace and export authentic PNG, SVG, GIF, MP4, and JSON outputs.",
+    image: "/images/glyphfield.png",
+    sprite: <Palette />,
+    type1: "Design",
+    type2: "Web",
+    hp: 320,
+    stats: { hp: 320, atk: 125, def: 130, spd: 115 },
+    moves: [
+      {
+        name: "Identity System",
+        power: 95,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.15,
+        description:
+          "Turns one brand identity into a coordinated visual strike.",
+      },
+      {
+        name: "Shader Forge",
+        power: 85,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 12,
+        critChance: 0.1,
+        description: "Renders a live material surface with production shaders.",
+      },
+      {
+        name: "Artifact Export",
+        power: 75,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 15,
+        description:
+          "Ships portable visual output in exactly the needed format.",
+      },
+      {
+        name: "Motion Sequence",
+        power: 0,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 10,
+        description:
+          "Builds a reusable animation sequence, sharply raising SPD.",
+        selfEffect: { type: "spdUp", chance: 1.0, amount: 2 },
+      },
+    ],
+  },
+
+  {
+    id: 2,
+    name: "Prototemplate",
+    url: "https://www.prototemplate.com/",
+    github: "https://github.com/Kevin-Liu-01/Prototemplate",
+    favorite: true,
+    description:
+      "Living brand-guideline and design lab for General Translation. Twenty-plus art directions compete as real localized pages, supported by a scroll presenter, design canon, build log, comparison tooling, and pixel-level visual audits.",
+    image: "/images/prototemplate.png",
+    sprite: <LayoutTemplate />,
+    type1: "Design",
+    type2: "Web",
+    hp: 305,
+    stats: { hp: 305, atk: 125, def: 125, spd: 105 },
+    moves: [
+      {
+        name: "Direction Sweep",
+        power: 38,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 15,
+        hits: { min: 2, max: 4 },
+        description: "Tests several live art directions in rapid succession.",
+      },
+      {
+        name: "Pixel Audit",
+        power: 100,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.2,
+        description: "Measures every rendered line and punishes visual drift.",
+      },
+      {
+        name: "Dossier Build",
+        power: 90,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 12,
+        description:
+          "Assembles the winning direction into a complete live site.",
+      },
+      {
+        name: "Living Canon",
+        power: 0,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Returns to the visual laws, sharply raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    name: "Local Search",
+    url: "https://www.lsearch.dev/",
+    github: "https://github.com/Kevin-Liu-01/Local-Search",
+    favorite: true,
+    description:
+      "Small open-source Rust CLI that turns a local Chrome or Chromium browser into structured search and browser tools for shell-capable agents. It returns compact stable JSON without a hosted API key, metered search account, or agent-specific SDK.",
+    image: "/images/local-search.png",
+    sprite: <Search />,
+    type1: "Infra",
+    type2: "AI",
+    hp: 325,
+    stats: { hp: 325, atk: 130, def: 120, spd: 135 },
+    moves: [
+      {
+        name: "Browser Query",
+        power: 95,
+        type: "Infra",
+        accuracy: 1.0,
+        pp: 10,
+        critChance: 0.15,
+        priority: 1,
+        description:
+          "Routes a live search through the browser at native speed.",
+      },
+      {
+        name: "Stable JSON",
+        power: 80,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 15,
+        description: "Compresses noisy search results into a precise payload.",
+      },
+      {
+        name: "Local Session",
+        power: 0,
+        type: "AI",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Uses the local browser boundary, sharply raising DEF.",
+        selfEffect: { type: "defUp", chance: 1.0, amount: 2 },
+      },
+      {
+        name: "Zero Meter",
+        power: 70,
+        type: "Infra",
+        accuracy: 1.0,
+        pp: 20,
+        description:
+          "Avoids hosted search billing and drains the foe's resources.",
+        selfEffect: { type: "drain", chance: 1.0, amount: 0.5 },
+      },
+    ],
+  },
+
+  {
+    id: 4,
+    name: "HDRPop",
+    url: "https://hdr.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/HDRPop",
+    favorite: true,
+    description:
+      "Local-first image experiment that converts ordinary images into PQ-tagged HDR JPEGs, compares SDR and HDR live, and explains why bright logos can visually exceed the white of a surrounding interface on compatible XDR displays.",
+    image: "/images/hdrpop.png",
+    sprite: <SunMedium />,
+    type1: "Web",
+    type2: "Design",
+    hp: 285,
+    stats: { hp: 285, atk: 125, def: 90, spd: 130 },
+    moves: [
+      {
+        name: "PQ Encode",
+        power: 100,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 10,
+        critChance: 0.2,
+        description: "Tags the image for HDR output with a brilliant strike.",
+      },
+      {
+        name: "Headroom Check",
+        power: 0,
+        type: "Data",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Measures the display's range and sharply raises ATK.",
+        selfEffect: { type: "atkUp", chance: 1.0, amount: 2 },
+      },
+      {
+        name: "Tone Map",
+        power: 75,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 15,
+        piercing: 0.5,
+        description:
+          "Maps the luminance curve through half the foe's defenses.",
+      },
+      {
+        name: "SDR Compare",
+        power: 85,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 12,
+        description:
+          "Splits the frame to reveal the full brightness difference.",
+      },
+    ],
+  },
+
+  {
+    id: 5,
+    name: "Aurematica",
+    url: "https://aurematica.vercel.app/",
+    github: HIDDEN_PROJECT_GITHUB,
+    favorite: true,
+    description:
+      "Cinematic photography archive organized as six editorial collections. Aurematica preserves the frame before the crop through portrait, stonework, ritual, witness, group, and motion studies shot on a Canon Rebel T2i.",
+    image: "/images/aurematica.png",
+    sprite: <Camera />,
+    type1: "Design",
+    type2: "Web",
+    hp: 290,
+    stats: { hp: 290, atk: 120, def: 105, spd: 115 },
+    moves: [
+      {
+        name: "Canon Frame",
+        power: 90,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 12,
+        critChance: 0.15,
+        description: "Holds the subject in a deliberate cinematic frame.",
+      },
+      {
+        name: "Crop Line",
+        power: 75,
+        type: "Web",
+        accuracy: 1.0,
+        pp: 15,
+        description: "Cuts the composition at exactly the right boundary.",
+      },
+      {
+        name: "Archive Index",
+        power: 80,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 15,
+        critChance: 0.1,
+        description: "Sequences six collections into a focused visual record.",
+      },
+      {
+        name: "Held Still",
+        power: 0,
+        type: "Design",
+        accuracy: 1.0,
+        pp: 10,
+        description: "Lets the moment settle, restoring HP.",
+        selfEffect: { type: "heal", chance: 1.0, amount: 55 },
+      },
+    ],
+  },
+
+  {
+    id: 6,
     name: "Reticle",
     url: "https://reticle-demo.vercel.app/",
     github: "https://github.com/dedalus-labs",
@@ -328,7 +664,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 1,
+    id: 7,
     name: "Ariadne",
     url: "https://ariadne.dedaluslabs.ai/",
     github: "https://github.com/Kevin-Liu-01/Ariadne",
@@ -384,7 +720,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 2,
+    id: 8,
     name: "Sandbox Arena",
     url: "https://sandboxarena.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sandbox-Arena",
@@ -441,7 +777,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 3,
+    id: 9,
     name: "Aryan 21",
     url: "https://aryan-birthday.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -495,7 +831,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 4,
+    id: 10,
     name: "Kevin's Wiki",
     url: "https://wiki.kevinliu.biz/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -549,7 +885,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 5,
+    id: 11,
     name: "Agent Machines",
     url: "https://www.agent-machines.dev/",
     github: "https://github.com/Kevin-Liu-01/Agent-Machines",
@@ -603,7 +939,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 6,
+    id: 12,
     name: "Dedalus",
     url: "https://dedaluslabs.ai/",
     github: "https://github.com/dedalus-labs",
@@ -660,7 +996,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 7,
+    id: 13,
     name: "Sigil UI",
     url: "https://sigil-ui-web.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sigil-UI",
@@ -717,7 +1053,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 8,
+    id: 14,
     name: "050525",
     url: "https://050525.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -771,7 +1107,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 9,
+    id: 15,
     name: "Loop",
     url: "https://loooop.dev/",
     github: "https://github.com/Kevin-Liu-01/Loop",
@@ -830,7 +1166,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 10,
+    id: 16,
     name: "Princeton TD",
     url: "https://ptd.quest/",
     github: "https://github.com/Kevin-Liu-01/Princeton-Tower-Defense",
@@ -909,7 +1245,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 11,
+    id: 17,
     name: "Dedalus Demo",
     url: "https://dedalus-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Dedalus-Demo",
@@ -964,7 +1300,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 12,
+    id: 18,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Podium",
@@ -1017,7 +1353,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 13,
+    id: 19,
     name: "Sevenfold",
     url: "https://sevenfold-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sevenfold-Demo",
@@ -1070,7 +1406,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 14,
+    id: 20,
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     github: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
@@ -1126,7 +1462,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 15,
+    id: 21,
     name: "Lumachor",
     url: "https://lumachor.vercel.app/home",
     github: "https://github.com/Kevin-Liu-01/Lumachor",
@@ -1180,7 +1516,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 16,
+    id: 22,
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2025",
@@ -1236,7 +1572,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17,
+    id: 23,
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SplitWay",
@@ -1290,7 +1626,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18,
+    id: 24,
     name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Lootbox-Simulator",
@@ -1344,7 +1680,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19,
+    id: 25,
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PawPointClicker",
@@ -1399,7 +1735,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20,
+    id: 26,
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Spring-2025",
@@ -1452,7 +1788,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21,
+    id: 27,
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2024",
@@ -1506,7 +1842,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 22,
+    id: 28,
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SnellTech-Solutions",
@@ -1558,7 +1894,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23,
+    id: 29,
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/LetMeCook",
@@ -1612,7 +1948,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24,
+    id: 30,
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Balladeer",
@@ -1666,7 +2002,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25,
+    id: 31,
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/CompassUSA",
@@ -1719,7 +2055,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26,
+    id: 32,
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -1773,7 +2109,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 27,
+    id: 33,
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Iron-Triangle",
@@ -1826,7 +2162,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 28,
+    id: 34,
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/AdventureGPT",
@@ -1880,7 +2216,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 29,
+    id: 35,
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/EditorGPT",
@@ -1932,7 +2268,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 30,
+    id: 36,
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Math-Comp",
@@ -1987,7 +2323,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 31,
+    id: 37,
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Sample-Portal",
@@ -2039,7 +2375,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 32,
+    id: 38,
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Enkrateia",
@@ -2092,7 +2428,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 33,
+    id: 39,
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
     github: HIDDEN_PROJECT_GITHUB,
@@ -2145,7 +2481,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 34,
+    id: 40,
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     github: "https://github.com/Kevin-Liu-01/OMMC-Website",
@@ -2199,7 +2535,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 35,
+    id: 41,
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Atlas",
@@ -2251,7 +2587,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 36,
+    id: 42,
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/RecyclAIble",
@@ -2303,7 +2639,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 37,
+    id: 43,
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PlantSTEM",
@@ -2356,7 +2692,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 38,
+    id: 44,
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Tutorial",
@@ -2409,7 +2745,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 39,
+    id: 45,
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SatelliteCrafter",

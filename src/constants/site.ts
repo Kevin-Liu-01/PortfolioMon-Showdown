@@ -4,7 +4,7 @@ export const SITE_TITLE =
   "Kevin Liu — Engineer, Designer & Builder | Princeton CS '28";
 
 export const SITE_DESCRIPTION =
-  "Kevin Liu's original interactive portfolio is PortfolioMon Showdown: a Pokemon-inspired battle game where forty shipped projects become playable fighters with unique types, stats, moves, images, and animations.";
+  "Kevin Liu's original interactive portfolio is PortfolioMon Showdown: a Pokemon-inspired battle game where forty-six shipped projects become playable fighters with unique types, stats, moves, images, and animations.";
 
 export const OG_IMAGE = `${SITE_URL}/images/kevin_powerlifting_bw.png`;
 
@@ -155,6 +155,18 @@ const SOCIAL_KEYWORDS = [
 
 // Project and portfolio keywords
 const PROJECT_KEYWORDS = [
+  "Claude of Tanks",
+  "Claude of Tanks browser game",
+  "cot.kevinliu.studio",
+  "Glyphfield",
+  "Glyphfield brand studio",
+  "Prototemplate",
+  "General Translation brand lab",
+  "Local Search CLI",
+  "lsearch.dev",
+  "HDRPop",
+  "PQ HDR converter",
+  "Aurematica photography",
   "PortfolioMon Showdown",
   "Pokemon Showdown portfolio",
   "Pokémon Showdown developer portfolio",
