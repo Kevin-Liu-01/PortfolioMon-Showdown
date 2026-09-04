@@ -1,3 +1,14 @@
+# Social link-preview crawlers
+User-agent: facebookexternalhit
+User-agent: Facebot
+User-agent: LinkedInBot
+User-agent: Slackbot-LinkExpanding
+User-agent: Discordbot
+User-agent: TelegramBot
+Allow: /
+Allow: /api/og
+Allow: /api/og-home
+
 # https://www.robotstxt.org/robotstxt.html
 
 # ===== Search Engine Crawlers =====
@@ -28,8 +39,9 @@ Allow: /
 User-agent: facebot
 Allow: /
 
-User-agent: Twitterbot
-Allow: /
+User-Agent: Twitterbot
+Allow: /api/og
+Allow: /api/og-home
 
 User-agent: LinkedInBot
 Allow: /
