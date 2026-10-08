@@ -3,7 +3,7 @@
 - Infra + Product at General Translation since July 2026. Previously a Founding Engineer at Dedalus Labs (YC S25), where I built production agent infrastructure: an MCP-powered SDK, multi-tenant auth (DAuth), and sandboxed execution via microVM workspaces and container orchestration.
 - Undergraduate Researcher at Princeton under Danqi Chen, studying agent orchestration with CoTCodec — how language choice in framework-visible messages affects context efficiency and multi-agent coordination.
 - Builder of 30+ shipped projects spanning AI agents, web platforms, browser games, health technology, and hardware. Previously: founding engineer at Sevenfold AI, SDE intern at AWS, SWE intern at Bloomberg (2x), AI research intern at AT&T Labs, full-stack engineer at JHU. Co-founder of OMMC (501(c)(3), $32k raised, 6k+ community).
-- Creator of [Hermes Machines](https://github.com/Kevin-Liu-01/hermes-machines) (persistent agent on Dedalus microVM with Cursor SDK bridge), [PortfolioMon Showdown](https://kevinliu.biz/#portfoliomon) (playable archive of his former game portfolio), and [Sigil UI](https://sigil-ui-web.vercel.app) (agent-first design system, 350+ components).
+- Creator of [Hermes Machines](https://github.com/Kevin-Liu-01/hermes-machines) (persistent agent on Dedalus microVM with Cursor SDK bridge), [PortfolioMon Showdown](https://www.kevinliu.studio/#portfoliomon) (playable archive of his former game portfolio), and [Sigil UI](https://sigil.kevinliu.studio) (agent-first design system, 350+ components).
 
 ## Personal Information
 
@@ -13,8 +13,7 @@
 - Full Name: Kevin B. Liu
 - Location: San Francisco Bay Area
 - From: Lincroft, Monmouth County, NJ
-- Website: https://kevinliu.biz
-- Alternate: https://kevin-liu.tech
+- Website: https://www.kevinliu.studio
 - Email: k.bowen.liu@gmail.com
 
 ## Social Links
@@ -23,7 +22,7 @@
 - [GitHub](https://github.com/Kevin-Liu-01)
 - [LinkedIn](https://linkedin.com/in/kevin-liu-princeton)
 - [Devpost](https://devpost.com/Kevin-Liu-01)
-- [Resume](https://kevinliu.biz/kevin_liu_resume_25.pdf)
+- [Resume](https://www.kevinliu.studio/kevin_liu_resume_25.pdf)
 
 ## Tech Stack
 

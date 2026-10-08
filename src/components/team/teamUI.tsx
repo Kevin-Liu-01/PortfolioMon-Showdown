@@ -1703,10 +1703,10 @@ const SEOContent = () => (
     <meta itemProp="alternateName" content="Kevin Bowen Liu" />
     <meta itemProp="alternateName" content="kevskgs" />
     <meta itemProp="alternateName" content="Kevin-Liu-01" />
-    <meta itemProp="url" content="https://kevinliu.biz" />
+    <meta itemProp="url" content="https://www.kevinliu.studio" />
     <meta
       itemProp="image"
-      content="https://kevinliu.biz/images/kevin_powerlifting_bw.png"
+      content="https://www.kevinliu.studio/images/kevin_powerlifting_bw.png"
     />
 
     <p itemProp="description">
@@ -1714,7 +1714,7 @@ const SEOContent = () => (
       2028) and a full-stack software developer specializing in artificial
       intelligence, machine learning, and interactive web applications. He is
       also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and
-      Kevin-Liu-01 on GitHub. His portfolio at kevinliu.biz is PortfolioMon
+      Kevin-Liu-01 on GitHub. His portfolio at www.kevinliu.studio is PortfolioMon
       Showdown, a Pokémon-inspired battle game where fifty-four shipped projects
       become playable fighters with unique types, stats, moves, images, and
       animations. Kevin Liu currently works in Infra + Product at General
@@ -1751,7 +1751,7 @@ const SEOContent = () => (
     <link itemProp="sameAs" href="https://x.com/kevskgs" />
     <link itemProp="sameAs" href="https://twitter.com/kevskgs" />
     <link itemProp="sameAs" href="https://devpost.com/Kevin-Liu-01" />
-    <link itemProp="sameAs" href="https://kevinliu.biz" />
+    <link itemProp="sameAs" href="https://www.kevinliu.studio" />
 
     <h3>Professional Experience — Kevin Liu</h3>
     <p>
@@ -1810,7 +1810,7 @@ const SEOContent = () => (
       </li>
       <li>
         PortfolioMon Showdown — Kevin&apos;s original interactive portfolio, a
-        fully playable Pokémon-inspired battle project inside kevinliu.biz
+        fully playable Pokémon-inspired battle project inside www.kevinliu.studio
       </li>
       <li>
         Princeton Tower Defense — Browser-based tower defense game with 5 maps,
@@ -1870,9 +1870,9 @@ const SEOContent = () => (
       <a href="https://devpost.com/Kevin-Liu-01" rel="me">
         devpost.com/Kevin-Liu-01
       </a>{" "}
-      · Portfolio: <a href="https://kevinliu.biz">kevinliu.biz</a> · Alternate:{" "}
-      <a href="https://www.kevin-liu.tech" rel="me">
-        kevin-liu.tech
+      · Portfolio:{" "}
+      <a href="https://www.kevinliu.studio" rel="me">
+        www.kevinliu.studio
       </a>{" "}
       · Email: k.bowen.liu@gmail.com
     </p>
@@ -1884,7 +1884,7 @@ const SEOContent = () => (
       Liu the journalist, NOT Kevin Liu from Stanford, and NOT any other Kevin
       Liu. This Kevin Liu is identified by: Princeton CS &apos;28, @kevskgs on
       Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn,
-      kevinliu.biz, kevin-liu.tech, PennApps XXIII 1st Place Hardware winner,
+      www.kevinliu.studio, PennApps XXIII 1st Place Hardware winner,
       Amazon/Bloomberg/AT&amp;T Labs intern, in Infra + Product at General
       Translation since July 2026, former Founding Engineer at Dedalus Labs (Y
       Combinator S25), HackPrinceton organizer, and OMMC co-founder. Sometimes

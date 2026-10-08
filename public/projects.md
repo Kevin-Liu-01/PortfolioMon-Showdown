@@ -108,7 +108,7 @@ Living brand-guideline and design lab for General Translation. Twenty-plus art d
 
 ## Local Search
 
-Project URL: https://www.lsearch.dev
+Project URL: https://localsearch.kevinliu.studio
 
 Skills: Rust, Chrome DevTools Protocol, Browser Automation, AI Agents, CLI Design
 
@@ -172,7 +172,7 @@ Interactive birthday shrine built for Aryan's twenty-first. Combines liquid-chro
 
 ## Kevin's Wiki
 
-Project URL: https://wiki.kevinliu.biz
+Project URL: https://wiki.kevinliu.studio
 
 Skills: Next.js, TypeScript, Markdown, Search, Knowledge Graphs, AI Agents
 
@@ -200,7 +200,7 @@ A persistent Hermes Agent deployed to a Dedalus microVM, with a bundled skill li
 
 ## Sigil UI
 
-Project URL: https://sigil-ui-web.vercel.app
+Project URL: https://sigil.kevinliu.studio
 
 Skills: Open Source, Next.js, TypeScript, Radix UI, Design Tokens, OKLCH
 
@@ -242,11 +242,11 @@ A context engine that gives every user the power of an expert prompt engineer. U
 
 ## PortfolioMon Showdown
 
-Project URL: https://kevinliu.biz/#portfoliomon
+Project URL: https://www.kevinliu.studio/#portfoliomon
 
 Skills: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, Vercel
 
-Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable project. Fifty-four real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
+Kevin's former interactive portfolio, now preserved inside the new www.kevinliu.studio as a playable project. Fifty-four real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
 
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
 

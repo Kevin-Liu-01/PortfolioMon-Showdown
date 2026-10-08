@@ -997,7 +997,7 @@ export const portfolioMonData: PortfolioMon[] = [
   {
     id: 11,
     name: "Local Search",
-    url: "https://www.lsearch.dev/",
+    url: "https://localsearch.kevinliu.studio/",
     github: "https://github.com/Kevin-Liu-01/Local-Search",
     favorite: true,
     description:
@@ -1385,7 +1385,7 @@ export const portfolioMonData: PortfolioMon[] = [
   {
     id: 18,
     name: "Kevin's Wiki",
-    url: "https://wiki.kevinliu.biz/",
+    url: "https://wiki.kevinliu.studio/",
     github: HIDDEN_PROJECT_GITHUB,
     favorite: true,
     description:
@@ -1550,7 +1550,7 @@ export const portfolioMonData: PortfolioMon[] = [
   {
     id: 21,
     name: "Sigil UI",
-    url: "https://sigil-ui-web.vercel.app/",
+    url: "https://sigil.kevinliu.studio/",
     github: "https://github.com/Kevin-Liu-01/Sigil-UI",
     favorite: true,
     description:
