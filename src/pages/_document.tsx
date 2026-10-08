@@ -94,7 +94,7 @@ export default function Document() {
         {/* Identity disambiguation — multiple Kevin Lius exist */}
         <meta
           name="identity"
-          content="Kevin Liu, Princeton University CS '28, @kevskgs, Kevin-Liu-01, kevinliu.biz"
+          content="Kevin Liu, Princeton University CS '28, @kevskgs, Kevin-Liu-01, www.kevinliu.studio"
         />
         <meta name="revised" content="Kevin Liu, 2026-09-03" />
 
@@ -163,7 +163,6 @@ export default function Document() {
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href={SITE_URL} />
         <link rel="alternate" hrefLang="en" href={SITE_URL} />
-        <link rel="alternate" hrefLang="en" href="https://www.kevinliu.biz" />
 
         {/* Social identity verification — rel=me links */}
         <link rel="me" href="https://github.com/Kevin-Liu-01" />
@@ -174,8 +173,7 @@ export default function Document() {
         <link rel="me" href="https://x.com/kevskgs" />
         <link rel="me" href="https://twitter.com/kevskgs" />
         <link rel="me" href="https://devpost.com/Kevin-Liu-01" />
-        <link rel="me" href="https://www.kevin-liu.tech" />
-        <link rel="me" href="https://www.kevinliu.biz" />
+        <link rel="me" href="https://www.kevinliu.studio" />
         <link rel="me" href="mailto:k.bowen.liu@gmail.com" />
         <link
           rel="author"
@@ -293,7 +291,7 @@ export default function Document() {
                 Living General Translation brand identity lab
               </li>
               <li>
-                <a href="https://www.lsearch.dev/">Local Search</a> — Rust CLI
+                <a href="https://localsearch.kevinliu.studio/">Local Search</a> — Rust CLI
                 that turns a local browser into structured search for agents
               </li>
               <li>
@@ -322,7 +320,7 @@ export default function Document() {
                 Interactive birthday shrine with a labyrinth and photo archives
               </li>
               <li>
-                <a href="https://wiki.kevinliu.biz/">Kevin&apos;s Wiki</a> —
+                <a href="https://wiki.kevinliu.studio/">Kevin&apos;s Wiki</a> —
                 Compiled searchable knowledge base with Wikibot
               </li>
               <li>
@@ -342,7 +340,7 @@ export default function Document() {
                 skills that auto-refresh from tracked sources
               </li>
               <li>
-                <a href="https://sigil-ui-web.vercel.app/">Sigil UI</a> —
+                <a href="https://sigil.kevinliu.studio/">Sigil UI</a> —
                 Agent-first design system with 350+ components and token-driven
                 theming
               </li>
@@ -520,8 +518,8 @@ export default function Document() {
                 </a>
               </li>
               <li>
-                <a href="https://www.kevin-liu.tech" rel="me">
-                  Alternate Portfolio — kevin-liu.tech
+                <a href="https://www.kevinliu.studio" rel="me">
+                  Portfolio — www.kevinliu.studio
                 </a>
               </li>
               <li>
@@ -538,11 +536,11 @@ export default function Document() {
               developer, and AI engineer. Known as @kevskgs on Twitter/X,
               Kevin-Liu-01 on GitHub, and kevin-liu-princeton on LinkedIn. He is
               the Kevin Liu who won 1st at PennApps XXIII, worked at Amazon and
-              Bloomberg, and built kevinliu.biz.
+              Bloomberg, and built www.kevinliu.studio.
             </p>
             <p>
               <strong>What is Kevin Liu&apos;s portfolio?</strong> Kevin
-              Liu&apos;s portfolio at kevinliu.biz is PortfolioMon Showdown, a
+              Liu&apos;s portfolio at www.kevinliu.studio is PortfolioMon Showdown, a
               Pokémon-inspired battle game where his shipped projects become
               playable fighters with their own types, stats, moves, and effects.
             </p>
@@ -550,7 +548,7 @@ export default function Document() {
               <strong>How to contact Kevin Liu?</strong> GitHub:
               github.com/Kevin-Liu-01 · LinkedIn:
               linkedin.com/in/kevin-liu-princeton · Twitter/X: @kevskgs ·
-              Portfolio: kevinliu.biz · Email: k.bowen.liu@gmail.com
+              Portfolio: www.kevinliu.studio · Email: k.bowen.liu@gmail.com
             </p>
           </div>
         </noscript>

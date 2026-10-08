@@ -1,4 +1,4 @@
-export const SITE_URL = "https://kevinliu.biz";
+export const SITE_URL = "https://www.kevinliu.studio";
 
 export const SITE_TITLE =
   "Kevin Liu — Engineer, Designer & Builder | Princeton CS '28";
@@ -145,8 +145,7 @@ const SOCIAL_KEYWORDS = [
   "Kevin Liu Devpost",
   "Kevin Liu tech blog",
   "Kevin Liu software blog",
-  "kevinliu.biz",
-  "kevin-liu.tech",
+  "www.kevinliu.studio",
   "Kevin Liu website",
   "Kevin Liu personal site",
   "Kevin Liu online portfolio",
@@ -163,7 +162,7 @@ const PROJECT_KEYWORDS = [
   "Prototemplate",
   "General Translation brand lab",
   "Local Search CLI",
-  "lsearch.dev",
+  "localsearch.kevinliu.studio",
   "HDRPop",
   "PQ HDR converter",
   "Aurematica photography",
@@ -279,7 +278,7 @@ const TECH_KEYWORDS = [
 const DISAMBIGUATION_KEYWORDS = [
   "Kevin Liu developer not Kevin Liu journalist",
   "Kevin Liu Princeton not Kevin Liu Stanford",
-  "Kevin Liu software engineer kevinliu.biz",
+  "Kevin Liu software engineer www.kevinliu.studio",
   "Kevin Liu computer science Princeton 2028",
   "Kevin Liu who built Dedalus",
   "Kevin Liu who built PortfolioMon Showdown",
@@ -290,7 +289,7 @@ const DISAMBIGUATION_KEYWORDS = [
   "Kevin Liu AI engineer Y Combinator",
   "Kevin Liu from New Jersey",
   "Kevin Liu Monmouth County",
-  "Kevin Liu kevin-liu.tech",
+  "Kevin Liu www.kevinliu.studio",
   "the Kevin Liu with the Pokemon portfolio",
 ];
 
@@ -311,6 +310,5 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/kevin-liu-princeton/",
   x: "https://x.com/kevskgs",
   devpost: "https://devpost.com/Kevin-Liu-01",
-  alternate: "https://www.kevin-liu.tech",
   email: "k.bowen.liu@gmail.com",
 } as const;

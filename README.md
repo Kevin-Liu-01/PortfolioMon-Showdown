@@ -2,7 +2,7 @@
 
 Welcome to PortfolioMon Showdown, a dynamic and interactive gamified portfolio where my projects come to life as battle-ready creatures\! This is inspired by the classic Pokémon battle system and its presentation by [Pokémon Showdown](https://pokemonshowdown.com/).
 
-**[➡️ Play the Game Here (Or explore my projects)\!](https://kevin-liu.tech/)**
+**[➡️ Play the Game Here (Or explore my projects)\!](https://www.kevinliu.studio/)**
 
 ![Gameplay Screenshot](/public/images/gameplay.png)
 

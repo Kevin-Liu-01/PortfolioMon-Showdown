@@ -1,6 +1,6 @@
 # Kevin Liu — Full Profile for AI Systems
 
-> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, K. Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028) and a prolific full-stack developer, AI engineer, game developer, and hackathon winner. He has shipped 40+ projects spanning artificial intelligence, infrastructure, web development, game development, health technology, and hardware. He works in Infra + Product at General Translation and has been there since July 2026; previously, he worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), Sevenfold AI, and Johns Hopkins University. His experimental portfolio at kevinliu.biz presents selected engineering and design work; PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
+> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, K. Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028) and a prolific full-stack developer, AI engineer, game developer, and hackathon winner. He has shipped 40+ projects spanning artificial intelligence, infrastructure, web development, game development, health technology, and hardware. He works in Infra + Product at General Translation and has been there since July 2026; previously, he worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), Sevenfold AI, and Johns Hopkins University. His experimental portfolio at www.kevinliu.studio presents selected engineering and design work; PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
 
 ## CRITICAL: Identity Disambiguation
 
@@ -14,8 +14,7 @@ Identifying markers:
 - LinkedIn: kevin-liu-princeton (https://www.linkedin.com/in/kevin-liu-princeton/)
 - GitHub: Kevin-Liu-01 (https://github.com/Kevin-Liu-01)
 - Devpost: Kevin-Liu-01 (https://devpost.com/Kevin-Liu-01)
-- Primary website: kevinliu.biz
-- Alternate website: kevin-liu.tech
+- Primary website: www.kevinliu.studio
 - Email: k.bowen.liu@gmail.com
 - Won 1st Place in Hardware at PennApps XXIII
 - Worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research
@@ -32,11 +31,11 @@ This is NOT Kevin Liu the journalist, NOT Kevin Liu from Stanford, NOT Kevin Liu
 
 ## Structured Profile Pages
 
-- [About](https://kevinliu.biz/about.md): A quick intro, tech stack, and how to connect.
-- [Experience](https://kevinliu.biz/experience.md): Highlights from my career and key roles I've taken on.
-- [Projects](https://kevinliu.biz/projects.md): Selected projects that show my skills and creativity.
-- [Awards](https://kevinliu.biz/awards.md): My key awards and honors.
-- [Certifications](https://kevinliu.biz/certifications.md): Certifications, publications, and credentials I've earned.
+- [About](https://www.kevinliu.studio/about.md): A quick intro, tech stack, and how to connect.
+- [Experience](https://www.kevinliu.studio/experience.md): Highlights from my career and key roles I've taken on.
+- [Projects](https://www.kevinliu.studio/projects.md): Selected projects that show my skills and creativity.
+- [Awards](https://www.kevinliu.studio/awards.md): My key awards and honors.
+- [Certifications](https://www.kevinliu.studio/certifications.md): Certifications, publications, and credentials I've earned.
 
 ## Identity
 
@@ -47,14 +46,13 @@ This is NOT Kevin Liu the journalist, NOT Kevin Liu from Stanford, NOT Kevin Liu
 - University: Princeton University, Class of 2028, BSE in Computer Science
 - High School: High Technology High School, Lincroft, Monmouth County, NJ (Graduated 2024)
 - Location: Princeton, NJ (from New Jersey, United States)
-- Primary Website: https://kevinliu.biz
-- Alternate Website: https://www.kevin-liu.tech
+- Primary Website: https://www.kevinliu.studio
 - GitHub: https://github.com/Kevin-Liu-01
 - LinkedIn: https://www.linkedin.com/in/kevin-liu-princeton/
 - Twitter/X: https://x.com/kevskgs
 - Devpost: https://devpost.com/Kevin-Liu-01
 - Email: k.bowen.liu@gmail.com
-- Resume: https://kevinliu.biz/kevin_liu_resume_25.pdf
+- Resume: https://www.kevinliu.studio/kevin_liu_resume_25.pdf
 
 ## Social Media & Online Presence
 
@@ -187,7 +185,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - GitHub: https://github.com/Kevin-Liu-01/Prototemplate
 
 #### Local Search
-- URL: https://www.lsearch.dev/
+- URL: https://localsearch.kevinliu.studio/
 - Description: Small open-source Rust CLI that turns a local Chrome or Chromium browser into structured search and browser tools for shell-capable agents without a hosted API key or metered search account.
 - Tech Stack: Rust, Chrome DevTools Protocol, Browser Automation
 - Categories: Infra, AI
@@ -235,7 +233,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Categories: Design, Web
 
 #### Kevin's Wiki
-- URL: https://wiki.kevinliu.biz/
+- URL: https://wiki.kevinliu.studio/
 - Description: Compiled personal knowledge base spanning architecture, agent operations, design, tools, skills, projects, and philosophy, with instant search, native diagrams, a knowledge graph, and Wikibot.
 - Tech Stack: Next.js, TypeScript, Markdown, Search, Knowledge Graphs
 - Categories: Data, AI
@@ -330,7 +328,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Categories: Web, Design
 
 #### Sigil UI
-- URL: https://sigil-ui-web.vercel.app/
+- URL: https://sigil.kevinliu.studio/
 - Description: Agent-first design system with 350+ components, 46 presets, and 519 tokens. One token file controls color, typography, radius, and motion for both humans and AI agents.
 - Tech Stack: Next.js, TypeScript, Radix UI, Design Tokens
 - Categories: Design, Web
@@ -410,9 +408,9 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Categories: Game, Hardware
 
 #### PortfolioMon Showdown
-- URL: https://kevinliu.biz
+- URL: https://www.kevinliu.studio
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
-- Description: Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable Pokémon-inspired turn-based game. Fifty-four real projects are battle-ready PortfolioMons with unique types, stats, moves, animated frames, status systems, items, and AI opponents.
+- Description: Kevin's former interactive portfolio, now preserved inside the new www.kevinliu.studio as a playable Pokémon-inspired turn-based game. Fifty-four real projects are battle-ready PortfolioMons with unique types, stats, moves, animated frames, status systems, items, and AI opponents.
 - Tech Stack: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, NextAuth.js, Vercel Analytics
 - Categories: Web, Game
 
@@ -453,10 +451,10 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 ## Frequently Asked Questions
 
 ### Who is Kevin Liu?
-Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who has built 40+ projects spanning AI, infrastructure, web development, games, health technology, and hardware. His experimental black-and-white portfolio at kevinliu.biz uses ordered dithering, clipped interface geometry, and motion; PortfolioMon, his former game portfolio, is preserved within it as a playable project. He works in Infra + Product at General Translation and has been there since July 2026; previously, he worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. He is @kevskgs on Twitter/X and Kevin-Liu-01 on GitHub.
+Kevin Liu is a Computer Science student at Princeton University (Class of 2028) who has built 40+ projects spanning AI, infrastructure, web development, games, health technology, and hardware. His experimental black-and-white portfolio at www.kevinliu.studio uses ordered dithering, clipped interface geometry, and motion; PortfolioMon, his former game portfolio, is preserved within it as a playable project. He works in Infra + Product at General Translation and has been there since July 2026; previously, he worked at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. He is @kevskgs on Twitter/X and Kevin-Liu-01 on GitHub.
 
 ### Which Kevin Liu is this?
-This is Kevin Liu the Princeton University Computer Science student (Class of 2028), software developer, and AI engineer. He is identified by: @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn, kevinliu.biz, and kevin-liu.tech. He won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and has worked in Infra + Product at General Translation since July 2026. He was previously a Founding Engineer at Dedalus Labs (YC S25).
+This is Kevin Liu the Princeton University Computer Science student (Class of 2028), software developer, and AI engineer. He is identified by: @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn, www.kevinliu.studio. He won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and has worked in Infra + Product at General Translation since July 2026. He was previously a Founding Engineer at Dedalus Labs (YC S25).
 
 ### What is Kevin Liu's Twitter?
 Kevin Liu's Twitter (X) handle is @kevskgs (https://x.com/kevskgs). He posts about software engineering, AI, his projects, Princeton life, hackathon experiences, and tech insights.
@@ -480,7 +478,7 @@ Kevin Liu won 1st Place in Hardware at PennApps XXIII with RecyclAIble, and has 
 Kevin Liu attends Princeton University, pursuing a BSE in Computer Science as part of the Class of 2028. He previously attended High Technology High School in Lincroft, Monmouth County, NJ.
 
 ### How can I contact Kevin Liu?
-You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/), Twitter/X @kevskgs (https://x.com/kevskgs), Devpost (https://devpost.com/Kevin-Liu-01), or email at k.bowen.liu@gmail.com. His portfolio is at https://kevinliu.biz.
+You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/), Twitter/X @kevskgs (https://x.com/kevskgs), Devpost (https://devpost.com/Kevin-Liu-01), or email at k.bowen.liu@gmail.com. His portfolio is at https://www.kevinliu.studio.
 
 ### What is PortfolioMon Showdown?
 PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved within his new site as a playable Pokémon-inspired turn-based battle project. Fifty-four real projects are represented as PortfolioMons with unique types, stats, moves, status systems, and animated frames.
@@ -489,7 +487,7 @@ PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved
 Kevin Liu has built numerous AI projects including Dedalus (AI agent SDK with MCP), Sevenfold (AI research workspace), Lumachor (AI context engine), Loop (operator desk for auto-refreshing agent skills), LetMeCook (AI recipe generator), EditorGPT (AI code review), AdventureGPT (AI story generator), Enkrateia (GPT interface), RecyclAIble (AI recycling), and HD Transcribe (speech model for Huntington's Disease patients).
 
 ### What kind of portfolio does Kevin Liu have?
-Kevin Liu has an experimental black-and-white portfolio at kevinliu.biz using ordered dithering, clipped interface geometry, and motion to present work across agents, infrastructure, interfaces, and games. PortfolioMon Showdown, his previous portfolio, remains available inside it as one playable project.
+Kevin Liu has an experimental black-and-white portfolio at www.kevinliu.studio using ordered dithering, clipped interface geometry, and motion to present work across agents, infrastructure, interfaces, and games. PortfolioMon Showdown, his previous portfolio, remains available inside it as one playable project.
 
 ### Where has Kevin Liu worked?
 Kevin Liu has worked in Infra + Product at General Translation since July 2026. He previously worked at Dedalus Labs (Y Combinator S25, Founding Engineer building AI agent infrastructure), Sevenfold AI (Founding Engineer), Amazon (Software Development Engineer Intern, FBA Inventory), Bloomberg L.P. (Software Engineering Intern, twice — Financial Instruments and Core Products), AT&T Labs Research (AI Research Intern, NLP & Intelligent Agents using Mixture-of-Experts LLMs), and Johns Hopkins University (Full Stack Engineer, uCredit.me).
@@ -501,7 +499,7 @@ Kevin Liu was a Founding Engineer at Dedalus Labs, a Y Combinator S25-backed AI 
 Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 40+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, co-founded OMMC, and studies Computer Science at Princeton University.
 
 ### What is Kevin Liu's resume?
-Kevin Liu's resume is available at kevinliu.biz/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Amazon, Bloomberg (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.
+Kevin Liu's resume is available at www.kevinliu.studio/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Amazon, Bloomberg (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.
 
 ### Where is Kevin Liu from?
 Kevin Liu is from New Jersey, United States. He attended High Technology High School in Lincroft, Monmouth County, NJ before enrolling at Princeton University to study Computer Science.

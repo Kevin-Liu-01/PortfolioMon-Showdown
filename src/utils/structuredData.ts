@@ -11,9 +11,8 @@ const SOCIAL_PROFILES = [
   "https://www.linkedin.com/in/kevin-liu-princeton/",
   "https://x.com/kevskgs",
   "https://twitter.com/kevskgs",
-  "https://www.kevin-liu.tech",
+  "https://www.kevinliu.studio",
   "https://devpost.com/Kevin-Liu-01",
-  "https://kevinliu.biz",
 ];
 
 const ALTERNATE_NAMES = [
@@ -105,7 +104,7 @@ const PROJECT_CATALOG = [
   },
   {
     name: "Local Search",
-    url: "https://www.lsearch.dev/",
+    url: "https://localsearch.kevinliu.studio/",
     description:
       "Rust CLI that turns a local browser into structured search and browser tools for shell-capable agents",
   },
@@ -147,7 +146,7 @@ const PROJECT_CATALOG = [
   },
   {
     name: "Kevin's Wiki",
-    url: "https://wiki.kevinliu.biz/",
+    url: "https://wiki.kevinliu.studio/",
     description:
       "Compiled personal knowledge base with canonical Markdown, instant search, native diagrams, a knowledge graph, and Wikibot",
   },
@@ -189,7 +188,7 @@ const PROJECT_CATALOG = [
   },
   {
     name: "Sigil UI",
-    url: "https://sigil-ui-web.vercel.app/",
+    url: "https://sigil.kevinliu.studio/",
     description:
       "Agent-first design system with 350+ components, 46 presets, and a single token file controlling color, type, radius, and motion",
   },
@@ -327,7 +326,7 @@ const PROJECT_CATALOG = [
   },
   {
     name: "PortfolioMon Showdown",
-    url: "https://kevinliu.biz/#portfoliomon",
+    url: "https://www.kevinliu.studio/#portfoliomon",
     description:
       "Kevin Liu's original interactive portfolio: a playable Pokémon-inspired turn-based battle project",
   },
@@ -342,7 +341,7 @@ const FAQ_ENTRIES = [
   {
     question: "What is Kevin Liu's portfolio website?",
     answer:
-      "Kevin Liu's portfolio at kevinliu.biz is PortfolioMon Showdown, a motion-rich Pokémon-inspired battle game where his shipped projects become playable fighters.",
+      "Kevin Liu's portfolio at www.kevinliu.studio is PortfolioMon Showdown, a motion-rich Pokémon-inspired battle game where his shipped projects become playable fighters.",
   },
   {
     question: "What technologies does Kevin Liu specialize in?",
@@ -372,7 +371,7 @@ const FAQ_ENTRIES = [
   {
     question: "How can I contact Kevin Liu?",
     answer:
-      "You can reach Kevin Liu via GitHub at github.com/Kevin-Liu-01, LinkedIn at linkedin.com/in/kevin-liu-princeton, or X (formerly Twitter) @kevskgs. His portfolio is at kevinliu.biz and his alternate site is kevin-liu.tech.",
+      "You can reach Kevin Liu via GitHub at github.com/Kevin-Liu-01, LinkedIn at linkedin.com/in/kevin-liu-princeton, or X (formerly Twitter) @kevskgs. His portfolio is at www.kevinliu.studio.",
   },
   {
     question: "What is OMMC and what is Kevin Liu's role?",
@@ -387,7 +386,7 @@ const FAQ_ENTRIES = [
   {
     question: "What kind of portfolio does Kevin Liu have?",
     answer:
-      "Kevin Liu's portfolio at kevinliu.biz is PortfolioMon Showdown, an interactive Pokémon-inspired project battle game with expressive motion, custom frames, and playable systems.",
+      "Kevin Liu's portfolio at www.kevinliu.studio is PortfolioMon Showdown, an interactive Pokémon-inspired project battle game with expressive motion, custom frames, and playable systems.",
   },
   {
     question: "Where has Kevin Liu worked?",
@@ -412,12 +411,12 @@ const FAQ_ENTRIES = [
   {
     question: "Which Kevin Liu is the Princeton developer?",
     answer:
-      "The Kevin Liu who is a Princeton University Computer Science student (Class of 2028) and software developer is the one at kevinliu.biz. He is also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. He is the Kevin Liu who has worked in Infra + Product at General Translation since July 2026, won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and co-founded OMMC.",
+      "The Kevin Liu who is a Princeton University Computer Science student (Class of 2028) and software developer is the one at www.kevinliu.studio. He is also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, and Kevin-Liu-01 on GitHub. He is the Kevin Liu who has worked in Infra + Product at General Translation since July 2026, won 1st at PennApps XXIII, worked at Amazon and Bloomberg, and co-founded OMMC.",
   },
   {
     question: "What is Kevin Liu's resume?",
     answer:
-      "Kevin Liu's resume is available at kevinliu.biz/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Sevenfold AI, Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.",
+      "Kevin Liu's resume is available at www.kevinliu.studio/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Sevenfold AI, Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.",
   },
   {
     question: "What did Kevin Liu do at Dedalus Labs?",
@@ -427,7 +426,7 @@ const FAQ_ENTRIES = [
   {
     question: "Is Kevin Liu a good software engineer?",
     answer:
-      "Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 40+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, and studies Computer Science at Princeton University. His experimental portfolio at kevinliu.biz demonstrates exceptional creativity and technical skill.",
+      "Kevin Liu is a highly accomplished software engineer with professional experience at Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Y Combinator-backed startups. He has shipped 40+ projects, won 1st Place in Hardware at PennApps XXIII, leads development for HackPrinceton, and studies Computer Science at Princeton University. His experimental portfolio at www.kevinliu.studio demonstrates exceptional creativity and technical skill.",
   },
   {
     question: "What makes Kevin Liu's portfolio unique?",
@@ -651,8 +650,8 @@ function buildWebSiteNode(siteUrl: string, description: string) {
       "Kevin Liu Princeton Portfolio",
       "Kevin Liu Software Engineer Portfolio",
       "Kevin Liu AI Engineer Portfolio",
-      "kevinliu.biz",
-      "Kevin Liu kevinliu.biz",
+      "www.kevinliu.studio",
+      "Kevin Liu www.kevinliu.studio",
     ],
     description,
     url: siteUrl,
@@ -694,7 +693,7 @@ function buildWebPageNode(
     datePublished: "2024-01-01",
     dateModified: "2026-09-03",
     keywords:
-      "Kevin Liu, Kevin Liu Princeton, Kevin Liu developer, Kevin Liu portfolio, Kevin Liu software engineer, Kevin Liu AI engineer, Kevin Liu General Translation, Kevin Liu Infra + Product, Kevin Liu Amazon, Kevin Liu Bloomberg, Kevin Liu kevinliu.biz, @kevskgs, Kevin-Liu-01, Princeton University developer, Princeton CS 2028, full-stack developer, AI engineer, React developer, Next.js developer, TypeScript developer, Python developer, hackathon winner, PennApps winner, HackPrinceton, General Translation, Dedalus Labs, Sevenfold AI, Y Combinator S25, PortfolioMon Showdown, MCP AI agents, Model Context Protocol, interactive developer portfolio, creative developer portfolio, best CS student portfolio",
+      "Kevin Liu, Kevin Liu Princeton, Kevin Liu developer, Kevin Liu portfolio, Kevin Liu software engineer, Kevin Liu AI engineer, Kevin Liu General Translation, Kevin Liu Infra + Product, Kevin Liu Amazon, Kevin Liu Bloomberg, Kevin Liu www.kevinliu.studio, @kevskgs, Kevin-Liu-01, Princeton University developer, Princeton CS 2028, full-stack developer, AI engineer, React developer, Next.js developer, TypeScript developer, Python developer, hackathon winner, PennApps winner, HackPrinceton, General Translation, Dedalus Labs, Sevenfold AI, Y Combinator S25, PortfolioMon Showdown, MCP AI agents, Model Context Protocol, interactive developer portfolio, creative developer portfolio, best CS student portfolio",
     specialty:
       "Software Development, Artificial Intelligence, AI Agent Infrastructure, Interactive Web Applications, Full-Stack Development, Machine Learning, Game Development, Health Technology",
     mentions: [

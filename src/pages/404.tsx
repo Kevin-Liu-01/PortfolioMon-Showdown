@@ -8,7 +8,7 @@ export default function Custom404() {
         <title>Page Not Found — Kevin Liu | Software Developer Portfolio</title>
         <meta
           name="description"
-          content="This page doesn't exist. Visit Kevin Liu's interactive developer portfolio at kevinliu.biz — a Pokémon Showdown-inspired battle game featuring 30+ projects."
+          content="This page doesn't exist. Visit Kevin Liu's interactive developer portfolio at www.kevinliu.studio — a Pokémon Showdown-inspired battle game featuring 30+ projects."
         />
         <meta name="robots" content="noindex" />
       </Head>

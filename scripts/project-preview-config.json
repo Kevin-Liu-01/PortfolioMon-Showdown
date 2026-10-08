@@ -88,7 +88,7 @@
     {
       "id": 11,
       "name": "Local Search",
-      "sourceUrl": "https://www.lsearch.dev/",
+      "sourceUrl": "https://localsearch.kevinliu.studio/",
       "output": "public/images/local-search.png",
       "waitMs": 6000
     },
@@ -134,7 +134,7 @@
     {
       "id": 18,
       "name": "Kevin's Wiki",
-      "sourceUrl": "https://wiki.kevinliu.biz/",
+      "sourceUrl": "https://wiki.kevinliu.studio/",
       "output": "public/images/wiki.png"
     },
     {
@@ -152,7 +152,7 @@
     {
       "id": 21,
       "name": "Sigil UI",
-      "sourceUrl": "https://sigil-ui-web.vercel.app/",
+      "sourceUrl": "https://sigil.kevinliu.studio/",
       "output": "public/images/sigil-ui.png"
     },
     {
@@ -194,7 +194,7 @@
     {
       "id": 28,
       "name": "PortfolioMon",
-      "sourceUrl": "https://kevinliu.biz/",
+      "sourceUrl": "https://www.kevinliu.studio/",
       "output": "public/images/kevinportfolio.png"
     },
     {
