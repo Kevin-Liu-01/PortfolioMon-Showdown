@@ -278,6 +278,558 @@ export const initialInventory: PlayerInventory = {
 export const portfolioMonData: PortfolioMon[] = [
   {
     id: 0,
+    name: "Jarhead",
+    url: "https://jarhead.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/Jarhead",
+    favorite: true,
+    description:
+      "Voice-first Mac assistant built with Swift and TypeScript. Combines wake-word activation, computer control, parallel agent tasks, persistent memory, and scheduled automations in a desktop companion.",
+    image: "/images/jarhead.png",
+    sprite: <Mic />,
+    type1: "AI",
+    type2: "Hardware",
+    hp: 310,
+    stats: {
+      hp: 310,
+      atk: 130,
+      def: 105,
+      spd: 140,
+    },
+    moves: [
+      {
+        name: "Wake Word",
+        power: 90,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Wakes the assistant with a sharp voice command.",
+      },
+      {
+        name: "Swift Hands",
+        power: 0,
+        type: "Hardware",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Coordinates Swift hands and raises DEF.",
+      },
+      {
+        name: "Parallel Threads",
+        power: 35,
+        type: "Hardware",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Dispatches two to three agent threads at once.",
+      },
+      {
+        name: "Sleep Timer",
+        power: 0,
+        type: "AI",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Rests the voice session and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 1,
+    name: "Mailroom",
+    url: "https://mailroom.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/mailroom",
+    favorite: true,
+    description:
+      "Gmail organizer that combines readable rules with typed AI judgments. Sorts mail, compiles natural-language searches, and records every change in a receipt with undo.",
+    image: "/images/mailroom.png",
+    sprite: <Archive />,
+    type1: "AI",
+    type2: "Data",
+    hp: 300,
+    stats: {
+      hp: 300,
+      atk: 110,
+      def: 135,
+      spd: 115,
+    },
+    moves: [
+      {
+        name: "Typed Judgment",
+        power: 90,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Classifies the foe with a precise AI judgment.",
+      },
+      {
+        name: "Filter Compile",
+        power: 0,
+        type: "Data",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Compiles protective mail rules and raises DEF.",
+      },
+      {
+        name: "Sender Sweep",
+        power: 35,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Sweeps through senders in two to three passes.",
+      },
+      {
+        name: "Receipt Undo",
+        power: 0,
+        type: "AI",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Undoes the last cleanup and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 2,
+    name: "Turboslide",
+    url: "https://www.turboslide.com/",
+    github: "https://github.com/Kevin-Liu-01/Turboslide",
+    favorite: true,
+    description:
+      "Presentation editor for people and agents, with a canvas on every slide, shared document rendering, and PowerPoint export. Exposes the same editing actions through its UI, CLI, HTTP API, and MCP server.",
+    image: "/images/turboslide.png",
+    sprite: <LayoutTemplate />,
+    type1: "Design",
+    type2: "Web",
+    hp: 300,
+    stats: {
+      hp: 300,
+      atk: 120,
+      def: 110,
+      spd: 130,
+    },
+    moves: [
+      {
+        name: "Slide Canvas",
+        power: 90,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Strikes with a perfectly placed slide element.",
+      },
+      {
+        name: "Layout Reflow",
+        power: 0,
+        type: "Web",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Reflows the layout into cover and raises DEF.",
+      },
+      {
+        name: "Deck Export",
+        power: 35,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Exports two to three slides in rapid succession.",
+      },
+      {
+        name: "Revision Restore",
+        power: 0,
+        type: "Design",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Restores an earlier revision and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    name: "Katagami",
+    url: "https://katagami.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/Katagami",
+    favorite: true,
+    description:
+      "Open-source type family built from Inter, with Sans, Round, Text, Mono, and CJK companions. Its interactive specimen lets visitors explore curves, glyphs, weights, and the shared construction of the family.",
+    image: "/images/katagami.png",
+    sprite: <Variable />,
+    type1: "Design",
+    type2: "Data",
+    hp: 280,
+    stats: {
+      hp: 280,
+      atk: 105,
+      def: 130,
+      spd: 125,
+    },
+    moves: [
+      {
+        name: "Bezier Cut",
+        power: 90,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Slices with the sharp edge of a letterform.",
+      },
+      {
+        name: "Glyph Map",
+        power: 0,
+        type: "Data",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Maps the glyph set into armor and raises DEF.",
+      },
+      {
+        name: "Weight Axis",
+        power: 35,
+        type: "Data",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Shifts font weights for two to three impacts.",
+      },
+      {
+        name: "Shared Skeleton",
+        power: 0,
+        type: "Design",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Rebuilds the shared skeleton and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 4,
+    name: "Relay",
+    url: "https://relay.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/Relay",
+    favorite: true,
+    description:
+      "Computer-use agent playground with a simulated Slack workspace, live browser replay, and inspectable evaluation traces. Compare models and interfaces, watch their actions, and review measured task outcomes.",
+    image: "/images/relay.png",
+    sprite: <Eye />,
+    type1: "AI",
+    type2: "Web",
+    hp: 300,
+    stats: {
+      hp: 300,
+      atk: 125,
+      def: 110,
+      spd: 130,
+    },
+    moves: [
+      {
+        name: "Action Trace",
+        power: 90,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Finds an opening in the recorded action trace.",
+      },
+      {
+        name: "Interface Switch",
+        power: 0,
+        type: "Web",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Switches interfaces to build cover and raise DEF.",
+      },
+      {
+        name: "Replay Sequence",
+        power: 35,
+        type: "Web",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Replays two to three coordinated actions.",
+      },
+      {
+        name: "Outcome Check",
+        power: 0,
+        type: "AI",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Checks the result and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 5,
+    name: "Agent Pets",
+    url: "https://agentpets.kevinliu.studio/",
+    github: HIDDEN_PROJECT_GITHUB,
+    favorite: true,
+    description:
+      "Animated companions for coding agents, with a browsable character library, interactive previews, and a browser companion. Optional local signals let pets react to working, attention, done, and error states.",
+    image: "/images/agent-pets.png",
+    sprite: <Sparkles />,
+    type1: "Design",
+    type2: "AI",
+    hp: 280,
+    stats: {
+      hp: 280,
+      atk: 105,
+      def: 110,
+      spd: 145,
+    },
+    moves: [
+      {
+        name: "Pixel Pounce",
+        power: 90,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Pounces from the desktop in a burst of pixels.",
+      },
+      {
+        name: "Working Loop",
+        power: 0,
+        type: "AI",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Settles into a steady working loop and raises DEF.",
+      },
+      {
+        name: "Companion Combo",
+        power: 35,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Calls two to three companions into the fray.",
+      },
+      {
+        name: "Victory Dance",
+        power: 0,
+        type: "Design",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Celebrates a finished task and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 6,
+    name: "Birthdayland",
+    url: "https://birthdayland.kevinliu.studio/",
+    github: HIDDEN_PROJECT_GITHUB,
+    favorite: true,
+    description:
+      "Birthday scrapbook on a tiny explorable 3D island. Friends become blob characters carrying cards, doodles, photos, and video messages in a shared birthday world built with Next.js and React Three Fiber.",
+    image: "/images/birthdayland.png",
+    sprite: <Bubbles />,
+    type1: "Game",
+    type2: "Design",
+    hp: 310,
+    stats: {
+      hp: 310,
+      atk: 100,
+      def: 125,
+      spd: 115,
+    },
+    moves: [
+      {
+        name: "Blob Bounce",
+        power: 90,
+        type: "Game",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Bounces across the island into the foe.",
+      },
+      {
+        name: "Island Stroll",
+        power: 0,
+        type: "Design",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Finds shelter on the island and raises DEF.",
+      },
+      {
+        name: "Memory Parade",
+        power: 35,
+        type: "Design",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Unleashes two to three heartfelt memory cards.",
+      },
+      {
+        name: "Birthday Wish",
+        power: 0,
+        type: "Game",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Makes a birthday wish and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 7,
+    name: "CoTFly",
+    url: "https://fly.kevinliu.studio/",
+    github: "https://github.com/Kevin-Liu-01/CoTFly",
+    favorite: true,
+    description:
+      "A fruit fly in a tiny tank helmet plays Claude of Tanks. Live spiking neurons drive autonomous battles, paired with a miniature 3D cockpit that makes the fly pilot visible.",
+    image: "/images/cotfly.png",
+    sprite: <Cpu />,
+    type1: "Game",
+    type2: "AI",
+    hp: 270,
+    stats: {
+      hp: 270,
+      atk: 125,
+      def: 100,
+      spd: 150,
+    },
+    moves: [
+      {
+        name: "Neural Spike",
+        power: 90,
+        type: "Game",
+        accuracy: 0.95,
+        pp: 12,
+        description: "Fires a burst of activity through the neural circuit.",
+      },
+      {
+        name: "Cockpit Lock",
+        power: 0,
+        type: "AI",
+        accuracy: 1,
+        pp: 10,
+        selfEffect: {
+          type: "defUp",
+          chance: 1,
+          amount: 1,
+        },
+        description: "Locks the cockpit into position and raises DEF.",
+      },
+      {
+        name: "Tank Burst",
+        power: 35,
+        type: "AI",
+        accuracy: 0.95,
+        pp: 10,
+        hits: {
+          min: 2,
+          max: 3,
+        },
+        description: "Directs two to three shots from the fly-piloted tank.",
+      },
+      {
+        name: "Pilot Reset",
+        power: 0,
+        type: "Game",
+        accuracy: 1,
+        pp: 8,
+        selfEffect: {
+          type: "heal",
+          chance: 1,
+          amount: 65,
+        },
+        description: "Resets the pilot circuit and recovers 65 HP.",
+      },
+    ],
+  },
+
+  {
+    id: 8,
     name: "Claude of Tanks",
     url: "https://cot.kevinliu.studio/",
     github: "https://github.com/Kevin-Liu-01/Claude-of-Tanks",
@@ -333,7 +885,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 1,
+    id: 9,
     name: "Glyphfield",
     url: "https://www.glyphfield.com/",
     github: "https://github.com/Kevin-Liu-01/Glyphfield",
@@ -389,7 +941,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 2,
+    id: 10,
     name: "Prototemplate",
     url: "https://www.prototemplate.com/",
     github: "https://github.com/Kevin-Liu-01/Prototemplate",
@@ -443,7 +995,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 3,
+    id: 11,
     name: "Local Search",
     url: "https://www.lsearch.dev/",
     github: "https://github.com/Kevin-Liu-01/Local-Search",
@@ -499,7 +1051,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 4,
+    id: 12,
     name: "HDRPop",
     url: "https://hdr.kevinliu.studio/",
     github: "https://github.com/Kevin-Liu-01/HDRPop",
@@ -554,7 +1106,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 5,
+    id: 13,
     name: "Aurematica",
     url: "https://aurematica.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -607,7 +1159,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 6,
+    id: 14,
     name: "Reticle",
     url: "https://reticle-demo.vercel.app/",
     github: "https://github.com/dedalus-labs",
@@ -664,7 +1216,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 7,
+    id: 15,
     name: "Ariadne",
     url: "https://ariadne.dedaluslabs.ai/",
     github: "https://github.com/Kevin-Liu-01/Ariadne",
@@ -720,7 +1272,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 8,
+    id: 16,
     name: "Sandbox Arena",
     url: "https://sandboxarena.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sandbox-Arena",
@@ -777,7 +1329,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 9,
+    id: 17,
     name: "Aryan 21",
     url: "https://aryan-birthday.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -831,7 +1383,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 10,
+    id: 18,
     name: "Kevin's Wiki",
     url: "https://wiki.kevinliu.biz/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -885,7 +1437,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 11,
+    id: 19,
     name: "Agent Machines",
     url: "https://www.agent-machines.dev/",
     github: "https://github.com/Kevin-Liu-01/Agent-Machines",
@@ -939,7 +1491,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 12,
+    id: 20,
     name: "Dedalus",
     url: "https://dedaluslabs.ai/",
     github: "https://github.com/dedalus-labs",
@@ -996,7 +1548,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 13,
+    id: 21,
     name: "Sigil UI",
     url: "https://sigil-ui-web.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sigil-UI",
@@ -1053,7 +1605,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 14,
+    id: 22,
     name: "050525",
     url: "https://050525.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -1107,7 +1659,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 15,
+    id: 23,
     name: "Loop",
     url: "https://loooop.dev/",
     github: "https://github.com/Kevin-Liu-01/Loop",
@@ -1166,7 +1718,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 16,
+    id: 24,
     name: "Princeton TD",
     url: "https://ptd.quest/",
     github: "https://github.com/Kevin-Liu-01/Princeton-Tower-Defense",
@@ -1245,7 +1797,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 17,
+    id: 25,
     name: "Dedalus Demo",
     url: "https://dedalus-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Dedalus-Demo",
@@ -1300,7 +1852,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 18,
+    id: 26,
     name: "Podium",
     url: "https://hackprinceton-podium.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Podium",
@@ -1353,7 +1905,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 19,
+    id: 27,
     name: "Sevenfold",
     url: "https://sevenfold-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Sevenfold-Demo",
@@ -1406,7 +1958,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 20,
+    id: 28,
     name: "PortfolioMon",
     url: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
     github: "https://github.com/Kevin-Liu-01/PortfolioMon-Showdown",
@@ -1462,7 +2014,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 21,
+    id: 29,
     name: "Lumachor",
     url: "https://lumachor.vercel.app/home",
     github: "https://github.com/Kevin-Liu-01/Lumachor",
@@ -1516,7 +2068,7 @@ export const portfolioMonData: PortfolioMon[] = [
   },
 
   {
-    id: 22,
+    id: 30,
     name: "HackPrinceton '25F",
     url: "https://hack-princeton-fall-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2025",
@@ -1572,7 +2124,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 23,
+    id: 31,
     name: "Splitway",
     url: "https://splitway.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SplitWay",
@@ -1626,7 +2178,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 24,
+    id: 32,
     name: "Lootbox Simulator",
     url: "https://lootboxsimulator.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Lootbox-Simulator",
@@ -1680,7 +2232,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 25,
+    id: 33,
     name: "PawPointClicker",
     url: "https://pawpointclicker.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PawPointClicker",
@@ -1735,7 +2287,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 26,
+    id: 34,
     name: "HackPrinceton '25S",
     url: "https://hack-princeton-spring-2025-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Spring-2025",
@@ -1788,7 +2340,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 27,
+    id: 35,
     name: "HackPrinceton '24F",
     url: "https://hack-princeton-fall-2024-demo.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/HackPrinceton-Demo-Fall-2024",
@@ -1842,7 +2394,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 28,
+    id: 36,
     name: "SnellTech",
     url: "https://snelltech.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SnellTech-Solutions",
@@ -1894,7 +2446,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 29,
+    id: 37,
     name: "LetMeCook",
     url: "https://letmecook.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/LetMeCook",
@@ -1948,7 +2500,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 30,
+    id: 38,
     name: "Balladeer",
     url: "https://balladeer.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Balladeer",
@@ -2002,7 +2554,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 31,
+    id: 39,
     name: "CompassUSA",
     url: "https://compass-usa.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/CompassUSA",
@@ -2055,7 +2607,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 32,
+    id: 40,
     name: "ApneaAlert",
     url: "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
     github: HIDDEN_PROJECT_GITHUB,
@@ -2109,7 +2661,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 33,
+    id: 41,
     name: "Iron Triangle",
     url: "https://iron-triangle.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Iron-Triangle",
@@ -2162,7 +2714,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 34,
+    id: 42,
     name: "AdventureGPT",
     url: "https://adventuregpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/AdventureGPT",
@@ -2216,7 +2768,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 35,
+    id: 43,
     name: "EditorGPT",
     url: "https://editorgpt.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/EditorGPT",
@@ -2268,7 +2820,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 36,
+    id: 44,
     name: "OMMC Portal",
     url: "https://ommc-test-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Math-Comp",
@@ -2323,7 +2875,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 37,
+    id: 45,
     name: "OMMC Sample Portal",
     url: "https://ommc-sample-portal.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Sample-Portal",
@@ -2375,7 +2927,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 38,
+    id: 46,
     name: "Enkrateia",
     url: "https://enkrateia.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Enkrateia",
@@ -2428,7 +2980,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 39,
+    id: 47,
     name: "HD Transcribe",
     url: "https://hd-transcribe.vercel.app",
     github: HIDDEN_PROJECT_GITHUB,
@@ -2481,7 +3033,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 40,
+    id: 48,
     name: "OMMC",
     url: "https://www.ommcofficial.org",
     github: "https://github.com/Kevin-Liu-01/OMMC-Website",
@@ -2535,7 +3087,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 41,
+    id: 49,
     name: "OMMC Atlas",
     url: "https://ommc-atlas.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/OMMC-Atlas",
@@ -2587,7 +3139,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 42,
+    id: 50,
     name: "RecyclAIble",
     url: "https://recyclaible.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/RecyclAIble",
@@ -2639,7 +3191,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 43,
+    id: 51,
     name: "PlantSTEM",
     url: "https://plant-stem.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/PlantSTEM",
@@ -2692,7 +3244,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 44,
+    id: 52,
     name: "Tutorial",
     url: "https://tutorial-nu.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/Tutorial",
@@ -2745,7 +3297,7 @@ export const portfolioMonData: PortfolioMon[] = [
     ],
   },
   {
-    id: 45,
+    id: 53,
     name: "Satellite Crafter",
     url: "https://satellite-crafter.vercel.app/",
     github: "https://github.com/Kevin-Liu-01/SatelliteCrafter",

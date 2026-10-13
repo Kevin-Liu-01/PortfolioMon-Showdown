@@ -4,7 +4,7 @@ export const SITE_TITLE =
   "Kevin Liu — Engineer, Designer & Builder | Princeton CS '28";
 
 export const SITE_DESCRIPTION =
-  "Kevin Liu's original interactive portfolio is PortfolioMon Showdown: a Pokemon-inspired battle game where forty-six shipped projects become playable fighters with unique types, stats, moves, images, and animations.";
+  "Kevin Liu's original interactive portfolio is PortfolioMon Showdown: a Pokemon-inspired battle game where fifty-four shipped projects become playable fighters with unique types, stats, moves, images, and animations.";
 
 export const OG_IMAGE = `${SITE_URL}/images/kevin_powerlifting_bw.png`;
 

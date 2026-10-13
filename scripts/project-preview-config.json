@@ -1,292 +1,360 @@
 {
-  "viewport": { "width": 1280, "height": 720 },
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
   "format": "png",
-  "defaults": { "waitMs": 5000 },
+  "defaults": {
+    "waitMs": 5000
+  },
   "projects": [
     {
       "id": 0,
+      "name": "Jarhead",
+      "sourceUrl": "https://jarhead.kevinliu.studio/",
+      "output": "public/images/jarhead.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 1,
+      "name": "Mailroom",
+      "sourceUrl": "https://mailroom.kevinliu.studio/",
+      "output": "public/images/mailroom.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 2,
+      "name": "Turboslide",
+      "sourceUrl": "https://www.turboslide.com/",
+      "output": "public/images/turboslide.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 3,
+      "name": "Katagami",
+      "sourceUrl": "https://katagami.kevinliu.studio/",
+      "output": "public/images/katagami.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 4,
+      "name": "Relay",
+      "sourceUrl": "https://relay.kevinliu.studio/",
+      "output": "public/images/relay.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 5,
+      "name": "Agent Pets",
+      "sourceUrl": "https://agentpets.kevinliu.studio/",
+      "output": "public/images/agent-pets.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 6,
+      "name": "Birthdayland",
+      "sourceUrl": "https://birthdayland.kevinliu.studio/",
+      "output": "public/images/birthdayland.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 7,
+      "name": "CoTFly",
+      "sourceUrl": "https://fly.kevinliu.studio/",
+      "output": "public/images/cotfly.png",
+      "waitMs": 6000
+    },
+    {
+      "id": 8,
       "name": "Claude of Tanks",
       "sourceUrl": "https://cot.kevinliu.studio/",
       "output": "public/images/claude-of-tanks.png",
       "waitMs": 6000
     },
     {
-      "id": 1,
+      "id": 9,
       "name": "Glyphfield",
       "sourceUrl": "https://www.glyphfield.com/",
       "output": "public/images/glyphfield.png",
       "waitMs": 6000
     },
     {
-      "id": 2,
+      "id": 10,
       "name": "Prototemplate",
       "sourceUrl": "https://www.prototemplate.com/",
       "output": "public/images/prototemplate.png",
       "waitMs": 6000
     },
     {
-      "id": 3,
+      "id": 11,
       "name": "Local Search",
       "sourceUrl": "https://www.lsearch.dev/",
       "output": "public/images/local-search.png",
       "waitMs": 6000
     },
     {
-      "id": 4,
+      "id": 12,
       "name": "HDRPop",
       "sourceUrl": "https://hdr.kevinliu.studio/",
       "output": "public/images/hdrpop.png",
       "waitMs": 6000
     },
     {
-      "id": 5,
+      "id": 13,
       "name": "Aurematica",
       "sourceUrl": "https://aurematica.vercel.app/",
       "output": "public/images/aurematica.png",
       "waitMs": 6000
     },
     {
-      "id": 6,
+      "id": 14,
       "name": "Reticle",
       "sourceUrl": "https://reticle-demo.vercel.app/",
       "output": "public/images/reticle.png"
     },
     {
-      "id": 7,
+      "id": 15,
       "name": "Ariadne",
       "sourceUrl": "https://ariadne.dedaluslabs.ai/",
       "output": "public/images/ariadne.png"
     },
     {
-      "id": 8,
+      "id": 16,
       "name": "Sandbox Arena",
       "sourceUrl": "https://sandboxarena.vercel.app/",
       "output": "public/images/sandbox-arena.png"
     },
     {
-      "id": 9,
+      "id": 17,
       "name": "Aryan 21",
       "sourceUrl": "https://aryan-birthday.vercel.app/",
       "output": "public/images/aryan-21.png",
       "waitMs": 6000
     },
     {
-      "id": 10,
+      "id": 18,
       "name": "Kevin's Wiki",
       "sourceUrl": "https://wiki.kevinliu.biz/",
       "output": "public/images/wiki.png"
     },
     {
-      "id": 11,
+      "id": 19,
       "name": "Agent Machines",
       "sourceUrl": "https://www.agent-machines.dev/",
       "output": "public/images/agentmachines.png"
     },
     {
-      "id": 12,
+      "id": 20,
       "name": "Dedalus",
       "sourceUrl": "https://dedaluslabs.ai/",
       "output": "public/images/dedaluslabs.ai.png"
     },
     {
-      "id": 13,
+      "id": 21,
       "name": "Sigil UI",
       "sourceUrl": "https://sigil-ui-web.vercel.app/",
       "output": "public/images/sigil-ui.png"
     },
     {
-      "id": 14,
+      "id": 22,
       "name": "050525",
       "sourceUrl": "https://050525.vercel.app/",
       "output": "public/images/050525.png"
     },
     {
-      "id": 15,
+      "id": 23,
       "name": "Loop",
       "sourceUrl": "https://loooop.dev/",
       "output": "public/images/loop-homepage.png"
     },
     {
-      "id": 16,
+      "id": 24,
       "name": "Princeton TD",
       "sourceUrl": "https://ptd.quest/",
       "output": "public/images/princetontd.png"
     },
     {
-      "id": 17,
+      "id": 25,
       "name": "Dedalus Demo",
       "sourceUrl": "https://dedalus-demo.vercel.app/",
       "output": "public/images/dedalus.png"
     },
     {
-      "id": 18,
+      "id": 26,
       "name": "Podium",
       "sourceUrl": "https://hackprinceton-podium.vercel.app/",
       "output": "public/images/podium.png"
     },
     {
-      "id": 19,
+      "id": 27,
       "name": "Sevenfold",
       "sourceUrl": "https://sevenfold-demo.vercel.app/",
       "output": "public/images/sevenfold.png"
     },
     {
-      "id": 20,
+      "id": 28,
       "name": "PortfolioMon",
       "sourceUrl": "https://kevinliu.biz/",
       "output": "public/images/kevinportfolio.png"
     },
     {
-      "id": 21,
+      "id": 29,
       "name": "Lumachor",
       "sourceUrl": "https://lumachor.vercel.app/home",
       "output": "public/images/lumachor.png"
     },
     {
-      "id": 22,
+      "id": 30,
       "name": "HackPrinceton '25F",
       "sourceUrl": "https://hack-princeton-fall-2025-demo.vercel.app/",
       "output": "public/images/hackprinceton25f.png"
     },
     {
-      "id": 23,
+      "id": 31,
       "name": "Splitway",
       "sourceUrl": "https://splitway.vercel.app/",
       "output": "public/images/splitway.png"
     },
     {
-      "id": 24,
+      "id": 32,
       "name": "Lootbox Simulator",
       "sourceUrl": "https://lootboxsimulator.vercel.app/",
       "output": "public/images/lootboxsimulator.png"
     },
     {
-      "id": 25,
+      "id": 33,
       "name": "PawPointClicker",
       "sourceUrl": "https://pawpointclicker.vercel.app/",
       "output": "public/images/pawpointclicker.png",
       "actions": [
-        { "type": "click", "role": "button", "name": "Start Clicking!" },
-        { "type": "wait", "ms": 1500 }
+        {
+          "type": "click",
+          "role": "button",
+          "name": "Start Clicking!"
+        },
+        {
+          "type": "wait",
+          "ms": 1500
+        }
       ]
     },
     {
-      "id": 26,
+      "id": 34,
       "name": "HackPrinceton '25S",
       "sourceUrl": "https://hack-princeton-spring-2025-demo.vercel.app/",
       "output": "public/images/hackprinceton25s.png",
       "waitMs": 9000
     },
     {
-      "id": 27,
+      "id": 35,
       "name": "HackPrinceton '24F",
       "sourceUrl": "https://hack-princeton-fall-2024-demo.vercel.app/",
       "output": "public/images/hackprinceton24f.png"
     },
     {
-      "id": 28,
+      "id": 36,
       "name": "SnellTech",
       "sourceUrl": "https://snelltech.vercel.app/",
       "output": "public/images/snelltech.png"
     },
     {
-      "id": 29,
+      "id": 37,
       "name": "LetMeCook",
       "sourceUrl": "https://letmecook.vercel.app/",
       "output": "public/images/letmecook.png"
     },
     {
-      "id": 30,
+      "id": 38,
       "name": "Balladeer",
       "sourceUrl": "https://balladeer.vercel.app/",
       "output": "public/images/balladeer.png"
     },
     {
-      "id": 31,
+      "id": 39,
       "name": "CompassUSA",
       "sourceUrl": "https://compass-usa.vercel.app/",
       "output": "public/images/compassusa.png"
     },
     {
-      "id": 32,
+      "id": 40,
       "name": "ApneaAlert",
       "sourceUrl": "https://apnea-alert-git-main-kevin-liu-01.vercel.app/",
       "output": "public/images/apnea-alert.png"
     },
     {
-      "id": 33,
+      "id": 41,
       "name": "Iron Triangle",
       "sourceUrl": "https://iron-triangle.vercel.app/",
       "output": "public/images/irontriangle.png"
     },
     {
-      "id": 34,
+      "id": 42,
       "name": "AdventureGPT",
       "sourceUrl": "https://adventuregpt.vercel.app/",
       "output": "public/images/adventuregpt.png"
     },
     {
-      "id": 35,
+      "id": 43,
       "name": "EditorGPT",
       "sourceUrl": "https://editorgpt.vercel.app/",
       "output": "public/images/editorgpt.png"
     },
     {
-      "id": 36,
+      "id": 44,
       "name": "OMMC Portal",
       "sourceUrl": "https://ommc-test-portal.vercel.app/",
       "output": "public/images/ommcportal.png"
     },
     {
-      "id": 37,
+      "id": 45,
       "name": "OMMC Sample Portal",
       "sourceUrl": "https://ommc-sample-portal.vercel.app/",
       "output": "public/images/ommcsampleportal.png"
     },
     {
-      "id": 38,
+      "id": 46,
       "name": "Enkrateia",
       "sourceUrl": "https://enkrateia.vercel.app/",
       "output": "public/images/enkrateia.png"
     },
     {
-      "id": 39,
+      "id": 47,
       "name": "HD Transcribe",
       "sourceUrl": "https://hd-transcribe.vercel.app/",
       "output": "public/images/hd-transcribe.png"
     },
     {
-      "id": 40,
+      "id": 48,
       "name": "OMMC",
       "sourceUrl": "https://www.ommcofficial.org/",
       "output": "public/images/ommc.png"
     },
     {
-      "id": 41,
+      "id": 49,
       "name": "OMMC Atlas",
       "sourceUrl": "https://ommc-atlas.vercel.app/",
       "output": "public/images/ommc-atlas.png"
     },
     {
-      "id": 42,
+      "id": 50,
       "name": "RecyclAIble",
       "sourceUrl": "https://recyclaible.vercel.app/",
       "output": "public/images/recyclaible.png"
     },
     {
-      "id": 43,
+      "id": 51,
       "name": "PlantSTEM",
       "sourceUrl": "https://plant-stem.vercel.app/",
       "output": "public/images/plantstem.png"
     },
     {
-      "id": 44,
+      "id": 52,
       "name": "Tutorial",
       "sourceUrl": "https://tutorial-nu.vercel.app/",
       "output": "public/images/tutorial.png"
     },
     {
-      "id": 45,
+      "id": 53,
       "name": "Satellite Crafter",
       "sourceUrl": "https://satellite-crafter.vercel.app/",
       "output": "public/images/satellitecrafter.png"

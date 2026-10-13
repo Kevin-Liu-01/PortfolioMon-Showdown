@@ -1,5 +1,81 @@
 # Projects
 
+## Jarhead
+
+Project URL: https://jarhead.kevinliu.studio/
+
+Skills: Swift, TypeScript, macOS, Voice AI, Computer Use, AI Agents
+
+Voice-first Mac assistant built with Swift and TypeScript. Combines wake-word activation, computer control, parallel agent tasks, persistent memory, and scheduled automations in a desktop companion.
+
+- GitHub: https://github.com/Kevin-Liu-01/Jarhead
+
+## Mailroom
+
+Project URL: https://mailroom.kevinliu.studio/
+
+Skills: Next.js, TypeScript, Gmail API, TypeSafe, PostgreSQL, Drizzle
+
+Gmail organizer that combines readable rules with typed AI judgments. Sorts mail, compiles natural-language searches, and records every change in a receipt with undo.
+
+- GitHub: https://github.com/Kevin-Liu-01/mailroom
+
+## Turboslide
+
+Project URL: https://www.turboslide.com/
+
+Skills: TypeScript, Presentation Design, Canvas, MCP, PowerPoint, AI Agents
+
+Presentation editor for people and agents, with a canvas on every slide, shared document rendering, and PowerPoint export. Exposes the same editing actions through its UI, CLI, HTTP API, and MCP server.
+
+- GitHub: https://github.com/Kevin-Liu-01/Turboslide
+
+## Katagami
+
+Project URL: https://katagami.kevinliu.studio/
+
+Skills: Typography, Variable Fonts, Font Engineering, Interactive Design
+
+Open-source type family built from Inter, with Sans, Round, Text, Mono, and CJK companions. Its interactive specimen lets visitors explore curves, glyphs, weights, and the shared construction of the family.
+
+- GitHub: https://github.com/Kevin-Liu-01/Katagami
+
+## Relay
+
+Project URL: https://relay.kevinliu.studio/
+
+Skills: Next.js, TypeScript, Computer Use, AI Agents, Evaluation, Browser Automation
+
+Computer-use agent playground with a simulated Slack workspace, live browser replay, and inspectable evaluation traces. Compare models and interfaces, watch their actions, and review measured task outcomes.
+
+- GitHub: https://github.com/Kevin-Liu-01/Relay
+
+## Agent Pets
+
+Project URL: https://agentpets.kevinliu.studio/
+
+Skills: Animation, Pixel Art, AI Agents, Interactive Design, Desktop Companions
+
+Animated companions for coding agents, with a browsable character library, interactive previews, and a browser companion. Optional local signals let pets react to working, attention, done, and error states.
+
+## Birthdayland
+
+Project URL: https://birthdayland.kevinliu.studio/
+
+Skills: Next.js, React Three Fiber, Three.js, 3D Worlds, Creative Development
+
+Birthday scrapbook on a tiny explorable 3D island. Friends become blob characters carrying cards, doodles, photos, and video messages in a shared birthday world built with Next.js and React Three Fiber.
+
+## CoTFly
+
+Project URL: https://fly.kevinliu.studio/
+
+Skills: Three.js, TypeScript, Spiking Neural Networks, Simulation, Game Development
+
+A fruit fly in a tiny tank helmet plays Claude of Tanks. Live spiking neurons drive autonomous battles, paired with a miniature 3D cockpit that makes the fly pilot visible.
+
+- GitHub: https://github.com/Kevin-Liu-01/CoTFly
+
 ## Claude of Tanks
 
 Project URL: https://cot.kevinliu.studio
@@ -170,7 +246,7 @@ Project URL: https://kevinliu.biz/#portfoliomon
 
 Skills: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, Vercel
 
-Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable project. Forty-six real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
+Kevin's former interactive portfolio, now preserved inside the new kevinliu.biz as a playable project. Fifty-four real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
 
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
 

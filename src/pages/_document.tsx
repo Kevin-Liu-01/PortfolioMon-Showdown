@@ -59,7 +59,7 @@ export default function Document() {
         <meta name="rating" content="general" />
         <meta
           name="abstract"
-          content="Kevin Liu is a Princeton University Computer Science student, full-stack developer, and AI engineer. PortfolioMon Showdown is his original interactive portfolio: a Pokémon-inspired battle game built from forty-six shipped projects."
+          content="Kevin Liu is a Princeton University Computer Science student, full-stack developer, and AI engineer. PortfolioMon Showdown is his original interactive portfolio: a Pokémon-inspired battle game built from fifty-four shipped projects."
         />
         <meta
           name="summary"
