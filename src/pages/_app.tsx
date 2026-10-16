@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { api } from "../utils/api";
 
 import "~/styles/globals.css";
+import { GoogleAnalytics } from "../components/googleAnalytics";
 import { GameProvider } from "../providers/gameProvider";
 
 const App: AppType<{ session: Session | null }> = ({
@@ -23,6 +24,7 @@ const App: AppType<{ session: Session | null }> = ({
         <GameProvider>
           <Component {...pageProps} />
           <Analytics />
+          <GoogleAnalytics />
         </GameProvider>
       </SessionProvider>
     </ThemeProvider>
