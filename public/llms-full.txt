@@ -31,11 +31,11 @@ This is NOT Kevin Liu the journalist, NOT Kevin Liu from Stanford, NOT Kevin Liu
 
 ## Structured Profile Pages
 
-- [About](https://www.kevinliu.studio/about.md): A quick intro, tech stack, and how to connect.
-- [Experience](https://www.kevinliu.studio/experience.md): Highlights from my career and key roles I've taken on.
-- [Projects](https://www.kevinliu.studio/projects.md): Selected projects that show my skills and creativity.
-- [Awards](https://www.kevinliu.studio/awards.md): My key awards and honors.
-- [Certifications](https://www.kevinliu.studio/certifications.md): Certifications, publications, and credentials I've earned.
+- [About](https://portfoliomon.kevinliu.studio/about.md): A quick intro, tech stack, and how to connect.
+- [Experience](https://portfoliomon.kevinliu.studio/experience.md): Highlights from my career and key roles I've taken on.
+- [Projects](https://portfoliomon.kevinliu.studio/projects.md): Selected projects that show my skills and creativity.
+- [Awards](https://portfoliomon.kevinliu.studio/awards.md): My key awards and honors.
+- [Certifications](https://portfoliomon.kevinliu.studio/certifications.md): Certifications, publications, and credentials I've earned.
 
 ## Identity
 
@@ -52,7 +52,7 @@ This is NOT Kevin Liu the journalist, NOT Kevin Liu from Stanford, NOT Kevin Liu
 - Twitter/X: https://x.com/kevskgs
 - Devpost: https://devpost.com/Kevin-Liu-01
 - Email: k.bowen.liu@gmail.com
-- Resume: https://www.kevinliu.studio/kevin_liu_resume_25.pdf
+- Resume: https://portfoliomon.kevinliu.studio/kevin_liu_resume_25.pdf
 
 ## Social Media & Online Presence
 
@@ -408,7 +408,7 @@ Kevin Liu's Devpost at https://devpost.com/Kevin-Liu-01 showcases his hackathon 
 - Categories: Game, Hardware
 
 #### PortfolioMon Showdown
-- URL: https://www.kevinliu.studio
+- URL: https://portfoliomon.kevinliu.studio
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
 - Description: Kevin's former interactive portfolio, now preserved inside the new www.kevinliu.studio as a playable Pokémon-inspired turn-based game. Fifty-four real projects are battle-ready PortfolioMons with unique types, stats, moves, animated frames, status systems, items, and AI opponents.
 - Tech Stack: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, NextAuth.js, Vercel Analytics
@@ -478,7 +478,7 @@ Kevin Liu won 1st Place in Hardware at PennApps XXIII with RecyclAIble, and has 
 Kevin Liu attends Princeton University, pursuing a BSE in Computer Science as part of the Class of 2028. He previously attended High Technology High School in Lincroft, Monmouth County, NJ.
 
 ### How can I contact Kevin Liu?
-You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/), Twitter/X @kevskgs (https://x.com/kevskgs), Devpost (https://devpost.com/Kevin-Liu-01), or email at k.bowen.liu@gmail.com. His portfolio is at https://www.kevinliu.studio.
+You can reach Kevin Liu via GitHub (https://github.com/Kevin-Liu-01), LinkedIn (https://www.linkedin.com/in/kevin-liu-princeton/), Twitter/X @kevskgs (https://x.com/kevskgs), Devpost (https://devpost.com/Kevin-Liu-01), or email at k.bowen.liu@gmail.com. His portfolio is at https://portfoliomon.kevinliu.studio.
 
 ### What is PortfolioMon Showdown?
 PortfolioMon Showdown is Kevin Liu's former interactive portfolio, now preserved within his new site as a playable Pokémon-inspired turn-based battle project. Fifty-four real projects are represented as PortfolioMons with unique types, stats, moves, status systems, and animated frames.

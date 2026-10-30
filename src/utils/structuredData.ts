@@ -11,7 +11,7 @@ const SOCIAL_PROFILES = [
   "https://www.linkedin.com/in/kevin-liu-princeton/",
   "https://x.com/kevskgs",
   "https://twitter.com/kevskgs",
-  "https://www.kevinliu.studio",
+  "https://portfoliomon.kevinliu.studio",
   "https://devpost.com/Kevin-Liu-01",
 ];
 
@@ -326,7 +326,7 @@ const PROJECT_CATALOG = [
   },
   {
     name: "PortfolioMon Showdown",
-    url: "https://www.kevinliu.studio/#portfoliomon",
+    url: "https://portfoliomon.kevinliu.studio/#portfoliomon",
     description:
       "Kevin Liu's original interactive portfolio: a playable Pokémon-inspired turn-based battle project",
   },

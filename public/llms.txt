@@ -18,17 +18,17 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 
 ## About Kevin Liu
 
-- [About](https://www.kevinliu.studio/about.md): A quick intro, tech stack, and how to connect.
-- [Experience](https://www.kevinliu.studio/experience.md): Highlights from my career and key roles I've taken on.
-- [Projects](https://www.kevinliu.studio/projects.md): Selected projects that show my skills and creativity.
-- [Awards](https://www.kevinliu.studio/awards.md): My key awards and honors.
-- [Certifications](https://www.kevinliu.studio/certifications.md): Certifications, publications, and credentials I've earned.
+- [About](https://portfoliomon.kevinliu.studio/about.md): A quick intro, tech stack, and how to connect.
+- [Experience](https://portfoliomon.kevinliu.studio/experience.md): Highlights from my career and key roles I've taken on.
+- [Projects](https://portfoliomon.kevinliu.studio/projects.md): Selected projects that show my skills and creativity.
+- [Awards](https://portfoliomon.kevinliu.studio/awards.md): My key awards and honors.
+- [Certifications](https://portfoliomon.kevinliu.studio/certifications.md): Certifications, publications, and credentials I've earned.
 - [Portfolio Website — www.kevinliu.studio](https://www.kevinliu.studio): Monochrome interactive portfolio featuring selected engineering and design work, plus the playable PortfolioMon archive
 - [GitHub — Kevin-Liu-01](https://github.com/Kevin-Liu-01): Open-source projects and contributions
 - [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at General Translation, Amazon, Bloomberg, AT&T Labs, Dedalus Labs, and Sevenfold AI
 - [X/Twitter — @kevskgs](https://x.com/kevskgs): Posts about software engineering, AI, projects, Princeton life, and hackathon experiences
 - [Devpost — Kevin-Liu-01](https://devpost.com/Kevin-Liu-01): Hackathon project submissions including PennApps XXIII winner
-- [Resume](https://www.kevinliu.studio/kevin_liu_resume_25.pdf): Full CV with work experience and education
+- [Resume](https://portfoliomon.kevinliu.studio/kevin_liu_resume_25.pdf): Full CV with work experience and education
 
 ## Key Skills and Expertise
 
@@ -124,7 +124,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [PlantSTEM](https://plant-stem.vercel.app/): Math and Physics education
 - [Tutorial](https://tutorial-nu.vercel.app/): Tutor-pupil matching platform
 - [Satellite Crafter](https://satellite-crafter.vercel.app/): Satellite building game
-- [PortfolioMon Showdown](https://www.kevinliu.studio/#portfoliomon): Kevin's former interactive portfolio, preserved as a playable project within the new site
+- [PortfolioMon Showdown](https://portfoliomon.kevinliu.studio/#portfoliomon): Kevin's former interactive portfolio, preserved as a playable project within the new site
 
 ## Education
 

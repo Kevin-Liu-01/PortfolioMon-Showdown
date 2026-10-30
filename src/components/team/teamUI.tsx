@@ -1706,7 +1706,7 @@ const SEOContent = () => (
     <meta itemProp="url" content="https://www.kevinliu.studio" />
     <meta
       itemProp="image"
-      content="https://www.kevinliu.studio/images/kevin_powerlifting_bw.png"
+      content="https://portfoliomon.kevinliu.studio/images/kevin_powerlifting_bw.png"
     />
 
     <p itemProp="description">
