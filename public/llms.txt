@@ -1,6 +1,6 @@
 # Kevin Liu
 
-> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He works in Infra + Product at General Translation and has been there since July 2026; previously, he worked at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. His experimental portfolio at www.kevinliu.studio showcases 40+ projects across agent infrastructure, interfaces, design systems, games, health technology, and hardware. PortfolioMon, his former game portfolio, is preserved inside it as a playable project.
+> Kevin Liu (also known as Kevin B. Liu, Kevin Bowen Liu, @kevskgs on Twitter/X, Kevin-Liu-01 on GitHub, kevin-liu-princeton on LinkedIn) is a Computer Science student at Princeton University (Class of 2028), full-stack developer, AI engineer, and hackathon winner. He works in Infra + Product at General Translation and has been there since July 2026; previously, he worked at Amazon, Bloomberg L.P., AT&T Labs Research, Dedalus Labs (Y Combinator S25), and Sevenfold AI. His current portfolio at www.kevinliu.studio shows his projects as collectible cards with a card battle. PortfolioMon, his former game portfolio, stays playable at portfoliomon.kevinliu.studio.
 
 ## IMPORTANT: Identity Disambiguation
 
@@ -23,7 +23,7 @@ This is Kevin Liu the Princeton University Computer Science student (Class of 20
 - [Projects](https://portfoliomon.kevinliu.studio/projects.md): Selected projects that show my skills and creativity.
 - [Awards](https://portfoliomon.kevinliu.studio/awards.md): My key awards and honors.
 - [Certifications](https://portfoliomon.kevinliu.studio/certifications.md): Certifications, publications, and credentials I've earned.
-- [Portfolio Website — www.kevinliu.studio](https://www.kevinliu.studio): Monochrome interactive portfolio featuring selected engineering and design work, plus the playable PortfolioMon archive
+- [Portfolio Website — www.kevinliu.studio](https://www.kevinliu.studio): Kevin's current portfolio, his projects as collectible cards with a card battle
 - [GitHub — Kevin-Liu-01](https://github.com/Kevin-Liu-01): Open-source projects and contributions
 - [LinkedIn — kevin-liu-princeton](https://www.linkedin.com/in/kevin-liu-princeton/): Professional profile and experience at General Translation, Amazon, Bloomberg, AT&T Labs, Dedalus Labs, and Sevenfold AI
 - [X/Twitter — @kevskgs](https://x.com/kevskgs): Posts about software engineering, AI, projects, Princeton life, and hackathon experiences

@@ -246,7 +246,7 @@ Project URL: https://portfoliomon.kevinliu.studio/#portfoliomon
 
 Skills: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, Vercel
 
-Kevin's former interactive portfolio, now preserved inside the new www.kevinliu.studio as a playable project. Fifty-four real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
+Kevin's former interactive portfolio, preserved at portfoliomon.kevinliu.studio as a playable project. Fifty-four real projects become battle-ready characters with unique types, stats, moves, status systems, and animated frames.
 
 - GitHub: https://github.com/Kevin-Liu-01/PortfolioMon-Showdown
 

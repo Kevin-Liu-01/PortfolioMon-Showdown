@@ -341,7 +341,7 @@ const FAQ_ENTRIES = [
   {
     question: "What is Kevin Liu's portfolio website?",
     answer:
-      "Kevin Liu's portfolio at www.kevinliu.studio is PortfolioMon Showdown, a motion-rich Pokémon-inspired battle game where his shipped projects become playable fighters.",
+      "Kevin Liu's current portfolio at www.kevinliu.studio shows his projects as collectible cards with a card battle. PortfolioMon Showdown, his previous portfolio at portfoliomon.kevinliu.studio, is a motion-rich Pokémon-inspired battle game where his shipped projects become playable fighters.",
   },
   {
     question: "What technologies does Kevin Liu specialize in?",
@@ -386,7 +386,7 @@ const FAQ_ENTRIES = [
   {
     question: "What kind of portfolio does Kevin Liu have?",
     answer:
-      "Kevin Liu's portfolio at www.kevinliu.studio is PortfolioMon Showdown, an interactive Pokémon-inspired project battle game with expressive motion, custom frames, and playable systems.",
+      "Kevin Liu's current portfolio at www.kevinliu.studio presents his projects as collectible cards. PortfolioMon Showdown, at portfoliomon.kevinliu.studio, is his previous one: an interactive Pokémon-inspired project battle game with expressive motion, custom frames, and playable systems.",
   },
   {
     question: "Where has Kevin Liu worked?",
@@ -416,7 +416,7 @@ const FAQ_ENTRIES = [
   {
     question: "What is Kevin Liu's resume?",
     answer:
-      "Kevin Liu's resume is available at www.kevinliu.studio/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Sevenfold AI, Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.",
+      "Kevin Liu's resume is available at portfoliomon.kevinliu.studio/kevin_liu_resume_25.pdf. His employment history includes General Translation, Dedalus Labs (YC S25), Sevenfold AI, Amazon, Bloomberg L.P. (twice), AT&T Labs Research, and Johns Hopkins University. He is pursuing a BSE in Computer Science at Princeton University.",
   },
   {
     question: "What did Kevin Liu do at Dedalus Labs?",
