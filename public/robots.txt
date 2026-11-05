@@ -123,11 +123,11 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://www.kevinliu.studio/sitemap.xml
+Sitemap: https://portfoliomon.kevinliu.studio/sitemap.xml
 
 # LLM-readable content
-# See https://www.kevinliu.studio/llms.txt for AI-optimized site summary
-# See https://www.kevinliu.studio/llms-full.txt for comprehensive project data
+# See https://portfoliomon.kevinliu.studio/llms.txt for AI-optimized site summary
+# See https://portfoliomon.kevinliu.studio/llms-full.txt for comprehensive project data
 #
 # This site belongs to Kevin Liu — Princeton University CS '28, Software Developer & AI Engineer
 # X: @kevskgs | GitHub: Kevin-Liu-01 | LinkedIn: kevin-liu-princeton

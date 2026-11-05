@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.kevinliu.studio";
+export const SITE_URL = "https://portfoliomon.kevinliu.studio";
 
 export const SITE_TITLE =
   "Kevin Liu — Engineer, Designer & Builder | Princeton CS '28";

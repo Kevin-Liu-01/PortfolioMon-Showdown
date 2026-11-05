@@ -242,7 +242,7 @@ A context engine that gives every user the power of an expert prompt engineer. U
 
 ## PortfolioMon Showdown
 
-Project URL: https://www.kevinliu.studio/#portfoliomon
+Project URL: https://portfoliomon.kevinliu.studio/#portfoliomon
 
 Skills: Next.js, TypeScript, React, tRPC, Tailwind CSS, Framer Motion, Radix UI, Vercel
 
